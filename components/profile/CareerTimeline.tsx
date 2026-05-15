@@ -39,15 +39,15 @@ export function CareerTimeline({ athlete }: Props) {
                       <span className="absolute size-3 rounded-full bg-accent shadow-[0_0_14px_var(--accent-glow)] ring-4 ring-zinc-950" />
                     </div>
                     <article className="group rounded-2xl border border-white/8 bg-black/40 p-5 transition hover:border-accent/30 hover:bg-black/55 md:p-6">
-                      <div className="flex gap-4 md:gap-5">
+                      <div className="flex items-start gap-5 md:gap-6">
                         {step.clubLogo ? (
-                          <div className="relative size-14 shrink-0 overflow-hidden rounded-xl bg-white/6 ring-1 ring-white/10">
+                          <div className="relative size-20 shrink-0 overflow-hidden rounded-2xl bg-white/6 ring-1 ring-white/10 md:size-24 lg:size-28">
                             <Image
                               src={step.clubLogo}
                               alt={`Logo ${step.club}`}
                               fill
-                              sizes="56px"
-                              className="object-contain p-2"
+                              sizes="(max-width: 768px) 80px, (max-width: 1024px) 96px, 112px"
+                              className="object-contain p-2 md:p-2.5"
                             />
                           </div>
                         ) : null}

@@ -179,14 +179,30 @@ export const ilarioSimonetti: AthleteProfile = {
       notes: "LNP — medie da referto ufficiale; squadra attuale.",
       clubLogo: "/athletes/latinalogo.png",
     },
-    { season: "2024-25", club: "Viola Basket", category: "Serie B · Interregionale" },
-    { season: "2023-24", club: "Pallacanestro Pozzuoli", category: "Serie B · Nazionale" },
-    { season: "2018-23", club: "Basket Vis Ferrara", category: "Giovanili" },
+    {
+      season: "2024-25",
+      club: "Viola Basket",
+      category: "Serie B · Interregionale",
+      clubLogo: "/athletes/violalogo.png",
+    },
+    {
+      season: "2023-24",
+      club: "Pallacanestro Pozzuoli",
+      category: "Serie B · Nazionale",
+      clubLogo: "/athletes/pozzuolilogo.png",
+    },
+    {
+      season: "2018-23",
+      club: "Basket Vis Ferrara",
+      category: "Giovanili",
+      clubLogo: "/athletes/ferraralogo.png",
+    },
     {
       season: "2014-18",
       club: "Eutimo Basket",
       category: "Giovanili",
       notes: "Avvio del percorso nel vivaio.",
+      clubLogo: "/athletes/eutimologo.png",
     },
   ],
   honors: [
