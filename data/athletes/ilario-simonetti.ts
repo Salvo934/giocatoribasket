@@ -10,7 +10,7 @@ export const ilarioSimonetti: AthleteProfile = {
     publicSiteUrl: "https://ilariosimonetti.talent.katahero.com",
   },
   header: {
-    heroImage: "/athletes/ilario-simonetti-hero.jpg",
+    heroImage: "/athletes/ilario-simonetti-avatar.png",
     heroImageFocus: "top",
     name: "Ilario Simonetti",
     number: "7",
