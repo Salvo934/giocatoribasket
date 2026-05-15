@@ -143,9 +143,22 @@ export function ProfileHeader({ athlete }: Props) {
             <p className="mt-2 text-xs font-medium uppercase tracking-wider text-zinc-500">{h.marketStatusLabel}</p>
 
             <dl className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-8 sm:gap-y-2">
-              <div>
+              <div className="min-w-0 sm:max-w-[min(100%,22rem)]">
                 <dt className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-600">Squadra</dt>
-                <dd className="mt-1 text-sm font-semibold text-zinc-100">{h.currentClub}</dd>
+                <dd className="mt-1 flex items-center gap-3">
+                  {h.currentClubLogo ? (
+                    <span className="relative size-11 shrink-0 overflow-hidden rounded-xl bg-white/6 ring-1 ring-white/12">
+                      <Image
+                        src={h.currentClubLogo}
+                        alt={`Logo ${h.currentClub}`}
+                        fill
+                        sizes="44px"
+                        className="object-contain p-1.5"
+                      />
+                    </span>
+                  ) : null}
+                  <span className="text-sm font-semibold leading-snug text-zinc-100">{h.currentClub}</span>
+                </dd>
               </div>
               <div>
                 <dt className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-600">Profilo aggiornato</dt>

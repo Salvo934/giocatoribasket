@@ -94,6 +94,8 @@ export interface CareerStep {
   club: string;
   category: string;
   notes?: string;
+  /** Logo squadra (`/athletes/...` in `public`) */
+  clubLogo?: string;
 }
 
 export interface HonorItem {
@@ -134,7 +136,10 @@ export interface AthleteProfile {
     birthYear: number;
     heightCm: number;
     nationality: string;
+    /** Squadra attuale */
     currentClub: string;
+    /** Logo squadra attuale — path in `public`, es. `/athletes/latinalogo.png` */
+    currentClubLogo?: string;
     category: string;
     league?: string;
     /** Paragrafo sopra le chip: se assente usa testo generico Player Card */

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { AthleteProfile } from "@/lib/types/athlete";
 import { SectionShell } from "./SectionShell";
 
@@ -38,21 +39,36 @@ export function CareerTimeline({ athlete }: Props) {
                       <span className="absolute size-3 rounded-full bg-accent shadow-[0_0_14px_var(--accent-glow)] ring-4 ring-zinc-950" />
                     </div>
                     <article className="group rounded-2xl border border-white/8 bg-black/40 p-5 transition hover:border-accent/30 hover:bg-black/55 md:p-6">
-                      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                        <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-accent">{step.season}</p>
-                        <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-zinc-400">
-                          {step.category}
-                        </span>
+                      <div className="flex gap-4 md:gap-5">
+                        {step.clubLogo ? (
+                          <div className="relative size-14 shrink-0 overflow-hidden rounded-xl bg-white/6 ring-1 ring-white/10">
+                            <Image
+                              src={step.clubLogo}
+                              alt={`Logo ${step.club}`}
+                              fill
+                              sizes="56px"
+                              className="object-contain p-2"
+                            />
+                          </div>
+                        ) : null}
+                        <div className="min-w-0 flex-1">
+                          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-accent">{step.season}</p>
+                            <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-zinc-400">
+                              {step.category}
+                            </span>
+                          </div>
+                          <h3
+                            className="mt-3 text-2xl font-bold leading-tight text-white md:text-[1.85rem]"
+                            style={{ fontFamily: "var(--font-bebas)" }}
+                          >
+                            {step.club}
+                          </h3>
+                          {step.notes ? (
+                            <p className="mt-3 border-l-2 border-accent/35 pl-3 text-sm leading-relaxed text-zinc-400">{step.notes}</p>
+                          ) : null}
+                        </div>
                       </div>
-                      <h3
-                        className="mt-3 text-2xl font-bold leading-tight text-white md:text-[1.85rem]"
-                        style={{ fontFamily: "var(--font-bebas)" }}
-                      >
-                        {step.club}
-                      </h3>
-                      {step.notes ? (
-                        <p className="mt-3 border-l-2 border-accent/35 pl-3 text-sm leading-relaxed text-zinc-400">{step.notes}</p>
-                      ) : null}
                     </article>
                   </li>
               ))}
