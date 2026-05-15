@@ -227,14 +227,5 @@ export const ilarioSimonetti: AthleteProfile = {
       { platform: "TikTok", handle: "@ilario7", url: "https://tiktok.com" },
     ],
   },
-  agencyRoster: [
-    {
-      slug: "alessandro-ferrari",
-      name: "Alessandro Ferrari",
-      role: "Guardia",
-      club: "Pall. Reggiana",
-      category: "U19",
-      image: "https://images.unsplash.com/photo-1517649763962-0c6230660131?w=400&q=80&auto=format&fit=crop",
-    },
-  ],
+  agencyRoster: [],
 };
