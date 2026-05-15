@@ -142,29 +142,33 @@ export function ProfileHeader({ athlete }: Props) {
 
             <p className="mt-2 text-xs font-medium uppercase tracking-wider text-zinc-500">{h.marketStatusLabel}</p>
 
-            <dl className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-8 sm:gap-y-2">
-              <div className="min-w-0 sm:max-w-[min(100%,22rem)]">
-                <dt className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-600">Squadra</dt>
-                <dd className="mt-1 flex items-center gap-3">
-                  {h.currentClubLogo ? (
-                    <span className="relative size-11 shrink-0 overflow-hidden rounded-xl bg-white/6 ring-1 ring-white/12">
-                      <Image
-                        src={h.currentClubLogo}
-                        alt={`Logo ${h.currentClub}`}
-                        fill
-                        sizes="44px"
-                        className="object-contain p-1.5"
-                      />
-                    </span>
-                  ) : null}
-                  <span className="text-sm font-semibold leading-snug text-zinc-100">{h.currentClub}</span>
-                </dd>
+            {/* Squadra + logo (contrasto alto) + data aggiornamento integrata */}
+            <div className="mt-5 rounded-2xl border border-white/10 bg-linear-to-br from-white/5 to-white/2 p-4 shadow-[0_16px_48px_-28px_rgba(0,0,0,0.75)] sm:p-5">
+              <div className="flex items-center gap-4 sm:gap-5">
+                {h.currentClubLogo ? (
+                  <div className="relative size-19 shrink-0 overflow-hidden rounded-2xl bg-white shadow-[inset_0_1px_0_0_rgba(255,255,255,0.9),0_12px_40px_-16px_rgba(0,0,0,0.55)] ring-2 ring-white/40 sm:size-23 md:size-24">
+                    <Image
+                      src={h.currentClubLogo}
+                      alt={`Logo ${h.currentClub}`}
+                      fill
+                      sizes="(max-width:640px) 76px, 96px"
+                      className="object-contain p-2.5 sm:p-3"
+                      priority
+                    />
+                  </div>
+                ) : null}
+                <div className="min-w-0 flex-1">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">Squadra</p>
+                  <p className="mt-1.5 text-base font-semibold leading-snug text-white sm:text-lg">{h.currentClub}</p>
+                </div>
               </div>
-              <div>
-                <dt className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-600">Profilo aggiornato</dt>
-                <dd className="mt-1 text-sm font-semibold tabular-nums text-zinc-300">{updated}</dd>
-              </div>
-            </dl>
+              <p className="mt-4 border-t border-white/10 pt-3 text-[11px] leading-relaxed text-zinc-500">
+                <time dateTime={h.lastUpdated} className="text-zinc-400">
+                  Scheda aggiornata <span className="text-zinc-500">·</span>{" "}
+                  <span className="font-medium tabular-nums text-zinc-300">{updated}</span>
+                </time>
+              </p>
+            </div>
 
             {h.identityNote ? (
               <p className="mt-4 max-w-xl border-l-2 border-accent/45 pl-3 text-sm leading-relaxed text-zinc-400">{h.identityNote}</p>
