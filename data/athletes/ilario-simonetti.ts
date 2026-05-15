@@ -220,7 +220,6 @@ export const ilarioSimonetti: AthleteProfile = {
       phone: "+39 327 459 7773",
     },
     athleteEmail: "athlete.placeholder@example.com",
-    contactFormUrl: "https://katahero.com",
     whatsapp: "https://wa.me/393274597773?text=Ciao%2C%20vorrei%20info%20su%20Ilario%20Simonetti",
     social: [
       { platform: "Instagram", handle: "@ilario.simonetti", url: "https://instagram.com" },
