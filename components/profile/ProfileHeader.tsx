@@ -74,7 +74,9 @@ export function ProfileHeader({ athlete }: Props) {
   );
 
   return (
-    <header className="relative overflow-hidden border-b border-white/6">
+    <header
+      className={`relative overflow-hidden border-b border-white/6 ${hasVideoBg ? "lg:flex lg:min-h-dvh lg:flex-col" : ""}`}
+    >
       {/* Base */}
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-[#030305]" />
 
@@ -86,7 +88,7 @@ export function ProfileHeader({ athlete }: Props) {
               Ritaglio “da sopra”: si mostra soprattutto la parte alta del clip e si maschera il fondo campo / pittaggio.
             */}
             <video
-              className="absolute left-1/2 top-0 min-h-[122%] w-full min-w-[102%] -translate-x-1/2 object-cover object-[center_14%] opacity-[0.82] sm:min-h-[128%] sm:object-[center_12%]"
+              className="absolute left-1/2 top-0 min-h-[126%] w-full min-w-[104%] -translate-x-1/2 translate-y-[-2.5%] bg-[#030305] object-cover object-[center_12%] opacity-[0.82] sm:min-h-[132%] sm:object-[center_10%]"
               src={h.heroBackgroundVideo}
               muted
               playsInline
@@ -111,6 +113,11 @@ export function ProfileHeader({ athlete }: Props) {
                 `,
               }}
             />
+            {/* Copre fascia grigia / letterboxing spesso visibile sopra il clip */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 top-0 z-2 h-14 bg-linear-to-b from-[#030305] from-42% to-transparent sm:h-17 md:h-20"
+            />
           </div>
           <div className="pointer-events-none absolute inset-0 z-0 md:hidden">{staticHeroBackdrop}</div>
           {/* Accenti leggeri sopra il video (solo desktop: sul mobile usiamo staticHeroBackdrop) */}
@@ -127,7 +134,9 @@ export function ProfileHeader({ athlete }: Props) {
         className="pointer-events-none absolute inset-x-0 top-0 z-2 h-24 bg-linear-to-b from-white/6 to-transparent"
       />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-4 pb-12 pt-8 sm:px-6 sm:pb-14 sm:pt-10 lg:px-8">
+      <div
+        className={`relative z-10 mx-auto w-full max-w-6xl px-4 pb-12 pt-8 sm:px-6 sm:pb-14 sm:pt-10 lg:px-8 ${hasVideoBg ? "lg:flex lg:flex-1 lg:flex-col lg:justify-end lg:pb-16 lg:pt-12" : ""}`}
+      >
         <a
           href="#contenuto-profilo"
           className="absolute left-[-10000px] top-0 z-50 overflow-hidden whitespace-nowrap rounded-md bg-white px-4 py-2 text-sm font-medium text-black focus:left-4 focus:top-4 focus:overflow-visible focus:outline-2 focus:outline-offset-2 focus:outline-accent"

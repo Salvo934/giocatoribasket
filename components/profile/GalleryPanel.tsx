@@ -68,13 +68,14 @@ function BroadcastGalleryChrome({
 
 function placementClass(index: number, total: number): string {
   if (total === 6) {
+    /* Colonna grande a sx; dx griglia 2×2; ultima foto solo su colonne 2–3 (no strip ultrawide) */
     const map = [
       "lg:col-start-1 lg:row-start-1 lg:row-span-2 lg:min-h-[280px]",
       "lg:col-start-2 lg:row-start-1 lg:min-h-[140px]",
       "lg:col-start-3 lg:row-start-1 lg:min-h-[140px]",
       "lg:col-start-2 lg:row-start-2 lg:min-h-[140px]",
       "lg:col-start-3 lg:row-start-2 lg:min-h-[140px]",
-      "lg:col-span-3 lg:col-start-1 lg:row-start-3 lg:min-h-[160px]",
+      "lg:col-start-2 lg:col-span-2 lg:row-start-3 lg:min-h-[170px]",
     ];
     return map[index] ?? "";
   }
@@ -101,9 +102,7 @@ function GalleryTile({
       ? "aspect-4/3 md:aspect-21/9"
       : variant === "bento" && total === 6 && index === 0
         ? "aspect-4/3 lg:aspect-auto lg:h-full lg:min-h-[280px]"
-        : variant === "bento" && total === 6 && index === 5
-          ? "aspect-[21/9] lg:aspect-auto lg:min-h-[160px]"
-          : "aspect-4/3 sm:aspect-[5/4]";
+        : "aspect-4/3 sm:aspect-[5/4]";
 
   return (
     <button
@@ -296,7 +295,7 @@ export function GalleryPanel({ athlete }: Props) {
           : variant === "quad"
             ? "grid gap-3 sm:grid-cols-2 md:grid-cols-2 md:gap-4"
             : variant === "bento"
-              ? "grid gap-3 md:gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)] lg:grid-rows-[auto_auto_auto]"
+              ? "grid gap-3 md:gap-4 lg:grid-cols-3 lg:grid-rows-[auto_auto_auto]"
               : "grid gap-3 sm:grid-cols-2 lg:grid-cols-3 md:gap-4";
 
   return (
