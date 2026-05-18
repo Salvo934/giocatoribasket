@@ -36,7 +36,6 @@ export const ilarioSimonetti: AthleteProfile = {
     },
     lastUpdated: "2026-05-14",
     highlightUrl: "https://www.youtube.com/watch?v=lVvjB86NlPM",
-    whatsapp: "https://wa.me/393396433807?text=Ciao%2C%20vorrei%20info%20su%20Ilario%20Simonetti",
   },
   scoutView: {
     sectionDescription:
@@ -279,9 +278,7 @@ export const ilarioSimonetti: AthleteProfile = {
       name: "Brightside Sports",
       role: "Management & scouting · Via Veneto 97, Capo d’Orlando (ME)",
       email: "info@brightsidesports.com",
-      phone: "+39 339 6433807",
     },
-    whatsapp: "https://wa.me/393396433807?text=Ciao%2C%20vorrei%20info%20su%20Ilario%20Simonetti",
     social: [
       { platform: "Instagram", handle: "@ilario.simonetti", url: "https://instagram.com" },
       { platform: "TikTok", handle: "@ilario7", url: "https://tiktok.com" },
