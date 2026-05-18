@@ -1,19 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-const LINKS = [
-  { href: "#scout", label: "Scout" },
-  { href: "#mercato", label: "Mercato" },
-  { href: "#video", label: "Video" },
-  { href: "#stats", label: "Stats" },
-  { href: "#fit", label: "Fit" },
-  { href: "#carriera", label: "Carriera" },
-  { href: "#honors", label: "Palmares" },
-  { href: "#contatti", label: "Contatti" },
-] as const;
+function navLinks(showGallery: boolean) {
+  const links: { href: string; label: string }[] = [
+    { href: "#scout", label: "Scout" },
+    { href: "#mercato", label: "Mercato" },
+    { href: "#video", label: "Video" },
+    { href: "#stats", label: "Stats" },
+    { href: "#fit", label: "Fit" },
+  ];
+  if (showGallery) links.push({ href: "#gallery", label: "Gallery" });
+  links.push(
+    { href: "#carriera", label: "Carriera" },
+    { href: "#honors", label: "Palmares" },
+    { href: "#contatti", label: "Contatti" },
+  );
+  return links;
+}
 
-export function ProfileNav() {
+type Props = { showGallery?: boolean };
+
+export function ProfileNav({ showGallery = false }: Props) {
+  const links = useMemo(() => navLinks(showGallery), [showGallery]);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -69,7 +78,7 @@ export function ProfileNav() {
             </div>
             <nav aria-label="Sezioni profilo" className="overflow-y-auto px-2 py-2">
               <ul className="space-y-1">
-                {LINKS.map(({ href, label }) => (
+                {links.map(({ href, label }) => (
                   <li key={href}>
                     <a
                       href={href}

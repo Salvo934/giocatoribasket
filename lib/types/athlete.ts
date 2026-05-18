@@ -119,6 +119,20 @@ export interface AgencyRosterCard {
   image: string;
 }
 
+/** Immagine nella sezione gallery (path in `public`, es. `/athletes/foto.jpg`) */
+export interface GalleryImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+export interface AthleteGallery {
+  /** Default: "Gallery" */
+  title?: string;
+  description?: string;
+  items: GalleryImage[];
+}
+
 export interface AthleteProfile {
   slug: string;
   seo: {
@@ -180,6 +194,8 @@ export interface AthleteProfile {
     idealSystem: string;
     idealRole: string;
   };
+  /** Foto da campo / ritratto — se assente o vuota la sezione non viene mostrata */
+  gallery?: AthleteGallery;
   career: CareerStep[];
   honors: HonorItem[];
   verifications: VerificationBadge[];

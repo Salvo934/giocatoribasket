@@ -172,6 +172,41 @@ export const ilarioSimonetti: AthleteProfile = {
     idealRole:
       "Ala piccola 2ª–3ª rotazione in B (target 15′–22′) con profilo 3&D in costruzione: oggi è più finisher‑connettore che spacer puro; il passo successivo è definire il ruolo chiave (chiudi, taglio, mani in zona) mentre tiro esterno e liberi consolidano la proiezione verso combo forward.",
   },
+  gallery: {
+    description: "Scatti da campo, allenamento e contesto squadra.",
+    items: [
+      {
+        src: "/athletes/1BE5A032-3CBF-4350-8790-FFC4AC5BBEA1_1_105_c.jpeg",
+        alt: "Ilario Simonetti schiera cinque con i compagni in maglia Latina",
+        caption: "Latina · momento di squadra in campo",
+      },
+      {
+        src: "/athletes/9DF9FF8A-A3E6-41DB-B948-AC1477E76AD3_1_105_c.jpeg",
+        alt: "Ilario Simonetti in possesso di palla con sorriso durante un possesso",
+        caption: "Azione · conclusione e lettura difensiva",
+      },
+      {
+        src: "/athletes/29F1A8EB-84B6-4AF2-9B1D-F12B6ACC0A9E.jpeg",
+        alt: "Ilario Simonetti a canestro in schiacciata con la maglia Viola",
+        caption: "Viola Basket · schiacciata",
+      },
+      {
+        src: "/athletes/43EF2D72-720C-4CF5-9BA8-7F7E71D6A637_4_5005_c.jpeg",
+        alt: "Ilario Simonetti in elevazione per il tiro, maglia numero 7",
+        caption: "Gara · tiro in sospensione",
+      },
+      {
+        src: "/athletes/59A529F1-A791-4D4B-BD53-A493C1D7C31F.jpeg",
+        alt: "Ilario Simonetti ritratto in maglia da gioco con palla",
+        caption: "Ritratto · focus e preparazione",
+      },
+      {
+        src: "/athletes/B89BEAB8-56C7-4BC8-BE0F-BECBC5852334.jpeg",
+        alt: "Ilario Simonetti esulta con i compagni dopo un canestro",
+        caption: "Emozioni in campo · celebrazione",
+      },
+    ],
+  },
   career: [
     {
       season: "2025-26",

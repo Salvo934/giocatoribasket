@@ -54,6 +54,24 @@ export function ProfileHeader({ athlete }: Props) {
   const objectPosition = HERO_FOCUS_CLASS[focus] ?? "object-center";
   const jersey = h.number?.replace(/\D/g, "") ?? "";
   const hasVideoBg = Boolean(h.heroBackgroundVideo);
+  const avatarDesktopShiftRight =
+    athlete.slug === "ilario-simonetti" ? "lg:translate-x-5 xl:translate-x-10 2xl:translate-x-12" : "";
+
+  const staticHeroBackdrop = (
+    <>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_85%_70%_at_0%_-10%,rgba(223,255,74,0.14),transparent_55%),radial-gradient(ellipse_60%_50%_at_100%_20%,rgba(100,140,255,0.08),transparent_50%),radial-gradient(ellipse_50%_40%_at_50%_100%,rgba(223,255,74,0.05),transparent_45%)]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.4] mix-blend-soft-light"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+        }}
+      />
+    </>
+  );
 
   return (
     <header className="relative overflow-hidden border-b border-white/6">
@@ -62,7 +80,8 @@ export function ProfileHeader({ athlete }: Props) {
 
       {hasVideoBg && h.heroBackgroundVideo ? (
         <>
-          <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+          {/* Video solo da md↑ — su mobile risparmiamo banda e CPU */}
+          <div className="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden md:block" aria-hidden>
             {/*
               Ritaglio “da sopra”: si mostra soprattutto la parte alta del clip e si maschera il fondo campo / pittaggio.
             */}
@@ -93,26 +112,15 @@ export function ProfileHeader({ athlete }: Props) {
               }}
             />
           </div>
-          {/* Accenti leggeri sopra il video */}
+          <div className="pointer-events-none absolute inset-0 z-0 md:hidden">{staticHeroBackdrop}</div>
+          {/* Accenti leggeri sopra il video (solo desktop: sul mobile usiamo staticHeroBackdrop) */}
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 z-1 bg-[radial-gradient(ellipse_90%_80%_at_0%_-15%,rgba(223,255,74,0.09),transparent_50%),radial-gradient(ellipse_70%_55%_at_100%_25%,rgba(100,140,255,0.06),transparent_52%)] opacity-70"
+            className="pointer-events-none absolute inset-0 z-1 hidden bg-[radial-gradient(ellipse_90%_80%_at_0%_-15%,rgba(223,255,74,0.09),transparent_50%),radial-gradient(ellipse_70%_55%_at_100%_25%,rgba(100,140,255,0.06),transparent_52%)] opacity-70 md:block"
           />
         </>
       ) : (
-        <>
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_85%_70%_at_0%_-10%,rgba(223,255,74,0.14),transparent_55%),radial-gradient(ellipse_60%_50%_at_100%_20%,rgba(100,140,255,0.08),transparent_50%),radial-gradient(ellipse_50%_40%_at_50%_100%,rgba(223,255,74,0.05),transparent_45%)]"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 opacity-[0.4] mix-blend-soft-light"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-            }}
-          />
-        </>
+        staticHeroBackdrop
       )}
       <div
         aria-hidden
@@ -264,7 +272,9 @@ export function ProfileHeader({ athlete }: Props) {
           </div>
 
           {/* Avatar: cornice conica, depth stack, badge maglia */}
-          <div className="order-1 mx-auto flex w-full max-w-82 flex-col items-center lg:order-2 lg:mx-0 lg:max-w-88 lg:items-end lg:pb-2">
+          <div
+            className={`order-1 mx-auto flex w-full max-w-82 flex-col items-center lg:order-2 lg:mx-0 lg:max-w-88 lg:items-end lg:pb-2 ${avatarDesktopShiftRight}`}
+          >
             <div className="relative w-full max-w-[min(20.5rem,88vw)]">
               {/* Alone doppio: accent caldo + spill blu */}
               <div

@@ -1,6 +1,7 @@
 import type { AthleteProfile } from "@/lib/types/athlete";
 import { CareerTimeline } from "./CareerTimeline";
 import { ContactsPanel } from "./ContactsPanel";
+import { GalleryPanel } from "./GalleryPanel";
 import { HonorsPanel } from "./HonorsPanel";
 import { MarketPanel } from "./MarketPanel";
 import { ProfileHeader } from "./ProfileHeader";
@@ -19,7 +20,7 @@ export function AthleteProfileView({ athlete }: Props) {
       <ProfileHeader athlete={athlete} />
       <div className="relative z-10 w-full min-w-0">
         <div className="mx-auto min-w-0 w-full max-w-360">
-          <ProfileNav />
+          <ProfileNav showGallery={Boolean(athlete.gallery?.items?.length)} />
           <div className="min-w-0">
             <main id="contenuto-profilo" className="min-w-0 pb-24 lg:pb-0">
               <ScoutPanel athlete={athlete} />
@@ -27,6 +28,7 @@ export function AthleteProfileView({ athlete }: Props) {
               <VideoHub athlete={athlete} />
               <StatsPanel athlete={athlete} />
               <TechnicalFitPanel athlete={athlete} />
+              <GalleryPanel athlete={athlete} />
               <CareerTimeline athlete={athlete} />
               <HonorsPanel athlete={athlete} />
               <ContactsPanel athlete={athlete} />
