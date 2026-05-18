@@ -55,7 +55,7 @@ export function ProfileHeader({ athlete }: Props) {
   const jersey = h.number?.replace(/\D/g, "") ?? "";
   const hasVideoBg = Boolean(h.heroBackgroundVideo);
   const avatarDesktopShiftRight =
-    athlete.slug === "ilario-simonetti" ? "lg:translate-x-5 xl:translate-x-10 2xl:translate-x-12" : "";
+    athlete.slug === "ilario-simonetti" ? "lg:translate-x-12 xl:translate-x-20 2xl:translate-x-28" : "";
 
   const staticHeroBackdrop = (
     <>
@@ -98,17 +98,17 @@ export function ProfileHeader({ athlete }: Props) {
               tabIndex={-1}
               aria-hidden
             />
-            {/* Fascia bassa: copre righe di campo / paint anche se nel frame */}
-            <div className="absolute inset-x-0 bottom-0 h-[min(46vh,52%)] bg-linear-to-t from-[#030305] via-[#030305]/94 via-55% to-transparent" />
+            {/* Fascia bassa: campo / paint — più morbida così si vede più video */}
+            <div className="absolute inset-x-0 bottom-0 h-[min(38vh,46%)] bg-linear-to-t from-[#030305]/88 via-[#030305]/48 via-48% to-transparent" />
             {/*
               Alto più trasparente (azione / canestro al centro); lati più carichi per copy (sx) e avatar (dx).
-              Verticale: poco velo in alto, più verso il basso per blocchi testuali e stats.
+              Verticale: meno velo nero in basso rispetto a prima.
             */}
             <div
               className="absolute inset-0"
               style={{
                 backgroundImage: `
-                  linear-gradient(to bottom, rgba(3, 3, 5, 0) 0%, rgba(3, 3, 5, 0.04) 42%, rgba(3, 3, 5, 0.22) 78%, rgba(3, 3, 5, 0.34) 100%),
+                  linear-gradient(to bottom, rgba(3, 3, 5, 0) 0%, rgba(3, 3, 5, 0.03) 48%, rgba(3, 3, 5, 0.09) 82%, rgba(3, 3, 5, 0.14) 100%),
                   linear-gradient(to right, rgba(0, 0, 0, 0.86) 0%, rgba(0, 0, 0, 0.2) 34%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.22) 66%, rgba(0, 0, 0, 0.84) 100%)
                 `,
               }}

@@ -205,6 +205,11 @@ export const ilarioSimonetti: AthleteProfile = {
         alt: "Ilario Simonetti esulta con i compagni dopo un canestro",
         caption: "Emozioni in campo · celebrazione",
       },
+      {
+        src: "/athletes/0CB8B452-7C7E-4003-9D57-BAEE435F0AF6_1_105_c.jpeg",
+        alt: "Ilario Simonetti in maglia Viola con la palla tra le mani",
+        caption: "Viola Basket · ritratto in palestra",
+      },
     ],
   },
   career: [
