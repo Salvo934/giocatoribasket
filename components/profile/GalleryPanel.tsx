@@ -8,7 +8,8 @@ import { SectionShell } from "./SectionShell";
 
 type Props = { athlete: AthleteProfile };
 
-const CAROUSEL_INTERVAL_MS = 4800;
+const CAROUSEL_INTERVAL_MS = 4200;
+const SWIPE_MIN_PX = 44;
 
 function BroadcastGalleryChrome({
   athleteName,
@@ -25,7 +26,7 @@ function BroadcastGalleryChrome({
   const frameLabel = `${String(currentFrame).padStart(2, "0")} / ${String(photoCount).padStart(2, "0")}`;
 
   return (
-    <div className="relative overflow-hidden rounded-lg border border-white/12 bg-[#070708] shadow-[0_18px_56px_-22px_rgba(0,0,0,0.88)]">
+    <div className="relative mx-auto w-full max-w-xl overflow-hidden rounded-lg border border-white/12 bg-[#070708] shadow-[0_14px_44px_-18px_rgba(0,0,0,0.85)]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(223,255,74,0.06),transparent_50%)]" aria-hidden />
 
       {/* Angoli HUD */}
@@ -37,7 +38,7 @@ function BroadcastGalleryChrome({
       {/* Top bar */}
       <div className="relative border-b border-white/10 bg-linear-to-r from-black via-zinc-950 to-black">
         <div className="h-px w-full bg-linear-to-r from-transparent via-accent/50 to-transparent" />
-        <div className="flex flex-wrap items-center justify-between gap-2 px-3 py-2 md:gap-3 md:px-4 md:py-2.5">
+        <div className="flex flex-wrap items-center justify-between gap-2 px-2.5 py-1.5 md:gap-2.5 md:px-3 md:py-2">
           <div className="flex min-w-0 flex-wrap items-center gap-2 md:gap-2.5">
             <span className="shrink-0 rounded bg-accent px-1.5 py-0.5 font-mono text-[9px] font-black uppercase tracking-[0.18em] text-black sm:text-[10px]">
               Still
@@ -62,12 +63,12 @@ function BroadcastGalleryChrome({
         </div>
       </div>
 
-      <div className="relative border-x border-white/6 bg-black/50 p-2 sm:p-3 md:p-3.5">{children}</div>
+      <div className="relative border-x border-white/6 bg-black/50 p-1.5 sm:p-2 md:p-2.5">{children}</div>
 
       {/* Lower stripe */}
-      <div className="border-t border-white/10 bg-linear-to-r from-zinc-950 via-black to-zinc-950 px-3 py-2 md:px-4">
-        <p className="text-center text-[9px] font-bold uppercase tracking-[0.26em] text-zinc-600 sm:text-[10px]">
-          Carosello auto · pausa su hover · tap fullscreen
+      <div className="border-t border-white/10 bg-linear-to-r from-zinc-950 via-black to-zinc-950 px-2.5 py-1.5 md:px-3">
+        <p className="text-center text-[9px] font-bold uppercase tracking-[0.24em] text-zinc-600 sm:text-[10px]">
+          Auto · swipe · pausa hover · tap fullscreen
         </p>
       </div>
     </div>
@@ -87,6 +88,8 @@ function GalleryCarousel({
   const [index, setIndex] = useState(0);
   const [pause, setPause] = useState(false);
   const reduceMotionRef = useRef(false);
+  const swipeStartX = useRef<number | null>(null);
+  const suppressClickRef = useRef(false);
 
   useEffect(() => {
     reduceMotionRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -111,15 +114,54 @@ function GalleryCarousel({
     [n],
   );
 
+  const onSwipePointerDown = useCallback(
+    (e: React.PointerEvent) => {
+      if (n <= 1) return;
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      swipeStartX.current = e.clientX;
+    },
+    [n],
+  );
+
+  const onSwipePointerUp = useCallback(
+    (e: React.PointerEvent) => {
+      if (swipeStartX.current === null || n <= 1) return;
+      const dx = e.clientX - swipeStartX.current;
+      swipeStartX.current = null;
+      if (Math.abs(dx) < SWIPE_MIN_PX) return;
+      suppressClickRef.current = true;
+      window.setTimeout(() => {
+        suppressClickRef.current = false;
+      }, 320);
+      go(dx > 0 ? -1 : 1);
+    },
+    [go, n],
+  );
+
+  const onSwipePointerCancel = useCallback(() => {
+    swipeStartX.current = null;
+  }, []);
+
   if (n === 0) return null;
 
   return (
     <div
-      className="space-y-2.5 md:space-y-3"
+      className="space-y-2 md:space-y-2.5"
       onMouseEnter={() => setPause(true)}
       onMouseLeave={() => setPause(false)}
     >
-      <div className="relative overflow-hidden rounded-lg border border-white/10 bg-zinc-950">
+      <div
+        role="region"
+        aria-roledescription="carosello"
+        aria-label="Galleria foto"
+        className="relative touch-pan-y overflow-hidden rounded-lg border border-white/10 bg-zinc-950 select-none"
+        onPointerDown={onSwipePointerDown}
+        onPointerUp={onSwipePointerUp}
+        onPointerCancel={onSwipePointerCancel}
+        onPointerLeave={(e) => {
+          if (e.buttons === 0) swipeStartX.current = null;
+        }}
+      >
         <div
           className="flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
           style={{ transform: `translate3d(-${index * 100}%, 0, 0)` }}
@@ -129,15 +171,18 @@ function GalleryCarousel({
             <div key={`${item.src}-${i}`} className="min-w-0 shrink-0 grow-0 basis-full">
               <button
                 type="button"
-                onClick={() => onOpen(i)}
+                onClick={() => {
+                  if (suppressClickRef.current) return;
+                  onOpen(i);
+                }}
                 className="group relative block w-full overflow-hidden text-left outline-none ring-accent/40 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
               >
-                <div className="relative aspect-5/4 w-full overflow-hidden sm:aspect-4/3 md:aspect-16/10">
+                <div className="relative h-[148px] w-full overflow-hidden sm:h-[164px] md:h-[176px]">
                   <Image
                     src={item.src}
                     alt={item.alt}
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 72rem"
+                    sizes="(max-width: 640px) min(100vw, 36rem), 576px"
                     className="object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
                     priority={i === 0}
                   />
@@ -165,13 +210,13 @@ function GalleryCarousel({
                     {String(i + 1).padStart(2, "0")}/{String(n).padStart(2, "0")}
                   </span>
                   {item.caption ? (
-                    <div className="pointer-events-none absolute inset-x-0 bottom-0 px-2 pb-2 pt-8 text-left sm:px-3 sm:pb-2.5">
-                      <p className="text-[11px] font-semibold leading-snug text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.88)] sm:text-xs">
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 px-2 pb-1.5 pt-6 text-left sm:px-2.5 sm:pb-2">
+                      <p className="line-clamp-2 text-[10px] font-semibold leading-snug text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.88)] sm:text-[11px]">
                         {item.caption}
                       </p>
                     </div>
                   ) : null}
-                  <span className="pointer-events-none absolute bottom-2 right-2 rounded-full border border-white/15 bg-black/55 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-zinc-300 opacity-0 backdrop-blur-md transition duration-300 group-hover:opacity-100 sm:text-[10px]">
+                  <span className="pointer-events-none absolute bottom-1.5 right-2 rounded-full border border-white/15 bg-black/55 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-zinc-300 opacity-0 backdrop-blur-md transition duration-300 group-hover:opacity-100 sm:text-[10px]">
                     Apri
                   </span>
                 </div>
@@ -185,16 +230,22 @@ function GalleryCarousel({
             <button
               type="button"
               aria-label="Foto precedente"
-              onClick={() => go(-1)}
-              className="absolute left-1 top-1/2 z-10 -translate-y-1/2 rounded-md border border-white/12 bg-black/65 px-2 py-2 text-xs font-bold text-white backdrop-blur-sm transition hover:border-accent/40 hover:text-accent md:left-2 md:px-2.5"
+              onClick={(e) => {
+                e.stopPropagation();
+                go(-1);
+              }}
+              className="absolute left-1 top-1/2 z-10 -translate-y-1/2 rounded-md border border-white/12 bg-black/65 px-2 py-1.5 text-xs font-bold text-white backdrop-blur-sm transition hover:border-accent/40 hover:text-accent md:left-2 md:px-2.5 md:py-2"
             >
               ‹
             </button>
             <button
               type="button"
               aria-label="Foto successiva"
-              onClick={() => go(1)}
-              className="absolute right-1 top-1/2 z-10 -translate-y-1/2 rounded-md border border-white/12 bg-black/65 px-2 py-2 text-xs font-bold text-white backdrop-blur-sm transition hover:border-accent/40 hover:text-accent md:right-2 md:px-2.5"
+              onClick={(e) => {
+                e.stopPropagation();
+                go(1);
+              }}
+              className="absolute right-1 top-1/2 z-10 -translate-y-1/2 rounded-md border border-white/12 bg-black/65 px-2 py-1.5 text-xs font-bold text-white backdrop-blur-sm transition hover:border-accent/40 hover:text-accent md:right-2 md:px-2.5 md:py-2"
             >
               ›
             </button>
