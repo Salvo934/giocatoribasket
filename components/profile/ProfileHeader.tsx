@@ -67,7 +67,7 @@ export function ProfileHeader({ athlete }: Props) {
               Ritaglio “da sopra”: si mostra soprattutto la parte alta del clip e si maschera il fondo campo / pittaggio.
             */}
             <video
-              className="absolute left-1/2 top-0 min-h-[122%] w-full min-w-[102%] -translate-x-1/2 object-cover object-[center_14%] opacity-[0.52] sm:min-h-[128%] sm:object-[center_12%]"
+              className="absolute left-1/2 top-0 min-h-[122%] w-full min-w-[102%] -translate-x-1/2 object-cover object-[center_14%] opacity-[0.82] sm:min-h-[128%] sm:object-[center_12%]"
               src={h.heroBackgroundVideo}
               muted
               playsInline
@@ -79,15 +79,24 @@ export function ProfileHeader({ athlete }: Props) {
             />
             {/* Fascia bassa: copre righe di campo / paint anche se nel frame */}
             <div className="absolute inset-x-0 bottom-0 h-[min(46vh,52%)] bg-linear-to-t from-[#030305] via-[#030305]/94 via-55% to-transparent" />
-            {/* Leggero velo globale — meno forte in alto così il video si legge */}
-            <div className="absolute inset-0 bg-black/48 sm:bg-black/44" />
-            <div className="absolute inset-0 bg-linear-to-r from-black/78 via-black/42 to-black/62 md:from-black/72 md:via-black/32 md:to-black/66" />
-            <div className="absolute inset-0 bg-linear-to-t from-transparent via-transparent to-black/28" />
+            {/*
+              Alto più trasparente (azione / canestro al centro); lati più carichi per copy (sx) e avatar (dx).
+              Verticale: poco velo in alto, più verso il basso per blocchi testuali e stats.
+            */}
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `
+                  linear-gradient(to bottom, rgba(3, 3, 5, 0) 0%, rgba(3, 3, 5, 0.04) 42%, rgba(3, 3, 5, 0.22) 78%, rgba(3, 3, 5, 0.34) 100%),
+                  linear-gradient(to right, rgba(0, 0, 0, 0.86) 0%, rgba(0, 0, 0, 0.2) 34%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.22) 66%, rgba(0, 0, 0, 0.84) 100%)
+                `,
+              }}
+            />
           </div>
           {/* Accenti leggeri sopra il video */}
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 z-1 bg-[radial-gradient(ellipse_90%_80%_at_0%_-15%,rgba(223,255,74,0.09),transparent_50%),radial-gradient(ellipse_70%_55%_at_100%_25%,rgba(100,140,255,0.06),transparent_52%)]"
+            className="pointer-events-none absolute inset-0 z-1 bg-[radial-gradient(ellipse_90%_80%_at_0%_-15%,rgba(223,255,74,0.09),transparent_50%),radial-gradient(ellipse_70%_55%_at_100%_25%,rgba(100,140,255,0.06),transparent_52%)] opacity-70"
           />
         </>
       ) : (
