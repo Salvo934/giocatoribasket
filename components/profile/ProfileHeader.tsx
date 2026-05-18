@@ -63,8 +63,11 @@ export function ProfileHeader({ athlete }: Props) {
       {hasVideoBg && h.heroBackgroundVideo ? (
         <>
           <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+            {/*
+              Ritaglio “da sopra”: si mostra soprattutto la parte alta del clip e si maschera il fondo campo / pittaggio.
+            */}
             <video
-              className="absolute inset-0 h-full w-full object-cover opacity-[0.42]"
+              className="absolute left-1/2 top-0 min-h-[122%] w-full min-w-[102%] -translate-x-1/2 object-cover object-[center_14%] opacity-[0.52] sm:min-h-[128%] sm:object-[center_12%]"
               src={h.heroBackgroundVideo}
               muted
               playsInline
@@ -74,10 +77,12 @@ export function ProfileHeader({ athlete }: Props) {
               tabIndex={-1}
               aria-hidden
             />
-            {/* Oscura tutta l’area hero così copy e avatar restano leggibili */}
-            <div className="absolute inset-0 bg-black/58" />
-            <div className="absolute inset-0 bg-linear-to-r from-black/82 via-black/52 to-black/68 md:from-black/78 md:via-black/40 md:to-black/72" />
-            <div className="absolute inset-0 bg-linear-to-t from-black/55 via-transparent to-black/35" />
+            {/* Fascia bassa: copre righe di campo / paint anche se nel frame */}
+            <div className="absolute inset-x-0 bottom-0 h-[min(46vh,52%)] bg-linear-to-t from-[#030305] via-[#030305]/94 via-55% to-transparent" />
+            {/* Leggero velo globale — meno forte in alto così il video si legge */}
+            <div className="absolute inset-0 bg-black/48 sm:bg-black/44" />
+            <div className="absolute inset-0 bg-linear-to-r from-black/78 via-black/42 to-black/62 md:from-black/72 md:via-black/32 md:to-black/66" />
+            <div className="absolute inset-0 bg-linear-to-t from-transparent via-transparent to-black/28" />
           </div>
           {/* Accenti leggeri sopra il video */}
           <div

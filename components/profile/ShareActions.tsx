@@ -9,7 +9,7 @@ type Props = {
 };
 
 export function ShareProfileButton({ path, publicSiteUrl, className }: Props) {
-  const [label, setLabel] = useState("Copia link");
+  const [label, setLabel] = useState("Condividi link");
 
   const absoluteUrl = useMemo(() => {
     const trimmed = publicSiteUrl?.trim();
@@ -27,7 +27,7 @@ export function ShareProfileButton({ path, publicSiteUrl, className }: Props) {
       if (typeof navigator.share === "function") {
         await navigator.share({ title: document.title, url });
         setLabel("Condiviso");
-        setTimeout(() => setLabel("Copia link"), 2000);
+        setTimeout(() => setLabel("Condividi link"), 2000);
         return;
       }
     } catch {
@@ -37,10 +37,10 @@ export function ShareProfileButton({ path, publicSiteUrl, className }: Props) {
     try {
       await navigator.clipboard.writeText(url);
       setLabel("Copiato");
-      setTimeout(() => setLabel("Copia link"), 2200);
+      setTimeout(() => setLabel("Condividi link"), 2200);
     } catch {
       setLabel("Errore");
-      setTimeout(() => setLabel("Copia link"), 2200);
+      setTimeout(() => setLabel("Condividi link"), 2200);
     }
   }, [absoluteUrl, path]);
 
