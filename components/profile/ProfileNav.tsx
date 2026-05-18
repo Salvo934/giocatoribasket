@@ -1,6 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
+
+const MOBILE_MENU_BALL_ICON = "/athletes/icons8-pallacanestro-64.png";
 
 function navLinks(showGallery: boolean) {
   const links: { href: string; label: string }[] = [
@@ -39,15 +42,20 @@ export function ProfileNav({ showGallery = false }: Props) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="fixed bottom-5 right-4 z-40 flex h-14 items-center gap-2 rounded-full border border-white/15 bg-zinc-950/95 px-5 text-sm font-bold uppercase tracking-wider text-white shadow-[0_12px_40px_-8px_rgba(0,0,0,0.85)] backdrop-blur-md transition hover:border-accent/40 hover:text-accent"
-        style={{ paddingBottom: "max(0.25rem, env(safe-area-inset-bottom))" }}
+        className="fixed z-40 flex size-14 items-center justify-center rounded-full border border-white/15 bg-zinc-950/95 shadow-[0_12px_40px_-8px_rgba(0,0,0,0.85)] backdrop-blur-md transition hover:border-accent/40 hover:shadow-[0_12px_40px_-8px_var(--accent-glow)]"
+        style={{ bottom: "max(1.25rem, env(safe-area-inset-bottom))", right: "max(1rem, env(safe-area-inset-right))" }}
+        aria-label="Apri menu sezioni"
         aria-expanded={open}
         aria-controls="profile-nav-sheet"
       >
-        <span className="text-lg leading-none" aria-hidden>
-          ☰
-        </span>
-        Indice
+        <Image
+          src={MOBILE_MENU_BALL_ICON}
+          alt=""
+          width={28}
+          height={28}
+          className="brightness-0 invert"
+          aria-hidden
+        />
       </button>
 
       {open ? (
@@ -62,7 +70,7 @@ export function ProfileNav({ showGallery = false }: Props) {
             id="profile-nav-sheet"
             role="dialog"
             aria-modal="true"
-            aria-label="Indice sezioni profilo"
+            aria-label="Menu sezioni profilo"
             className="relative max-h-[min(78vh,520px)] overflow-hidden rounded-t-2xl border border-white/12 border-b-0 bg-zinc-950 shadow-[0_-24px_60px_-12px_rgba(0,0,0,0.9)]"
             style={{ paddingBottom: "max(1rem, env(safe-area-inset-bottom))" }}
           >
