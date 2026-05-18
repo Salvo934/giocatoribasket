@@ -10,6 +10,7 @@ type Props = { athlete: AthleteProfile };
 
 const CAROUSEL_INTERVAL_MS = 4200;
 const SWIPE_MIN_PX = 44;
+const MOBILE_GALLERY_BALL_ICON = "/athletes/icons8-pallacanestro-64.png";
 
 function BroadcastGalleryChrome({
   athleteName,
@@ -254,21 +255,58 @@ function GalleryCarousel({
       </div>
 
       {n > 1 ? (
-        <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2" role="tablist" aria-label="Seleziona foto">
-          {items.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              role="tab"
-              aria-selected={i === index}
-              aria-label={`Foto ${i + 1} di ${n}`}
-              onClick={() => setIndex(i)}
-              className={`h-1.5 rounded-full transition-all sm:h-2 ${
-                i === index ? "w-6 bg-accent shadow-[0_0_12px_var(--accent-glow)] sm:w-8" : "w-1.5 bg-white/25 hover:bg-white/45 sm:w-2"
-              }`}
-            />
-          ))}
-        </div>
+        <>
+          {/* Mobile: palloni da basket come indicatori */}
+          <div
+            className="flex flex-wrap items-center justify-center gap-2 px-1 md:hidden"
+            role="tablist"
+            aria-label="Seleziona foto"
+          >
+            {items.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                role="tab"
+                aria-selected={i === index}
+                aria-label={`Foto ${i + 1} di ${n}`}
+                onClick={() => setIndex(i)}
+                className={`relative grid size-10 shrink-0 place-items-center rounded-full border transition-all ${
+                  i === index
+                    ? "border-accent/55 bg-accent/10 shadow-[0_0_16px_var(--accent-glow)]"
+                    : "border-white/12 bg-black/40 opacity-55 hover:border-white/25 hover:opacity-90"
+                }`}
+              >
+                <Image
+                  src={MOBILE_GALLERY_BALL_ICON}
+                  alt=""
+                  width={26}
+                  height={26}
+                  className={`pointer-events-none brightness-0 invert transition-transform ${
+                    i === index ? "scale-110" : "scale-95"
+                  }`}
+                  aria-hidden
+                />
+              </button>
+            ))}
+          </div>
+
+          {/* Desktop: indicatori a barretta */}
+          <div className="hidden flex-wrap items-center justify-center gap-1.5 sm:gap-2 md:flex" role="tablist" aria-label="Seleziona foto">
+            {items.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                role="tab"
+                aria-selected={i === index}
+                aria-label={`Foto ${i + 1} di ${n}`}
+                onClick={() => setIndex(i)}
+                className={`h-1.5 rounded-full transition-all sm:h-2 ${
+                  i === index ? "w-6 bg-accent shadow-[0_0_12px_var(--accent-glow)] sm:w-8" : "w-1.5 bg-white/25 hover:bg-white/45 sm:w-2"
+                }`}
+              />
+            ))}
+          </div>
+        </>
       ) : null}
     </div>
   );
