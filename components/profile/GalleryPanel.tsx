@@ -26,7 +26,7 @@ function BroadcastGalleryChrome({
   const frameLabel = `${String(currentFrame).padStart(2, "0")} / ${String(photoCount).padStart(2, "0")}`;
 
   return (
-    <div className="relative mx-auto w-full max-w-xl overflow-hidden rounded-lg border border-white/12 bg-[#070708] shadow-[0_14px_44px_-18px_rgba(0,0,0,0.85)]">
+    <div className="relative mx-auto w-full max-w-2xl overflow-hidden rounded-lg border border-white/12 bg-[#070708] shadow-[0_14px_44px_-18px_rgba(0,0,0,0.85)]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(223,255,74,0.06),transparent_50%)]" aria-hidden />
 
       {/* Angoli HUD */}
@@ -177,12 +177,12 @@ function GalleryCarousel({
                 }}
                 className="group relative block w-full overflow-hidden text-left outline-none ring-accent/40 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
               >
-                <div className="relative h-[148px] w-full overflow-hidden sm:h-[164px] md:h-[176px]">
+                <div className="relative h-[196px] w-full overflow-hidden sm:h-[228px] md:h-[252px]">
                   <Image
                     src={item.src}
                     alt={item.alt}
                     fill
-                    sizes="(max-width: 640px) min(100vw, 36rem), 576px"
+                    sizes="(max-width: 640px) min(100vw, 42rem), 672px"
                     className="object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
                     priority={i === 0}
                   />
