@@ -2,21 +2,28 @@
 
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { AthleteProfile, GalleryImage } from "@/lib/types/athlete";
 import { SectionShell } from "./SectionShell";
 
 type Props = { athlete: AthleteProfile };
 
+const CAROUSEL_INTERVAL_MS = 4800;
+
 function BroadcastGalleryChrome({
   athleteName,
   photoCount,
+  currentFrame,
   children,
 }: {
   athleteName: string;
   photoCount: number;
+  /** 1-based indice slide attiva (per HUD) */
+  currentFrame: number;
   children: ReactNode;
 }) {
+  const frameLabel = `${String(currentFrame).padStart(2, "0")} / ${String(photoCount).padStart(2, "0")}`;
+
   return (
     <div className="relative overflow-hidden rounded-lg border border-white/12 bg-[#070708] shadow-[0_18px_56px_-22px_rgba(0,0,0,0.88)]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(223,255,74,0.06),transparent_50%)]" aria-hidden />
@@ -48,6 +55,7 @@ function BroadcastGalleryChrome({
             </div>
           </div>
           <div className="flex items-center gap-1.5 font-mono text-[9px] font-bold uppercase tracking-wider text-zinc-400 sm:gap-2 sm:text-[10px]">
+            <span className="rounded border border-white/12 bg-white/5 px-1.5 py-0.5 text-accent">{frameLabel}</span>
             <span className="rounded border border-white/12 bg-white/5 px-1.5 py-0.5 text-zinc-300">{photoCount} frames</span>
             <span className="rounded border border-white/12 bg-white/5 px-1.5 py-0.5 text-accent">RAW</span>
           </div>
@@ -59,108 +67,159 @@ function BroadcastGalleryChrome({
       {/* Lower stripe */}
       <div className="border-t border-white/10 bg-linear-to-r from-zinc-950 via-black to-zinc-950 px-3 py-2 md:px-4">
         <p className="text-center text-[9px] font-bold uppercase tracking-[0.26em] text-zinc-600 sm:text-[10px]">
-          Tap · fullscreen · arrows
+          Carosello auto · pausa su hover · tap fullscreen
         </p>
       </div>
     </div>
   );
 }
 
-function placementClass(index: number, total: number): string {
-  if (total === 6) {
-    /* Colonna grande a sx; dx griglia 2×2; ultima foto solo su colonne 2–3 (no strip ultrawide) */
-    const map = [
-      "lg:col-start-1 lg:row-start-1 lg:row-span-2 lg:min-h-[210px]",
-      "lg:col-start-2 lg:row-start-1 lg:min-h-[104px]",
-      "lg:col-start-3 lg:row-start-1 lg:min-h-[104px]",
-      "lg:col-start-2 lg:row-start-2 lg:min-h-[104px]",
-      "lg:col-start-3 lg:row-start-2 lg:min-h-[104px]",
-      "lg:col-start-2 lg:col-span-2 lg:row-start-3 lg:min-h-[124px]",
-    ];
-    return map[index] ?? "";
-  }
-  return "";
-}
-
-function GalleryTile({
-  item,
-  index,
-  total,
-  variant,
+function GalleryCarousel({
+  items,
   onOpen,
+  onSlideChange,
 }: {
-  item: GalleryImage;
-  index: number;
-  total: number;
-  variant: "single" | "pair" | "trio" | "quad" | "many" | "bento";
-  onOpen: () => void;
+  items: GalleryImage[];
+  onOpen: (index: number) => void;
+  onSlideChange?: (index: number) => void;
 }) {
-  const idxLabel = String(index + 1).padStart(2, "0");
+  const n = items.length;
+  const [index, setIndex] = useState(0);
+  const [pause, setPause] = useState(false);
+  const reduceMotionRef = useRef(false);
 
-  const aspect =
-    variant === "single"
-      ? "aspect-4/3 md:aspect-[2/1]"
-      : variant === "bento" && total === 6 && index === 0
-        ? "aspect-4/3 lg:aspect-auto lg:h-full lg:min-h-[210px]"
-        : "aspect-[5/4] sm:aspect-4/3";
+  useEffect(() => {
+    reduceMotionRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }, []);
+
+  useEffect(() => {
+    onSlideChange?.(index);
+  }, [index, onSlideChange]);
+
+  useEffect(() => {
+    if (n <= 1 || pause || reduceMotionRef.current) return;
+    const id = window.setInterval(() => {
+      setIndex((i) => (i + 1) % n);
+    }, CAROUSEL_INTERVAL_MS);
+    return () => window.clearInterval(id);
+  }, [n, pause]);
+
+  const go = useCallback(
+    (dir: -1 | 1) => {
+      setIndex((i) => (i + dir + n) % n);
+    },
+    [n],
+  );
+
+  if (n === 0) return null;
 
   return (
-    <button
-      type="button"
-      onClick={onOpen}
-      className={`group relative w-full overflow-hidden rounded-lg border border-white/10 bg-zinc-950 text-left outline-none ring-accent/40 transition hover:border-accent/35 hover:shadow-[0_0_28px_-12px_var(--accent-glow)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-black ${placementClass(index, total)}`}
+    <div
+      className="space-y-2.5 md:space-y-3"
+      onMouseEnter={() => setPause(true)}
+      onMouseLeave={() => setPause(false)}
     >
-      <div className={`relative w-full overflow-hidden ${aspect}`}>
-        <Image
-          src={item.src}
-          alt={item.alt}
-          fill
-          sizes={
-            variant === "single"
-              ? "(max-width: 768px) 100vw, 80vw"
-              : variant === "bento" && index === 0
-                ? "(max-width: 1024px) 100vw, 45vw"
-                : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 28vw"
-          }
-          className="object-cover transition duration-400 ease-out group-hover:scale-[1.03]"
-        />
-
-        {/* Overlay */}
+      <div className="relative overflow-hidden rounded-lg border border-white/10 bg-zinc-950">
         <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-linear-to-t from-black via-black/25 to-transparent opacity-90 transition duration-300 group-hover:via-black/40"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-0 mix-blend-overlay transition duration-300 group-hover:opacity-100"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E\")",
-          }}
-        />
+          className="flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+          style={{ transform: `translate3d(-${index * 100}%, 0, 0)` }}
+          aria-live="polite"
+        >
+          {items.map((item, i) => (
+            <div key={`${item.src}-${i}`} className="min-w-0 shrink-0 grow-0 basis-full">
+              <button
+                type="button"
+                onClick={() => onOpen(i)}
+                className="group relative block w-full overflow-hidden text-left outline-none ring-accent/40 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              >
+                <div className="relative aspect-5/4 w-full overflow-hidden sm:aspect-4/3 md:aspect-16/10">
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 72rem"
+                    className="object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
+                    priority={i === 0}
+                  />
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent opacity-90 transition duration-300 group-hover:via-black/35"
+                  />
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 opacity-0 mix-blend-overlay transition duration-300 group-hover:opacity-100"
+                    style={{
+                      backgroundImage:
+                        "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E\")",
+                    }}
+                  />
+                  <div
+                    className="pointer-events-none absolute left-2 top-2 h-5 w-5 scale-90 border-l border-t border-accent/0 transition duration-300 group-hover:scale-100 group-hover:border-accent/55 sm:left-2.5 sm:top-2.5"
+                    aria-hidden
+                  />
+                  <div
+                    className="pointer-events-none absolute right-2 top-2 h-5 w-5 scale-90 border-r border-t border-accent/0 transition duration-300 group-hover:scale-100 group-hover:border-accent/55 sm:right-2.5 sm:top-2.5"
+                    aria-hidden
+                  />
+                  <span className="pointer-events-none absolute left-2 top-2 rounded bg-black/65 px-1.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider text-accent backdrop-blur-sm sm:left-2.5 sm:top-2.5 sm:text-[10px]">
+                    {String(i + 1).padStart(2, "0")}/{String(n).padStart(2, "0")}
+                  </span>
+                  {item.caption ? (
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 px-2 pb-2 pt-8 text-left sm:px-3 sm:pb-2.5">
+                      <p className="text-[11px] font-semibold leading-snug text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.88)] sm:text-xs">
+                        {item.caption}
+                      </p>
+                    </div>
+                  ) : null}
+                  <span className="pointer-events-none absolute bottom-2 right-2 rounded-full border border-white/15 bg-black/55 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-zinc-300 opacity-0 backdrop-blur-md transition duration-300 group-hover:opacity-100 sm:text-[10px]">
+                    Apri
+                  </span>
+                </div>
+              </button>
+            </div>
+          ))}
+        </div>
 
-        {/* Mini-angoli hover */}
-        <div className="pointer-events-none absolute left-2 top-2 h-5 w-5 scale-90 border-l border-t border-accent/0 transition duration-300 group-hover:scale-100 group-hover:border-accent/55" aria-hidden />
-        <div className="pointer-events-none absolute right-2 top-2 h-5 w-5 scale-90 border-r border-t border-accent/0 transition duration-300 group-hover:scale-100 group-hover:border-accent/55" aria-hidden />
-
-        {/* Frame counter */}
-        <span className="pointer-events-none absolute left-2 top-2 rounded bg-black/65 px-1.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider text-accent backdrop-blur-sm sm:left-2.5 sm:top-2.5 sm:text-[10px]">
-          {idxLabel}/{String(total).padStart(2, "0")}
-        </span>
-
-        {item.caption ? (
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 px-2 pb-2 pt-8 text-left sm:px-2.5 sm:pb-2.5 md:px-3">
-            <p className="text-[11px] font-semibold leading-snug text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] sm:text-xs">
-              {item.caption}
-            </p>
-          </div>
+        {n > 1 ? (
+          <>
+            <button
+              type="button"
+              aria-label="Foto precedente"
+              onClick={() => go(-1)}
+              className="absolute left-1 top-1/2 z-10 -translate-y-1/2 rounded-md border border-white/12 bg-black/65 px-2 py-2 text-xs font-bold text-white backdrop-blur-sm transition hover:border-accent/40 hover:text-accent md:left-2 md:px-2.5"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              aria-label="Foto successiva"
+              onClick={() => go(1)}
+              className="absolute right-1 top-1/2 z-10 -translate-y-1/2 rounded-md border border-white/12 bg-black/65 px-2 py-2 text-xs font-bold text-white backdrop-blur-sm transition hover:border-accent/40 hover:text-accent md:right-2 md:px-2.5"
+            >
+              ›
+            </button>
+          </>
         ) : null}
-
-        <span className="pointer-events-none absolute bottom-2 right-2 rounded-full border border-white/15 bg-black/55 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-zinc-300 opacity-0 backdrop-blur-md transition duration-300 group-hover:opacity-100 sm:text-[10px]">
-          Apri
-        </span>
       </div>
-    </button>
+
+      {n > 1 ? (
+        <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2" role="tablist" aria-label="Seleziona foto">
+          {items.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              role="tab"
+              aria-selected={i === index}
+              aria-label={`Foto ${i + 1} di ${n}`}
+              onClick={() => setIndex(i)}
+              className={`h-1.5 rounded-full transition-all sm:h-2 ${
+                i === index ? "w-6 bg-accent shadow-[0_0_12px_var(--accent-glow)] sm:w-8" : "w-1.5 bg-white/25 hover:bg-white/45 sm:w-2"
+              }`}
+            />
+          ))}
+        </div>
+      ) : null}
+    </div>
   );
 }
 
@@ -199,7 +258,7 @@ function Lightbox({
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
+      className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-6"
       role="dialog"
       aria-modal="true"
       aria-label="Immagine gallery a schermo intero"
@@ -261,6 +320,7 @@ function Lightbox({
 export function GalleryPanel({ athlete }: Props) {
   const items = athlete.gallery?.items ?? [];
   const [lightbox, setLightbox] = useState<number | null>(null);
+  const [activeSlide, setActiveSlide] = useState(0);
 
   const close = useCallback(() => setLightbox(null), []);
   const goPrev = useCallback(() => {
@@ -270,6 +330,10 @@ export function GalleryPanel({ athlete }: Props) {
     setLightbox((i) => (i === null || items.length === 0 ? i : (i + 1) % items.length));
   }, [items.length]);
 
+  const onSlideChange = useCallback((i: number) => {
+    setActiveSlide(i);
+  }, []);
+
   if (items.length === 0) return null;
 
   const title = athlete.gallery?.title?.trim() || "Gallery";
@@ -278,25 +342,6 @@ export function GalleryPanel({ athlete }: Props) {
     "Immagini da campo, allenamento e contesto club.";
 
   const n = items.length;
-  let variant: "single" | "pair" | "trio" | "quad" | "many" | "bento" = "many";
-  if (n === 1) variant = "single";
-  else if (n === 2) variant = "pair";
-  else if (n === 3) variant = "trio";
-  else if (n === 4) variant = "quad";
-  else if (n === 6) variant = "bento";
-
-  const gridClass =
-    variant === "single"
-      ? "mx-auto max-w-4xl"
-      : variant === "pair"
-        ? "grid gap-2 sm:grid-cols-2 md:gap-3"
-        : variant === "trio"
-          ? "grid gap-2 sm:grid-cols-3 md:gap-3"
-          : variant === "quad"
-            ? "grid gap-2 sm:grid-cols-2 md:grid-cols-2 md:gap-3"
-            : variant === "bento"
-              ? "grid gap-2 md:gap-2.5 lg:grid-cols-3 lg:grid-rows-[auto_auto_auto]"
-              : "grid gap-2 sm:grid-cols-2 lg:grid-cols-3 md:gap-2.5";
 
   return (
     <SectionShell
@@ -312,19 +357,8 @@ export function GalleryPanel({ athlete }: Props) {
         </span>
       }
     >
-      <BroadcastGalleryChrome athleteName={athlete.header.name} photoCount={n}>
-        <div className={gridClass}>
-          {items.map((item, idx) => (
-            <GalleryTile
-              key={`${item.src}-${idx}`}
-              item={item}
-              index={idx}
-              total={n}
-              variant={variant}
-              onOpen={() => setLightbox(idx)}
-            />
-          ))}
-        </div>
+      <BroadcastGalleryChrome athleteName={athlete.header.name} photoCount={n} currentFrame={activeSlide + 1}>
+        <GalleryCarousel items={items} onOpen={setLightbox} onSlideChange={onSlideChange} />
       </BroadcastGalleryChrome>
 
       {lightbox !== null ? (
