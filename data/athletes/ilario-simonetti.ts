@@ -12,6 +12,7 @@ export const ilarioSimonetti: AthleteProfile = {
   header: {
     heroImage: "/athletes/ilario-simonetti-avatar.png",
     heroImageFocus: "top",
+    heroBackgroundVideo: "/athletes/sfondoheroila.mp4",
     name: "Ilario Simonetti",
     number: "7",
     sport: "Basket",
@@ -29,13 +30,13 @@ export const ilarioSimonetti: AthleteProfile = {
     dashboardIntro:
       "Ala piccola classe 2004, 200 cm, in contesto Serie B nazionale: profilo orientato a spacing e versatilità sulle ali, con valore nel mismatch e nel gioco vicino alla zona. Scheda per valutazione rapida: identità fisico-tecnica, numeri, clip e contatto col referente.",
     agency: {
-      name: "KataHero Agency",
-      representative: "Staff scouting & player management",
-      website: "https://katahero.com",
+      name: "Brightside Sports",
+      representative: "Brightside Sports SRL · Capo d’Orlando (ME)",
+      website: "https://www.brightsidesports.com/",
     },
     lastUpdated: "2026-05-14",
     highlightUrl: "https://www.youtube.com/watch?v=lVvjB86NlPM",
-    whatsapp: "https://wa.me/393274597773?text=Ciao%2C%20richiesta%20su%20Ilario%20Simonetti",
+    whatsapp: "https://wa.me/393396433807?text=Ciao%2C%20vorrei%20info%20su%20Ilario%20Simonetti",
   },
   scoutView: {
     sectionDescription:
@@ -230,15 +231,17 @@ export const ilarioSimonetti: AthleteProfile = {
     { id: "club", label: "Club confermato", ok: true },
   ],
   contacts: {
-    agency: { name: "KataHero Agency (demo)", website: "https://katahero.com" },
-    representative: {
-      name: "Referente scouting (demo)",
-      role: "Procuratore / head of scouting",
-      email: "salvo.bonaita9808@gmail.com",
-      phone: "+39 327 459 7773",
+    agency: {
+      name: "Brightside Sports SRL",
+      website: "https://www.brightsidesports.com/contact/",
     },
-    athleteEmail: "athlete.placeholder@example.com",
-    whatsapp: "https://wa.me/393274597773?text=Ciao%2C%20vorrei%20info%20su%20Ilario%20Simonetti",
+    representative: {
+      name: "Brightside Sports",
+      role: "Management & scouting · Via Veneto 97, Capo d’Orlando (ME)",
+      email: "info@brightsidesports.com",
+      phone: "+39 339 6433807",
+    },
+    whatsapp: "https://wa.me/393396433807?text=Ciao%2C%20vorrei%20info%20su%20Ilario%20Simonetti",
     social: [
       { platform: "Instagram", handle: "@ilario.simonetti", url: "https://instagram.com" },
       { platform: "TikTok", handle: "@ilario7", url: "https://tiktok.com" },

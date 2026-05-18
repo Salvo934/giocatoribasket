@@ -148,6 +148,8 @@ export interface AthleteProfile {
     identityNote?: string;
     /** Ritaglio foto hero: utile per ritratti verticali */
     heroImageFocus?: "top" | "center" | "bottom";
+    /** Video loop in `public` (mp4), dietro overlay — uso mirato per non coprire copy/avatar */
+    heroBackgroundVideo?: string;
     marketStatusLabel: string;
     agency: AgencyRef;
     lastUpdated: string;

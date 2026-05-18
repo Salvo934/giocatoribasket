@@ -53,28 +53,56 @@ export function ProfileHeader({ athlete }: Props) {
   const focus = h.heroImageFocus ?? "center";
   const objectPosition = HERO_FOCUS_CLASS[focus] ?? "object-center";
   const jersey = h.number?.replace(/\D/g, "") ?? "";
+  const hasVideoBg = Boolean(h.heroBackgroundVideo);
 
   return (
     <header className="relative overflow-hidden border-b border-white/6">
-      {/* Sfondo hero: alone rispetto alle sezioni — glow, mesh, niente diagonale ripetuta */}
+      {/* Base */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[#030305]" />
+
+      {hasVideoBg && h.heroBackgroundVideo ? (
+        <>
+          <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+            <video
+              className="absolute inset-0 h-full w-full object-cover opacity-[0.42]"
+              src={h.heroBackgroundVideo}
+              muted
+              playsInline
+              autoPlay
+              loop
+              preload="metadata"
+              tabIndex={-1}
+              aria-hidden
+            />
+            {/* Oscura tutta l’area hero così copy e avatar restano leggibili */}
+            <div className="absolute inset-0 bg-black/58" />
+            <div className="absolute inset-0 bg-linear-to-r from-black/82 via-black/52 to-black/68 md:from-black/78 md:via-black/40 md:to-black/72" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/55 via-transparent to-black/35" />
+          </div>
+          {/* Accenti leggeri sopra il video */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-1 bg-[radial-gradient(ellipse_90%_80%_at_0%_-15%,rgba(223,255,74,0.09),transparent_50%),radial-gradient(ellipse_70%_55%_at_100%_25%,rgba(100,140,255,0.06),transparent_52%)]"
+          />
+        </>
+      ) : (
+        <>
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_85%_70%_at_0%_-10%,rgba(223,255,74,0.14),transparent_55%),radial-gradient(ellipse_60%_50%_at_100%_20%,rgba(100,140,255,0.08),transparent_50%),radial-gradient(ellipse_50%_40%_at_50%_100%,rgba(223,255,74,0.05),transparent_45%)]"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-[0.4] mix-blend-soft-light"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+            }}
+          />
+        </>
+      )}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[#030305]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_85%_70%_at_0%_-10%,rgba(223,255,74,0.14),transparent_55%),radial-gradient(ellipse_60%_50%_at_100%_20%,rgba(100,140,255,0.08),transparent_50%),radial-gradient(ellipse_50%_40%_at_50%_100%,rgba(223,255,74,0.05),transparent_45%)]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.4] mix-blend-soft-light"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-linear-to-b from-white/6 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 z-2 h-24 bg-linear-to-b from-white/6 to-transparent"
       />
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 pb-12 pt-8 sm:px-6 sm:pb-14 sm:pt-10 lg:px-8">
