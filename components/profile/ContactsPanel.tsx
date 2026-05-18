@@ -52,10 +52,18 @@ function IconChevron({ className }: { className?: string }) {
   );
 }
 
+const phoneCardClass = `group relative overflow-hidden rounded-2xl border border-white/8 bg-linear-to-br from-zinc-900/90 to-zinc-950 p-5 shadow-[0_1px_0_0_rgba(255,255,255,0.06)_inset] transition hover:border-sky-400/35 hover:shadow-[0_20px_50px_-28px_rgba(56,189,248,0.35)] ${focusRing}`;
+const whatsappCardClass = `group relative overflow-hidden rounded-2xl border border-white/8 bg-linear-to-br from-zinc-900/90 to-zinc-950 p-5 shadow-[0_1px_0_0_rgba(255,255,255,0.06)_inset] transition hover:border-emerald-400/35 hover:shadow-[0_20px_50px_-28px_rgba(52,211,153,0.3)] ${focusRing}`;
+
 export function ContactsPanel({ athlete }: Props) {
   const h = athlete.header;
   const c = athlete.contacts;
   const waUrl = c.whatsapp ?? h.whatsapp;
+  const tel = c.representative.phone;
+  const telPublic = c.representative.phonePublicLabel;
+
+  const showPhoneCard = Boolean(tel || telPublic);
+  const showWhatsappCard = Boolean(waUrl || c.whatsappPublicLabel);
 
   return (
     <SectionShell
@@ -67,42 +75,70 @@ export function ContactsPanel({ athlete }: Props) {
       <div className="grid gap-8">
         {/* Tre vie di contatto — card moderne */}
         <div className="grid gap-4 sm:grid-cols-3">
-          {c.representative.phone ? (
-            <a
-              href={`tel:${c.representative.phone.replace(/\s/g, "")}`}
-              className={`group relative overflow-hidden rounded-2xl border border-white/8 bg-linear-to-br from-zinc-900/90 to-zinc-950 p-5 shadow-[0_1px_0_0_rgba(255,255,255,0.06)_inset] transition hover:border-sky-400/35 hover:shadow-[0_20px_50px_-28px_rgba(56,189,248,0.35)] ${focusRing}`}
-            >
-              <div className="pointer-events-none absolute -right-6 -top-6 size-28 rounded-full bg-sky-500/10 blur-2xl transition group-hover:bg-sky-400/15" aria-hidden />
-              <div className="relative flex items-start justify-between gap-3">
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-sky-500/15 text-sky-400 ring-1 ring-sky-400/25">
-                  <IconPhone className="size-6" />
-                </span>
-                <IconChevron className="size-5 shrink-0 text-zinc-600 opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100" />
+          {showPhoneCard ? (
+            tel ? (
+              <a href={`tel:${tel.replace(/\s/g, "")}`} className={phoneCardClass}>
+                <div className="pointer-events-none absolute -right-6 -top-6 size-28 rounded-full bg-sky-500/10 blur-2xl transition group-hover:bg-sky-400/15" aria-hidden />
+                <div className="relative flex items-start justify-between gap-3">
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-sky-500/15 text-sky-400 ring-1 ring-sky-400/25">
+                    <IconPhone className="size-6" />
+                  </span>
+                  <IconChevron className="size-5 shrink-0 text-zinc-600 opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100" />
+                </div>
+                <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">Telefono</p>
+                <p className="relative mt-2 text-lg font-semibold tracking-tight text-white">{tel}</p>
+                <p className="relative mt-3 text-xs text-zinc-500">Chiama il referente</p>
+              </a>
+            ) : (
+              <div
+                className="relative cursor-default overflow-hidden rounded-2xl border border-white/8 bg-linear-to-br from-zinc-900/90 to-zinc-950 p-5 opacity-95 shadow-[0_1px_0_0_rgba(255,255,255,0.06)_inset]"
+                role="note"
+                aria-label="Telefono"
+              >
+                <div className="pointer-events-none absolute -right-6 -top-6 size-28 rounded-full bg-sky-500/10 blur-2xl" aria-hidden />
+                <div className="relative flex items-start gap-3">
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-sky-500/15 text-sky-400 ring-1 ring-sky-400/25">
+                    <IconPhone className="size-6" />
+                  </span>
+                </div>
+                <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">Telefono</p>
+                <p className="relative mt-2 text-lg font-semibold tracking-tight text-white">{telPublic}</p>
+                <p className="relative mt-3 text-xs text-zinc-500">Numero non pubblicato: usa email</p>
               </div>
-              <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">Telefono</p>
-              <p className="relative mt-2 text-lg font-semibold tracking-tight text-white">{c.representative.phone}</p>
-              <p className="relative mt-3 text-xs text-zinc-500">Chiama il referente</p>
-            </a>
+            )
           ) : null}
 
-          {waUrl ? (
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`group relative overflow-hidden rounded-2xl border border-white/8 bg-linear-to-br from-zinc-900/90 to-zinc-950 p-5 shadow-[0_1px_0_0_rgba(255,255,255,0.06)_inset] transition hover:border-emerald-400/35 hover:shadow-[0_20px_50px_-28px_rgba(52,211,153,0.3)] ${focusRing}`}
-            >
-              <div className="pointer-events-none absolute -right-6 -top-6 size-28 rounded-full bg-emerald-500/10 blur-2xl transition group-hover:bg-emerald-400/15" aria-hidden />
-              <div className="relative flex items-start justify-between gap-3">
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-400 ring-1 ring-emerald-400/25">
-                  <IconWhatsApp className="size-6" />
-                </span>
-                <IconChevron className="size-5 shrink-0 text-zinc-600 opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100" />
+          {showWhatsappCard ? (
+            waUrl ? (
+              <a href={waUrl} target="_blank" rel="noopener noreferrer" className={whatsappCardClass}>
+                <div className="pointer-events-none absolute -right-6 -top-6 size-28 rounded-full bg-emerald-500/10 blur-2xl transition group-hover:bg-emerald-400/15" aria-hidden />
+                <div className="relative flex items-start justify-between gap-3">
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-400 ring-1 ring-emerald-400/25">
+                    <IconWhatsApp className="size-6" />
+                  </span>
+                  <IconChevron className="size-5 shrink-0 text-zinc-600 opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100" />
+                </div>
+                <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">WhatsApp</p>
+                <p className="relative mt-2 text-lg font-semibold tracking-tight text-white">Messaggio diretto</p>
+                <p className="relative mt-3 text-xs text-zinc-500">Apre la chat sul telefono</p>
+              </a>
+            ) : (
+              <div
+                className="relative cursor-default overflow-hidden rounded-2xl border border-white/8 bg-linear-to-br from-zinc-900/90 to-zinc-950 p-5 opacity-95 shadow-[0_1px_0_0_rgba(255,255,255,0.06)_inset]"
+                role="note"
+                aria-label="WhatsApp"
+              >
+                <div className="pointer-events-none absolute -right-6 -top-6 size-28 rounded-full bg-emerald-500/10 blur-2xl" aria-hidden />
+                <div className="relative flex items-start gap-3">
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-400 ring-1 ring-emerald-400/25">
+                    <IconWhatsApp className="size-6" />
+                  </span>
+                </div>
+                <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">WhatsApp</p>
+                <p className="relative mt-2 text-lg font-semibold tracking-tight text-white">{c.whatsappPublicLabel}</p>
+                <p className="relative mt-3 text-xs text-zinc-500">Contatto su richiesta tramite mail</p>
               </div>
-              <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">WhatsApp</p>
-              <p className="relative mt-2 text-lg font-semibold tracking-tight text-white">Messaggio diretto</p>
-              <p className="relative mt-3 text-xs text-zinc-500">Apre la chat sul telefono</p>
-            </a>
+            )
           ) : null}
 
           {c.representative.email ? (

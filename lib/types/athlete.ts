@@ -28,6 +28,8 @@ export interface RepresentativeContact {
   role: string;
   email?: string;
   phone?: string;
+  /** Mostra card “Telefono” senza link: testo es. “Su richiesta” (nessun numero pubblico) */
+  phonePublicLabel?: string;
 }
 
 export interface SocialLink {
@@ -205,6 +207,8 @@ export interface AthleteProfile {
     athleteEmail?: string;
     contactFormUrl?: string;
     whatsapp?: string;
+    /** Card WhatsApp senza link: testo es. gestito su richiesta */
+    whatsappPublicLabel?: string;
     social: SocialLink[];
   };
   agencyRoster: AgencyRosterCard[];

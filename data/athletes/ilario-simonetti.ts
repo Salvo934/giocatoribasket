@@ -278,7 +278,9 @@ export const ilarioSimonetti: AthleteProfile = {
       name: "Brightside Sports",
       role: "Management & scouting · Via Veneto 97, Capo d’Orlando (ME)",
       email: "info@brightsidesports.com",
+      phonePublicLabel: "Su richiesta (club / scouting)",
     },
+    whatsappPublicLabel: "Gestito su richiesta · nessun numero pubblico",
     social: [
       { platform: "Instagram", handle: "@ilario.simonetti", url: "https://instagram.com" },
       { platform: "TikTok", handle: "@ilario7", url: "https://tiktok.com" },
