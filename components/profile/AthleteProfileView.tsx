@@ -36,9 +36,6 @@ export function AthleteProfileView({ athlete }: Props) {
             <footer className="border-t border-white/6 bg-linear-to-t from-black/40 to-transparent py-12 md:py-14">
               <div className="mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-zinc-600">Player Card</p>
-                <p className="mx-auto mt-3 max-w-md text-xs leading-relaxed text-zinc-500">
-                  Template demo — sostituire con contenuti ufficiali dell&apos;atleta e dell&apos;agenzia.
-                </p>
                 {athlete.seo.publicSiteUrl ? (
                   <p className="mt-4 text-xs text-zinc-500">
                     Sito ufficiale:{" "}

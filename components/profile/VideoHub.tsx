@@ -34,10 +34,10 @@ function BroadcastFrame({
         <div className="flex flex-col gap-2 px-3 py-2.5 sm:flex-row sm:items-center sm:justify-between sm:px-4 md:px-5">
           <div className="flex min-w-0 items-center gap-3">
             <span className="shrink-0 rounded bg-[#C9082A] px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-white">
-              Scout tape
+              Clip
             </span>
             <div className="min-w-0">
-              <p className="truncate text-[11px] font-bold uppercase tracking-[0.12em] text-zinc-400">Feature reel</p>
+              <p className="truncate text-[11px] font-bold uppercase tracking-[0.12em] text-zinc-400">In evidenza</p>
               <p className="truncate text-sm font-bold text-white md:text-base">
                 {athleteName}
                 {number ? (
@@ -118,7 +118,7 @@ function FilmRoomThumbnail({
         />
         {selected ? (
           <span className="pointer-events-none absolute left-1.5 top-1.5 rounded bg-[#C9082A] px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider text-white shadow-lg">
-            In play
+            In riproduzione
           </span>
         ) : (
           <span className="pointer-events-none absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/55 text-[10px] text-white backdrop-blur-sm transition group-hover:scale-105 group-hover:border-[#C9082A]/60">
@@ -180,16 +180,16 @@ export function VideoHub({ athlete }: Props) {
   return (
     <SectionShell
       id="video"
-      eyebrow="Film room"
-      title="Video Hub"
-      description="Look da broadcast: feature principale e clip per skill, organizzate come in un film room — lettura rapida per staff e video."
+      eyebrow="Sala video"
+      title="Video e clip"
+      description="Primo piano sul giocatore e clip divise per argomento: visione rapida per staff e allenatori."
       headerActions={
         <>
           <span className="inline-flex items-center gap-1.5 rounded-full border border-[#17408B]/40 bg-[#17408B]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#7eb3ff]">
-            Skill breakdown
+            Per reparto
           </span>
           <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/4 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
-            Est. {v.categories.length} reparti
+            {v.categories.length} categorie
           </span>
         </>
       }

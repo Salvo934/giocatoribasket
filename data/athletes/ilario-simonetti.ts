@@ -6,7 +6,7 @@ export const ilarioSimonetti: AthleteProfile = {
   seo: {
     title: "Ilario Simonetti · Ala piccola Serie B | Player Card",
     description:
-      "Ilario Simonetti (2004), ala piccola 200 cm, Serie B nazionale: profilo fisico, mano destra dominante e finiture con la sinistra, highlights e numeri. Scheda operativa per club e scouting.",
+      "Ilario Simonetti (2004), ala piccola 200 cm, Serie B nazionale: buon fisico, mano destra e sinistra in crescita, video e statistiche. Scheda per club e scouting.",
     publicSiteUrl: "https://ilariosimonetti7.katahero.com",
   },
   header: {
@@ -26,9 +26,9 @@ export const ilarioSimonetti: AthleteProfile = {
     league: "LNP · campionato nazionale",
     marketStatusLabel: "Disponibile · progetti 26/27",
     identityNote:
-      "Ala piccola con corpo da elite fisica: spalle larghe, compattezza nei contatti e capacità di finire attraverso il fisico. Mano dominante destra, uso avanzato della sinistra in penetrazione, passaggio e galleggi verso il ferro.",
+      "Ala piccola con fisico importante: spalle larghe, solidità nei contatti e capacità di concludere anche con il contatto. Mano dominante destra; sinistra già utile in penetrazione, passaggi e verso il canestro.",
     dashboardIntro:
-      "Ala piccola classe 2004, 200 cm, in contesto Serie B nazionale: profilo orientato a spacing e versatilità sulle ali, con valore nel mismatch e nel gioco vicino alla zona. Scheda per valutazione rapida: identità fisico-tecnica, numeri, clip e contatto col referente.",
+      "Ala piccola classe 2004, 200 cm, in Serie B: gioco spaziato e ruolo sulle ali, con valore nei confronti fisici e vicino alla zona. Scheda per decidere in fretta: punti di forza, numeri, video e contatti.",
     agency: {
       name: "Brightside Sports",
       representative: "Brightside Sports SRL · Capo d’Orlando (ME)",
@@ -39,15 +39,15 @@ export const ilarioSimonetti: AthleteProfile = {
   },
   scoutView: {
     sectionDescription:
-      "Due righe operative: chi è sul campo, perché uno staff Serie B dovrebbe volerlo, dove lo massimi — il resto lo validi con film e contesto vivo.",
+      "In sintesi: cos’è in campo, perché può interessare a un club di Serie B e in che tipo di squadra rende di più; da incrociare con video e partite vere.",
     shortProfile:
-      "Ala 200 cm classe ’04 già utilizzabile in Serie B: finisce dentro con senso (63% da 2 sul referto in corso), usa il corpo nei mismatch sulle ali, destra dominante sinistra già spendibile su galleggio e passaggi ravvicinati. Non è high‑usage scorer: vale come economia del possesso vicino al ferro, difesa fisica leggibile e connectività leggera (~1 ast). Profilo ~15′: ~5,7 ppg, ~1,8 rpg; tripli e lunetta sono il tema di crescita.",
+      "Ala 200 cm, classe 2004, già impiegabile in Serie B: segna sotto canestro con buone percentuali (63% da due sui dati LNP attuali), usa il corpo sugli avversari alti, mano destra dominante e sinistra già utile su palleggio e passaggi. Non è un giocatore che tira tantissimo e gestisce tutta l’attacco: porta punti dall’area, difesa fisica e circa un assist a partita nel ruolo attuale. Indicativamente 15′ a partita, circa 5,7 punti e 1,8 rimbalzi; da costruire tiro da tre e tiro libero.",
     idealFit:
-      "Ideale se cerchi un’ala corpo‑mani da 2ª–3ª rotazione (15′–22′) in sistemi che muovono palla e hanno lunghi esterni: chiudi, taglio, second side dopo vantaggi creati altrove. Non forzare volume da creatore primario: il sistema valorizza ciò che già converte oggi.",
+      "Va bene in squadre dove la palla gira e ci sono lunghi che aprono il campo: tagli, chiusure sui tiratori dopo un aiuto, gioco sul lato opposto dopo una penetrazione. Meglio non chiedergli di essere il playmaker principale: il valore è quello che sa già fare bene.",
     whyWatch:
-      "Perché tenerlo nel roster: risolve possessi con chilometri nel 1v1 fisico, chiude spazi in area e ha margine giovanile se il perimetro cresce. È la carta della specializzazione che ti dà efficienza dove il gioco si fa stretto.",
+      "Ha senso se vuoi un’ala fisica che vince duelli sotto canestro, copre bene in area e sulla quale puoi ancora lavorare il tiro da fuori. Il punto forte è l’efficienza vicino al ferro, non il tiro a volume.",
     toVerify:
-      "Lunetta e tre sotto pressione; continuità se salgono i minuti; difesa quando il mismatch si fa rapido. Incrocia con il film più che col solo box score.",
+      "Tiro da tre e liberi sotto pressione; continuità se aumentano i minuti; difesa quando il confronto si sposta veloce sul perimetro. Controlla sempre le immagini e le partite, non solo il tabellino.",
   },
   market: {
     availableFrom: "Stagione 2026-27 (valutabile anticipo su prestito) — da concordare",
@@ -58,9 +58,9 @@ export const ilarioSimonetti: AthleteProfile = {
       { id: "showcase", label: "Showcase / eventi", active: true },
       { id: "abroad", label: "Estero", active: true },
     ],
-    regionsEvaluated: ["Italia centro-sud", "Europa (tier B)", "NBA Global Academy network (contatti)"],
+    regionsEvaluated: ["Italia centro-sud", "Europa (fascia B)", "Academy e contatti internazionali (NBA Global Academy)"],
     opportunitySought:
-      "Ruolo da ala piccola con minuti in rotazione Serie B, staff che valorizzi versatilità e fisico; eventuale step successivo verso alta B o prestiti brevi.",
+      "Ruolo da ala piccola con minuti in rotazione in Serie B, staff che sappia usare fisico e ruolo sul campo; possibile passo futuro verso categorie superiori o prestiti.",
     economicsNote: "Dettaglio economico / ingaggio: solo su richiesta diretta al referente.",
   },
   videos: {
@@ -71,11 +71,11 @@ export const ilarioSimonetti: AthleteProfile = {
     },
     filmRoomSide: [
       {
-        title: "Film room — clip 1",
+        title: "Analisi video — clip 1",
         url: "https://www.youtube.com/watch?v=JYJfGWHTEho",
       },
       {
-        title: "Film room — clip 2",
+        title: "Analisi video — clip 2",
         url: "https://www.youtube.com/watch?v=Zvu_SEi4XdU",
       },
     ],
@@ -84,44 +84,44 @@ export const ilarioSimonetti: AthleteProfile = {
         id: "shooting",
         label: "Tiro",
         clips: [
-          { title: "Catch & shoot da angolo", url: "https://www.youtube.com/watch?v=lVvjB86NlPM" },
-          { title: "Tiro dopo pick alt", url: "https://www.youtube.com/watch?v=JYJfGWHTEho" },
+          { title: "Tiro al ricevimento da angolo", url: "https://www.youtube.com/watch?v=lVvjB86NlPM" },
+          { title: "Tiro dopo blocco alto", url: "https://www.youtube.com/watch?v=JYJfGWHTEho" },
         ],
       },
       {
         id: "defense",
         label: "Difesa",
-        clips: [{ title: "Pressing full court + recovery", url: "https://www.youtube.com/watch?v=Zvu_SEi4XdU" }],
+        clips: [{ title: "Pressing su tutto il campo e recuperi palla", url: "https://www.youtube.com/watch?v=Zvu_SEi4XdU" }],
       },
       {
         id: "transition",
         label: "Transizione",
-        clips: [{ title: "Decisioni early offense", url: "https://www.youtube.com/watch?v=lVvjB86NlPM" }],
+        clips: [{ title: "Decisioni in attacco veloce", url: "https://www.youtube.com/watch?v=lVvjB86NlPM" }],
       },
       {
         id: "playmaking",
-        label: "Playmaking",
-        clips: [{ title: "Assist in penetrazione", url: "https://www.youtube.com/watch?v=JYJfGWHTEho" }],
+        label: "Passaggi",
+        clips: [{ title: "Assist dopo penetrazione", url: "https://www.youtube.com/watch?v=JYJfGWHTEho" }],
       },
       {
         id: "pnr",
-        label: "Pick & roll",
-        clips: [{ title: "Lettura blocco alto", url: "https://www.youtube.com/watch?v=Zvu_SEi4XdU" }],
+        label: "Gioco sul blocco",
+        clips: [{ title: "Lettura sul blocco alto", url: "https://www.youtube.com/watch?v=Zvu_SEi4XdU" }],
       },
       {
         id: "iso",
-        label: "1v1",
-        clips: [{ title: "Split, change e finish", url: "https://www.youtube.com/watch?v=lVvjB86NlPM" }],
+        label: "Uno contro uno",
+        clips: [{ title: "Cross-over e conclusione", url: "https://www.youtube.com/watch?v=lVvjB86NlPM" }],
       },
       {
         id: "rebounding",
         label: "Rimbalzo",
-        clips: [{ title: "Tag e second chance", url: "https://www.youtube.com/watch?v=JYJfGWHTEho" }],
+        clips: [{ title: "Taglio verso canestro e seconda opportunità", url: "https://www.youtube.com/watch?v=JYJfGWHTEho" }],
       },
       {
         id: "athleticism",
         label: "Atletismo",
-        clips: [{ title: "Accelerazioni e chiusure", url: "https://www.youtube.com/watch?v=Zvu_SEi4XdU" }],
+        clips: [{ title: "Accelerazioni e rapidità in campo", url: "https://www.youtube.com/watch?v=Zvu_SEi4XdU" }],
       },
     ],
     fullGame: {
@@ -154,22 +154,22 @@ export const ilarioSimonetti: AthleteProfile = {
   },
   technicalFit: {
     playerType:
-      "Ilario Simonetti · ala 200 cm (2004) · Benacquista Assicurazioni Latina, Serie B LNP — rotazione da ~15′ con identità fisico‑mani: pesa nei contatti, chiede palla nell’area (63% da 2 sul referto), seconda mano già nel repertorio. Non alimenta il tiro ad alto volume: vince possessi nel traffico, mismatch e finalizzazioni ragionate.",
+      "Ilario Simonetti: ala 200 cm (2004), Benacquista Assicurazioni Latina in Serie B LNP — minuti da rotazione (circa 15′), gioco fisico e buone mani. Cerca il canestro in area (63% da due sui dati ufficiali), la sinistra è già nel suo repertorio. Non vive di tiri lunghi: fa la differenza vicino al ferro, nei contatti e nelle letture semplici.",
     strengths: [
-      "Area e mezza distanza: priorità al ferro coerente col dato LNP (63% da 2) — sa dove prendersi punti senza forzare da creatore primario",
-      "Sinistra nel pacchetto: galleggio, passaggi in traffic e finiture quando il contact apre il ferro; estende il repertorio sotto pressione",
-      "Cornice 200 cm per chiudere linee sulle ali e reggere mismatch 3/4 — corpo che può fare la guardia senza vivere da palleggio puro",
-      "Connettività quando la palla gira (~1 ast nel minutaggio attuale): margini da strutturare se il ruolo allarga compiti",
+      "Area e tiro dalla media distanza: va verso il canestro con criterio — il 63% da due LNP lo conferma",
+      "Sinistra utile: palleggio, passaggio in mezzo alla difesa e conclusioni quando crea contatto",
+      "Statura da 200 cm per marcare sulle ali e reggere piccoli difensori più bassi — senza dover fare da playmaker puro",
+      "Passaggi quando la palla si muove (circa 1 assist nel minutaggio attuale): può crescere se il ruolo si allarga",
     ],
     improvements: [
-      "Perimetro come proiezione: ~31% da tre su volume ancora modesto — scelta e qualità di tiro se il minutaggio chiede più spacing",
-      "Lunetta al 52%: con più possessi “lenti” i liberi devono diventare certezza",
-      "Continuità tra serate e rimbalzo d’attacco (~1,8 rpg oggi): più second chance coerenti col fisico",
+      "Tiro da tre: circa 31% con ancora pochi tentativi — migliorare scelta e sicurezza se chiedi più campo aperto",
+      "Liberi al 52%: con possessi più lunghi diventano decisivi",
+      "Continuità serata dopo serata e rimbalzi in attacco (circa 1,8 a partita): può chiedere di più al fisico",
     ],
     idealSystem:
-      "Offese che muovono la palla (motion, tagli, second side) con lunghi esterni — lui massimizza catch dalla media, backdoor e finish al contatto quando difesa e aiuti sono leggibili. Evita di fargli tenere il cronometro in lunghi isolamenti: rende meglio in possessi che girano e nei mismatch creati altrove. In difesa: meno switch “automatico” sulle ali dove il recupero sul tiratore conta; aiuti prevedibili dove il suo due punti e la mano debole restano armi.",
+      "Attacchi in movimento (tagli, palla che gira) con lunghi che tirano: così riceve palla a metà zona, taglia o finisce al contatto quando le difese si spostano. Meglio evitare lunghi isolamenti per lui: rende di più quando il possesso fluisce. In difesa, meno cambi automatici sulle ali dove deve poi correre sul tiratore; aiuti chiari dove sfrutta canestro da media e mano non dominante.",
     idealRole:
-      "Ala piccola — in certe linee anche piccolo 4 situazionale — da 2ª–3ª rotazione Serie B, fascia 15′–22′ tra chiudi forti da blocco, taglio, second side e porzioni di corto roll quando la mappa glielo permette. Oggi è finisher‑connettore più che spacer puro: il salto passa da ruoli chiari (chiudi, mismatch, incarichi difensivi) e dalla crescita triplo–lunetta, senza vestirlo da playmaker d’ingresso.",
+      "Ala piccola — a volte anche numero 4 per necessità — tra seconda e terza rotazione in Serie B, circa 15′–22′ tra chiusure sui blocchi, tagli, gioco sul secondo lato e qualche corto dopo il blocco se lo schema lo consente. Oggi è più finitore e passatore che tiratore da fuori puro: il salto passa da compiti chiari in difesa e dal migliorare tiro lungo e liberi, senza chiedergli di comandare l’attacco da palleggio.",
   },
   gallery: {
     description: "Scatti da campo, allenamento e contesto squadra.",
@@ -181,7 +181,7 @@ export const ilarioSimonetti: AthleteProfile = {
       },
       {
         src: "/athletes/9DF9FF8A-A3E6-41DB-B948-AC1477E76AD3_1_105_c.jpeg",
-        alt: "Ilario Simonetti in possesso di palla con sorriso durante un possesso",
+        alt: "Ilario Simonetti in possesso di palla, sorriso in un’azione di gioco",
         caption: "Azione · conclusione e lettura difensiva",
       },
       {
@@ -280,7 +280,7 @@ export const ilarioSimonetti: AthleteProfile = {
       email: "info@brightsidesports.com",
       phonePublicLabel: "Su richiesta (club / scouting)",
     },
-    whatsappPublicLabel: "Gestito su richiesta · nessun numero pubblico",
+    whatsappPublicLabel: "Solo su richiesta — nessun numero pubblico",
     social: [
       { platform: "Instagram", handle: "@ilario.simonetti", url: "https://instagram.com" },
       { platform: "TikTok", handle: "@ilario7", url: "https://tiktok.com" },
