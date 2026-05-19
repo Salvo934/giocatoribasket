@@ -173,7 +173,7 @@ export interface AthleteProfile {
     whatsapp?: string;
   };
   scoutView: {
-    /** Override intro SectionShell "One-Minute Scout View" se valorizzato */
+    /** Override intro sezione scout (pitch rapido) se valorizzato */
     sectionDescription?: string;
     shortProfile: string;
     whyWatch: string;

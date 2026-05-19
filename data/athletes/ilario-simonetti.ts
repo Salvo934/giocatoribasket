@@ -39,15 +39,15 @@ export const ilarioSimonetti: AthleteProfile = {
   },
   scoutView: {
     sectionDescription:
-      "Ilario Simonetti: ala 200 cm (2004), Serie B LNP — campionato in corso su ~15′ e ~5,7 ppg con efficienza forte da due. In 60 secondi: cosa porta subito, dove guardare il film e che tipo di roster lo massimizza.",
+      "Due righe operative: chi è sul campo, perché uno staff Serie B dovrebbe volerlo, dove lo massimi — il resto lo validi con film e contesto vivo.",
     shortProfile:
-      "Ala del 2004, 200 cm, in Serie B con la Benacquista Assicurazioni Latina (Girone B): oggi è un profilo da rotazione da ~15′ con numeri LNP che raccontano più efficienza in area che volume da fuori — 5,7 punti, 1,8 rimbalzi e 1 assist di media, con 63% da due su un campionario ancora contenuto da tre (31%, ~1,7 tentativi a partita) e 52% ai liberi. Coerente con quanto emerge dal vivo: telaio e contatto, mano destra dominante e sinistra già credibile su finiture e passaggi in traffic; non è un high-usage scorer, ma può sostenere possessi corti e chiudere spazi con il corpo.",
+      "Ala 200 cm classe ’04 già utilizzabile in Serie B: finisce dentro con senso (63% da 2 sul referto in corso), usa il corpo nei mismatch sulle ali, destra dominante sinistra già spendibile su galleggio e passaggi ravvicinati. Non è high‑usage scorer: vale come economia del possesso vicino al ferro, difesa fisica leggibile e connectività leggera (~1 ast). Profilo ~15′: ~5,7 ppg, ~1,8 rpg; tripli e lunetta sono il tema di crescita.",
     idealFit:
-      "Sistemi spacing e movimento in Serie B (o step verso alta B) dove il ruolo è chiaro: ala piccola di 2ª–3ª rotazione, minuti in 15′–22′ con compiti su chiudi, taglio e second side, senza chiedergli da subito il volume di un marcatore primario. Ideale con 4/5 che aprono il pitturato e guardie che creano vantaggi: così scala il valore del due punti e delle letture, mentre si costruisce piano sul perimetro (tre e lunetta) se il minutaggio cresce.",
+      "Ideale se cerchi un’ala corpo‑mani da 2ª–3ª rotazione (15′–22′) in sistemi che muovono palla e hanno lunghi esterni: chiudi, taglio, second side dopo vantaggi creati altrove. Non forzare volume da creatore primario: il sistema valorizza ciò che già converte oggi.",
     whyWatch:
-      "Perché a 21 anni il suo rendimento dal vivo (e il 63% da due sul referto) meritano un occhio veloce: può finire in meta e caricare penetrazioni senza forzare tiragol; quando trova ritmo mostra picchi utili in serate LNP anche con minuti ancora a intermittenza. La seconda mano è il tema esplorativo più interessante per chi cerca ali corpo‑mani più che sole atlete.",
+      "Perché tenerlo nel roster: risolve possessi con chilometri nel 1v1 fisico, chiude spazi in area e ha margine giovanile se il perimetro cresce. È la carta della specializzazione che ti dà efficienza dove il gioco si fa stretto.",
     toVerify:
-      "Continuità oltre la fascia di minuti attuale: liberi al 52% e tre al 31% con volume ancora basso — come reggono sotto pressione se sale il ruolo? Gestione errore nelle serate a zero punti rispetto a quelle da 6–7 punti in 17′–23′. Rimbalzo offensivo e falli quando cambia su piccoli rapidi; decisioni vs aiuti visti gli assist nello slot odierno. Da incrociare con film difensivo (chiudi, recoveries) più che solo box score.",
+      "Lunetta e tre sotto pressione; continuità se salgono i minuti; difesa quando il mismatch si fa rapido. Incrocia con il film più che col solo box score.",
   },
   market: {
     availableFrom: "Stagione 2026-27 (valutabile anticipo su prestito) — da concordare",
@@ -84,44 +84,44 @@ export const ilarioSimonetti: AthleteProfile = {
         id: "shooting",
         label: "Tiro",
         clips: [
-          { title: "Catch & shoot da angolo", url: "https://www.youtube.com/watch?v=M7lc1UVf-VE" },
-          { title: "Tiro dopo pick alt", url: "https://www.youtube.com/watch?v=M7lc1UVf-VE" },
+          { title: "Catch & shoot da angolo", url: "https://www.youtube.com/watch?v=lVvjB86NlPM" },
+          { title: "Tiro dopo pick alt", url: "https://www.youtube.com/watch?v=JYJfGWHTEho" },
         ],
       },
       {
         id: "defense",
         label: "Difesa",
-        clips: [{ title: "Pressing full court + recovery", url: "https://www.youtube.com/watch?v=M7lc1UVf-VE" }],
+        clips: [{ title: "Pressing full court + recovery", url: "https://www.youtube.com/watch?v=Zvu_SEi4XdU" }],
       },
       {
         id: "transition",
         label: "Transizione",
-        clips: [{ title: "Decisioni early offense", url: "https://www.youtube.com/watch?v=M7lc1UVf-VE" }],
+        clips: [{ title: "Decisioni early offense", url: "https://www.youtube.com/watch?v=lVvjB86NlPM" }],
       },
       {
         id: "playmaking",
         label: "Playmaking",
-        clips: [{ title: "Assist in penetrazione", url: "https://www.youtube.com/watch?v=M7lc1UVf-VE" }],
+        clips: [{ title: "Assist in penetrazione", url: "https://www.youtube.com/watch?v=JYJfGWHTEho" }],
       },
       {
         id: "pnr",
         label: "Pick & roll",
-        clips: [{ title: "Lettura blocco alto", url: "https://www.youtube.com/watch?v=M7lc1UVf-VE" }],
+        clips: [{ title: "Lettura blocco alto", url: "https://www.youtube.com/watch?v=Zvu_SEi4XdU" }],
       },
       {
         id: "iso",
         label: "1v1",
-        clips: [{ title: "Split, change e finish", url: "https://www.youtube.com/watch?v=M7lc1UVf-VE" }],
+        clips: [{ title: "Split, change e finish", url: "https://www.youtube.com/watch?v=lVvjB86NlPM" }],
       },
       {
         id: "rebounding",
         label: "Rimbalzo",
-        clips: [{ title: "Tag e second chance", url: "https://www.youtube.com/watch?v=M7lc1UVf-VE" }],
+        clips: [{ title: "Tag e second chance", url: "https://www.youtube.com/watch?v=JYJfGWHTEho" }],
       },
       {
         id: "athleticism",
         label: "Atletismo",
-        clips: [{ title: "Accelerazioni e chiusure", url: "https://www.youtube.com/watch?v=M7lc1UVf-VE" }],
+        clips: [{ title: "Accelerazioni e chiusure", url: "https://www.youtube.com/watch?v=Zvu_SEi4XdU" }],
       },
     ],
     fullGame: {

@@ -22,19 +22,19 @@ export function ScoutPanel({ athlete }: Props) {
   return (
     <SectionShell
       id="scout"
-      eyebrow="60 secondi"
-      title="One-Minute Scout View"
+      eyebrow="30 secondi"
+      title="Pitch scout per il club"
       description={
         s.sectionDescription ??
-        "Sintesi operativa per decision maker: chi è il profilo, perché merita minuti di valutazione, cosa validare dal vivo e in che contesto tecnico rende al massimo."
+        "~30 sec: perché questo profilo porta valore ora, dove incide sul campo e cosa confermare prima di decidere."
       }
       headerActions={
         <>
           <span className={pill} title="Tempo indicativo di lettura">
             <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_8px_rgba(223,255,74,0.7)]" aria-hidden />
-            Lettura ≈ 60s
+            Lettura ≈ 30s
           </span>
-          <span className={pill}>Priorità: valutazione rapida</span>
+          <span className={pill}>Focus: valorizzazione rapida</span>
         </>
       }
     >
@@ -65,20 +65,20 @@ export function ScoutPanel({ athlete }: Props) {
               Executive
             </span>
           </div>
-          <h3 className="mt-2 text-sm font-semibold uppercase tracking-[0.15em] text-accent">Profilo breve</h3>
+          <h3 className="mt-2 text-sm font-semibold uppercase tracking-[0.15em] text-accent">Cosa dà ora</h3>
           <p className="mt-4 text-base leading-relaxed text-zinc-200 md:text-lg">{s.shortProfile}</p>
         </article>
 
         {/* 02 — Perché guardarlo */}
         <article className="relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-linear-to-br from-emerald-500/7 to-transparent p-5 md:p-6 lg:col-span-6">
           <div className="flex items-start justify-between gap-3">
-            <h3 className="text-sm font-semibold uppercase tracking-[0.15em] text-emerald-300/90">Perché guardarlo</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.15em] text-emerald-300/90">Perché portarlo nel roster</h3>
             <span className="text-3xl leading-none text-emerald-500/25" style={{ fontFamily: "var(--font-bebas)" }} aria-hidden>
               02
             </span>
           </div>
           <p className="mt-3 text-sm leading-relaxed text-zinc-200 md:text-base">{s.whyWatch}</p>
-          <p className="mt-4 text-[11px] font-medium uppercase tracking-wider text-emerald-400/70">Leva principale · upside scouting</p>
+          <p className="mt-4 text-[11px] font-medium uppercase tracking-wider text-emerald-400/70">Leva immediata · perché sceglierlo</p>
         </article>
 
         {/* 03 — Due diligence */}
