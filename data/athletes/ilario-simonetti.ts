@@ -154,22 +154,22 @@ export const ilarioSimonetti: AthleteProfile = {
   },
   technicalFit: {
     playerType:
-      "Ala 200 cm (2004) in Serie B LNP: contributo da rotazione (~15′, referto in corso) orientato a efficienza da due e connettività leggera (≈1 apg) più che a volume scoring; identità fisico‑mani (destra dominante, sinistra utile) coerente con il mismatch da ala.",
+      "Ilario Simonetti · ala 200 cm (2004) · Benacquista Assicurazioni Latina, Serie B LNP — rotazione da ~15′ con identità fisico‑mani: pesa nei contatti, chiede palla nell’area (63% da 2 sul referto), seconda mano già nel repertorio. Non alimenta il tiro ad alto volume: vince possessi nel traffico, mismatch e finalizzazioni ragionate.",
     strengths: [
-      "Finire e percentuale da due in linea con il ruolo (LNP ~63% da 2): priorità al ferro e alla mezzafonte corta",
-      "Sinistra come leva su galleggi, passaggi ravvicinati e finiture quando il corpo crea slivaggio",
-      "Telaio 200 cm per tenere linee di passaggio e lavorare da ala “corpo” senza forzare da guardia pura",
-      "Segnali di lettura quando la palla gira (assist reali nel minutaggio attuale) — margine per evolvere da connettore a ruoli più larghi",
+      "Area e mezza distanza: priorità al ferro coerente col dato LNP (63% da 2) — sa dove prendersi punti senza forzare da creatore primario",
+      "Sinistra nel pacchetto: galleggio, passaggi in traffic e finiture quando il contact apre il ferro; estende il repertorio sotto pressione",
+      "Cornice 200 cm per chiudere linee sulle ali e reggere mismatch 3/4 — corpo che può fare la guardia senza vivere da palleggio puro",
+      "Connettività quando la palla gira (~1 ast nel minutaggio attuale): margini da strutturare se il ruolo allarga compiti",
     ],
     improvements: [
-      "Scalare qualità e volume dal perimetro (31% da tre su ~1,7 T3/g) e stabilità lunetta (52% TL) se il minutaggio cresce",
-      "Continuità di impact: alternanza tra serate negative in pochi minuti e outputs positivi con 17′–23′ — ritmo ed errori",
-      "Rimbalzo d’attacco e second chance: 1,8 rpg nella fascia attuale — chiedere più tag e box-out offensivo sul fisico",
+      "Perimetro come proiezione: ~31% da tre su volume ancora modesto — scelta e qualità di tiro se il minutaggio chiede più spacing",
+      "Lunetta al 52%: con più possessi “lenti” i liberi devono diventare certezza",
+      "Continuità tra serate e rimbalzo d’attacco (~1,8 rpg oggi): più second chance coerenti col fisico",
     ],
     idealSystem:
-      "Offese che aprono il pitturato (pick/pop 5, spacing laterale) e muovono la palla su short roll e ricicli: massimizza catch dalla media, backdoor e finalizzazioni senza isolamenti lunghi. Difese che switchano poco sulle ali o che concedono aiuti leggibili — dove il due punti e la mano debole diventano leve.",
+      "Offese che muovono la palla (motion, tagli, second side) con lunghi esterni — lui massimizza catch dalla media, backdoor e finish al contatto quando difesa e aiuti sono leggibili. Evita di fargli tenere il cronometro in lunghi isolamenti: rende meglio in possessi che girano e nei mismatch creati altrove. In difesa: meno switch “automatico” sulle ali dove il recupero sul tiratore conta; aiuti prevedibili dove il suo due punti e la mano debole restano armi.",
     idealRole:
-      "Ala piccola 2ª–3ª rotazione in B (target 15′–22′) con profilo 3&D in costruzione: oggi è più finisher‑connettore che spacer puro; il passo successivo è definire il ruolo chiave (chiudi, taglio, mani in zona) mentre tiro esterno e liberi consolidano la proiezione verso combo forward.",
+      "Ala piccola — in certe linee anche piccolo 4 situazionale — da 2ª–3ª rotazione Serie B, fascia 15′–22′ tra chiudi forti da blocco, taglio, second side e porzioni di corto roll quando la mappa glielo permette. Oggi è finisher‑connettore più che spacer puro: il salto passa da ruoli chiari (chiudi, mismatch, incarichi difensivi) e dalla crescita triplo–lunetta, senza vestirlo da playmaker d’ingresso.",
   },
   gallery: {
     description: "Scatti da campo, allenamento e contesto squadra.",
