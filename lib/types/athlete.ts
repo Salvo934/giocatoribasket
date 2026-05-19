@@ -196,6 +196,16 @@ export interface AthleteProfile {
     idealSystem: string;
     idealRole: string;
   };
+  /**
+   * Opzionale. Sezione narrativa dopo il fit tecnico: dove il giocatore “calza”
+   * davvero (tipi di squadra / filosofia di gioco).
+   */
+  whyHeFits?: {
+    /** Paragrafo d’apertura sotto il titolo */
+    intro: string;
+    /** Esempi concreti: titolo breve + spiegazione */
+    scenarios: Array<{ title: string; body: string }>;
+  };
   /** Foto da campo / ritratto — se assente o vuota la sezione non viene mostrata */
   gallery?: AthleteGallery;
   career: CareerStep[];

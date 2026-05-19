@@ -10,6 +10,7 @@ import { ScoutPanel } from "./ScoutPanel";
 import { StatsPanel } from "./StatsPanel";
 import { TechnicalFitPanel } from "./TechnicalFitPanel";
 import { VideoHub } from "./VideoHub";
+import { WhyHeFitsPanel } from "./WhyHeFitsPanel";
 
 type Props = { athlete: AthleteProfile };
 
@@ -28,6 +29,7 @@ export function AthleteProfileView({ athlete }: Props) {
               <VideoHub athlete={athlete} />
               <StatsPanel athlete={athlete} />
               <TechnicalFitPanel athlete={athlete} />
+              <WhyHeFitsPanel athlete={athlete} />
               <GalleryPanel athlete={athlete} />
               <CareerTimeline athlete={athlete} />
               <HonorsPanel athlete={athlete} />

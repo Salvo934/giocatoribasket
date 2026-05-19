@@ -171,6 +171,28 @@ export const ilarioSimonetti: AthleteProfile = {
     idealRole:
       "Ala piccola — a volte anche numero 4 per necessità — tra seconda e terza rotazione in Serie B, circa 15′–22′ tra chiusure sui blocchi, tagli, gioco sul secondo lato e qualche corto dopo il blocco se lo schema lo consente. Oggi è più finitore e passatore che tiratore da fuori puro: il salto passa da compiti chiari in difesa e dal migliorare tiro lungo e liberi, senza chiedergli di comandare l’attacco da palleggio.",
   },
+  whyHeFits: {
+    intro:
+      "Ilario non è un “tuttoterreno” generico: ha un profilo chiaro (fisico, area, letture semplici). Alcune squadre lo fanno esplodere perché il sistema copre le sue pecche; altre lo mettono in difficoltà perché chiedono il contrario del suo punto di forza. Qui sotto, i contesti in cui il fit è più naturale.",
+    scenarios: [
+      {
+        title: "Squadra che spazia il campo e muove la palla",
+        body: "Con lunghi che tirano e attacchi in movimento trova spazi per tagli, ricezioni a metà zona e canestri dopo contatto quando la difesa si sposta. Non deve tenere la palla ferma a lungo: il valore viene quando il possesso gira e lui può sfruttare equilibri difensivi scomposti.",
+      },
+      {
+        title: "Organico che cerca fisicità sulle ali",
+        body: "Utile se manca un corpo che regga i contrasti con esterni avversari, chiuda sui blocchi e porti secondi possessi con presenza in area. È la risposta “da contatto” più che la scelta per aprire il campo solo dal tiro.",
+      },
+      {
+        title: "Staff che sa assegnargli compiti chiari",
+        body: "Rende meglio con ruoli ben definiti: chiudere, tagliare, finire intorno alla zona, qualche incarico sul secondo lato. Meno efficace se deve fare da direttore d’orchestra col palleggio o se l’attacco dipende solo da lui dal tiro da tre.",
+      },
+      {
+        title: "Dove invece il fit è più difficile",
+        body: "Sistemi costruiti su isolamenti lunghi, pochissimo movimento e tanta responsabilità sul tiro esterno da subito chiedono cose che oggi sono ancora in costruzione. Non è un “no” definitivo: è un avviso da staff su cosa validare prima di firmare il ruolo.",
+      },
+    ],
+  },
   gallery: {
     description: "Scatti da campo, allenamento e contesto squadra.",
     items: [
