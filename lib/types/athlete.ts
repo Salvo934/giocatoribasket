@@ -203,8 +203,13 @@ export interface AthleteProfile {
   whyHeFits?: {
     /** Paragrafo d’apertura sotto il titolo */
     intro: string;
-    /** Esempi concreti: titolo breve + spiegazione */
-    scenarios: Array<{ title: string; body: string }>;
+    /** Esempi concreti: titolo breve + testo (+ variante estetica) */
+    scenarios: Array<{
+      title: string;
+      body: string;
+      /** default = card neutra valorizzante; caution = enfasi “occhio ai limiti” */
+      variant?: "default" | "caution";
+    }>;
   };
   /** Foto da campo / ritratto — se assente o vuota la sezione non viene mostrata */
   gallery?: AthleteGallery;

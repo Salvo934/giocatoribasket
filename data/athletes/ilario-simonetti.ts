@@ -190,6 +190,7 @@ export const ilarioSimonetti: AthleteProfile = {
       {
         title: "Dove invece il fit è più difficile",
         body: "Sistemi costruiti su isolamenti lunghi, pochissimo movimento e tanta responsabilità sul tiro esterno da subito chiedono cose che oggi sono ancora in costruzione. Non è un “no” definitivo: è un avviso da staff su cosa validare prima di firmare il ruolo.",
+        variant: "caution",
       },
     ],
   },
