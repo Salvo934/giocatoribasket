@@ -35,17 +35,16 @@ function ScenarioCard({
 
       <div className="relative flex items-start gap-4">
         <span
-          className={`flex h-14 w-12 shrink-0 flex-col justify-center rounded-xl border px-2 text-center ${
+          className={`flex h-14 w-12 shrink-0 items-center justify-center rounded-xl border ${
             isCaution
               ? "border-amber-500/35 bg-amber-500/12 text-amber-200/95"
               : "border-white/12 bg-black/55 text-accent"
           }`}
         >
-          <span className="text-[9px] font-bold uppercase tracking-wider text-current/70">Scenario</span>
           <span
             className="text-2xl leading-none tracking-tight"
             style={{ fontFamily: "var(--font-bebas)" }}
-            aria-hidden
+            aria-label={`Scenario ${index + 1}`}
           >
             {String(index + 1).padStart(2, "0")}
           </span>
