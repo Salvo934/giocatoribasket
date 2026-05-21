@@ -16,25 +16,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!athlete) return { title: "Giocatore non trovato" };
 
   const origin = publicSiteOrigin(athlete.seo.publicSiteUrl);
-  const heroSrc = athlete.header.heroImage.trim();
-  const heroIsAbsolute = /^https?:\/\//i.test(heroSrc);
+  const previewSrc = (athlete.seo.ogImage ?? athlete.header.heroImage).trim();
+  const previewIsAbsolute = /^https?:\/\//i.test(previewSrc);
 
   /** Anteprima link (OG / Twitter): URL assoluto o path risolto con metadataBase / env. */
   let previewImageUrl: string | undefined;
-  if (heroIsAbsolute) {
-    previewImageUrl = heroSrc;
+  if (previewIsAbsolute) {
+    previewImageUrl = previewSrc;
   } else if (origin) {
-    previewImageUrl = heroSrc.startsWith("/") ? heroSrc : `/${heroSrc}`;
+    previewImageUrl = previewSrc.startsWith("/") ? previewSrc : `/${previewSrc}`;
   } else {
     const envBase = stripTrailingSlash(process.env.NEXT_PUBLIC_SITE_URL?.trim() || "");
     if (envBase) {
-      previewImageUrl = `${envBase}${heroSrc.startsWith("/") ? heroSrc : `/${heroSrc}`}`;
+      previewImageUrl = `${envBase}${previewSrc.startsWith("/") ? previewSrc : `/${previewSrc}`}`;
     }
   }
 
+  const previewAlt = athlete.seo.ogImage
+    ? `${athlete.header.name} — player card`
+    : `${athlete.header.name} — foto profilo`;
+
   const previewImages =
     previewImageUrl !== undefined
-      ? [{ url: previewImageUrl, alt: `${athlete.header.name} — foto profilo` }]
+      ? [{ url: previewImageUrl, alt: previewAlt }]
       : undefined;
 
   const meta: Metadata = {

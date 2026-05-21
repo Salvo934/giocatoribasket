@@ -142,6 +142,8 @@ export interface AthleteProfile {
     description: string;
     /** Dominio ufficiale del sito giocatore (es. https://nome.talent.katahero.com) */
     publicSiteUrl?: string;
+    /** Anteprima link (OG / Twitter); default: `header.heroImage` */
+    ogImage?: string;
   };
   header: {
     heroImage: string;
