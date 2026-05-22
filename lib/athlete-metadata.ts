@@ -38,7 +38,9 @@ export function buildAthleteMetadata(
     : `${athlete.header.name} — foto profilo`;
 
   const previewImages =
-    previewImageUrl !== undefined ? [{ url: previewImageUrl, alt: previewAlt }] : undefined;
+    previewImageUrl !== undefined
+      ? [{ url: previewImageUrl, width: 1200, height: 675, alt: previewAlt }]
+      : undefined;
 
   const meta: Metadata = {
     title: athlete.seo.title,

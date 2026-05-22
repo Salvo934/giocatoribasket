@@ -8,7 +8,7 @@ export const ilarioSimonetti: AthleteProfile = {
     description:
       "Ilario Simonetti (2004), ala piccola 200 cm, Serie B nazionale: buon fisico, mano destra e sinistra in crescita, video e statistiche. Scheda per club e scouting.",
     publicSiteUrl: "https://ilariosimonetti7.katahero.com",
-    ogImage: "/athletes/cardilario7.png",
+    ogImage: "/athletes/cardilario7-og.jpg",
   },
   header: {
     heroImage: "/athletes/ilario-simonetti-avatar.png",
