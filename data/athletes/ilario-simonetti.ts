@@ -10,6 +10,17 @@ export const ilarioSimonetti: AthleteProfile = {
     publicSiteUrl: "https://ilariosimonetti7.katahero.com",
     ogImage: "/athletes/cardilario7-og.jpg",
   },
+  legal: {
+    dataController: {
+      name: "Brightside Sports SRL",
+      email: "info@brightsidesports.com",
+      address: "Via Veneto 97, 98071 Capo d'Orlando (ME)",
+      website: "https://www.brightsidesports.com/",
+    },
+    platformRoleNote:
+      "KataHero fornisce la piattaforma tecnica Player Card (hosting e template) in qualità di responsabile del trattamento per conto di Brightside Sports SRL.",
+    policyUpdated: "2026-05-23",
+  },
   header: {
     heroImage: "/athletes/ilario-simonetti-avatar.png",
     heroImageFocus: "top",

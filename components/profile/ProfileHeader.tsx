@@ -101,15 +101,14 @@ export function ProfileHeader({ athlete }: Props) {
             {/* Fascia bassa: campo / paint — più morbida così si vede più video */}
             <div className="absolute inset-x-0 bottom-0 h-[min(38vh,46%)] bg-linear-to-t from-[#030305]/88 via-[#030305]/48 via-48% to-transparent" />
             {/*
-              Alto più trasparente (azione / canestro al centro); lati più carichi per copy (sx) e avatar (dx).
-              Verticale: meno velo nero in basso rispetto a prima.
+              Velo sul clip: niente trasparenza al centro (prima lasciava vedere canestro / paint).
             */}
             <div
               className="absolute inset-0"
               style={{
                 backgroundImage: `
-                  linear-gradient(to bottom, rgba(3, 3, 5, 0) 0%, rgba(3, 3, 5, 0.03) 48%, rgba(3, 3, 5, 0.09) 82%, rgba(3, 3, 5, 0.14) 100%),
-                  linear-gradient(to right, rgba(0, 0, 0, 0.86) 0%, rgba(0, 0, 0, 0.2) 34%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.22) 66%, rgba(0, 0, 0, 0.84) 100%)
+                  linear-gradient(to bottom, rgba(3, 3, 5, 0) 0%, rgba(3, 3, 5, 0.12) 48%, rgba(3, 3, 5, 0.28) 82%, rgba(3, 3, 5, 0.38) 100%),
+                  linear-gradient(to right, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.52) 34%, rgba(0, 0, 0, 0.58) 50%, rgba(0, 0, 0, 0.52) 66%, rgba(0, 0, 0, 0.88) 100%)
                 `,
               }}
             />

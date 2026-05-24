@@ -135,6 +135,25 @@ export interface AthleteGallery {
   items: GalleryImage[];
 }
 
+/** Configurazione GDPR / privacy per sito atleta (override opzionali). */
+export interface AthleteLegalConfig {
+  /** Titolare del trattamento dei dati pubblicati sul sito */
+  dataController?: {
+    name: string;
+    email: string;
+    address?: string;
+    website?: string;
+  };
+  /** Nota su contitolarità o ruolo piattaforma (es. KataHero come fornitore tecnico) */
+  platformRoleNote?: string;
+  /** URL informativa privacy esterna (se non usi quella generata dal template) */
+  privacyPolicyUrl?: string;
+  /** URL cookie policy esterna */
+  cookiePolicyUrl?: string;
+  /** Data ultimo aggiornamento informativa (ISO yyyy-mm-dd) */
+  policyUpdated?: string;
+}
+
 export interface AthleteProfile {
   slug: string;
   seo: {
@@ -145,6 +164,8 @@ export interface AthleteProfile {
     /** Anteprima link (OG / Twitter); default: `header.heroImage` */
     ogImage?: string;
   };
+  /** GDPR: titolare, note legali e override policy (default da agenzia + piattaforma) */
+  legal?: AthleteLegalConfig;
   header: {
     heroImage: string;
     name: string;

@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import type { AthleteProfile, AthleteVideo, VideoCategoryId } from "@/lib/types/athlete";
+import { useCookieConsent } from "@/components/legal/CookieConsentProvider";
+import { YouTubeConsentGate } from "@/components/legal/YouTubeConsentGate";
 import { youtubeEmbedUrl, youtubeThumbnailUrl } from "@/lib/youtube";
 import { SectionShell } from "./SectionShell";
 
@@ -86,7 +88,8 @@ function FilmRoomThumbnail({
   selected: boolean;
   onSelect: () => void;
 }) {
-  const thumb = youtubeThumbnailUrl(clip.url);
+  const { externalMediaAllowed, ready } = useCookieConsent();
+  const thumb = externalMediaAllowed ? youtubeThumbnailUrl(clip.url) : null;
 
   return (
     <button
@@ -100,7 +103,14 @@ function FilmRoomThumbnail({
       }`}
     >
       <div className="relative aspect-video">
-        {thumb ? (
+        {!ready ? (
+          <div className="flex h-full items-center justify-center bg-zinc-900 text-[10px] text-zinc-500">…</div>
+        ) : !externalMediaAllowed ? (
+          <div className="flex h-full flex-col items-center justify-center gap-2 bg-zinc-900 p-3 text-center">
+            <p className="text-[10px] font-bold uppercase text-zinc-400">Anteprima YouTube</p>
+            <p className="line-clamp-2 text-[10px] text-zinc-500">{clip.title}</p>
+          </div>
+        ) : thumb ? (
           <img
             src={thumb}
             alt=""
@@ -213,14 +223,19 @@ export function VideoHub({ athlete }: Props) {
             >
               <div className="relative aspect-video min-h-0 w-full overflow-hidden bg-zinc-950">
                 {mainSrc ? (
-                  <iframe
-                    key={playing.url}
-                    title={playing.title}
-                    src={`${mainSrc}?rel=0`}
-                    className="h-full w-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
+                  <YouTubeConsentGate
+                    title="Video YouTube"
+                    description="Per riprodurre clip e highlights incorporati serve il consenso ai contenuti esterni (Google/YouTube)."
+                  >
+                    <iframe
+                      key={playing.url}
+                      title={playing.title}
+                      src={`${mainSrc}?rel=0`}
+                      className="h-full w-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </YouTubeConsentGate>
                 ) : (
                   <div className="flex h-full flex-col items-center justify-center gap-2 p-6 text-center">
                     <p className="text-sm font-semibold text-zinc-400">Nessun embed valido</p>

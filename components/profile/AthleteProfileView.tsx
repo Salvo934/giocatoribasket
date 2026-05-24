@@ -1,4 +1,5 @@
 import type { AthleteProfile } from "@/lib/types/athlete";
+import { LegalFooterLinks } from "@/components/legal/LegalFooterLinks";
 import { CareerTimeline } from "./CareerTimeline";
 import { ContactsPanel } from "./ContactsPanel";
 import { GalleryPanel } from "./GalleryPanel";
@@ -49,6 +50,7 @@ export function AthleteProfileView({ athlete }: Props) {
                     </a>
                   </p>
                 ) : null}
+                <LegalFooterLinks athlete={athlete} />
                 <p className="mt-6 text-xs text-zinc-500">
                   Servizio creato da{" "}
                   <a

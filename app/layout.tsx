@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, DM_Sans } from "next/font/google";
+import { CookieConsentProvider } from "@/components/legal/CookieConsentProvider";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -30,7 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it" className={[dmSans.variable, bebasNeue.variable].join(" ")}>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <CookieConsentProvider>{children}</CookieConsentProvider>
+      </body>
     </html>
   );
 }
