@@ -3,14 +3,25 @@ import { CookieSettingsButton } from "@/components/legal/CookieSettingsButton";
 import { resolveLegalContext } from "@/lib/legal";
 import type { AthleteProfile } from "@/lib/types/athlete";
 
-type Props = { athlete: AthleteProfile };
+type Props = {
+  athlete: AthleteProfile;
+  layout?: "inline" | "stack";
+};
 
-export function LegalFooterLinks({ athlete }: Props) {
+const pillClass =
+  "inline-flex h-9 items-center justify-center rounded-full border border-white/10 bg-white/4 px-4 text-xs font-semibold text-zinc-300 transition hover:border-white/22 hover:bg-white/7 hover:text-white";
+
+export function LegalFooterLinks({ athlete, layout = "inline" }: Props) {
   const legal = resolveLegalContext(athlete);
+  const isStack = layout === "stack";
 
   return (
     <nav
-      className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-zinc-500"
+      className={
+        isStack
+          ? "mt-4 flex flex-col gap-2"
+          : "mt-6 flex flex-wrap items-center justify-center gap-2"
+      }
       aria-label="Informazioni legali"
     >
       {legal.usesExternalPrivacy && legal.externalPrivacyUrl ? (
@@ -18,12 +29,12 @@ export function LegalFooterLinks({ athlete }: Props) {
           href={legal.externalPrivacyUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-zinc-300"
+          className={pillClass}
         >
-          Privacy
+          Privacy ↗
         </a>
       ) : (
-        <Link href={legal.privacyPath} className="hover:text-zinc-300">
+        <Link href={legal.privacyPath} className={pillClass}>
           Privacy
         </Link>
       )}
@@ -32,16 +43,16 @@ export function LegalFooterLinks({ athlete }: Props) {
           href={legal.externalCookieUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-zinc-300"
+          className={pillClass}
         >
-          Cookie policy
+          Cookie ↗
         </a>
       ) : (
-        <Link href={legal.cookiePath} className="hover:text-zinc-300">
+        <Link href={legal.cookiePath} className={pillClass}>
           Cookie policy
         </Link>
       )}
-      <CookieSettingsButton />
+      <CookieSettingsButton variant="pill" className={isStack ? "w-full sm:w-auto" : undefined} />
     </nav>
   );
 }

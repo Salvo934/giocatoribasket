@@ -1,10 +1,10 @@
 import type { AthleteProfile } from "@/lib/types/athlete";
-import { LegalFooterLinks } from "@/components/legal/LegalFooterLinks";
 import { CareerTimeline } from "./CareerTimeline";
 import { ContactsPanel } from "./ContactsPanel";
 import { GalleryPanel } from "./GalleryPanel";
 import { HonorsPanel } from "./HonorsPanel";
 import { MarketPanel } from "./MarketPanel";
+import { ProfileFooter } from "./ProfileFooter";
 import { ProfileHeader } from "./ProfileHeader";
 import { ProfileNav } from "./ProfileNav";
 import { ScoutPanel } from "./ScoutPanel";
@@ -36,34 +36,7 @@ export function AthleteProfileView({ athlete }: Props) {
               <HonorsPanel athlete={athlete} />
               <ContactsPanel athlete={athlete} />
             </main>
-            <footer className="border-t border-white/6 bg-linear-to-t from-black/40 to-transparent py-12 md:py-14">
-              <div className="mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-zinc-600">Player Card</p>
-                {athlete.seo.publicSiteUrl ? (
-                  <p className="mt-4 text-xs text-zinc-500">
-                    Sito ufficiale:{" "}
-                    <a
-                      href={athlete.seo.publicSiteUrl}
-                      className="font-medium text-zinc-300 underline decoration-white/20 underline-offset-4 transition hover:text-accent hover:decoration-accent/50"
-                    >
-                      {athlete.seo.publicSiteUrl.replace(/^https?:\/\//, "")}
-                    </a>
-                  </p>
-                ) : null}
-                <LegalFooterLinks athlete={athlete} />
-                <p className="mt-6 text-xs text-zinc-500">
-                  Servizio creato da{" "}
-                  <a
-                    href="https://katahero.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-medium text-zinc-300 underline decoration-white/20 underline-offset-4 transition hover:text-accent hover:decoration-accent/50"
-                  >
-                    katahero.com
-                  </a>
-                </p>
-              </div>
-            </footer>
+            <ProfileFooter athlete={athlete} />
           </div>
         </div>
       </div>
