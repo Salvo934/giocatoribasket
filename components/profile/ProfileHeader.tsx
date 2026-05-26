@@ -91,21 +91,25 @@ export function ProfileHeader({ athlete }: Props) {
               objectPosition={h.heroBackgroundVideoObjectPosition}
               scoreboardVeil={h.heroBackgroundVideoScoreboardVeil}
               lightOverlay={h.heroBackgroundVideoLightOverlay}
+              noOverlay={h.heroBackgroundVideoNoOverlay}
             />
           </div>
           <div className="pointer-events-none absolute inset-0 z-0 md:hidden">{staticHeroBackdrop}</div>
-          {/* Accenti leggeri sopra il video (solo desktop: sul mobile usiamo staticHeroBackdrop) */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 z-1 hidden bg-[radial-gradient(ellipse_90%_80%_at_0%_-15%,rgba(223,255,74,0.09),transparent_50%),radial-gradient(ellipse_70%_55%_at_100%_25%,rgba(100,140,255,0.06),transparent_52%)] opacity-70 md:block"
-          />
+          {!h.heroBackgroundVideoNoOverlay ? (
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 z-1 hidden bg-[radial-gradient(ellipse_90%_80%_at_0%_-15%,rgba(223,255,74,0.09),transparent_50%),radial-gradient(ellipse_70%_55%_at_100%_25%,rgba(100,140,255,0.06),transparent_52%)] opacity-70 md:block"
+            />
+          ) : null}
         </>
       ) : (
         staticHeroBackdrop
       )}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 z-2 h-24 bg-linear-to-b from-white/6 to-transparent"
+        className={`pointer-events-none absolute inset-x-0 top-0 z-2 h-24 bg-linear-to-b to-transparent ${
+          hasVideoBg && h.heroBackgroundVideoNoOverlay ? "from-transparent" : "from-white/6"
+        }`}
       />
 
       <div

@@ -199,6 +199,8 @@ export interface AthleteProfile {
     heroBackgroundVideoScoreboardVeil?: boolean;
     /** Overlay hero più leggero se il clip risulta troppo scuro */
     heroBackgroundVideoLightOverlay?: boolean;
+    /** Nessun velo scuro sul video hero */
+    heroBackgroundVideoNoOverlay?: boolean;
     marketStatusLabel: string;
     agency: AgencyRef;
     lastUpdated: string;
