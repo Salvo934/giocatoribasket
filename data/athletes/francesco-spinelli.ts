@@ -34,10 +34,10 @@ export const francescoSpinelli: AthleteProfile = {
     dashboardIntro:
       "Guardia classe 2005, 197 cm, in Serie B Girone A con Rimadesio Desio: circa 16′ a partita, 6 punti di media sui dati LNP. Scheda con numeri ufficiali, ultimi match e contatti.",
     agency: {
-      name: "In arrivo",
-      representative: "Referente scouting",
+      name: "PLS · Pool Sport Agents",
+      representative: "Puccio Lapenna · procuratore",
     },
-    lastUpdated: "2026-05-23",
+    lastUpdated: "2026-05-27",
     highlightUrl: "/athletes/spinelli-highlight-1.mp4",
   },
   scoutView: {
@@ -262,19 +262,18 @@ export const francescoSpinelli: AthleteProfile = {
   verifications: [
     { id: "data", label: "Dati LNP verificati", ok: true },
     { id: "video", label: "Video verificato", ok: true },
-    { id: "contact", label: "Contatto verificato", ok: false },
+    { id: "contact", label: "Contatto verificato", ok: true },
     { id: "fresh", label: "Profilo aggiornato", ok: true },
     { id: "club", label: "Club confermato", ok: true },
   ],
   contacts: {
-    agency: { name: "In arrivo" },
+    agency: { name: "PLS · Pool Sport Agents" },
     representative: {
-      name: "Referente scouting",
-      role: "Procuratore",
-      phonePublicLabel: "In arrivo",
-      emailPublicLabel: "In arrivo",
+      name: "Puccio Lapenna",
+      role: "Procuratore · PLS Pool Sport Agents",
+      phonePublicLabel: "Su richiesta (club / scouting)",
     },
-    whatsappPublicLabel: "In arrivo",
+    whatsappPublicLabel: "Solo su richiesta — contattare il procuratore",
     social: [
       {
         platform: "Instagram",
