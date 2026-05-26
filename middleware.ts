@@ -1,0 +1,49 @@
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import { athleteSlugs, getAthleteSlugByHost } from "@/data/athletes";
+
+/** Su dominio dedicato: / → profilo atleta, slug sbagliato → correzione. */
+export function middleware(request: NextRequest) {
+  const host = request.headers.get("host");
+  const dedicatedSlug = host ? getAthleteSlugByHost(host) : undefined;
+  if (!dedicatedSlug) return NextResponse.next();
+
+  const { pathname } = request.nextUrl;
+
+  if (pathname === "/privacy") {
+    return NextResponse.rewrite(new URL(`/${dedicatedSlug}/privacy`, request.url));
+  }
+  if (pathname === "/cookie-policy") {
+    return NextResponse.rewrite(new URL(`/${dedicatedSlug}/cookie-policy`, request.url));
+  }
+
+  if (pathname === "/" || pathname === "") {
+    return NextResponse.rewrite(new URL(`/${dedicatedSlug}`, request.url));
+  }
+
+  const segments = pathname.split("/").filter(Boolean);
+  const first = segments[0];
+
+  if (first && athleteSlugs.includes(first) && first !== dedicatedSlug) {
+    const rest = segments.slice(1).join("/");
+    const target = rest ? `/${rest}` : "/";
+    return NextResponse.redirect(new URL(target, request.url), 308);
+  }
+
+  if (first === dedicatedSlug && segments.length === 1) {
+    return NextResponse.redirect(new URL("/", request.url), 308);
+  }
+
+  if (first === dedicatedSlug && segments.length > 1) {
+    const rest = segments.slice(1).join("/");
+    if (rest === "privacy" || rest === "cookie-policy") {
+      return NextResponse.redirect(new URL(`/${rest}`, request.url), 308);
+    }
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|athletes/|.*\\..*).*)"],
+};

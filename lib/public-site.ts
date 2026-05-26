@@ -3,9 +3,10 @@ export function stripTrailingSlash(s: string): string {
   return s.trim().replace(/\/+$/, "");
 }
 
-/** Host normalizzato (minuscolo, senza porta). */
+/** Host normalizzato (minuscolo, senza porta e prefisso www.). */
 export function normalizeHost(host: string): string {
-  return host.trim().toLowerCase().split(":")[0];
+  const bare = host.trim().toLowerCase().split(":")[0];
+  return bare.startsWith("www.") ? bare.slice(4) : bare;
 }
 
 /** Estrae l'host da un publicSiteUrl (es. https://nome.katahero.com). */
