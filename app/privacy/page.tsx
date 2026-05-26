@@ -1,7 +1,9 @@
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { athleteSlugs } from "@/data/athletes";
+import { resolveAthleteSlugForHost } from "@/data/athletes";
 
-/** Shortcut per deploy mono-atleta: /privacy → /{slug}/privacy */
-export default function PrivacyShortcutPage() {
-  redirect(`/${athleteSlugs[0]}/privacy`);
+/** Shortcut: /privacy → /{slug}/privacy in base al dominio. */
+export default async function PrivacyShortcutPage() {
+  const host = (await headers()).get("host");
+  redirect(`/${resolveAthleteSlugForHost(host)}/privacy`);
 }

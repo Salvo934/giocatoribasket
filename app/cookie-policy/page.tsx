@@ -1,7 +1,9 @@
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { athleteSlugs } from "@/data/athletes";
+import { resolveAthleteSlugForHost } from "@/data/athletes";
 
-/** Shortcut per deploy mono-atleta: /cookie-policy → /{slug}/cookie-policy */
-export default function CookiePolicyShortcutPage() {
-  redirect(`/${athleteSlugs[0]}/cookie-policy`);
+/** Shortcut: /cookie-policy → /{slug}/cookie-policy in base al dominio. */
+export default async function CookiePolicyShortcutPage() {
+  const host = (await headers()).get("host");
+  redirect(`/${resolveAthleteSlugForHost(host)}/cookie-policy`);
 }

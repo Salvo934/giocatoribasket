@@ -3,6 +3,20 @@ export function stripTrailingSlash(s: string): string {
   return s.trim().replace(/\/+$/, "");
 }
 
+/** Host normalizzato (minuscolo, senza porta). */
+export function normalizeHost(host: string): string {
+  return host.trim().toLowerCase().split(":")[0];
+}
+
+/** Estrae l'host da un publicSiteUrl (es. https://nome.katahero.com). */
+export function hostFromPublicSiteUrl(publicSiteUrl: string): string | null {
+  try {
+    return normalizeHost(new URL(publicSiteUrl.trim()).host);
+  } catch {
+    return null;
+  }
+}
+
 /**
  * Origine pubblica del sito atleta (sottodominio dedicato o env di deploy).
  * Ordine: dato profilo → NEXT_PUBLIC_SITE_URL.
