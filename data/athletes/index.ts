@@ -1,9 +1,10 @@
 import { alessandroFerrari } from "./alessandro-ferrari";
+import { francescoSpinelli } from "./francesco-spinelli";
 import { ilarioSimonetti } from "./ilario-simonetti";
 import type { AthleteProfile } from "@/lib/types/athlete";
 import { hostFromPublicSiteUrl, normalizeHost } from "@/lib/public-site";
 
-const athletes: AthleteProfile[] = [ilarioSimonetti, alessandroFerrari];
+const athletes: AthleteProfile[] = [ilarioSimonetti, alessandroFerrari, francescoSpinelli];
 
 export const athletesBySlug = Object.fromEntries(athletes.map((a) => [a.slug, a])) as Record<
   string,
