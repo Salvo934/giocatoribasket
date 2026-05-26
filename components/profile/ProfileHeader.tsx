@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { AthleteProfile } from "@/lib/types/athlete";
+import { HeroBackgroundVideo } from "./HeroBackgroundVideo";
 import { ShareProfileButton } from "./ShareActions";
 
 type Props = { athlete: AthleteProfile };
@@ -84,38 +85,11 @@ export function ProfileHeader({ athlete }: Props) {
         <>
           {/* Video solo da md↑ — su mobile risparmiamo banda e CPU */}
           <div className="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden md:block" aria-hidden>
-            {/*
-              Ritaglio “da sopra”: si mostra soprattutto la parte alta del clip e si maschera il fondo campo / pittaggio.
-            */}
-            <video
-              className="absolute left-1/2 top-0 min-h-[126%] w-full min-w-[104%] -translate-x-1/2 translate-y-[-2.5%] bg-[#030305] object-cover object-[center_12%] opacity-[0.82] sm:min-h-[132%] sm:object-[center_10%]"
+            <HeroBackgroundVideo
               src={h.heroBackgroundVideo}
-              muted
-              playsInline
-              autoPlay
-              loop
-              preload="metadata"
-              tabIndex={-1}
-              aria-hidden
-            />
-            {/* Fascia bassa: campo / paint — più morbida così si vede più video */}
-            <div className="absolute inset-x-0 bottom-0 h-[min(38vh,46%)] bg-linear-to-t from-[#030305]/88 via-[#030305]/48 via-48% to-transparent" />
-            {/*
-              Velo sul clip: niente trasparenza al centro (prima lasciava vedere canestro / paint).
-            */}
-            <div
-              className="absolute inset-0"
-              style={{
-                backgroundImage: `
-                  linear-gradient(to bottom, rgba(3, 3, 5, 0) 0%, rgba(3, 3, 5, 0.12) 48%, rgba(3, 3, 5, 0.28) 82%, rgba(3, 3, 5, 0.38) 100%),
-                  linear-gradient(to right, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.52) 34%, rgba(0, 0, 0, 0.58) 50%, rgba(0, 0, 0, 0.52) 66%, rgba(0, 0, 0, 0.88) 100%)
-                `,
-              }}
-            />
-            {/* Copre fascia grigia / letterboxing spesso visibile sopra il clip */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-x-0 top-0 z-2 h-14 bg-linear-to-b from-[#030305] from-42% to-transparent sm:h-17 md:h-20"
+              loopEnd={h.heroBackgroundVideoLoopEnd}
+              objectPosition={h.heroBackgroundVideoObjectPosition}
+              scoreboardVeil={h.heroBackgroundVideoScoreboardVeil}
             />
           </div>
           <div className="pointer-events-none absolute inset-0 z-0 md:hidden">{staticHeroBackdrop}</div>

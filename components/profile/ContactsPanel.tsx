@@ -1,6 +1,8 @@
 "use client";
 
 import type { AthleteProfile } from "@/lib/types/athlete";
+import { youtubeVideoId } from "@/lib/youtube";
+import { isLocalVideoUrl } from "@/lib/video-url";
 import { SectionShell } from "./SectionShell";
 
 type Props = { athlete: AthleteProfile };
@@ -36,10 +38,10 @@ function IconWhatsApp({ className }: { className?: string }) {
   );
 }
 
-function IconYoutube({ className }: { className?: string }) {
+function IconPlay({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M23.5 6.2c-.3-1.1-1.1-1.9-2.2-2.2C19.6 3.5 12 3.5 12 3.5s-7.6 0-9.3.5C1.6 4.3.8 5.1.5 6.2 0 8 0 12 0 12s0 4 .5 5.8c.3 1.1 1.1 1.9 2.2 2.2 1.7.5 9.3.5 9.3.5s7.6 0 9.3-.5c1.1-.3 1.9-1.1 2.2-2.2.5-1.8.5-5.8.5-5.8s0-4-.5-5.8zm-13.8 9.4V8.4l6.2 3.6-6.2 3.6z" />
+      <path d="M8 5.14v13.72L19 12 8 5.14z" />
     </svg>
   );
 }
@@ -67,6 +69,11 @@ export function ContactsPanel({ athlete }: Props) {
   const showPhoneCard = Boolean(tel || telPublic);
   const showWhatsappCard = Boolean(waUrl || c.whatsappPublicLabel);
   const showEmailCard = Boolean(email || emailPublic);
+  const highlightHref =
+    h.highlightUrl && (isLocalVideoUrl(h.highlightUrl) || !youtubeVideoId(h.highlightUrl))
+      ? "#video"
+      : h.highlightUrl;
+  const highlightExternal = Boolean(highlightHref && highlightHref !== "#video");
 
   return (
     <SectionShell
@@ -183,19 +190,15 @@ export function ContactsPanel({ athlete }: Props) {
 
         {h.highlightUrl ? (
           <a
-            href={h.highlightUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`flex items-center justify-between gap-4 rounded-2xl border border-red-500/20 bg-linear-to-r from-red-950/40 to-zinc-950/40 px-5 py-4 transition hover:border-red-500/35 ${focusRing}`}
+            href={highlightHref}
+            {...(highlightExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            className={`flex items-center justify-between gap-4 rounded-2xl border border-accent/25 bg-linear-to-r from-accent/10 to-zinc-950/40 px-5 py-4 transition hover:border-accent/40 ${focusRing}`}
           >
             <span className="flex items-center gap-4">
-              <span className="flex size-11 items-center justify-center rounded-xl bg-red-500/15 text-red-400 ring-1 ring-red-500/25">
-                <IconYoutube className="size-5" />
+              <span className="flex size-11 items-center justify-center rounded-xl bg-accent/15 text-accent ring-1 ring-accent/30">
+                <IconPlay className="size-5" />
               </span>
-              <span>
-                <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-red-400/90">Video</span>
-                <span className="mt-1 block text-base font-semibold text-white">Highlights YouTube</span>
-              </span>
+              <span className="text-base font-semibold text-white">Highlights</span>
             </span>
             <IconChevron className="size-5 shrink-0 text-zinc-500" />
           </a>

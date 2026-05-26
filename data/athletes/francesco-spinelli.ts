@@ -13,6 +13,10 @@ export const francescoSpinelli: AthleteProfile = {
   header: {
     heroImage: "/athletes/francesco-spinelli-avatar.jpg",
     heroImageFocus: "top",
+    heroBackgroundVideo: "/athletes/spinelli-highlight-3.mp4",
+    heroBackgroundVideoLoopEnd: 4.5,
+    heroBackgroundVideoObjectPosition: "center 38%",
+    heroBackgroundVideoScoreboardVeil: true,
     name: "Francesco Spinelli",
     number: "9",
     sport: "Basket",
@@ -29,9 +33,8 @@ export const francescoSpinelli: AthleteProfile = {
     dashboardIntro:
       "Guardia classe 2005, 197 cm, in Serie B Girone A con Rimadesio Desio: circa 16′ a partita, 6 punti di media sui dati LNP. Scheda con numeri ufficiali, ultimi match e contatti.",
     agency: {
-      name: "KataHero Agency (demo)",
+      name: "In arrivo",
       representative: "Referente scouting",
-      website: "https://katahero.com",
     },
     lastUpdated: "2026-05-23",
     highlightUrl: "/athletes/spinelli-highlight-1.mp4",
@@ -257,15 +260,15 @@ export const francescoSpinelli: AthleteProfile = {
   ],
   verifications: [
     { id: "data", label: "Dati LNP verificati", ok: true },
-    { id: "video", label: "Video da integrare", ok: false },
+    { id: "video", label: "Video verificato", ok: true },
     { id: "contact", label: "Contatto verificato", ok: false },
     { id: "fresh", label: "Profilo aggiornato", ok: true },
     { id: "club", label: "Club confermato", ok: true },
   ],
   contacts: {
-    agency: { name: "KataHero Agency (demo)", website: "https://katahero.com" },
+    agency: { name: "In arrivo" },
     representative: {
-      name: "Referente scouting (demo)",
+      name: "Referente scouting",
       role: "Procuratore",
       phonePublicLabel: "In arrivo",
       emailPublicLabel: "In arrivo",

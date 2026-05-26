@@ -191,6 +191,12 @@ export interface AthleteProfile {
     heroImageFocus?: "top" | "center" | "bottom";
     /** Video loop in `public` (mp4), dietro overlay — uso mirato per non coprire copy/avatar */
     heroBackgroundVideo?: string;
+    /** Fine loop in secondi (esclude coda indesiderata, es. registrazione schermo) */
+    heroBackgroundVideoLoopEnd?: number;
+    /** CSS object-position del clip hero (default: center 12%) */
+    heroBackgroundVideoObjectPosition?: string;
+    /** Velo extra sull’overlay tabellone broadcast (angolo basso-sinistra del clip) */
+    heroBackgroundVideoScoreboardVeil?: boolean;
     marketStatusLabel: string;
     agency: AgencyRef;
     lastUpdated: string;
