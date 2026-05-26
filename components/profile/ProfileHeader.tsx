@@ -90,6 +90,7 @@ export function ProfileHeader({ athlete }: Props) {
               loopEnd={h.heroBackgroundVideoLoopEnd}
               objectPosition={h.heroBackgroundVideoObjectPosition}
               scoreboardVeil={h.heroBackgroundVideoScoreboardVeil}
+              lightOverlay={h.heroBackgroundVideoLightOverlay}
             />
           </div>
           <div className="pointer-events-none absolute inset-0 z-0 md:hidden">{staticHeroBackdrop}</div>

@@ -197,6 +197,8 @@ export interface AthleteProfile {
     heroBackgroundVideoObjectPosition?: string;
     /** Velo extra sull’overlay tabellone broadcast (angolo basso-sinistra del clip) */
     heroBackgroundVideoScoreboardVeil?: boolean;
+    /** Overlay hero più leggero se il clip risulta troppo scuro */
+    heroBackgroundVideoLightOverlay?: boolean;
     marketStatusLabel: string;
     agency: AgencyRef;
     lastUpdated: string;
