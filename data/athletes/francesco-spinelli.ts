@@ -34,7 +34,7 @@ export const francescoSpinelli: AthleteProfile = {
       website: "https://katahero.com",
     },
     lastUpdated: "2026-05-23",
-    highlightUrl: "https://www.youtube.com/watch?v=lVvjB86NlPM",
+    highlightUrl: "/athletes/spinelli-highlight-1.mp4",
   },
   scoutView: {
     sectionDescription:
@@ -65,49 +65,58 @@ export const francescoSpinelli: AthleteProfile = {
   videos: {
     main: {
       title: "Highlights — Francesco Spinelli",
-      url: "https://www.youtube.com/watch?v=lVvjB86NlPM",
-      provider: "youtube",
+      url: "/athletes/spinelli-highlight-1.mp4",
     },
+    filmRoomSide: [
+      {
+        title: "Highlights — clip 2",
+        url: "/athletes/spinelli-highlight-2.mp4",
+      },
+      {
+        title: "Highlights — clip 3",
+        url: "/athletes/spinelli-highlight-3.mp4",
+      },
+    ],
     categories: [
       {
         id: "shooting",
         label: "Tiro",
-        clips: [{ title: "Tiro da tre in transizione", url: "https://www.youtube.com/watch?v=lVvjB86NlPM" }],
+        clips: [{ title: "Highlights — tiro", url: "/athletes/spinelli-highlight-1.mp4" }],
       },
       {
         id: "playmaking",
         label: "Playmaking",
-        clips: [{ title: "Decisioni in pick-and-roll", url: "https://www.youtube.com/watch?v=lVvjB86NlPM" }],
+        clips: [{ title: "Highlights — regia", url: "/athletes/spinelli-highlight-2.mp4" }],
       },
       {
         id: "transition",
         label: "Transizione",
-        clips: [{ title: "Palleggio in campo aperto", url: "https://www.youtube.com/watch?v=lVvjB86NlPM" }],
+        clips: [{ title: "Highlights — transizione", url: "/athletes/spinelli-highlight-3.mp4" }],
       },
       {
         id: "defense",
         label: "Difesa",
-        clips: [{ title: "Press sul portatore", url: "https://www.youtube.com/watch?v=lVvjB86NlPM" }],
+        clips: [{ title: "Highlights — difesa", url: "/athletes/spinelli-highlight-1.mp4" }],
       },
       {
         id: "pnr",
         label: "Pick & roll",
-        clips: [{ title: "Snake e kick-out", url: "https://www.youtube.com/watch?v=lVvjB86NlPM" }],
+        clips: [{ title: "Highlights — pick & roll", url: "/athletes/spinelli-highlight-2.mp4" }],
       },
       {
         id: "iso",
         label: "1v1",
-        clips: [{ title: "Penetrazione da guardia", url: "https://www.youtube.com/watch?v=lVvjB86NlPM" }],
+        clips: [{ title: "Highlights — 1v1", url: "/athletes/spinelli-highlight-3.mp4" }],
       },
       {
         id: "rebounding",
         label: "Rimbalzo",
-        clips: [{ title: "Rimbalzo difensivo", url: "https://www.youtube.com/watch?v=lVvjB86NlPM" }],
+        clips: [{ title: "Highlights — rimbalzo", url: "/athletes/spinelli-highlight-1.mp4" }],
       },
       {
         id: "athleticism",
         label: "Atletismo",
-        clips: [{ title: "Primo passo e cambio ritmo", url: "https://www.youtube.com/watch?v=lVvjB86NlPM" }],
+        clips: [{ title: "Highlights — atletismo", url: "/athletes/spinelli-highlight-2.mp4" }],
       },
     ],
   },
@@ -258,10 +267,17 @@ export const francescoSpinelli: AthleteProfile = {
     representative: {
       name: "Referente scouting (demo)",
       role: "Procuratore",
-      email: "salvo.bonaita9808@gmail.com",
+      phonePublicLabel: "In arrivo",
+      emailPublicLabel: "In arrivo",
     },
-    whatsappPublicLabel: "Su richiesta — contattare via email",
-    social: [],
+    whatsappPublicLabel: "In arrivo",
+    social: [
+      {
+        platform: "Instagram",
+        handle: "@francescospinelli___",
+        url: "https://www.instagram.com/francescospinelli___/",
+      },
+    ],
   },
   agencyRoster: [],
 };

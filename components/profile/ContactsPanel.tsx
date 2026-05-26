@@ -61,9 +61,12 @@ export function ContactsPanel({ athlete }: Props) {
   const waUrl = c.whatsapp ?? h.whatsapp;
   const tel = c.representative.phone;
   const telPublic = c.representative.phonePublicLabel;
+  const email = c.representative.email;
+  const emailPublic = c.representative.emailPublicLabel;
 
   const showPhoneCard = Boolean(tel || telPublic);
   const showWhatsappCard = Boolean(waUrl || c.whatsappPublicLabel);
+  const showEmailCard = Boolean(email || emailPublic);
 
   return (
     <SectionShell
@@ -103,7 +106,7 @@ export function ContactsPanel({ athlete }: Props) {
                 </div>
                 <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">Telefono</p>
                 <p className="relative mt-2 text-lg font-semibold tracking-tight text-white">{telPublic}</p>
-                <p className="relative mt-3 text-xs text-zinc-500">Numero non pubblicato: usa email</p>
+                <p className="relative mt-3 text-xs text-zinc-500">Contatto in arrivo</p>
               </div>
             )
           ) : null}
@@ -136,27 +139,45 @@ export function ContactsPanel({ athlete }: Props) {
                 </div>
                 <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">WhatsApp</p>
                 <p className="relative mt-2 text-lg font-semibold tracking-tight text-white">{c.whatsappPublicLabel}</p>
-                <p className="relative mt-3 text-xs text-zinc-500">Contatto su richiesta tramite mail</p>
+                <p className="relative mt-3 text-xs text-zinc-500">Contatto in arrivo</p>
               </div>
             )
           ) : null}
 
-          {c.representative.email ? (
-            <a
-              href={`mailto:${c.representative.email}`}
-              className={`group relative overflow-hidden rounded-2xl border border-white/8 bg-linear-to-br from-zinc-900/90 to-zinc-950 p-5 shadow-[0_1px_0_0_rgba(255,255,255,0.06)_inset] transition hover:border-accent/40 hover:shadow-[0_20px_50px_-28px_rgba(223,255,74,0.2)] ${focusRing}`}
-            >
-              <div className="pointer-events-none absolute -right-6 -top-6 size-28 rounded-full bg-accent/8 blur-2xl transition group-hover:bg-accent/12" aria-hidden />
-              <div className="relative flex items-start justify-between gap-3">
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent ring-1 ring-accent/30">
-                  <IconMail className="size-6" />
-                </span>
-                <IconChevron className="size-5 shrink-0 text-zinc-600 opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100" />
+          {showEmailCard ? (
+            email ? (
+              <a
+                href={`mailto:${email}`}
+                className={`group relative overflow-hidden rounded-2xl border border-white/8 bg-linear-to-br from-zinc-900/90 to-zinc-950 p-5 shadow-[0_1px_0_0_rgba(255,255,255,0.06)_inset] transition hover:border-accent/40 hover:shadow-[0_20px_50px_-28px_rgba(223,255,74,0.2)] ${focusRing}`}
+              >
+                <div className="pointer-events-none absolute -right-6 -top-6 size-28 rounded-full bg-accent/8 blur-2xl transition group-hover:bg-accent/12" aria-hidden />
+                <div className="relative flex items-start justify-between gap-3">
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent ring-1 ring-accent/30">
+                    <IconMail className="size-6" />
+                  </span>
+                  <IconChevron className="size-5 shrink-0 text-zinc-600 opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100" />
+                </div>
+                <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">Email</p>
+                <p className="relative mt-2 break-all text-sm font-semibold leading-snug text-white">{email}</p>
+                <p className="relative mt-3 text-xs text-zinc-500">Ideale per materiale e proposte</p>
+              </a>
+            ) : (
+              <div
+                className="relative cursor-default overflow-hidden rounded-2xl border border-white/8 bg-linear-to-br from-zinc-900/90 to-zinc-950 p-5 opacity-95 shadow-[0_1px_0_0_rgba(255,255,255,0.06)_inset]"
+                role="note"
+                aria-label="Email"
+              >
+                <div className="pointer-events-none absolute -right-6 -top-6 size-28 rounded-full bg-accent/8 blur-2xl" aria-hidden />
+                <div className="relative flex items-start gap-3">
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent ring-1 ring-accent/30">
+                    <IconMail className="size-6" />
+                  </span>
+                </div>
+                <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">Email</p>
+                <p className="relative mt-2 text-lg font-semibold tracking-tight text-white">{emailPublic}</p>
+                <p className="relative mt-3 text-xs text-zinc-500">Contatto in arrivo</p>
               </div>
-              <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">Email</p>
-              <p className="relative mt-2 break-all text-sm font-semibold leading-snug text-white">{c.representative.email}</p>
-              <p className="relative mt-3 text-xs text-zinc-500">Ideale per materiale e proposte</p>
-            </a>
+            )
           ) : null}
         </div>
 

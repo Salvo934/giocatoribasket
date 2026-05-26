@@ -5,6 +5,7 @@ import type { AthleteProfile, AthleteVideo, VideoCategoryId } from "@/lib/types/
 import { useCookieConsent } from "@/components/legal/CookieConsentProvider";
 import { YouTubeConsentGate } from "@/components/legal/YouTubeConsentGate";
 import { youtubeEmbedUrl, youtubeThumbnailUrl } from "@/lib/youtube";
+import { isLocalVideoUrl } from "@/lib/video-url";
 import { SectionShell } from "./SectionShell";
 
 type Props = { athlete: AthleteProfile };
@@ -89,7 +90,8 @@ function FilmRoomThumbnail({
   onSelect: () => void;
 }) {
   const { externalMediaAllowed, ready } = useCookieConsent();
-  const thumb = externalMediaAllowed ? youtubeThumbnailUrl(clip.url) : null;
+  const thumb = externalMediaAllowed && !isLocalVideoUrl(clip.url) ? youtubeThumbnailUrl(clip.url) : null;
+  const localVideo = isLocalVideoUrl(clip.url);
 
   return (
     <button
@@ -110,6 +112,14 @@ function FilmRoomThumbnail({
             <p className="text-[10px] font-bold uppercase text-zinc-400">Anteprima YouTube</p>
             <p className="line-clamp-2 text-[10px] text-zinc-500">{clip.title}</p>
           </div>
+        ) : localVideo ? (
+          <video
+            src={clip.url}
+            muted
+            playsInline
+            preload="metadata"
+            className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
+          />
         ) : thumb ? (
           <img
             src={thumb}
@@ -181,6 +191,7 @@ export function VideoHub({ athlete }: Props) {
   const playing =
     filmRoomFocus === "main" ? v.main : (sideClips[filmRoomFocus] ?? v.main);
   const mainSrc = youtubeEmbedUrl(playing.url);
+  const localMain = isLocalVideoUrl(playing.url);
 
   const firstId = v.categories[0]?.id ?? "shooting";
   const [activeId, setActiveId] = useState<VideoCategoryId>(firstId);
@@ -222,7 +233,16 @@ export function VideoHub({ athlete }: Props) {
               className={`grid gap-3 ${sideClips.length > 0 ? "lg:grid-cols-[minmax(0,1fr)_minmax(148px,16rem)] lg:gap-4" : ""}`}
             >
               <div className="relative aspect-video min-h-0 w-full overflow-hidden bg-zinc-950">
-                {mainSrc ? (
+                {localMain ? (
+                  <video
+                    key={playing.url}
+                    controls
+                    playsInline
+                    preload="metadata"
+                    className="h-full w-full object-contain"
+                    src={playing.url}
+                  />
+                ) : mainSrc ? (
                   <YouTubeConsentGate
                     title="Video YouTube"
                     description="Per riprodurre clip e highlights incorporati serve il consenso ai contenuti esterni (Google/YouTube)."

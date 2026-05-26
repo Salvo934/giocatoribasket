@@ -27,6 +27,8 @@ export interface RepresentativeContact {
   name: string;
   role: string;
   email?: string;
+  /** Mostra card “Email” senza link: testo es. “In arrivo” */
+  emailPublicLabel?: string;
   phone?: string;
   /** Mostra card “Telefono” senza link: testo es. “Su richiesta” (nessun numero pubblico) */
   phonePublicLabel?: string;
