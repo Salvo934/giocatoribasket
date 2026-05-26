@@ -16,7 +16,7 @@ export const francescoSpinelli: AthleteProfile = {
     heroBackgroundVideo: "/athletes/spinelli-highlight-3.mp4",
     heroBackgroundVideoLoopEnd: 4.5,
     heroBackgroundVideoObjectPosition: "center 38%",
-    heroBackgroundVideoNoOverlay: true,
+    heroBackgroundVideoReadabilityOverlay: true,
     name: "Francesco Spinelli",
     number: "9",
     sport: "Basket",

@@ -92,10 +92,11 @@ export function ProfileHeader({ athlete }: Props) {
               scoreboardVeil={h.heroBackgroundVideoScoreboardVeil}
               lightOverlay={h.heroBackgroundVideoLightOverlay}
               noOverlay={h.heroBackgroundVideoNoOverlay}
+              readabilityOverlay={h.heroBackgroundVideoReadabilityOverlay}
             />
           </div>
           <div className="pointer-events-none absolute inset-0 z-0 md:hidden">{staticHeroBackdrop}</div>
-          {!h.heroBackgroundVideoNoOverlay ? (
+          {!h.heroBackgroundVideoNoOverlay && !h.heroBackgroundVideoReadabilityOverlay ? (
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 z-1 hidden bg-[radial-gradient(ellipse_90%_80%_at_0%_-15%,rgba(223,255,74,0.09),transparent_50%),radial-gradient(ellipse_70%_55%_at_100%_25%,rgba(100,140,255,0.06),transparent_52%)] opacity-70 md:block"
@@ -108,7 +109,11 @@ export function ProfileHeader({ athlete }: Props) {
       <div
         aria-hidden
         className={`pointer-events-none absolute inset-x-0 top-0 z-2 h-24 bg-linear-to-b to-transparent ${
-          hasVideoBg && h.heroBackgroundVideoNoOverlay ? "from-transparent" : "from-white/6"
+          hasVideoBg && h.heroBackgroundVideoNoOverlay
+            ? "from-transparent"
+            : h.heroBackgroundVideoReadabilityOverlay
+              ? "from-[#030305]/45"
+              : "from-white/6"
         }`}
       />
 

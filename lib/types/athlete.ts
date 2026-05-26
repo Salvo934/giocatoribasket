@@ -201,6 +201,8 @@ export interface AthleteProfile {
     heroBackgroundVideoLightOverlay?: boolean;
     /** Nessun velo scuro sul video hero */
     heroBackgroundVideoNoOverlay?: boolean;
+    /** Velo leggero a sinistra per leggibilità testi — video ancora luminoso */
+    heroBackgroundVideoReadabilityOverlay?: boolean;
     marketStatusLabel: string;
     agency: AgencyRef;
     lastUpdated: string;

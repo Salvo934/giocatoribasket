@@ -11,6 +11,8 @@ type Props = {
   lightOverlay?: boolean;
   /** Nessun velo scuro sul clip (solo video) */
   noOverlay?: boolean;
+  /** Velo mirato per leggibilità testi hero — video ancora visibile */
+  readabilityOverlay?: boolean;
 };
 
 export function HeroBackgroundVideo({
@@ -20,6 +22,7 @@ export function HeroBackgroundVideo({
   scoreboardVeil = false,
   lightOverlay = false,
   noOverlay = false,
+  readabilityOverlay = false,
 }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
 
@@ -43,7 +46,13 @@ export function HeroBackgroundVideo({
       <video
         ref={ref}
         className={`absolute left-1/2 top-0 min-h-[126%] w-full min-w-[104%] -translate-x-1/2 translate-y-[-2.5%] bg-[#030305] object-cover sm:min-h-[132%] ${
-          noOverlay ? "opacity-100" : lightOverlay ? "opacity-[0.94]" : "opacity-[0.82]"
+          noOverlay
+            ? "opacity-100"
+            : readabilityOverlay
+              ? "opacity-[0.9]"
+              : lightOverlay
+                ? "opacity-[0.94]"
+                : "opacity-[0.82]"
         }`}
         style={{ objectPosition }}
         src={src}
@@ -55,7 +64,23 @@ export function HeroBackgroundVideo({
         tabIndex={-1}
         aria-hidden
       />
-      {noOverlay ? null : (
+      {noOverlay ? null : readabilityOverlay ? (
+        <>
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, rgba(3, 3, 5, 0.82) 0%, rgba(3, 3, 5, 0.52) 32%, rgba(3, 3, 5, 0.16) 58%, transparent 78%),
+                linear-gradient(to bottom, rgba(3, 3, 5, 0) 0%, rgba(3, 3, 5, 0.1) 58%, rgba(3, 3, 5, 0.28) 100%)
+              `,
+            }}
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 z-2 h-12 bg-linear-to-b from-[#030305]/70 to-transparent sm:h-14"
+          />
+        </>
+      ) : (
         <>
           <div
             className={`absolute inset-x-0 bottom-0 h-[min(38vh,46%)] bg-linear-to-t to-transparent ${
