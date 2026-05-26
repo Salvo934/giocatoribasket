@@ -271,9 +271,10 @@ export const francescoSpinelli: AthleteProfile = {
     representative: {
       name: "Puccio Lapenna",
       role: "Procuratore · PLS Pool Sport Agents",
-      phonePublicLabel: "Su richiesta (club / scouting)",
+      email: "puccio@poolsportagents.com",
+      phone: "+39 348 514 8418",
     },
-    whatsappPublicLabel: "Solo su richiesta — contattare il procuratore",
+    whatsapp: "https://wa.me/393485148418",
     social: [
       {
         platform: "Instagram",
