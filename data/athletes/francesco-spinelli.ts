@@ -176,6 +176,26 @@ export const francescoSpinelli: AthleteProfile = {
       },
     ],
   },
+  gallery: {
+    description: "Scatti da gara con Rimadesio Desio — palleggio, tiro e momenti in campo.",
+    items: [
+      {
+        src: "/athletes/spinelli-gallery-1.jpg",
+        alt: "Francesco Spinelli in palleggio con la maglia Rimadesio numero 9",
+        caption: "Rimadesio Desio · palleggio in transizione",
+      },
+      {
+        src: "/athletes/spinelli-gallery-2.jpg",
+        alt: "Francesco Spinelli in fase di tiro con entrambe le mani sopra la testa",
+        caption: "Gara · meccanica di tiro",
+      },
+      {
+        src: "/athletes/spinelli-gallery-3.jpg",
+        alt: "Francesco Spinelli in piedi in campo con la palla, maglia Rimadesio numero 9",
+        caption: "Rimadesio Desio · concentrazione pre-azione",
+      },
+    ],
+  },
   career: [
     {
       season: "2025-26",
@@ -201,19 +221,31 @@ export const francescoSpinelli: AthleteProfile = {
       category: "Serie B · Girone A",
     },
     {
-      season: "2022-23",
-      club: "Bava Pozzuoli",
+      season: "2020-23",
+      club: "Pozzuoli",
       category: "Serie B · Girone D",
-      clubLogo: "/athletes/pozzuolilogo.png",
-    },
-    {
-      season: "2020-22",
-      club: "Virtus Pozzuoli",
-      category: "Serie B · Girone D",
-      clubLogo: "/athletes/pozzuolilogo.png",
     },
   ],
-  honors: [],
+  honors: [
+    {
+      title: "Campione regionale U17 Eccellenza",
+      detail: "Titolo regionale con la formazione Under 17 Eccellenza.",
+      year: "2022",
+    },
+    {
+      title: "Due finali nazionali giovanili",
+      detail: "Raggiunte due finali scudetto nel settore giovanile.",
+    },
+    {
+      title: "Miglior Giovane — Giardini Margherita",
+      detail: "Premio individuale al torneo Giardini Margherita.",
+      year: "2025",
+    },
+    {
+      title: "Nazionali giovanili U18 e U20",
+      detail: "Convocazioni ed esperienze con le rappresentative nazionali Under 18 e Under 20.",
+    },
+  ],
   verifications: [
     { id: "data", label: "Dati LNP verificati", ok: true },
     { id: "video", label: "Video da integrare", ok: false },
