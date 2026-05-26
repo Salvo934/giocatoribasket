@@ -6,6 +6,7 @@ export const alessandroFerrari: AthleteProfile = {
   seo: {
     title: "Alessandro Ferrari · Guardia | Player Card",
     description: "Scheda atleta demo — sostituire testi, numeri e video.",
+    publicSiteUrl: "https://alessandroferrari10.katahero.com",
   },
   header: {
     heroImage:
