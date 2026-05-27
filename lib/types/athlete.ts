@@ -44,9 +44,13 @@ export interface AthleteVideo {
   title: string;
   url: string;
   note?: string;
+  /** Copertina clip locale (path in `public`) */
+  poster?: string;
 }
 
 export interface AthleteVideos {
+  /** Copertina default per clip mp4 in sala video */
+  poster?: string;
   main: AthleteVideo & { provider?: VideoProvider };
   /** Max 2 consigliati: miniature accanto al player principale in Film room */
   filmRoomSide?: AthleteVideo[];

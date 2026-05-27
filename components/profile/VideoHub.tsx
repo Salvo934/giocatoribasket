@@ -80,18 +80,25 @@ function BroadcastFrame({
   );
 }
 
+function clipPoster(clip: AthleteVideo, fallback?: string) {
+  return clip.poster ?? fallback;
+}
+
 function FilmRoomThumbnail({
   clip,
   selected,
   onSelect,
+  defaultPoster,
 }: {
   clip: AthleteVideo;
   selected: boolean;
   onSelect: () => void;
+  defaultPoster?: string;
 }) {
   const { externalMediaAllowed, ready } = useCookieConsent();
   const thumb = externalMediaAllowed && !isLocalVideoUrl(clip.url) ? youtubeThumbnailUrl(clip.url) : null;
   const localVideo = isLocalVideoUrl(clip.url);
+  const poster = localVideo ? clipPoster(clip, defaultPoster) : null;
 
   return (
     <button
@@ -112,6 +119,13 @@ function FilmRoomThumbnail({
             <p className="text-[10px] font-bold uppercase text-zinc-400">Anteprima YouTube</p>
             <p className="line-clamp-2 text-[10px] text-zinc-500">{clip.title}</p>
           </div>
+        ) : localVideo && poster ? (
+          <img
+            src={poster}
+            alt=""
+            className="h-full w-full object-cover object-top transition duration-300 group-hover:scale-[1.03]"
+            loading="lazy"
+          />
         ) : localVideo ? (
           <video
             src={clip.url}
@@ -190,6 +204,7 @@ export function VideoHub({ athlete }: Props) {
   const [filmRoomFocus, setFilmRoomFocus] = useState<"main" | number>("main");
   const playing =
     filmRoomFocus === "main" ? v.main : (sideClips[filmRoomFocus] ?? v.main);
+  const playingPoster = isLocalVideoUrl(playing.url) ? clipPoster(playing, v.poster) : undefined;
   const mainSrc = youtubeEmbedUrl(playing.url);
   const localMain = isLocalVideoUrl(playing.url);
 
@@ -234,14 +249,25 @@ export function VideoHub({ athlete }: Props) {
             >
               <div className="relative aspect-video min-h-0 w-full overflow-hidden bg-zinc-950">
                 {localMain ? (
-                  <video
-                    key={playing.url}
-                    controls
-                    playsInline
-                    preload="metadata"
-                    className="h-full w-full object-contain"
-                    src={playing.url}
-                  />
+                  <>
+                    {playingPoster ? (
+                      <img
+                        src={playingPoster}
+                        alt=""
+                        aria-hidden
+                        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-top"
+                      />
+                    ) : null}
+                    <video
+                      key={playing.url}
+                      controls
+                      playsInline
+                      preload="metadata"
+                      poster={playingPoster}
+                      className="relative z-1 h-full w-full object-contain"
+                      src={playing.url}
+                    />
+                  </>
                 ) : mainSrc ? (
                   <YouTubeConsentGate
                     title="Video YouTube"
@@ -272,6 +298,7 @@ export function VideoHub({ athlete }: Props) {
                       clip={clip}
                       selected={filmRoomFocus === i}
                       onSelect={() => setFilmRoomFocus(i)}
+                      defaultPoster={v.poster}
                     />
                   ))}
                 </div>

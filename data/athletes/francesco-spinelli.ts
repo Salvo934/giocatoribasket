@@ -67,6 +67,7 @@ export const francescoSpinelli: AthleteProfile = {
     economicsNote: "Solo su richiesta al referente.",
   },
   videos: {
+    poster: "/athletes/spinelli-gallery-1.jpg",
     main: {
       title: "Highlights — Francesco Spinelli",
       url: "/athletes/spinelli-highlight-1.mp4",
