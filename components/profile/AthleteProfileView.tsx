@@ -8,6 +8,7 @@ import { ProfileFooter } from "./ProfileFooter";
 import { ProfileHeader } from "./ProfileHeader";
 import { ProfileNav } from "./ProfileNav";
 import { ScoutPanel } from "./ScoutPanel";
+import { SocialMediaKitPanel } from "./SocialMediaKitPanel";
 import { StatsPanel } from "./StatsPanel";
 import { TechnicalFitPanel } from "./TechnicalFitPanel";
 import { VideoHub } from "./VideoHub";
@@ -32,6 +33,7 @@ export function AthleteProfileView({ athlete }: Props) {
               <TechnicalFitPanel athlete={athlete} />
               <WhyHeFitsPanel athlete={athlete} />
               <GalleryPanel athlete={athlete} />
+              <SocialMediaKitPanel athlete={athlete} />
               <CareerTimeline athlete={athlete} />
               <HonorsPanel athlete={athlete} />
               <ContactsPanel athlete={athlete} />

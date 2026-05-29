@@ -210,6 +210,10 @@ export const francescoSpinelli: AthleteProfile = {
       },
     ],
   },
+  socialMediaKit: {
+    statusLabel: "Aggiornato dopo ogni gara",
+    items: [],
+  },
   career: [
     {
       season: "2025-26",

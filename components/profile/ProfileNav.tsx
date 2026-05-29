@@ -14,6 +14,7 @@ function navLinks(showGallery: boolean) {
     { href: "#fit", label: "Fit" },
   ];
   if (showGallery) links.push({ href: "#gallery", label: "Gallery" });
+  links.push({ href: "#social-kit", label: "Social kit" });
   links.push(
     { href: "#carriera", label: "Carriera" },
     { href: "#honors", label: "Palmares" },

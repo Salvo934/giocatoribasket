@@ -141,6 +141,32 @@ export interface AthleteGallery {
   items: GalleryImage[];
 }
 
+export type SocialKitFormat = "post" | "story";
+
+/** Asset scaricabile per Instagram (post 1:1 o storia 9:16) */
+export interface SocialKitAsset {
+  id: string;
+  title: string;
+  format: SocialKitFormat;
+  /** Path in `public` o URL assoluto */
+  src: string;
+  /** Testo suggerito per la caption Instagram */
+  caption?: string;
+  /** Data gara (ISO yyyy-mm-dd) */
+  matchDate?: string;
+  opponent?: string;
+  downloadName?: string;
+}
+
+export interface AthleteSocialMediaKit {
+  /** Default: "Contenuti pronti per i social" */
+  title?: string;
+  description?: string;
+  /** Es. "Aggiornato dopo ogni gara" */
+  statusLabel?: string;
+  items: SocialKitAsset[];
+}
+
 /** Configurazione GDPR / privacy per sito atleta (override opzionali). */
 export interface AthleteLegalConfig {
   /** Titolare del trattamento dei dati pubblicati sul sito */
@@ -254,6 +280,8 @@ export interface AthleteProfile {
   };
   /** Foto da campo / ritratto — se assente o vuota la sezione non viene mostrata */
   gallery?: AthleteGallery;
+  /** Post e storie pronti per Instagram dopo le partite */
+  socialMediaKit?: AthleteSocialMediaKit;
   career: CareerStep[];
   honors: HonorItem[];
   verifications: VerificationBadge[];
