@@ -1,26 +1,24 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import type { AthleteProfile, SocialKitAsset, SocialKitFormat } from "@/lib/types/athlete";
-import { shareImageToInstagram } from "@/lib/share-instagram";
+import { isMobileDevice, shareImageToInstagram } from "@/lib/share-instagram";
 import { SectionShell } from "./SectionShell";
 
 type Props = { athlete: AthleteProfile };
 
-type ShareState = "idle" | "loading" | "shared" | "fallback" | "err";
-
 const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/45 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950";
+
+const instagramBtnClass = `inline-flex h-10 w-full items-center justify-center gap-2 rounded-full border border-[#E1306C]/50 bg-linear-to-r from-[#f77737]/20 via-[#E1306C]/25 to-[#833AB4]/20 px-4 text-xs font-bold uppercase tracking-wider text-[#ffb3d0] [-webkit-tap-highlight-color:transparent] ${focusRing}`;
 
 function formatLabel(format: SocialKitFormat) {
   return format === "story" ? "Storia" : "Post";
 }
 
-function thumbClass(format: SocialKitFormat) {
-  return format === "story"
-    ? "w-[4.25rem] aspect-[9/16] sm:w-[4.75rem]"
-    : "w-[4.75rem] aspect-[4/5] sm:w-[5.25rem]";
+function aspectClass(format: SocialKitFormat) {
+  return format === "story" ? "aspect-[9/16]" : "aspect-[4/5]";
 }
 
 function IconInstagram({ className }: { className?: string }) {
@@ -31,42 +29,9 @@ function IconInstagram({ className }: { className?: string }) {
   );
 }
 
-function IconDownload({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16" />
-    </svg>
-  );
-}
-
-function IconCopy({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-      <rect x="9" y="9" width="11" height="11" rx="2" />
-      <path strokeLinecap="round" d="M5 15V5a2 2 0 012-2h10" />
-    </svg>
-  );
-}
-
-function shareButtonLabel(state: ShareState, format: SocialKitFormat) {
-  if (state === "loading") return "…";
-  if (state === "shared") return "Ok";
-  if (state === "fallback") return "Scaricato";
-  if (state === "err") return "Riprova";
-  return format === "story" ? "Storia" : "Post";
-}
-
-function shareHint(state: ShareState) {
-  if (state === "shared") return "Scegli Instagram nel menu.";
-  if (state === "fallback") return "Grafica scaricata · caption negli appunti.";
-  return null;
-}
-
-const iconBtnClass = `inline-flex size-8 shrink-0 items-center justify-center rounded-lg border border-white/12 bg-white/5 text-zinc-300 transition hover:border-white/22 hover:bg-white/8 hover:text-white ${focusRing}`;
-
 function KitCard({ item }: { item: SocialKitAsset }) {
   const [copyState, setCopyState] = useState<"idle" | "ok" | "err">("idle");
-  const [shareState, setShareState] = useState<ShareState>("idle");
+  const sharingRef = useRef(false);
 
   const copyCaption = useCallback(async () => {
     if (!item.caption?.trim()) return;
@@ -81,100 +46,75 @@ function KitCard({ item }: { item: SocialKitAsset }) {
   }, [item.caption]);
 
   const shareToInstagram = useCallback(async () => {
-    setShareState("loading");
+    if (sharingRef.current) return;
+    sharingRef.current = true;
     try {
-      const result = await shareImageToInstagram({
+      await shareImageToInstagram({
         src: item.src,
         downloadName: item.downloadName,
         caption: item.caption,
       });
-      setShareState(result === "shared" ? "shared" : "fallback");
     } catch {
-      setShareState("err");
+      /* annullato o errore */
     } finally {
-      window.setTimeout(() => setShareState("idle"), 4000);
+      sharingRef.current = false;
     }
   }, [item.caption, item.downloadName, item.src]);
 
   const meta = [item.matchDate, item.opponent].filter(Boolean).join(" · ");
-  const hint = shareHint(shareState);
-  const shareLabel = shareButtonLabel(shareState, item.format);
+  const shareLabel = item.format === "story" ? "Condividi storia" : "Condividi post";
 
   return (
-    <article className="group relative overflow-hidden rounded-xl border border-white/10 bg-zinc-950/55 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] transition hover:border-[#E1306C]/25">
-      <div
-        className="pointer-events-none absolute inset-0 bg-linear-to-br from-[#E1306C]/6 via-transparent to-[#833AB4]/5 opacity-0 transition group-hover:opacity-100"
-        aria-hidden
-      />
+    <article className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/60 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] transition hover:border-accent/30">
+      <div className={`relative w-full overflow-hidden bg-black ${aspectClass(item.format)}`}>
+        <Image
+          src={item.src}
+          alt={item.title}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition duration-500 group-hover:scale-[1.02]"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-black/20" />
+        <span className="absolute left-3 top-3 rounded-full border border-white/20 bg-black/55 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-sm">
+          {formatLabel(item.format)}
+        </span>
+      </div>
 
-      <div className="relative flex gap-3 p-3 sm:gap-3.5 sm:p-3.5">
-        <div
-          className={`relative shrink-0 overflow-hidden rounded-lg bg-black shadow-[0_0_0_1px_rgba(255,255,255,0.08)] ${thumbClass(item.format)}`}
-        >
-          <Image
-            src={item.src}
-            alt={item.title}
-            fill
-            sizes="84px"
-            className="object-cover transition duration-300 group-hover:scale-[1.03]"
-          />
-          <span className="absolute bottom-1 left-1 rounded bg-black/70 px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wider text-white backdrop-blur-sm">
-            {formatLabel(item.format)}
-          </span>
-        </div>
+      <div className="flex flex-1 flex-col p-4 md:p-5">
+        <h3 className="text-base font-semibold leading-snug text-white">{item.title}</h3>
+        {meta ? <p className="mt-1 text-xs font-medium text-zinc-500">{meta}</p> : null}
+        {item.caption ? (
+          <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-zinc-400">{item.caption}</p>
+        ) : null}
 
-        <div className="flex min-w-0 flex-1 flex-col justify-center gap-2.5">
-          <div className="min-w-0">
-            <h3 className="truncate text-sm font-semibold text-white">{item.title}</h3>
-            {meta ? (
-              <p className="mt-0.5 truncate text-[10px] font-medium uppercase tracking-wide text-zinc-500">{meta}</p>
-            ) : null}
-          </div>
+        <div className="mt-4 flex flex-col gap-2">
+          <button type="button" onClick={() => void shareToInstagram()} className={instagramBtnClass}>
+            <IconInstagram className="size-4 shrink-0" />
+            {shareLabel}
+          </button>
 
-          <div className="flex items-center gap-1.5">
-            <button
-              type="button"
-              onClick={() => void shareToInstagram()}
-              disabled={shareState === "loading"}
-              title={item.format === "story" ? "Condividi storia su Instagram" : "Condividi post su Instagram"}
-              className={`inline-flex h-8 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg border border-[#E1306C]/45 bg-linear-to-r from-[#f77737]/15 via-[#E1306C]/20 to-[#833AB4]/15 px-2.5 text-[10px] font-bold uppercase tracking-wider text-[#ffc4dc] transition hover:border-[#E1306C]/65 hover:from-[#f77737]/25 hover:via-[#E1306C]/30 hover:to-[#833AB4]/25 disabled:cursor-not-allowed disabled:opacity-60 sm:text-[11px] ${focusRing}`}
-            >
-              <IconInstagram className="size-3.5 shrink-0" />
-              <span className="truncate">{shareState === "idle" ? "Instagram" : shareLabel}</span>
-            </button>
-
+          <div className="flex flex-wrap gap-2">
             <a
               href={item.src}
               download={item.downloadName ?? true}
-              title="Scarica grafica"
-              aria-label="Scarica grafica"
-              className={iconBtnClass}
+              className={`inline-flex h-10 items-center justify-center rounded-full border border-white/15 bg-white/5 px-4 text-xs font-bold uppercase tracking-wider text-zinc-200 transition hover:border-white/25 hover:bg-white/8 ${focusRing}`}
             >
-              <IconDownload className="size-3.5" />
+              Scarica
             </a>
-
             {item.caption ? (
               <button
                 type="button"
                 onClick={() => void copyCaption()}
-                title="Copia caption"
-                aria-label="Copia caption"
-                className={iconBtnClass}
+                className={`inline-flex h-10 items-center justify-center rounded-full border border-white/15 bg-white/5 px-4 text-xs font-bold uppercase tracking-wider text-zinc-200 transition hover:border-white/25 hover:bg-white/8 ${focusRing}`}
               >
-                {copyState === "ok" ? (
-                  <span className="text-[9px] font-bold text-accent">OK</span>
-                ) : copyState === "err" ? (
-                  <span className="text-[9px] font-bold text-red-400">!</span>
-                ) : (
-                  <IconCopy className="size-3.5" />
-                )}
+                {copyState === "ok" ? "Copiato" : copyState === "err" ? "Errore" : "Copia caption"}
               </button>
             ) : null}
           </div>
 
-          {hint ? (
-            <p className="text-[10px] leading-snug text-zinc-500" role="status">
-              {hint}
+          {isMobileDevice() ? (
+            <p className="text-xs leading-relaxed text-zinc-600">
+              Tocca il pulsante e scegli Instagram: la grafica si apre pronta per il post.
             </p>
           ) : null}
         </div>
@@ -189,30 +129,28 @@ export function SocialMediaKitPanel({ athlete }: Props) {
   const title = kit?.title?.trim() || "Contenuti pronti per i social";
   const description =
     kit?.description?.trim() ||
-    "Grafiche pronte dopo le gare: condividi su Instagram dal telefono o scarica.";
+    "Post e storie aggiornati dopo le partite: condividi su Instagram dal telefono, oppure scarica la grafica.";
   const statusLabel = kit?.statusLabel?.trim();
   const instagram = athlete.contacts.social.find((s) => s.platform.toLowerCase() === "instagram");
 
   return (
     <SectionShell
       id="social-kit"
-      density="compact"
       eyebrow="Social media kit"
       title={title}
       description={description}
       headerActions={
         <>
-          <span className="inline-flex items-center gap-1 rounded-full border border-[#E1306C]/30 bg-[#E1306C]/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#ff9ec8]">
-            <IconInstagram className="size-3" />
-            Instagram
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-[#E1306C]/35 bg-[#E1306C]/12 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#ff9ec8]">
+            Instagram ready
           </span>
           {statusLabel ? (
-            <span className="inline-flex rounded-full border border-white/10 bg-white/4 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-400">
+            <span className="inline-flex rounded-full border border-white/10 bg-white/4 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
               {statusLabel}
             </span>
           ) : null}
           {items.length > 0 ? (
-            <span className="inline-flex rounded-full border border-accent/30 bg-accent/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
+            <span className="inline-flex rounded-full border border-accent/35 bg-accent/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-accent">
               {items.length} {items.length === 1 ? "asset" : "asset"}
             </span>
           ) : null}
@@ -220,25 +158,28 @@ export function SocialMediaKitPanel({ athlete }: Props) {
       }
     >
       {items.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-white/12 bg-zinc-950/35 px-5 py-8 text-center md:px-8 md:py-10">
-          <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-zinc-500">Kit in arrivo</p>
-          <p className="mx-auto mt-3 max-w-md text-base font-semibold text-white">
-            Dopo ogni gara troverai qui post e storie pronti da condividere.
+        <div className="rounded-2xl border border-dashed border-white/15 bg-zinc-950/40 px-6 py-12 text-center md:px-10 md:py-14">
+          <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-zinc-500">Kit in arrivo</p>
+          <p className="mx-auto mt-4 max-w-md text-lg font-semibold text-white">
+            Dopo ogni gara troverai qui grafiche pronte per post e storie.
+          </p>
+          <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-zinc-500">
+            Il team prepara contenuti con statistiche, risultato e branding del club — tu li condividi con un tap su
+            Instagram.
           </p>
           {instagram ? (
             <a
               href={instagram.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`mt-5 inline-flex h-9 items-center justify-center gap-1.5 rounded-full border border-[#E1306C]/40 bg-[#E1306C]/10 px-5 text-xs font-semibold text-[#ffb3d0] transition hover:bg-[#E1306C]/20 ${focusRing}`}
+              className={`mt-8 inline-flex h-11 items-center justify-center rounded-full border border-[#E1306C]/40 bg-[#E1306C]/10 px-6 text-sm font-semibold text-[#ffb3d0] transition hover:bg-[#E1306C]/20 ${focusRing}`}
             >
-              <IconInstagram className="size-3.5" />
-              {instagram.handle}
+              Vai su {instagram.handle}
             </a>
           ) : null}
         </div>
       ) : (
-        <div className="grid gap-2.5 sm:grid-cols-2 sm:gap-3">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {items.map((item) => (
             <KitCard key={item.id} item={item} />
           ))}
