@@ -246,6 +246,21 @@ export const ilarioSimonetti: AthleteProfile = {
       },
     ],
   },
+  socialMediaKit: {
+    statusLabel: "Stagione 2025-26 · Latina Basket",
+    items: [
+      {
+        id: "ilario-season-25-26-post",
+        title: "Player card — stagione 25/26",
+        format: "post",
+        src: "/athletes/social/ilario-simonetti-season-25-26.jpg",
+        caption:
+          "In campo cerco di essere un'ala completa: mi piace giocare con intensità, essere presente sotto canestro, ma anche adattarmi sul perimetro e migliorare continuamente le mie letture offensive. Credo molto nel lavoro quotidiano, nella disciplina e nello spirito di squadra.\n\n📊 Serie B 25/26 · Latina Basket\nPPG 5.7 · AST 1.0 · REB 1.8 · MIN 15.3",
+        matchDate: "2026-04-28",
+        downloadName: "ilario-simonetti-player-card-25-26.jpg",
+      },
+    ],
+  },
   career: [
     {
       season: "2025-26",

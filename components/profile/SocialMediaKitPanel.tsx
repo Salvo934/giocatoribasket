@@ -15,7 +15,7 @@ function formatLabel(format: SocialKitFormat) {
 }
 
 function aspectClass(format: SocialKitFormat) {
-  return format === "story" ? "aspect-[9/16]" : "aspect-square";
+  return format === "story" ? "aspect-[9/16]" : "aspect-[4/5]";
 }
 
 function KitCard({ item }: { item: SocialKitAsset }) {
