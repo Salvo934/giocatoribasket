@@ -29,6 +29,33 @@ function IconInstagram({ className }: { className?: string }) {
   );
 }
 
+function IconDownload({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} aria-hidden>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v10m0 0l-3.5-3.5M12 14l3.5-3.5M5 20h14" />
+    </svg>
+  );
+}
+
+function IconCopy({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} aria-hidden>
+      <rect x="8" y="8" width="12" height="12" rx="2" />
+      <path strokeLinecap="round" d="M6 16V6a2 2 0 012-2h10" />
+    </svg>
+  );
+}
+
+function IconCheck({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+  );
+}
+
+const secondaryActionClass = `inline-flex h-11 min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-zinc-900/75 px-3 text-sm font-semibold text-zinc-100 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] transition hover:border-white/18 hover:bg-zinc-900 active:bg-zinc-800/90 [-webkit-tap-highlight-color:transparent] ${focusRing}`;
+
 function KitCard({ item }: { item: SocialKitAsset }) {
   const [copyState, setCopyState] = useState<"idle" | "ok" | "err">("idle");
   const sharingRef = useRef(false);
@@ -93,21 +120,49 @@ function KitCard({ item }: { item: SocialKitAsset }) {
             {shareLabel}
           </button>
 
-          <div className="flex flex-wrap gap-2">
-            <a
-              href={item.src}
-              download={item.downloadName ?? true}
-              className={`inline-flex h-10 items-center justify-center rounded-full border border-white/15 bg-white/5 px-4 text-xs font-bold uppercase tracking-wider text-zinc-200 transition hover:border-white/25 hover:bg-white/8 ${focusRing}`}
-            >
-              Scarica
+          <div
+            className={
+              item.caption
+                ? "grid grid-cols-2 gap-2"
+                : "grid grid-cols-1"
+            }
+          >
+            <a href={item.src} download={item.downloadName ?? true} className={secondaryActionClass}>
+              <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-white/6 text-zinc-200 ring-1 ring-white/10">
+                <IconDownload className="size-4" />
+              </span>
+              <span className="min-w-0 truncate">Scarica</span>
             </a>
             {item.caption ? (
               <button
                 type="button"
                 onClick={() => void copyCaption()}
-                className={`inline-flex h-10 items-center justify-center rounded-full border border-white/15 bg-white/5 px-4 text-xs font-bold uppercase tracking-wider text-zinc-200 transition hover:border-white/25 hover:bg-white/8 ${focusRing}`}
+                className={`${secondaryActionClass} ${
+                  copyState === "ok"
+                    ? "border-accent/35 bg-accent/10 text-accent"
+                    : copyState === "err"
+                      ? "border-red-500/35 bg-red-500/10 text-red-300"
+                      : ""
+                }`}
               >
-                {copyState === "ok" ? "Copiato" : copyState === "err" ? "Errore" : "Copia caption"}
+                <span
+                  className={`flex size-8 shrink-0 items-center justify-center rounded-lg ring-1 ${
+                    copyState === "ok"
+                      ? "bg-accent/15 text-accent ring-accent/25"
+                      : copyState === "err"
+                        ? "bg-red-500/15 text-red-300 ring-red-500/25"
+                        : "bg-white/6 text-zinc-200 ring-white/10"
+                  }`}
+                >
+                  {copyState === "ok" ? (
+                    <IconCheck className="size-4" />
+                  ) : (
+                    <IconCopy className="size-4" />
+                  )}
+                </span>
+                <span className="min-w-0 truncate">
+                  {copyState === "ok" ? "Copiata" : copyState === "err" ? "Errore" : "Copia caption"}
+                </span>
               </button>
             ) : null}
           </div>
