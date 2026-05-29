@@ -3,12 +3,17 @@
 import Image from "next/image";
 import { useCallback, useState } from "react";
 import type { AthleteProfile, SocialKitAsset, SocialKitFormat } from "@/lib/types/athlete";
+import { isMobileDevice, shareImageToInstagram } from "@/lib/share-instagram";
 import { SectionShell } from "./SectionShell";
 
 type Props = { athlete: AthleteProfile };
 
+type ShareState = "idle" | "loading" | "shared" | "fallback" | "err";
+
 const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/45 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950";
+
+const instagramBtnClass = `inline-flex h-10 items-center justify-center gap-2 rounded-full border border-[#E1306C]/50 bg-linear-to-r from-[#f77737]/20 via-[#E1306C]/25 to-[#833AB4]/20 px-4 text-xs font-bold uppercase tracking-wider text-[#ffb3d0] transition hover:border-[#E1306C]/70 hover:from-[#f77737]/30 hover:via-[#E1306C]/35 hover:to-[#833AB4]/30 disabled:cursor-not-allowed disabled:opacity-60 ${focusRing}`;
 
 function formatLabel(format: SocialKitFormat) {
   return format === "story" ? "Storia" : "Post";
@@ -18,8 +23,35 @@ function aspectClass(format: SocialKitFormat) {
   return format === "story" ? "aspect-[9/16]" : "aspect-[4/5]";
 }
 
+function IconInstagram({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+    </svg>
+  );
+}
+
+function shareButtonLabel(state: ShareState, format: SocialKitFormat) {
+  if (state === "loading") return "Apertura…";
+  if (state === "shared") return "Condiviso";
+  if (state === "fallback") return "Scaricato";
+  if (state === "err") return "Riprova";
+  return format === "story" ? "Condividi storia" : "Condividi post";
+}
+
+function shareHint(state: ShareState) {
+  if (state === "shared") {
+    return "Seleziona Instagram nel menu e incolla la caption se non compare da sola.";
+  }
+  if (state === "fallback") {
+    return "Immagine scaricata e caption copiata: apri Instagram sul telefono e crea un nuovo post.";
+  }
+  return null;
+}
+
 function KitCard({ item }: { item: SocialKitAsset }) {
   const [copyState, setCopyState] = useState<"idle" | "ok" | "err">("idle");
+  const [shareState, setShareState] = useState<ShareState>("idle");
 
   const copyCaption = useCallback(async () => {
     if (!item.caption?.trim()) return;
@@ -33,7 +65,24 @@ function KitCard({ item }: { item: SocialKitAsset }) {
     }
   }, [item.caption]);
 
+  const shareToInstagram = useCallback(async () => {
+    setShareState("loading");
+    try {
+      const result = await shareImageToInstagram({
+        src: item.src,
+        downloadName: item.downloadName,
+        caption: item.caption,
+      });
+      setShareState(result === "shared" ? "shared" : "fallback");
+    } catch {
+      setShareState("err");
+    } finally {
+      window.setTimeout(() => setShareState("idle"), 5000);
+    }
+  }, [item.caption, item.downloadName, item.src]);
+
   const meta = [item.matchDate, item.opponent].filter(Boolean).join(" · ");
+  const hint = shareHint(shareState);
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/60 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] transition hover:border-accent/30">
@@ -58,22 +107,44 @@ function KitCard({ item }: { item: SocialKitAsset }) {
           <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-zinc-400">{item.caption}</p>
         ) : null}
 
-        <div className="mt-4 flex flex-wrap gap-2">
-          <a
-            href={item.src}
-            download={item.downloadName ?? true}
-            className={`inline-flex h-10 items-center justify-center rounded-full border border-accent/45 bg-accent/12 px-4 text-xs font-bold uppercase tracking-wider text-accent transition hover:bg-accent/20 ${focusRing}`}
+        <div className="mt-4 flex flex-col gap-2">
+          <button
+            type="button"
+            onClick={() => void shareToInstagram()}
+            disabled={shareState === "loading"}
+            className={instagramBtnClass}
           >
-            Scarica
-          </a>
-          {item.caption ? (
-            <button
-              type="button"
-              onClick={() => void copyCaption()}
+            <IconInstagram className="size-4 shrink-0" />
+            {shareButtonLabel(shareState, item.format)}
+          </button>
+
+          <div className="flex flex-wrap gap-2">
+            <a
+              href={item.src}
+              download={item.downloadName ?? true}
               className={`inline-flex h-10 items-center justify-center rounded-full border border-white/15 bg-white/5 px-4 text-xs font-bold uppercase tracking-wider text-zinc-200 transition hover:border-white/25 hover:bg-white/8 ${focusRing}`}
             >
-              {copyState === "ok" ? "Copiato" : copyState === "err" ? "Errore" : "Copia caption"}
-            </button>
+              Scarica
+            </a>
+            {item.caption ? (
+              <button
+                type="button"
+                onClick={() => void copyCaption()}
+                className={`inline-flex h-10 items-center justify-center rounded-full border border-white/15 bg-white/5 px-4 text-xs font-bold uppercase tracking-wider text-zinc-200 transition hover:border-white/25 hover:bg-white/8 ${focusRing}`}
+              >
+                {copyState === "ok" ? "Copiato" : copyState === "err" ? "Errore" : "Copia caption"}
+              </button>
+            ) : null}
+          </div>
+
+          {hint ? (
+            <p className="text-xs leading-relaxed text-zinc-500" role="status">
+              {hint}
+            </p>
+          ) : isMobileDevice() ? (
+            <p className="text-xs leading-relaxed text-zinc-600">
+              Tocca il pulsante e scegli Instagram: la grafica si apre pronta per il post.
+            </p>
           ) : null}
         </div>
       </div>
@@ -87,7 +158,7 @@ export function SocialMediaKitPanel({ athlete }: Props) {
   const title = kit?.title?.trim() || "Contenuti pronti per i social";
   const description =
     kit?.description?.trim() ||
-    "Post e storie aggiornati dopo le partite: scarica e condividi sui tuoi canali Instagram (feed, storie o repost).";
+    "Post e storie aggiornati dopo le partite: con un tap condividi su Instagram dal telefono, oppure scarica la grafica.";
   const statusLabel = kit?.statusLabel?.trim();
   const instagram = athlete.contacts.social.find((s) => s.platform.toLowerCase() === "instagram");
 
@@ -122,8 +193,8 @@ export function SocialMediaKitPanel({ athlete }: Props) {
             Dopo ogni gara troverai qui grafiche pronte per post e storie.
           </p>
           <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-zinc-500">
-            Il team prepara contenuti con statistiche, risultato e branding del club — tu li scarichi e li pubblichi
-            sui tuoi social.
+            Il team prepara contenuti con statistiche, risultato e branding del club — tu li condividi con un tap su
+            Instagram.
           </p>
           {instagram ? (
             <a
