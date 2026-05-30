@@ -15,7 +15,7 @@ export const thomasAguzzoli: AthleteProfile = {
     heroImageObjectPosition: "50% 16%",
     heroBackgroundVideo: "/athletes/aguzzoli-hero-bg.mp4",
     heroBackgroundVideoLandscape: true,
-    heroBackgroundVideoLoopEnd: 14.5,
+    heroBackgroundVideoLoopEnd: 13.2,
     heroBackgroundVideoObjectPosition: "center center",
     heroBackgroundVideoReadabilityOverlay: true,
     name: "Thomas Aguzzoli",
@@ -223,12 +223,37 @@ export const thomasAguzzoli: AthleteProfile = {
     ],
   },
   gallery: {
-    description: "Thomas Aguzzoli con la maglia del Barcellona Basket — presentazione stagione 2025-26.",
+    description: "Scatti da gara con Barcellona, Viola e percorsi emiliani — tiro, penetrazione e intensità.",
     items: [
       {
         src: "/athletes/thomas-aguzzoli-gallery-1.jpg",
         alt: "Thomas Aguzzoli, ala del Barcellona Basket, posa con la maglia giallorossa",
         caption: "Barcellona Basket · presentazione stagione 25/26",
+      },
+      {
+        src: "/athletes/thomas-aguzzoli-gallery-2.jpg",
+        alt: "Thomas Aguzzoli in elevazione per il tiro con la maglia nera e gialla del Barcellona numero 5",
+        caption: "Barcellona Basket · tiro in sospensione",
+      },
+      {
+        src: "/athletes/thomas-aguzzoli-gallery-3.jpg",
+        alt: "Thomas Aguzzoli in palleggio con la maglia numero 5 durante una gara",
+        caption: "Gara · palleggio e cambio di ritmo",
+      },
+      {
+        src: "/athletes/thomas-aguzzoli-gallery-4.jpg",
+        alt: "Thomas Aguzzoli, maglia AGUZZOLI 5, conclude al canestro sotto la difesa avversaria",
+        caption: "Gara · conclusione al ferro",
+      },
+      {
+        src: "/athletes/thomas-aguzzoli-gallery-5.jpg",
+        alt: "Thomas Aguzzoli con la maglia arancione della Pallacanestro Viola Reggio Calabria",
+        caption: "Viola Reggio Calabria · ritratto in campo",
+      },
+      {
+        src: "/athletes/thomas-aguzzoli-gallery-6.jpg",
+        alt: "Thomas Aguzzoli in volo per il tiro con la maglia rossa e gialla del Barcellona",
+        caption: "Barcellona Basket · tiro in elevazione",
       },
     ],
   },
