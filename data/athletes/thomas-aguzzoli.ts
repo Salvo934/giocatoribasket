@@ -253,8 +253,19 @@ export const thomasAguzzoli: AthleteProfile = {
     ],
   },
   socialMediaKit: {
-    statusLabel: "Aggiornato dopo ogni gara",
-    items: [],
+    statusLabel: "Stagione 2025-26 · Basket Barcellona 4.0",
+    items: [
+      {
+        id: "aguzzoli-season-25-26-post",
+        title: "Player card — stagione 25/26",
+        format: "post",
+        src: "/athletes/social/thomas-aguzzoli-season-25-26.jpg",
+        caption:
+          "Ala atletica, difesa perimetrale e tiro dalla distanza: in campo porto energia, spacing e la voglia di essere protagonista offensivo. Credo nel lavoro quotidiano e nel crescere partita dopo partita.\n\n📊 Serie B Interregionale 25/26 · Basket Barcellona 4.0\nPPG 14.5 · AST 2.8 · REB 5.0 · MIN 32.0",
+        matchDate: "2026-05-30",
+        downloadName: "thomas-aguzzoli-player-card-25-26.jpg",
+      },
+    ],
   },
   career: [
     {
