@@ -15,7 +15,7 @@ export const thomasAguzzoli: AthleteProfile = {
     heroImageObjectPosition: "50% 16%",
     heroBackgroundVideo: "/athletes/aguzzoli-hero-bg.mp4",
     heroBackgroundVideoLandscape: true,
-    heroBackgroundVideoLoopEnd: 13.2,
+    heroBackgroundVideoLoopEnd: 9.8,
     heroBackgroundVideoObjectPosition: "center center",
     heroBackgroundVideoReadabilityOverlay: true,
     name: "Thomas Aguzzoli",
