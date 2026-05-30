@@ -226,11 +226,6 @@ export const thomasAguzzoli: AthleteProfile = {
     description: "Scatti da gara con Barcellona, Viola e percorsi emiliani — tiro, penetrazione e intensità.",
     items: [
       {
-        src: "/athletes/thomas-aguzzoli-gallery-1.jpg",
-        alt: "Thomas Aguzzoli, ala del Barcellona Basket, posa con la maglia giallorossa",
-        caption: "Barcellona Basket · presentazione stagione 25/26",
-      },
-      {
         src: "/athletes/thomas-aguzzoli-gallery-2.jpg",
         alt: "Thomas Aguzzoli in elevazione per il tiro con la maglia nera e gialla del Barcellona numero 5",
         caption: "Barcellona Basket · tiro in sospensione",
