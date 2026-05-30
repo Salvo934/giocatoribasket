@@ -94,6 +94,7 @@ export function ProfileHeader({ athlete }: Props) {
               lightOverlay={h.heroBackgroundVideoLightOverlay}
               noOverlay={h.heroBackgroundVideoNoOverlay}
               readabilityOverlay={h.heroBackgroundVideoReadabilityOverlay}
+              landscape={h.heroBackgroundVideoLandscape}
             />
           </div>
           <div className="pointer-events-none absolute inset-0 z-0 md:hidden">{staticHeroBackdrop}</div>

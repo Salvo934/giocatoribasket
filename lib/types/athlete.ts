@@ -235,6 +235,8 @@ export interface AthleteProfile {
     heroBackgroundVideoNoOverlay?: boolean;
     /** Velo leggero a sinistra per leggibilità testi — video ancora luminoso */
     heroBackgroundVideoReadabilityOverlay?: boolean;
+    /** Clip 16:9 — riempie lo sfondo hero in orizzontale (default: crop verticale tipo reel) */
+    heroBackgroundVideoLandscape?: boolean;
     marketStatusLabel: string;
     agency: AgencyRef;
     lastUpdated: string;
