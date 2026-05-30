@@ -53,6 +53,7 @@ export function ProfileHeader({ athlete }: Props) {
   const updated = formatItalianShortDate(h.lastUpdated);
   const focus = h.heroImageFocus ?? "center";
   const objectPosition = HERO_FOCUS_CLASS[focus] ?? "object-center";
+  const heroObjectPosition = h.heroImageObjectPosition?.trim();
   const jersey = h.number?.replace(/\D/g, "") ?? "";
   const hasVideoBg = Boolean(h.heroBackgroundVideo);
   const avatarDesktopShiftRight =
@@ -298,7 +299,8 @@ export function ProfileHeader({ athlete }: Props) {
                         priority
                         quality={95}
                         sizes="(max-width: 1024px) 88vw, 22rem"
-                        className={`object-cover ${objectPosition} scale-[1.02]`}
+                        className={`object-cover ${heroObjectPosition ? "" : objectPosition} scale-[1.02]`}
+                        style={heroObjectPosition ? { objectPosition: heroObjectPosition } : undefined}
                       />
                       <div
                         aria-hidden

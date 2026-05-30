@@ -12,7 +12,12 @@ export const thomasAguzzoli: AthleteProfile = {
   },
   header: {
     heroImage: "/athletes/thomas-aguzzoli-avatar.jpg",
-    heroImageFocus: "center",
+    heroImageObjectPosition: "50% 16%",
+    heroBackgroundVideo: "/athletes/aguzzoli-hero-bg.mp4",
+    heroBackgroundVideoLoopEnd: 10.5,
+    heroBackgroundVideoObjectPosition: "center 28%",
+    heroBackgroundVideoScoreboardVeil: true,
+    heroBackgroundVideoReadabilityOverlay: true,
     name: "Thomas Aguzzoli",
     number: "5",
     sport: "Basket",
@@ -29,12 +34,12 @@ export const thomasAguzzoli: AthleteProfile = {
     dashboardIntro:
       "Ala classe 2000, 195 cm, secondo marcatore del Barcellona in Serie B Interregionale 2025-26 con 14,5 punti di media su 34 gare. Percorso emiliano (Reggiana, Novellara, Ancona, BMR) e calabro-pugliese (Viola, Monopoli) prima del progetto siciliano.",
     agency: {
-      name: "Basket Barcellona 4.0 SSD",
-      representative: "Ufficio stampa · Barcellona Pozzo di Gotto (ME)",
+      name: "Brightside Sports SRL",
+      representative: "Brightside Sports · Capo d’Orlando (ME)",
+      website: "https://www.brightsidesports.com/",
     },
     lastUpdated: "2026-05-30",
-    highlightUrl:
-      "mailto:salvo.bonaita9808@gmail.com?subject=Richiesta%20highlights%20Thomas%20Aguzzoli",
+    highlightUrl: "https://www.youtube.com/watch?v=F_Rm-K6hYlc",
   },
   scoutView: {
     sectionDescription:
@@ -65,90 +70,50 @@ export const thomasAguzzoli: AthleteProfile = {
   videos: {
     poster: "/athletes/thomas-aguzzoli-avatar.jpg",
     main: {
-      title: "Highlights — Thomas Aguzzoli (in arrivo)",
-      url: "mailto:salvo.bonaita9808@gmail.com?subject=Richiesta%20highlights%20Thomas%20Aguzzoli",
-      note: "Clip ufficiali in preparazione — richiedi il link privato.",
+      title: "Highlights — Thomas Aguzzoli",
+      url: "https://www.youtube.com/watch?v=F_Rm-K6hYlc",
+      provider: "youtube",
     },
     categories: [
       {
         id: "shooting",
         label: "Tiro",
-        clips: [
-          {
-            title: "Tiro da tre e pull-up",
-            url: "mailto:salvo.bonaita9808@gmail.com?subject=Richiesta%20clip%20tiro%20Thomas%20Aguzzoli",
-          },
-        ],
+        clips: [{ title: "Highlights — tiro", url: "https://www.youtube.com/watch?v=F_Rm-K6hYlc" }],
       },
       {
         id: "defense",
         label: "Difesa",
-        clips: [
-          {
-            title: "Marcatura e recuperi",
-            url: "mailto:salvo.bonaita9808@gmail.com?subject=Richiesta%20clip%20difesa%20Thomas%20Aguzzoli",
-          },
-        ],
+        clips: [{ title: "Highlights — difesa", url: "https://www.youtube.com/watch?v=F_Rm-K6hYlc" }],
       },
       {
         id: "transition",
         label: "Transizione",
-        clips: [
-          {
-            title: "Contropiede e finish",
-            url: "mailto:salvo.bonaita9808@gmail.com?subject=Richiesta%20clip%20transizione%20Thomas%20Aguzzoli",
-          },
-        ],
+        clips: [{ title: "Highlights — transizione", url: "https://www.youtube.com/watch?v=F_Rm-K6hYlc" }],
       },
       {
         id: "playmaking",
         label: "Passaggi",
-        clips: [
-          {
-            title: "Lettura e assist",
-            url: "mailto:salvo.bonaita9808@gmail.com?subject=Richiesta%20clip%20passaggi%20Thomas%20Aguzzoli",
-          },
-        ],
+        clips: [{ title: "Highlights — passaggi", url: "https://www.youtube.com/watch?v=F_Rm-K6hYlc" }],
       },
       {
         id: "pnr",
         label: "Gioco sul blocco",
-        clips: [
-          {
-            title: "Pop e roll",
-            url: "mailto:salvo.bonaita9808@gmail.com?subject=Richiesta%20clip%20pick%20and%20roll%20Thomas%20Aguzzoli",
-          },
-        ],
+        clips: [{ title: "Highlights — pick & roll", url: "https://www.youtube.com/watch?v=F_Rm-K6hYlc" }],
       },
       {
         id: "iso",
         label: "Uno contro uno",
-        clips: [
-          {
-            title: "Penetrazione e mid-range",
-            url: "mailto:salvo.bonaita9808@gmail.com?subject=Richiesta%20clip%201v1%20Thomas%20Aguzzoli",
-          },
-        ],
+        clips: [{ title: "Highlights — 1v1", url: "https://www.youtube.com/watch?v=F_Rm-K6hYlc" }],
       },
       {
         id: "rebounding",
         label: "Rimbalzo",
-        clips: [
-          {
-            title: "Tagli e secondi possessi",
-            url: "mailto:salvo.bonaita9808@gmail.com?subject=Richiesta%20clip%20rimbalzo%20Thomas%20Aguzzoli",
-          },
-        ],
+        clips: [{ title: "Highlights — rimbalzo", url: "https://www.youtube.com/watch?v=F_Rm-K6hYlc" }],
       },
       {
         id: "athleticism",
         label: "Atletismo",
-        clips: [
-          {
-            title: "Accelerazioni e verticalità",
-            url: "mailto:salvo.bonaita9808@gmail.com?subject=Richiesta%20clip%20atletismo%20Thomas%20Aguzzoli",
-          },
-        ],
+        clips: [{ title: "Highlights — atletismo", url: "https://www.youtube.com/watch?v=F_Rm-K6hYlc" }],
       },
     ],
     fullGame: {
@@ -288,7 +253,6 @@ export const thomasAguzzoli: AthleteProfile = {
       club: "Pallacanestro Viola RC",
       category: "Serie B Interregionale",
       notes: "Prima fase campionato · Reggio Calabria",
-      clubLogo: "/athletes/violalogo.png",
     },
     {
       season: "2022-23",
@@ -339,28 +303,28 @@ export const thomasAguzzoli: AthleteProfile = {
   ],
   verifications: [
     { id: "data", label: "Dati verificati", ok: true },
-    { id: "video", label: "Video in arrivo", ok: false },
+    { id: "video", label: "Video verificato", ok: true },
     { id: "contact", label: "Contatto verificato", ok: false },
     { id: "fresh", label: "Profilo aggiornato", ok: true },
     { id: "club", label: "Club confermato", ok: true },
   ],
   contacts: {
     agency: {
-      name: "Basket Barcellona 4.0 SSD",
-      website: "https://www.barcellonabasket40.com/",
+      name: "Brightside Sports SRL",
+      website: "https://www.brightsidesports.com/",
     },
     representative: {
-      name: "Referente club / scouting",
-      role: "Basket Barcellona 4.0 · Barcellona Pozzo di Gotto (ME)",
-      emailPublicLabel: "Su richiesta (club / scouting)",
-      phonePublicLabel: "Su richiesta",
+      name: "Brightside Sports",
+      role: "Management & scouting · Via Veneto 97, Capo d’Orlando (ME)",
+      email: "info@brightsidesports.com",
+      phonePublicLabel: "Su richiesta (club / scouting)",
     },
-    whatsappPublicLabel: "Su richiesta — contatto tramite club",
+    whatsappPublicLabel: "Solo su richiesta — nessun numero pubblico",
     social: [
       {
         platform: "Instagram",
-        handle: "@barcellonabasket",
-        url: "https://www.instagram.com/barcellonabasket/",
+        handle: "@___timmmy",
+        url: "https://www.instagram.com/___timmmy/",
       },
     ],
   },
