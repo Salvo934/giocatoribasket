@@ -21,13 +21,14 @@ export const antonioSorbara: AthleteProfile = {
     heroImage: "/athletes/antonio-sorbara-avatar.jpg",
     heroImageObjectPosition: "50% 12%",
     name: "Antonio Sorbara",
+    number: "00",
     sport: "Basket",
     role: "Ala piccola / guardia",
     birthYear: 2005,
     heightCm: 186,
     nationality: "Italia",
     currentClub: "Scuola Basket Viola",
-    currentClubLogo: "/athletes/scuola-basket-viola-logo.jpg",
+    currentClubLogo: "/athletes/scuola-basket-viola-logo.png",
     category: "Divisione Regionale 1",
     league: "FIP Calabria",
     marketStatusLabel: "In roster · stagione DR1 25/26",
@@ -257,7 +258,6 @@ export const antonioSorbara: AthleteProfile = {
       club: "Scuola Basket Viola",
       category: "Divisione Regionale 1 · Calabria",
       notes: "16,4 PPG in 23 gare · season high 38 pts",
-      clubLogo: "/athletes/scuola-basket-viola-logo.jpg",
     },
     {
       season: "2024-25",
@@ -288,7 +288,6 @@ export const antonioSorbara: AthleteProfile = {
       club: "Pallacanestro Viola RC",
       category: "Serie B",
       notes: "Vivaio / prima affiliazione in società Viola",
-      clubLogo: "/athletes/violalogo.png",
     },
   ],
   honors: [
@@ -325,7 +324,13 @@ export const antonioSorbara: AthleteProfile = {
       phone: "+39 331 770 1638",
     },
     whatsapp: "https://wa.me/393317701638",
-    social: [],
+    social: [
+      {
+        platform: "Instagram",
+        handle: "@_antosorb_",
+        url: "https://www.instagram.com/_antosorb_/",
+      },
+    ],
   },
   agencyRoster: [],
 };
