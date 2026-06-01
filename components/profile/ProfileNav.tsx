@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 
 const MOBILE_MENU_BALL_ICON = "/athletes/icons8-pallacanestro-64.png";
 
-function navLinks(showGallery: boolean) {
+function navLinks(showGallery: boolean, showSocialKit: boolean) {
   const links: { href: string; label: string }[] = [
     { href: "#scout", label: "Scout" },
     { href: "#mercato", label: "Mercato" },
@@ -14,7 +14,7 @@ function navLinks(showGallery: boolean) {
     { href: "#fit", label: "Fit" },
   ];
   if (showGallery) links.push({ href: "#gallery", label: "Gallery" });
-  links.push({ href: "#social-kit", label: "Social kit" });
+  if (showSocialKit) links.push({ href: "#social-kit", label: "Social kit" });
   links.push(
     { href: "#carriera", label: "Carriera" },
     { href: "#honors", label: "Palmares" },
@@ -23,10 +23,10 @@ function navLinks(showGallery: boolean) {
   return links;
 }
 
-type Props = { showGallery?: boolean };
+type Props = { showGallery?: boolean; showSocialKit?: boolean };
 
-export function ProfileNav({ showGallery = false }: Props) {
-  const links = useMemo(() => navLinks(showGallery), [showGallery]);
+export function ProfileNav({ showGallery = false, showSocialKit = true }: Props) {
+  const links = useMemo(() => navLinks(showGallery, showSocialKit), [showGallery, showSocialKit]);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {

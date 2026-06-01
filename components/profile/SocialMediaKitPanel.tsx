@@ -180,7 +180,9 @@ function KitCard({ item }: { item: SocialKitAsset }) {
 
 export function SocialMediaKitPanel({ athlete }: Props) {
   const kit = athlete.socialMediaKit;
-  const items = kit?.items ?? [];
+  if (!kit) return null;
+
+  const items = kit.items ?? [];
   const title = kit?.title?.trim() || "Contenuti pronti per i social";
   const description =
     kit?.description?.trim() ||

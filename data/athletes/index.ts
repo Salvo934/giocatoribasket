@@ -1,3 +1,4 @@
+import { antonioSorbara } from "./antonio-sorbara";
 import { alessandroFerrari } from "./alessandro-ferrari";
 import { francescoSpinelli } from "./francesco-spinelli";
 import { ilarioSimonetti } from "./ilario-simonetti";
@@ -10,6 +11,7 @@ const athletes: AthleteProfile[] = [
   alessandroFerrari,
   francescoSpinelli,
   thomasAguzzoli,
+  antonioSorbara,
 ];
 
 export const athletesBySlug = Object.fromEntries(athletes.map((a) => [a.slug, a])) as Record<

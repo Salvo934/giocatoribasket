@@ -23,7 +23,10 @@ export function AthleteProfileView({ athlete }: Props) {
       <ProfileHeader athlete={athlete} />
       <div className="relative z-10 w-full min-w-0">
         <div className="mx-auto min-w-0 w-full max-w-360">
-          <ProfileNav showGallery={Boolean(athlete.gallery?.items?.length)} />
+          <ProfileNav
+            showGallery={Boolean(athlete.gallery?.items?.length)}
+            showSocialKit={Boolean(athlete.socialMediaKit)}
+          />
           <div className="min-w-0">
             <main id="contenuto-profilo" className="min-w-0 pb-24 lg:pb-0">
               <ScoutPanel athlete={athlete} />
