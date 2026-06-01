@@ -109,14 +109,10 @@ export function ProfileHeader({ athlete }: Props) {
         staticHeroBackdrop
       )}
 
-      {jersey ? (
+      {jersey && athlete.slug !== "antonio-sorbara" ? (
         <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
           <span
-            className={`absolute select-none font-bold leading-[0.82] tracking-tighter ${
-              athlete.slug === "antonio-sorbara"
-                ? "left-1/2 top-[38%] -translate-x-1/2 text-[min(72vw,26rem)] text-[#ff7a18]/10 sm:top-[36%] sm:text-[min(64vw,30rem)] lg:left-[56%] lg:top-[44%] lg:-translate-x-1/2 lg:text-[min(42vw,28rem)] xl:text-[min(38vw,32rem)]"
-                : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[min(48vw,22rem)] text-white/[0.035] lg:left-[58%] lg:text-[min(36vw,26rem)]"
-            }`}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none text-[min(48vw,22rem)] font-bold leading-[0.82] tracking-tighter text-white/[0.035] lg:left-[58%] lg:text-[min(36vw,26rem)]"
             style={{ fontFamily: "var(--font-bebas)" }}
           >
             {jersey}
@@ -244,12 +240,14 @@ export function ProfileHeader({ athlete }: Props) {
               >
                 Guarda gli highlights
               </a>
-              <a
-                href="#contatti"
-                className={`inline-flex h-11 items-center justify-center rounded-full border border-white/18 bg-white/3 px-6 text-sm font-semibold text-zinc-200 transition hover:border-white/30 hover:bg-white/7 hover:text-white ${focusRing}`}
-              >
-                Contatta procuratore
-              </a>
+              {athlete.slug !== "antonio-sorbara" ? (
+                <a
+                  href="#contatti"
+                  className={`inline-flex h-11 items-center justify-center rounded-full border border-white/18 bg-white/3 px-6 text-sm font-semibold text-zinc-200 transition hover:border-white/30 hover:bg-white/7 hover:text-white ${focusRing}`}
+                >
+                  Contatta procuratore
+                </a>
+              ) : null}
             </div>
 
             {/* Stat fascia unica — non box ripetuti come i panel */}
