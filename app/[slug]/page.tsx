@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const previewImages =
     previewImageUrl !== undefined
-      ? [{ url: previewImageUrl, alt: previewAlt }]
+      ? [{ url: previewImageUrl, width: 1200, height: 675, alt: previewAlt }]
       : undefined;
 
   const meta: Metadata = {

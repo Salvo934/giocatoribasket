@@ -7,7 +7,7 @@ export const thomasAguzzoli: AthleteProfile = {
     title: "Thomas Aguzzoli · Ala piccola Serie B Interregionale | Player Card",
     description:
       "Thomas Aguzzoli (2000), ala piccola 195 cm, Basket Barcellona 4.0 in Serie B Interregionale: scorer, tiro da tre e atletismo. Statistiche, carriera e scheda scouting.",
-    ogImage: "/athletes/cardaguzzoli-og.png",
+    ogImage: "/athletes/cardaguzzoli-og.jpg",
     publicSiteUrl: "https://thomasaguzzoli5.katahero.com",
   },
   header: {
