@@ -4,9 +4,9 @@ import type { AthleteProfile } from "@/lib/types/athlete";
 export const antonioSorbara: AthleteProfile = {
   slug: "antonio-sorbara",
   seo: {
-    title: "Antonio Sorbara · Ala piccola DR1 Calabria | Player Card",
+    title: "Antonio Sorbara · Guardia DR1 Calabria | Player Card",
     description:
-      "Antonio Sorbara (2005), ala piccola 186 cm, Scuola Basket Viola in Divisione Regionale 1: scorer, 16,4 PPG su 23 gare. Statistiche, carriera e scheda scouting.",
+      "Antonio Sorbara (2005), guardia 186 cm, Scuola Basket Viola in Divisione Regionale 1: scorer, 16,4 PPG su 23 gare. Statistiche, carriera e scheda scouting.",
     ogImage: "/athletes/cardsorbara-og.jpg",
     publicSiteUrl: "https://antoniosorbara.katahero.com",
   },
@@ -23,7 +23,7 @@ export const antonioSorbara: AthleteProfile = {
     name: "Antonio Sorbara",
     number: "00",
     sport: "Basket",
-    role: "Ala piccola / guardia",
+    role: "Guardia",
     birthYear: 2005,
     heightCm: 186,
     nationality: "Italia",
@@ -44,15 +44,15 @@ export const antonioSorbara: AthleteProfile = {
   },
   scoutView: {
     sectionDescription:
-      "Profilo da scorer regionale: cosa porta oggi in DR1, perché può interessare a club che cercano energia e punti dalle ali.",
+      "Profilo da scorer regionale: cosa porta oggi in DR1, perché può interessare a club che cercano energia e punti dal perimetro.",
     shortProfile:
-      "Ala piccola 186 cm, classe 2005, già testato in Serie C (Cocuzza, Stingers) e DR1: a Reggio chiude la stagione regolare a 16,4 PPG in 23 gare PlayBasket, con picchi da 38 punti vs CCB Academy Catanzaro e 28 in trasferta a Botteghelle. Porta volume realizzativo, transizione e mentalità da playmaker reggino.",
+      "Guardia 186 cm, classe 2005, già testato in Serie C (Cocuzza, Stingers) e DR1: a Reggio chiude la stagione regolare a 16,4 PPG in 23 gare PlayBasket, con picchi da 38 punti vs CCB Academy Catanzaro e 28 in trasferta a Botteghelle. Porta volume realizzativo, transizione e mentalità da playmaker reggino.",
     whyWatch:
-      "Interessante se cerchi un’ala/guardia che può portare 15-20 punti a partita in DR1 e ha già vissuto trasferte in Sicilia — da incrociare con video e partite recenti.",
+      "Interessante se cerchi una guardia che può portare 15-20 punti a partita in DR1 e ha già vissuto trasferte in Sicilia — da incrociare con video e partite recenti.",
     toVerify:
       "Continuità nelle gare difficili (es. uscite sotto i 10 punti); impatto difensivo e gestione del volume di tiro sotto pressione.",
     idealFit:
-      "Squadre che giocano ritmo alto, transizione e spacing sulle ali; meno adatto se chiedi solo lavoro interno o ruolo da lungo.",
+      "Squadre che giocano ritmo alto, transizione e spacing dal perimetro; meno adatto se chiedi solo lavoro interno o ruolo da lungo.",
   },
   market: {
     availableFrom: "Da definire con il club / referente",
