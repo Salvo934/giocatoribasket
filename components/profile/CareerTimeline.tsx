@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import type { AthleteProfile } from "@/lib/types/athlete";
 import { SectionShell } from "./SectionShell";
+import { useProfileLocale } from "./ProfileLocaleContext";
 
 type Props = { athlete: AthleteProfile };
 
@@ -10,19 +13,20 @@ const panelFrame =
 const panelInner = "rounded-[1.65rem] bg-zinc-950/55 px-6 py-8 md:px-10 md:py-10 backdrop-blur-sm";
 
 export function CareerTimeline({ athlete }: Props) {
+  const { ui } = useProfileLocale();
   const steps = athlete.career;
 
   return (
     <SectionShell
       id="carriera"
-      eyebrow="Club"
-      title="Percorso"
-      description="Linea temporale stagioni e contesti: utile per contesto sportivo rapido senza aprire referti completi."
+      eyebrow={ui.career.eyebrow}
+      title={ui.career.title}
+      description={ui.career.description}
     >
       <div className={panelFrame}>
         <div className={panelInner}>
           {steps.length === 0 ? (
-            <p className="text-sm text-zinc-500">Nessun passaggio carriera in scheda.</p>
+            <p className="text-sm text-zinc-500">{ui.career.empty}</p>
           ) : (
             <div className="relative">
               <div

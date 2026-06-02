@@ -1,5 +1,8 @@
+"use client";
+
 import type { AthleteProfile } from "@/lib/types/athlete";
 import { SectionShell } from "./SectionShell";
+import { useProfileLocale } from "./ProfileLocaleContext";
 
 type Props = { athlete: AthleteProfile };
 
@@ -9,19 +12,20 @@ const panelFrame =
 const panelInner = "rounded-[1.65rem] bg-zinc-950/55 px-6 py-8 md:px-10 md:py-10 backdrop-blur-sm";
 
 export function HonorsPanel({ athlete }: Props) {
+  const { ui } = useProfileLocale();
   const items = athlete.honors;
 
   return (
     <SectionShell
       id="honors"
-      eyebrow="Palmares"
-      title="Titoli e riconoscimenti"
-      description="Premi ufficiali e traguardi citati in scheda — sempre da confermare con fonti federazione / club quando serve una due diligence."
+      eyebrow={ui.honors.eyebrow}
+      title={ui.honors.title}
+      description={ui.honors.description}
     >
       <div className={panelFrame}>
         <div className={panelInner}>
           {items.length === 0 ? (
-            <p className="text-sm text-zinc-500">Nessun elemento palmares in scheda.</p>
+            <p className="text-sm text-zinc-500">{ui.honors.empty}</p>
           ) : (
             <ul className="grid gap-4 sm:grid-cols-2 lg:gap-5">
               {items.map((it, idx) => (
@@ -41,7 +45,7 @@ export function HonorsPanel({ athlete }: Props) {
                       {it.year ? (
                         <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-accent">{it.year}</p>
                       ) : (
-                        <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-zinc-500">Anno n/d</p>
+                        <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-zinc-500">{ui.honors.yearUnknown}</p>
                       )}
                       <p className="mt-2 text-lg font-bold leading-snug text-white">{it.title}</p>
                       <p className="mt-2 text-sm leading-relaxed text-zinc-400">{it.detail}</p>

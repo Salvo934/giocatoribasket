@@ -1,4 +1,9 @@
+"use client";
+
 import type { AthleteProfile } from "@/lib/types/athlete";
+import type { ProfileLocale } from "@/lib/i18n/profile-locale";
+import { ProfileLocaleProvider } from "./ProfileLocaleContext";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { CareerTimeline } from "./CareerTimeline";
 import { ContactsPanel } from "./ContactsPanel";
 import { GalleryPanel } from "./GalleryPanel";
@@ -14,10 +19,12 @@ import { TechnicalFitPanel } from "./TechnicalFitPanel";
 import { VideoHub } from "./VideoHub";
 import { WhyHeFitsPanel } from "./WhyHeFitsPanel";
 
-type Props = { athlete: AthleteProfile };
+type Props = { athlete: AthleteProfile; locale?: ProfileLocale; dedicatedDomain?: boolean };
 
-export function AthleteProfileView({ athlete }: Props) {
+export function AthleteProfileView({ athlete, locale = "it", dedicatedDomain = false }: Props) {
   return (
+    <ProfileLocaleProvider locale={locale} athlete={athlete} dedicatedDomain={dedicatedDomain}>
+      <LanguageSwitcher />
     <div className="min-h-screen bg-background bg-[radial-gradient(ellipse_120%_80%_at_50%_-20%,rgba(223,255,74,0.07),transparent_55%),radial-gradient(ellipse_70%_50%_at_100%_50%,rgba(100,160,255,0.04),transparent_50%),radial-gradient(ellipse_60%_40%_at_0%_80%,rgba(223,255,74,0.03),transparent_45%)]">
       <div className="pointer-events-none fixed inset-x-0 top-0 z-0 h-px bg-linear-to-r from-transparent via-white/15 to-transparent" aria-hidden />
       <ProfileHeader athlete={athlete} />
@@ -46,5 +53,6 @@ export function AthleteProfileView({ athlete }: Props) {
         </div>
       </div>
     </div>
+    </ProfileLocaleProvider>
   );
 }

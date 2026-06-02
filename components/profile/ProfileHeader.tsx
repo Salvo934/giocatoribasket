@@ -1,37 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import type { AthleteProfile } from "@/lib/types/athlete";
 import { HeroBackgroundVideo } from "./HeroBackgroundVideo";
 import { ShareProfileButton } from "./ShareActions";
+import { useProfileLocale } from "./ProfileLocaleContext";
 
 type Props = { athlete: AthleteProfile };
-
-const IT_MONTHS_SHORT = [
-  "gen",
-  "feb",
-  "mar",
-  "apr",
-  "mag",
-  "giu",
-  "lug",
-  "ago",
-  "set",
-  "ott",
-  "nov",
-  "dic",
-] as const;
-
-function formatItalianShortDate(isoDate: string): string {
-  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(isoDate.trim());
-  if (!m) {
-    return isoDate;
-  }
-  const monthNum = Number(m[2]);
-  const day = Number(m[3]);
-  if (monthNum < 1 || monthNum > 12) {
-    return isoDate;
-  }
-  return `${day} ${IT_MONTHS_SHORT[monthNum - 1]} ${m[1]}`;
-}
 
 function formatStat(v: number) {
   const n = Math.round(v * 10) / 10;
@@ -48,9 +23,10 @@ const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950";
 
 export function ProfileHeader({ athlete }: Props) {
+  const { ui, formatDate } = useProfileLocale();
   const h = athlete.header;
   const s = athlete.stats;
-  const updated = formatItalianShortDate(h.lastUpdated);
+  const updated = formatDate(h.lastUpdated);
   const focus = h.heroImageFocus ?? "center";
   const objectPosition = HERO_FOCUS_CLASS[focus] ?? "object-center";
   const heroObjectPosition = h.heroImageObjectPosition?.trim();
@@ -138,7 +114,7 @@ export function ProfileHeader({ athlete }: Props) {
           href="#contenuto-profilo"
           className="absolute left-[-10000px] top-0 z-50 overflow-hidden whitespace-nowrap rounded-md bg-white px-4 py-2 text-sm font-medium text-black focus:left-4 focus:top-4 focus:overflow-visible focus:outline-2 focus:outline-offset-2 focus:outline-accent"
         >
-          Salta intro
+          {ui.skipIntro}
         </a>
 
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(280px,42%)] lg:items-end lg:gap-x-10 xl:gap-x-14">
@@ -183,9 +159,9 @@ export function ProfileHeader({ athlete }: Props) {
             </div>
 
             <p className="mt-5 max-w-lg text-sm leading-relaxed text-zinc-400 sm:text-base">
-              <span className="text-zinc-200">Giocatore</span>
+              <span className="text-zinc-200">{ui.player}</span>
               <span className="text-zinc-600"> · </span>
-              classe {h.birthYear}
+              {ui.birthYear} {h.birthYear}
               <span className="text-zinc-600"> · </span>
               {h.heightCm} cm
               {(h.category || h.league) && (
@@ -199,14 +175,14 @@ export function ProfileHeader({ athlete }: Props) {
             <p className="mt-2 text-xs font-medium uppercase tracking-wider text-zinc-500">{h.marketStatusLabel}</p>
             <p className="mt-1.5 text-xs text-zinc-500">
               <time dateTime={h.lastUpdated}>
-                Scheda aggiornata <span className="text-zinc-600">·</span>{" "}
+                {ui.profileUpdated} <span className="text-zinc-600">·</span>{" "}
                 <span className="tabular-nums text-zinc-400">{updated}</span>
               </time>
             </p>
 
             <div className="mt-5">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-600">Squadra</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-600">{ui.team}</p>
                 <div className="mt-1 flex items-center gap-3">
                   {h.currentClubLogo ? (
                     <span className="relative size-12 shrink-0 overflow-hidden rounded-lg bg-white ring-1 ring-black/10 sm:size-14">
@@ -230,7 +206,6 @@ export function ProfileHeader({ athlete }: Props) {
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <ShareProfileButton
-                path={`/${athlete.slug}`}
                 publicSiteUrl={athlete.seo.publicSiteUrl}
                 className={`inline-flex h-11 items-center justify-center rounded-full border border-accent/50 bg-accent/12 px-6 text-sm font-semibold text-accent shadow-[0_0_28px_-8px_var(--accent-glow)] transition hover:border-accent/65 hover:bg-accent/18 ${focusRing}`}
               />
@@ -238,21 +213,21 @@ export function ProfileHeader({ athlete }: Props) {
                 href="#video"
                 className={`inline-flex h-11 items-center justify-center rounded-full bg-accent px-6 text-sm font-bold text-black shadow-[0_0_28px_-6px_rgba(223,255,74,0.55)] transition hover:bg-[#e8ff6a] hover:shadow-[0_0_36px_-4px_rgba(223,255,74,0.65)] ${focusRing}`}
               >
-                Guarda gli highlights
+                {ui.watchHighlights}
               </a>
               {athlete.slug !== "antonio-sorbara" ? (
                 <a
                   href="#contatti"
                   className={`inline-flex h-11 items-center justify-center rounded-full border border-white/18 bg-white/3 px-6 text-sm font-semibold text-zinc-200 transition hover:border-white/30 hover:bg-white/7 hover:text-white ${focusRing}`}
                 >
-                  Contatta procuratore
+                  {ui.contactAgent}
                 </a>
               ) : null}
             </div>
 
             {/* Stat fascia unica — non box ripetuti come i panel */}
             <div className="mt-10 border-y border-white/10 py-4 sm:mt-12">
-              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-600">Media stagione</p>
+              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-600">{ui.seasonAvg}</p>
               <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 sm:gap-x-10">
                 {(
                   [
@@ -309,7 +284,7 @@ export function ProfileHeader({ athlete }: Props) {
                     <div className="relative size-full overflow-hidden rounded-full shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08),inset_0_8px_24px_rgba(0,0,0,0.55)]">
                       <Image
                         src={h.heroImage}
-                        alt={`${h.name} — foto profilo`}
+                        alt={`${h.name} — ${ui.profilePhotoAlt}`}
                         fill
                         priority
                         quality={95}

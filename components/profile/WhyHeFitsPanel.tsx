@@ -1,5 +1,8 @@
+"use client";
+
 import type { AthleteProfile } from "@/lib/types/athlete";
 import { SectionShell } from "./SectionShell";
+import { useProfileLocale } from "./ProfileLocaleContext";
 
 type Props = { athlete: AthleteProfile };
 
@@ -14,6 +17,7 @@ function ScenarioCard({
   body: string;
   variant?: "default" | "caution";
 }) {
+  const { ui } = useProfileLocale();
   const isCaution = variant === "caution";
 
   return (
@@ -21,7 +25,7 @@ function ScenarioCard({
       className={`group relative flex min-h-0 flex-col overflow-hidden rounded-2xl border p-6 transition-[transform,box-shadow,border-color] duration-300 md:p-7 ${
         isCaution
           ? "border-amber-500/35 bg-linear-to-br from-amber-500/10 via-zinc-950/90 to-black shadow-[inset_0_1px_0_0_rgba(251,191,36,0.08)] hover:border-amber-400/45"
-          : "border-white/10 bg-linear-to-br from-white/[0.06] via-zinc-950/95 to-black shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)] hover:border-accent/30 hover:shadow-[0_28px_64px_-40px_var(--accent-glow)]"
+          : "border-white/10 bg-linear-to-br from-white/6 via-zinc-950/95 to-black shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)] hover:border-accent/30 hover:shadow-[0_28px_64px_-40px_var(--accent-glow)]"
       }`}
     >
       <span
@@ -44,16 +48,16 @@ function ScenarioCard({
           <span
             className="text-2xl leading-none tracking-tight"
             style={{ fontFamily: "var(--font-bebas)" }}
-            aria-label={`Scenario ${index + 1}`}
+            aria-label={ui.whyHeFits.scenarioLabel(index + 1)}
           >
             {String(index + 1).padStart(2, "0")}
           </span>
         </span>
         <div className="min-w-0 flex-1 pt-0.5">
           {isCaution ? (
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-300/95">Da valutare con attenzione</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-300/95">{ui.whyHeFits.reviewCarefully}</p>
           ) : (
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">Contesto ideale</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">{ui.whyHeFits.idealContext}</p>
           )}
           <p
             className={`mt-1.5 text-base font-semibold leading-snug tracking-tight md:text-[1.05rem] ${
@@ -77,20 +81,21 @@ function ScenarioCard({
 }
 
 export function WhyHeFitsPanel({ athlete }: Props) {
+  const { ui } = useProfileLocale();
   const block = athlete.whyHeFits;
   if (!block?.scenarios?.length) return null;
 
   return (
     <SectionShell
       id="why-he-fits"
-      eyebrow="Roster · sistemi · contesto"
-      title="Why he fits"
-      description="Tradotto in pratica: in che tipo di squadra questo profilo esprime il massimo — e quando conviene fermarsi e riflettere prima di decidere."
+      eyebrow={ui.whyHeFits.eyebrow}
+      title={ui.whyHeFits.title}
+      description={ui.whyHeFits.description}
       density="compact"
       headerActions={
         <>
           <span className="inline-flex rounded-full border border-accent/35 bg-accent/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-accent">
-            Unicità roster
+            {ui.whyHeFits.rosterBadge}
           </span>
           <span className="inline-flex rounded-full border border-white/10 bg-white/4 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
             {athlete.header.name}
@@ -98,7 +103,7 @@ export function WhyHeFitsPanel({ athlete }: Props) {
         </>
       }
     >
-      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-black/60 via-zinc-950/80 to-accent/[0.04] p-[1px] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]">
+      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-black/60 via-zinc-950/80 to-accent/4 p-px shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]">
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.4]"
           style={{
@@ -109,29 +114,29 @@ export function WhyHeFitsPanel({ athlete }: Props) {
         />
 
         <div className="relative rounded-[calc(1.5rem-1px)] bg-zinc-950/75 p-5 sm:p-7 md:p-9">
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-linear-to-br from-white/[0.07] via-zinc-900/80 to-transparent p-6 md:p-8">
-            <div className="pointer-events-none absolute -right-20 -top-20 size-[22rem] rounded-full bg-accent/6 blur-3xl" aria-hidden />
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-linear-to-br from-white/7 via-zinc-900/80 to-transparent p-6 md:p-8">
+            <div className="pointer-events-none absolute -right-20 -top-20 size-88 rounded-full bg-accent/6 blur-3xl" aria-hidden />
             <p
-              className="relative mb-5 text-[clamp(3rem,8vw,4.75rem)] leading-none text-accent/[0.12] md:mb-6"
+              className="relative mb-5 text-[clamp(3rem,8vw,4.75rem)] leading-none text-accent/12 md:mb-6"
               style={{ fontFamily: "var(--font-bebas)" }}
               aria-hidden
             >
               FIT
             </p>
-            <p className="relative max-w-none text-[11px] font-bold uppercase tracking-[0.24em] text-zinc-500">Messaggio chiave per club</p>
+            <p className="relative max-w-none text-[11px] font-bold uppercase tracking-[0.24em] text-zinc-500">{ui.whyHeFits.clubMessage}</p>
             <p className="relative mt-4 max-w-4xl text-lg leading-relaxed text-zinc-100 md:text-xl md:leading-snug">{block.intro}</p>
           </div>
 
           <div className="relative mt-7 md:mt-9">
             <div className="mb-6 flex flex-wrap items-end justify-between gap-3 border-b border-white/10 pb-5 md:mb-8 md:pb-6">
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-accent/90">Mappa degli scenari</p>
+                <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-accent/90">{ui.whyHeFits.scenarioMap}</p>
                 <p className="mt-2 text-xl font-semibold uppercase tracking-[0.12em] text-white md:text-2xl">
-                  Dove incastra davvero
+                  {ui.whyHeFits.whereItFits}
                 </p>
               </div>
               <span className="rounded-lg border border-white/12 bg-black/45 px-3 py-1.5 text-[10px] font-mono uppercase tracking-wide text-zinc-500">
-                {block.scenarios.length} contesti · sintesi decisionale
+                {ui.whyHeFits.scenariosMeta(block.scenarios.length)}
               </span>
             </div>
 

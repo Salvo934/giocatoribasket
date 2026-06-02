@@ -4,6 +4,7 @@ import type { AthleteProfile } from "@/lib/types/athlete";
 import { youtubeVideoId } from "@/lib/youtube";
 import { isLocalVideoUrl } from "@/lib/video-url";
 import { SectionShell } from "./SectionShell";
+import { useProfileLocale } from "./ProfileLocaleContext";
 
 type Props = { athlete: AthleteProfile };
 
@@ -58,6 +59,7 @@ const phoneCardClass = `group relative overflow-hidden rounded-2xl border border
 const whatsappCardClass = `group relative overflow-hidden rounded-2xl border border-white/8 bg-linear-to-br from-zinc-900/90 to-zinc-950 p-5 shadow-[0_1px_0_0_rgba(255,255,255,0.06)_inset] transition hover:border-emerald-400/35 hover:shadow-[0_20px_50px_-28px_rgba(52,211,153,0.3)] ${focusRing}`;
 
 export function ContactsPanel({ athlete }: Props) {
+  const { ui } = useProfileLocale();
   const h = athlete.header;
   const c = athlete.contacts;
   const waUrl = c.whatsapp ?? h.whatsapp;
@@ -78,9 +80,9 @@ export function ContactsPanel({ athlete }: Props) {
   return (
     <SectionShell
       id="contatti"
-      eyebrow="Rubrica operativa"
-      title="Canali diretti"
-      description="Telefono, WhatsApp ed email sono i canali ufficiali per club e scouting."
+      eyebrow={ui.contacts.eyebrow}
+      title={ui.contacts.title}
+      description={ui.contacts.description}
     >
       <div className="grid gap-8">
         {/* Tre vie di contatto — card moderne */}
@@ -95,15 +97,15 @@ export function ContactsPanel({ athlete }: Props) {
                   </span>
                   <IconChevron className="size-5 shrink-0 text-zinc-600 opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100" />
                 </div>
-                <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">Telefono</p>
+                <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">{ui.contacts.phone}</p>
                 <p className="relative mt-2 text-lg font-semibold tracking-tight text-white">{tel}</p>
-                <p className="relative mt-3 text-xs text-zinc-500">Chiama il referente</p>
+                <p className="relative mt-3 text-xs text-zinc-500">{ui.contacts.callRep}</p>
               </a>
             ) : (
               <div
                 className="relative cursor-default overflow-hidden rounded-2xl border border-white/8 bg-linear-to-br from-zinc-900/90 to-zinc-950 p-5 opacity-95 shadow-[0_1px_0_0_rgba(255,255,255,0.06)_inset]"
                 role="note"
-                aria-label="Telefono"
+                aria-label={ui.contacts.phone}
               >
                 <div className="pointer-events-none absolute -right-6 -top-6 size-28 rounded-full bg-sky-500/10 blur-2xl" aria-hidden />
                 <div className="relative flex items-start gap-3">
@@ -111,9 +113,9 @@ export function ContactsPanel({ athlete }: Props) {
                     <IconPhone className="size-6" />
                   </span>
                 </div>
-                <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">Telefono</p>
+                <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">{ui.contacts.phone}</p>
                 <p className="relative mt-2 text-lg font-semibold tracking-tight text-white">{telPublic}</p>
-                <p className="relative mt-3 text-xs text-zinc-500">Contatto in arrivo</p>
+                <p className="relative mt-3 text-xs text-zinc-500">{ui.contacts.phonePending}</p>
               </div>
             )
           ) : null}
@@ -128,15 +130,14 @@ export function ContactsPanel({ athlete }: Props) {
                   </span>
                   <IconChevron className="size-5 shrink-0 text-zinc-600 opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100" />
                 </div>
-                <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">WhatsApp</p>
-                <p className="relative mt-2 text-lg font-semibold tracking-tight text-white">Messaggio diretto</p>
-                <p className="relative mt-3 text-xs text-zinc-500">Apre la chat sul telefono</p>
+                <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">{ui.contacts.whatsapp}</p>
+                <p className="relative mt-2 text-lg font-semibold tracking-tight text-white">{ui.contacts.writeWhatsapp}</p>
               </a>
             ) : (
               <div
                 className="relative cursor-default overflow-hidden rounded-2xl border border-white/8 bg-linear-to-br from-zinc-900/90 to-zinc-950 p-5 opacity-95 shadow-[0_1px_0_0_rgba(255,255,255,0.06)_inset]"
                 role="note"
-                aria-label="WhatsApp"
+                aria-label={ui.contacts.whatsapp}
               >
                 <div className="pointer-events-none absolute -right-6 -top-6 size-28 rounded-full bg-emerald-500/10 blur-2xl" aria-hidden />
                 <div className="relative flex items-start gap-3">
@@ -144,9 +145,9 @@ export function ContactsPanel({ athlete }: Props) {
                     <IconWhatsApp className="size-6" />
                   </span>
                 </div>
-                <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">WhatsApp</p>
+                <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">{ui.contacts.whatsapp}</p>
                 <p className="relative mt-2 text-lg font-semibold tracking-tight text-white">{c.whatsappPublicLabel}</p>
-                <p className="relative mt-3 text-xs text-zinc-500">Contatto in arrivo</p>
+                <p className="relative mt-3 text-xs text-zinc-500">{ui.contacts.whatsappPending}</p>
               </div>
             )
           ) : null}
@@ -164,15 +165,15 @@ export function ContactsPanel({ athlete }: Props) {
                   </span>
                   <IconChevron className="size-5 shrink-0 text-zinc-600 opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100" />
                 </div>
-                <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">Email</p>
+                <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">{ui.contacts.email}</p>
                 <p className="relative mt-2 break-all text-sm font-semibold leading-snug text-white">{email}</p>
-                <p className="relative mt-3 text-xs text-zinc-500">Ideale per materiale e proposte</p>
+                <p className="relative mt-3 text-xs text-zinc-500">{ui.contacts.writeEmail}</p>
               </a>
             ) : (
               <div
                 className="relative cursor-default overflow-hidden rounded-2xl border border-white/8 bg-linear-to-br from-zinc-900/90 to-zinc-950 p-5 opacity-95 shadow-[0_1px_0_0_rgba(255,255,255,0.06)_inset]"
                 role="note"
-                aria-label="Email"
+                aria-label={ui.contacts.email}
               >
                 <div className="pointer-events-none absolute -right-6 -top-6 size-28 rounded-full bg-accent/8 blur-2xl" aria-hidden />
                 <div className="relative flex items-start gap-3">
@@ -180,9 +181,9 @@ export function ContactsPanel({ athlete }: Props) {
                     <IconMail className="size-6" />
                   </span>
                 </div>
-                <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">Email</p>
+                <p className="relative mt-5 text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-500">{ui.contacts.email}</p>
                 <p className="relative mt-2 text-lg font-semibold tracking-tight text-white">{emailPublic}</p>
-                <p className="relative mt-3 text-xs text-zinc-500">Contatto in arrivo</p>
+                <p className="relative mt-3 text-xs text-zinc-500">{ui.contacts.emailPending}</p>
               </div>
             )
           ) : null}
@@ -198,7 +199,7 @@ export function ContactsPanel({ athlete }: Props) {
               <span className="flex size-11 items-center justify-center rounded-xl bg-accent/15 text-accent ring-1 ring-accent/30">
                 <IconPlay className="size-5" />
               </span>
-              <span className="text-base font-semibold text-white">Highlights</span>
+              <span className="text-base font-semibold text-white">{ui.contacts.highlights}</span>
             </span>
             <IconChevron className="size-5 shrink-0 text-zinc-500" />
           </a>
@@ -208,7 +209,7 @@ export function ContactsPanel({ athlete }: Props) {
         <div className="rounded-2xl border border-white/10 bg-zinc-950/40 p-6 sm:p-8">
           <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">Referente</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">{ui.contacts.representative}</p>
               <p className="mt-2 text-xl font-semibold text-white">{c.representative.name}</p>
               <p className="mt-1 text-sm text-zinc-400">{c.representative.role}</p>
 
@@ -223,7 +224,7 @@ export function ContactsPanel({ athlete }: Props) {
             </div>
 
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">Agenzia</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">{ui.contacts.agency}</p>
               <p className="mt-2 text-base font-semibold text-white">{c.agency.name}</p>
               {c.agency.website ? (
                 <a
@@ -237,7 +238,7 @@ export function ContactsPanel({ athlete }: Props) {
                 </a>
               ) : null}
 
-              <p className="mt-8 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">Social</p>
+              <p className="mt-8 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">{ui.contacts.social}</p>
               <ul className="mt-3 space-y-2">
                 {c.social.map((s) => (
                   <li key={s.platform}>

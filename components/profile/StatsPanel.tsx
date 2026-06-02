@@ -1,5 +1,8 @@
+"use client";
+
 import type { AthleteProfile } from "@/lib/types/athlete";
 import { SectionShell } from "./SectionShell";
+import { useProfileLocale } from "./ProfileLocaleContext";
 
 type Props = { athlete: AthleteProfile };
 
@@ -26,34 +29,35 @@ function ShotBar({ label, pct }: { label: string; pct: number }) {
 }
 
 export function StatsPanel({ athlete }: Props) {
+  const { ui } = useProfileLocale();
   const s = athlete.stats;
   const maxPtsLast5 = Math.max(...s.lastGames.map((g) => g.points), 1);
   const astTo = s.turnoversPerGame > 0 ? s.assistsPerGame / s.turnoversPerGame : null;
 
   const primaryKpis = [
-    { label: "Punti", sub: "PPG", value: fmt(s.pointsPerGame) },
-    { label: "Assist", sub: "APG", value: fmt(s.assistsPerGame) },
-    { label: "Rimbalzi", sub: "RPG", value: fmt(s.reboundsPerGame) },
+    { label: ui.stats.points, sub: "PPG", value: fmt(s.pointsPerGame) },
+    { label: ui.stats.assists, sub: "APG", value: fmt(s.assistsPerGame) },
+    { label: ui.stats.rebounds, sub: "RPG", value: fmt(s.reboundsPerGame) },
   ];
 
   const secondaryKpis = [
-    { label: "Partite", value: String(s.games) },
-    { label: "Minuti", value: `${fmt(s.minutesPerGame)} mpg` },
-    { label: "Recuperi", value: fmt(s.stealsPerGame) },
-    { label: "Palle perse", value: fmt(s.turnoversPerGame) },
+    { label: ui.stats.games, value: String(s.games) },
+    { label: ui.stats.minutes, value: `${fmt(s.minutesPerGame)} mpg` },
+    { label: ui.stats.steals, value: fmt(s.stealsPerGame) },
+    { label: ui.stats.turnovers, value: fmt(s.turnoversPerGame) },
   ];
 
   const volumeKpis = [
-    { label: "Tentativi da 2", value: fmt(s.twoAttPerGame), hint: "a partita" },
-    { label: "Tentativi da 3", value: fmt(s.threeAttPerGame), hint: "a partita" },
+    { kind: "two" as const, label: ui.stats.twoAttempts, value: fmt(s.twoAttPerGame), hint: ui.stats.perGame },
+    { kind: "three" as const, label: ui.stats.threeAttempts, value: fmt(s.threeAttPerGame), hint: ui.stats.perGame },
   ];
 
   return (
     <SectionShell
       id="stats"
-      eyebrow="Numeri"
-      title="Statistiche"
-      description={`${s.label} — sintesi per partita e ultime uscite.`}
+      eyebrow={ui.stats.eyebrow}
+      title={ui.stats.title}
+      description={`${s.label} ${ui.stats.descriptionSuffix}`}
     >
       {/* KPI principali */}
       <div className="grid gap-3 sm:grid-cols-3">
@@ -89,16 +93,16 @@ export function StatsPanel({ athlete }: Props) {
           ))}
         </div>
         <div className="flex flex-col justify-center rounded-2xl border border-dashed border-white/15 bg-white/2 px-4 py-4 md:px-5">
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Indicatori rapidi</p>
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">{ui.stats.quickIndicators}</p>
           <dl className="mt-2 space-y-2 text-sm">
             <div className="flex justify-between gap-4 border-b border-white/6 pb-2">
-              <dt className="text-zinc-400">Assist / palla persa</dt>
+              <dt className="text-zinc-400">{ui.stats.astToRatio}</dt>
               <dd className="font-semibold tabular-nums text-white">
                 {astTo !== null ? `${fmt(astTo, 2)} : 1` : "—"}
               </dd>
             </div>
             <div className="flex justify-between gap-4">
-              <dt className="text-zinc-400">FG% effettivo</dt>
+              <dt className="text-zinc-400">{ui.stats.effectiveFg}</dt>
               <dd className="font-semibold tabular-nums text-accent">{fmt(s.fgPct, 1)}%</dd>
             </div>
           </dl>
@@ -108,24 +112,25 @@ export function StatsPanel({ athlete }: Props) {
       {/* Tiro e volume */}
       <div className="mt-8 grid gap-6 lg:grid-cols-2">
         <div className="rounded-2xl border border-white/8 bg-elevated p-5 md:p-6">
-          <h3 className="text-sm font-semibold text-white">Efficienza al tiro</h3>
-          <p className="mt-1 text-xs text-zinc-500">Percentuali di stagione — confronto visivo immediato per scouting.</p>
+          <h3 className="text-sm font-semibold text-white">{ui.stats.shootingEfficiency}</h3>
+          <p className="mt-1 text-xs text-zinc-500">{ui.stats.shootingHint}</p>
           <div className="mt-6 space-y-5">
-            <ShotBar label="Tiro dal campo (FG%)" pct={s.fgPct} />
-            <ShotBar label="Tiro da 2 (2P%)" pct={s.twoPct} />
-            <ShotBar label="Tiro da 3 (3P%)" pct={s.threePct} />
-            <ShotBar label="Tiro libero (FT%)" pct={s.ftPct} />
+            <ShotBar label={ui.stats.fg} pct={s.fgPct} />
+            <ShotBar label={ui.stats.twoPt} pct={s.twoPct} />
+            <ShotBar label={ui.stats.threePt} pct={s.threePct} />
+            <ShotBar label={ui.stats.ft} pct={s.ftPct} />
           </div>
         </div>
         <div className="rounded-2xl border border-white/8 bg-elevated p-5 md:p-6">
-          <h3 className="text-sm font-semibold text-white">Volume e selezione</h3>
-          <p className="mt-1 text-xs text-zinc-500">Tentativi medi: mix tra gioco interno e perimeter.</p>
+          <h3 className="text-sm font-semibold text-white">{ui.stats.volumeSelection}</h3>
+          <p className="mt-1 text-xs text-zinc-500">{ui.stats.volumeHint}</p>
           <div className="mt-6 space-y-6">
             {volumeKpis.map((v) => {
               const total = s.twoAttPerGame + s.threeAttPerGame;
-              const share = total > 0 ? (v.label.includes("3") ? s.threeAttPerGame / total : s.twoAttPerGame / total) : 0;
+              const share = total > 0 ? (v.kind === "three" ? s.threeAttPerGame / total : s.twoAttPerGame / total) : 0;
+              const sharePct = Math.round(share * 100);
               return (
-                <div key={v.label}>
+                <div key={v.kind}>
                   <div className="flex items-baseline justify-between gap-2">
                     <span className="text-sm font-medium text-zinc-300">{v.label}</span>
                     <span className="text-lg font-semibold tabular-nums text-white">
@@ -136,18 +141,16 @@ export function StatsPanel({ athlete }: Props) {
                   <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/8">
                     <div
                       className="h-full rounded-full bg-zinc-400/80"
-                      style={{ width: `${Math.round(share * 100)}%` }}
+                      style={{ width: `${sharePct}%` }}
                     />
                   </div>
-                  <p className="mt-1 text-[10px] text-zinc-600">
-                    {Math.round(share * 100)}% del volume tattico complessivo (2pt + 3pt).
-                  </p>
+                  <p className="mt-1 text-[10px] text-zinc-600">{ui.stats.volumeShare(sharePct)}</p>
                 </div>
               );
             })}
             <div className="rounded-xl border border-white/6 bg-black/30 px-3 py-3">
               <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
-                Tentativi totali / partita
+                {ui.stats.totalAttempts}
               </p>
               <p className="mt-1 text-xl font-semibold tabular-nums text-white" style={{ fontFamily: "var(--font-bebas)" }}>
                 {fmt(s.twoAttPerGame + s.threeAttPerGame, 1)}
@@ -161,8 +164,8 @@ export function StatsPanel({ athlete }: Props) {
       <div className="mt-10">
         <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h3 className="text-sm font-semibold text-white">Ultime 5 partite</h3>
-            <p className="text-xs text-zinc-500">Log compatto; punti in evidenza rispetto al massimo nel campione.</p>
+            <h3 className="text-sm font-semibold text-white">{ui.stats.lastFive}</h3>
+            <p className="text-xs text-zinc-500">{ui.stats.lastFiveHint}</p>
           </div>
         </div>
 
@@ -173,18 +176,18 @@ export function StatsPanel({ athlete }: Props) {
               <thead>
                 <tr className="border-b border-white/10 bg-white/3">
                   <th className="sticky left-0 z-10 bg-elevated px-4 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">
-                    Data
+                    {ui.stats.date}
                   </th>
                   <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">
-                    Avversario
+                    {ui.stats.opponent}
                   </th>
-                  <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">Min</th>
-                  <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">Pts</th>
-                  <th className="px-3 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">Trend</th>
-                  <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">Rim</th>
-                  <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">Ast</th>
-                  <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">Rec</th>
-                  <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">Pé</th>
+                  <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">{ui.stats.min}</th>
+                  <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">{ui.stats.pts}</th>
+                  <th className="px-3 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">{ui.stats.trend}</th>
+                  <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">{ui.stats.reb}</th>
+                  <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">{ui.stats.ast}</th>
+                  <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">{ui.stats.stl}</th>
+                  <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">{ui.stats.to}</th>
                 </tr>
               </thead>
               <tbody className="text-zinc-300">
@@ -241,7 +244,7 @@ export function StatsPanel({ athlete }: Props) {
                     <p className="text-3xl leading-none text-accent" style={{ fontFamily: "var(--font-bebas)" }}>
                       {g.points}
                     </p>
-                    <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">punti</p>
+                    <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">{ui.stats.pointsMobile}</p>
                   </div>
                 </div>
                 <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/8">
@@ -249,19 +252,19 @@ export function StatsPanel({ athlete }: Props) {
                 </div>
                 <dl className="mt-4 grid grid-cols-4 gap-2 text-center text-xs">
                   <div className="rounded-lg bg-black/25 py-2">
-                    <dt className="text-zinc-500">Min</dt>
+                    <dt className="text-zinc-500">{ui.stats.min}</dt>
                     <dd className="mt-0.5 font-semibold tabular-nums text-white">{g.minutes}</dd>
                   </div>
                   <div className="rounded-lg bg-black/25 py-2">
-                    <dt className="text-zinc-500">Rim</dt>
+                    <dt className="text-zinc-500">{ui.stats.reb}</dt>
                     <dd className="mt-0.5 font-semibold tabular-nums text-white">{g.rebounds}</dd>
                   </div>
                   <div className="rounded-lg bg-black/25 py-2">
-                    <dt className="text-zinc-500">Ast</dt>
+                    <dt className="text-zinc-500">{ui.stats.ast}</dt>
                     <dd className="mt-0.5 font-semibold tabular-nums text-white">{g.assists}</dd>
                   </div>
                   <div className="rounded-lg bg-black/25 py-2">
-                    <dt className="text-zinc-500">R/Pé</dt>
+                    <dt className="text-zinc-500">{ui.stats.stl}/{ui.stats.to}</dt>
                     <dd className="mt-0.5 font-semibold tabular-nums text-white">
                       {g.steals ?? "—"}/{g.turnovers ?? "—"}
                     </dd>

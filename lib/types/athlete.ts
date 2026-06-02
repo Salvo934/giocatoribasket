@@ -186,8 +186,12 @@ export interface AthleteLegalConfig {
   policyUpdated?: string;
 }
 
+export type ProfileLocaleCode = "it" | "en";
+
 export interface AthleteProfile {
   slug: string;
+  /** Lingue disponibili oltre all'italiano (default). */
+  locales?: ProfileLocaleCode[];
   seo: {
     title: string;
     description: string;

@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { athleteSlugs, getAthlete } from "@/data/athletes";
+import { athleteSlugs, athleteSupportsLocale } from "@/data/athletes";
 import { AthleteProfilePage, buildAthleteMetadata } from "@/lib/athlete-profile-page";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return athleteSlugs.map((slug) => ({ slug }));
+  return athleteSlugs.filter((slug) => athleteSupportsLocale(slug, "en")).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  return buildAthleteMetadata(slug, "it");
+  return buildAthleteMetadata(slug, "en");
 }
 
-export default async function AthletePage({ params }: Props) {
+export default async function EnglishAthletePage({ params }: Props) {
   const { slug } = await params;
-  if (!getAthlete(slug, "it")) notFound();
-  return <AthleteProfilePage slug={slug} locale="it" />;
+  if (!athleteSupportsLocale(slug, "en")) notFound();
+  return <AthleteProfilePage slug={slug} locale="en" />;
 }

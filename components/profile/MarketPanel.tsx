@@ -1,5 +1,8 @@
+"use client";
+
 import type { AthleteProfile } from "@/lib/types/athlete";
 import { SectionShell } from "./SectionShell";
+import { useProfileLocale } from "./ProfileLocaleContext";
 
 type Props = { athlete: AthleteProfile };
 
@@ -34,22 +37,23 @@ function AvailabilityTile({ label, active }: { label: string; active: boolean })
 }
 
 export function MarketPanel({ athlete }: Props) {
+  const { ui } = useProfileLocale();
   const m = athlete.market;
   const openChannels = m.availability.filter((a) => a.active).length;
 
   return (
     <SectionShell
       id="mercato"
-      eyebrow="Disponibilità"
-      title="Status mercato"
-      description="Finestre temporali, modalità di ingresso valutate e aree geografiche — quadro chiaro prima di aprire un thread con il referente."
+      eyebrow={ui.market.eyebrow}
+      title={ui.market.title}
+      description={ui.market.description}
       headerActions={
         <>
           <span className="inline-flex rounded-full border border-[#C9082A]/35 bg-[#C9082A]/12 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#ff8a8a]">
-            Trading desk
+            {ui.market.tradingDesk}
           </span>
           <span className="inline-flex rounded-full border border-white/10 bg-white/4 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
-            {openChannels}/{m.availability.length} canali aperti
+            {ui.market.openChannels(openChannels, m.availability.length)}
           </span>
         </>
       }
@@ -67,8 +71,8 @@ export function MarketPanel({ athlete }: Props) {
         <div className="relative space-y-5 p-3 sm:p-4 md:space-y-6 md:p-5">
           <div className="grid gap-4 lg:grid-cols-12 lg:gap-5">
             <article className="rounded-2xl border border-white/10 bg-zinc-950/75 p-5 md:p-6 lg:col-span-5">
-              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-zinc-500">Finestra temporale</p>
-              <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-[#ff9a9a]/90">Disponibile da</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-zinc-500">{ui.market.timeWindow}</p>
+              <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-[#ff9a9a]/90">{ui.market.availableFrom}</p>
               <p
                 className="mt-3 text-2xl leading-tight text-white md:text-3xl"
                 style={{ fontFamily: "var(--font-bebas)" }}
@@ -76,19 +80,19 @@ export function MarketPanel({ athlete }: Props) {
                 {m.availableFrom}
               </p>
               <div className="mt-5 rounded-xl border border-dashed border-white/12 bg-black/35 px-3 py-3">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Economico</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">{ui.market.economics}</p>
                 <p className="mt-2 text-sm leading-relaxed text-zinc-300">{m.economicsNote}</p>
               </div>
             </article>
 
             <article className="rounded-2xl border border-white/10 bg-elevated/90 p-5 md:p-6 lg:col-span-7">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-zinc-500">Obiettivo progetto</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-zinc-500">{ui.market.projectGoal}</p>
                 <span className="rounded-md border border-accent/30 bg-accent/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-accent">
-                  Fit ricercato
+                  {ui.market.fitSought}
                 </span>
               </div>
-              <h3 className="mt-2 text-sm font-bold uppercase tracking-widest text-white">Tipo opportunità cercata</h3>
+              <h3 className="mt-2 text-sm font-bold uppercase tracking-widest text-white">{ui.market.opportunityType}</h3>
               <p className="mt-4 border-l-2 border-accent/45 pl-3 text-sm leading-relaxed text-zinc-300 md:pl-4 md:text-base">
                 {m.opportunitySought}
               </p>
@@ -98,8 +102,8 @@ export function MarketPanel({ athlete }: Props) {
           <div className="rounded-2xl border border-white/8 bg-black/40 p-4 md:p-5">
             <div className="flex flex-wrap items-end justify-between gap-2">
               <div>
-                <h3 className="text-sm font-bold uppercase tracking-widest text-white">Disponibile per</h3>
-                <p className="mt-1 text-xs text-zinc-500">Seleziona cosa ha senso aprire in prima battuta.</p>
+                <h3 className="text-sm font-bold uppercase tracking-widest text-white">{ui.market.availableFor}</h3>
+                <p className="mt-1 text-xs text-zinc-500">{ui.market.availableHint}</p>
               </div>
             </div>
             <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
@@ -112,8 +116,8 @@ export function MarketPanel({ athlete }: Props) {
           </div>
 
           <article className="rounded-2xl border border-white/8 bg-linear-to-r from-white/4 to-transparent p-4 md:p-6">
-            <h3 className="text-sm font-bold uppercase tracking-widest text-white">Zone valutate</h3>
-            <p className="mt-1 text-xs text-zinc-500">Mercati geografici in cui ha senso allineare scouting e contatti.</p>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-white">{ui.market.regions}</h3>
+            <p className="mt-1 text-xs text-zinc-500">{ui.market.regionsHint}</p>
             <ul className="mt-4 flex flex-wrap gap-2">
               {m.regionsEvaluated.map((r) => (
                 <li key={r}>

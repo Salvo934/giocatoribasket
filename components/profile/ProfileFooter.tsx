@@ -1,38 +1,18 @@
+"use client";
+
 import Link from "next/link";
 import type { AthleteProfile } from "@/lib/types/athlete";
 import { resolveLegalContext } from "@/lib/legal";
 import { LegalFooterLinks } from "@/components/legal/LegalFooterLinks";
+import { useProfileLocale } from "./ProfileLocaleContext";
 
 type Props = { athlete: AthleteProfile };
 
-const IT_MONTHS_SHORT = [
-  "gen",
-  "feb",
-  "mar",
-  "apr",
-  "mag",
-  "giu",
-  "lug",
-  "ago",
-  "set",
-  "ott",
-  "nov",
-  "dic",
-] as const;
-
-function formatItalianShortDate(isoDate: string): string {
-  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(isoDate.trim());
-  if (!m) return isoDate;
-  const monthNum = Number(m[2]);
-  const day = Number(m[3]);
-  if (monthNum < 1 || monthNum > 12) return isoDate;
-  return `${day} ${IT_MONTHS_SHORT[monthNum - 1]} ${m[1]}`;
-}
-
 export function ProfileFooter({ athlete }: Props) {
+  const { ui, formatDate } = useProfileLocale();
   const h = athlete.header;
   const legal = resolveLegalContext(athlete);
-  const updated = formatItalianShortDate(h.lastUpdated);
+  const updated = formatDate(h.lastUpdated);
   const jersey = h.number?.replace(/\D/g, "") ?? "";
   const siteHost = athlete.seo.publicSiteUrl?.replace(/^https?:\/\//, "");
 
@@ -64,7 +44,7 @@ export function ProfileFooter({ athlete }: Props) {
                 #{jersey}
               </span>
             ) : null}
-            <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-600">Player Card</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-600">{ui.footer.playerCard}</p>
             <p
               className="mt-2 text-3xl leading-none tracking-tight text-white sm:text-4xl"
               style={{ fontFamily: "var(--font-bebas)" }}
@@ -98,21 +78,19 @@ export function ProfileFooter({ athlete }: Props) {
 
           {/* Legale */}
           <div className="min-w-0 lg:border-x lg:border-white/6 lg:px-8 xl:px-10">
-            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-zinc-600">Informazioni legali</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-zinc-600">{ui.footer.legal}</p>
             <LegalFooterLinks athlete={athlete} layout="stack" />
             <p className="mt-4 text-[11px] leading-relaxed text-zinc-600">
-              Titolare: {legal.controller.name}
+              {ui.footer.controller}: {legal.controller.name}
             </p>
           </div>
 
           {/* Piattaforma */}
           <div className="min-w-0">
-            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-zinc-600">Piattaforma</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-zinc-600">{ui.footer.platform}</p>
             <div className="mt-3 rounded-2xl border border-white/8 bg-linear-to-br from-white/6 via-zinc-950/80 to-black p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]">
               <p className="text-sm font-semibold text-zinc-200">Realizzato con KataHero</p>
-              <p className="mt-2 text-xs leading-relaxed text-zinc-500">
-                Player Card per scouting, club e agenzie. Template condiviso, dominio dedicato per ogni atleta.
-              </p>
+              <p className="mt-2 text-xs leading-relaxed text-zinc-500">{ui.footer.platformBody}</p>
               <a
                 href="https://katahero.com"
                 target="_blank"
@@ -132,7 +110,7 @@ export function ProfileFooter({ athlete }: Props) {
             <span className="mx-2 text-zinc-800" aria-hidden>
               ·
             </span>
-            Aggiornato{" "}
+            {ui.footer.updated}{" "}
             <time dateTime={h.lastUpdated} className="tabular-nums text-zinc-500">
               {updated}
             </time>
@@ -142,10 +120,10 @@ export function ProfileFooter({ athlete }: Props) {
               href="#contenuto-profilo"
               className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 transition hover:text-accent"
             >
-              Torna su ↑
+              {ui.footer.backToTop}
             </Link>
             <span className="hidden h-3 w-px bg-white/10 sm:block" aria-hidden />
-            <p className="text-[11px] text-zinc-700">© {new Date().getFullYear()} · Scheda atleta</p>
+            <p className="text-[11px] text-zinc-700">© {new Date().getFullYear()} · {ui.footer.copyright}</p>
           </div>
         </div>
       </div>

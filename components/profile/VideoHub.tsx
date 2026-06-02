@@ -6,7 +6,9 @@ import { useCookieConsent } from "@/components/legal/CookieConsentProvider";
 import { YouTubeConsentGate } from "@/components/legal/YouTubeConsentGate";
 import { youtubeEmbedUrl, youtubeThumbnailUrl } from "@/lib/youtube";
 import { isLocalVideoUrl } from "@/lib/video-url";
+import type { VideoUi } from "@/lib/i18n/profile-ui";
 import { SectionShell } from "./SectionShell";
+import { useProfileLocale } from "./ProfileLocaleContext";
 
 type Props = { athlete: AthleteProfile };
 
@@ -15,12 +17,14 @@ function BroadcastFrame({
   athleteName,
   number,
   role,
+  videoUi,
   children,
 }: {
   title: string;
   athleteName: string;
   number?: string;
   role: string;
+  videoUi: VideoUi;
   children: React.ReactNode;
 }) {
   return (
@@ -37,10 +41,10 @@ function BroadcastFrame({
         <div className="flex flex-col gap-2 px-3 py-2.5 sm:flex-row sm:items-center sm:justify-between sm:px-4 md:px-5">
           <div className="flex min-w-0 items-center gap-3">
             <span className="shrink-0 rounded bg-[#C9082A] px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-white">
-              Clip
+              {videoUi.clip}
             </span>
             <div className="min-w-0">
-              <p className="truncate text-[11px] font-bold uppercase tracking-[0.12em] text-zinc-400">In evidenza</p>
+              <p className="truncate text-[11px] font-bold uppercase tracking-[0.12em] text-zinc-400">{videoUi.featured}</p>
               <p className="truncate text-sm font-bold text-white md:text-base">
                 {athleteName}
                 {number ? (
@@ -71,7 +75,7 @@ function BroadcastFrame({
         <div className="flex items-start gap-3">
           <span className="mt-0.5 h-8 w-1 shrink-0 rounded-full bg-[#C9082A]" aria-hidden />
           <div className="min-w-0">
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">Now playing</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">{videoUi.nowPlaying}</p>
             <p className="text-sm font-semibold leading-snug text-white md:text-base">{title}</p>
           </div>
         </div>
@@ -197,6 +201,7 @@ function ClipRow({ index, clip }: { index: number; clip: AthleteVideo }) {
 }
 
 export function VideoHub({ athlete }: Props) {
+  const { ui } = useProfileLocale();
   const v = athlete.videos;
   const h = athlete.header;
 
@@ -242,6 +247,7 @@ export function VideoHub({ athlete }: Props) {
           athleteName={h.name}
           number={h.number}
           role={h.role}
+          videoUi={ui.video}
         >
           <div className="p-4 md:p-5">
             <div

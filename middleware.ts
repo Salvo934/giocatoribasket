@@ -1,6 +1,6 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { athleteSlugs, getAthleteSlugByHost } from "@/data/athletes";
+import { athleteSlugs, athleteSupportsLocale, getAthleteSlugByHost } from "@/data/athletes";
 
 /** Su dominio dedicato: / → profilo atleta, slug sbagliato → correzione. */
 export function middleware(request: NextRequest) {
@@ -17,12 +17,23 @@ export function middleware(request: NextRequest) {
     return NextResponse.rewrite(new URL(`/${dedicatedSlug}/cookie-policy`, request.url));
   }
 
+  if (pathname === "/en" || pathname === "/en/") {
+    if (athleteSupportsLocale(dedicatedSlug, "en")) {
+      return NextResponse.rewrite(new URL(`/en/${dedicatedSlug}`, request.url));
+    }
+    return NextResponse.redirect(new URL("/", request.url), 308);
+  }
+
   if (pathname === "/" || pathname === "") {
     return NextResponse.rewrite(new URL(`/${dedicatedSlug}`, request.url));
   }
 
   const segments = pathname.split("/").filter(Boolean);
   const first = segments[0];
+
+  if (first === "en" && segments[1] === dedicatedSlug && segments.length === 2) {
+    return NextResponse.redirect(new URL("/en", request.url), 308);
+  }
 
   if (first && athleteSlugs.includes(first) && first !== dedicatedSlug) {
     const rest = segments.slice(1).join("/");
