@@ -238,6 +238,7 @@ export function ProfileHeader({ athlete }: Props) {
                         ["GOL", String(s.seasonTotals.goals)],
                         ["AST", String(s.seasonTotals.assists)],
                         ["MIN", s.seasonTotals.minutes.toLocaleString(numberLocale)],
+                        ["PASS%", `${formatStat(s.fgPct)}%`],
                       ] as const)
                     : h.sport === "Calcio"
                       ? ([
