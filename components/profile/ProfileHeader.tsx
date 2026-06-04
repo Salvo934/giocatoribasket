@@ -23,7 +23,8 @@ const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950";
 
 export function ProfileHeader({ athlete }: Props) {
-  const { ui, formatDate } = useProfileLocale();
+  const { ui, formatDate, locale } = useProfileLocale();
+  const numberLocale = locale === "en" ? "en-GB" : "it-IT";
   const h = athlete.header;
   const s = athlete.stats;
   const updated = formatDate(h.lastUpdated);
@@ -227,22 +228,30 @@ export function ProfileHeader({ athlete }: Props) {
 
             {/* Stat fascia unica — non box ripetuti come i panel */}
             <div className="mt-10 border-y border-white/10 py-4 sm:mt-12">
-              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-600">{ui.seasonAvg}</p>
+              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-600">
+                {h.sport === "Calcio" && s.seasonTotals ? ui.seasonTotals : ui.seasonAvg}
+              </p>
               <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 sm:gap-x-10">
                 {(
-                  h.sport === "Calcio"
+                  h.sport === "Calcio" && s.seasonTotals
                     ? ([
-                        ["GOL", formatStat(s.pointsPerGame)],
-                        ["AST", formatStat(s.assistsPerGame)],
-                        ["MIN", formatStat(s.minutesPerGame)],
-                        ["PASS%", `${formatStat(s.fgPct)}%`],
+                        ["GOL", String(s.seasonTotals.goals)],
+                        ["AST", String(s.seasonTotals.assists)],
+                        ["MIN", s.seasonTotals.minutes.toLocaleString(numberLocale)],
                       ] as const)
-                    : ([
-                        ["PPG", formatStat(s.pointsPerGame)],
-                        ["AST", formatStat(s.assistsPerGame)],
-                        ["REB", formatStat(s.reboundsPerGame)],
-                        ["3PT%", `${formatStat(s.threePct)}%`],
-                      ] as const)
+                    : h.sport === "Calcio"
+                      ? ([
+                          ["GOL", formatStat(s.pointsPerGame)],
+                          ["AST", formatStat(s.assistsPerGame)],
+                          ["MIN", formatStat(s.minutesPerGame)],
+                          ["PASS%", `${formatStat(s.fgPct)}%`],
+                        ] as const)
+                      : ([
+                          ["PPG", formatStat(s.pointsPerGame)],
+                          ["AST", formatStat(s.assistsPerGame)],
+                          ["REB", formatStat(s.reboundsPerGame)],
+                          ["3PT%", `${formatStat(s.threePct)}%`],
+                        ] as const)
                 ).map(([label, val], i) => (
                   <div key={label} className="flex items-baseline gap-2">
                     {i > 0 ? (

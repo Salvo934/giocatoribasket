@@ -48,7 +48,7 @@ export const costantinoFavasuli: AthleteProfile = {
     sectionDescription:
       "In sintesi: cosa porta sulle fasce, perché può interessare in Serie B e in che sistema rende di più — da incrociare con video e partite vere.",
     shortProfile:
-      "Terzino destro 178 cm, classe 2004, US Catanzaro in Serie B: impiego da titolare (circa 92′ a partita sui dati Lega B 25/26), 2 gol e 1 assist nel campionato attuale. Punta su corsa, spinta e duttilità: sale sulla fascia, mette pressione e si riposiziona in ripiegamento. Non è un esterno puramente offensivo: il valore è nell’intensità, nella copertura e nella capacità di sostenere il ritmo per tutta la partita.",
+      "Terzino destro 178 cm, classe 2004, US Catanzaro in Serie B: impiego da titolare (circa 85′ a partita sui dati Lega B 25/26), 2 gol e 3 assist nel campionato attuale. Punta su corsa, spinta e duttilità: sale sulla fascia, mette pressione e si riposiziona in ripiegamento. Non è un esterno puramente offensivo: il valore è nell’intensità, nella copertura e nella capacità di sostenere il ritmo per tutta la partita.",
     idealFit:
       "Squadre che giocano con esterni alti e ampiezza: sovrapposizioni, transizioni rapide e pressing sulle fasce. Meglio in schemi dove il terzino ha compiti chiari (salire in determinati momenti, non costruire tutto dal basso come regista).",
     whyWatch:
@@ -141,11 +141,16 @@ export const costantinoFavasuli: AthleteProfile = {
   },
   stats: {
     label: "Serie B 2025-26 · US Catanzaro · fonte Lega B (sintesi)",
-    games: 34,
-    minutesPerGame: 92.3,
+    games: 36,
+    seasonTotals: {
+      goals: 2,
+      assists: 3,
+      minutes: 3053,
+    },
+    minutesPerGame: 84.8,
     pointsPerGame: 0.1,
     reboundsPerGame: 0.5,
-    assistsPerGame: 0.03,
+    assistsPerGame: 0.08,
     stealsPerGame: 1.7,
     turnoversPerGame: 1.2,
     fgPct: 83.6,

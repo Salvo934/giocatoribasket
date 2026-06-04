@@ -177,6 +177,7 @@ export type ProfileUi = {
   watchHighlights: string;
   contactAgent: string;
   seasonAvg: string;
+  seasonTotals: string;
   languageSwitch: { label: string; toEn: string; toIt: string };
   share: { label: string; shared: string; copied: string; error: string };
   nav: {
@@ -221,6 +222,7 @@ const UI_IT: ProfileUi = {
   watchHighlights: "Guarda gli highlights",
   contactAgent: "Contatta procuratore",
   seasonAvg: "Media stagione",
+  seasonTotals: "Totali stagione",
   languageSwitch: { label: "Lingua", toEn: "English", toIt: "Italiano" },
   share: { label: "Condividi link", shared: "Condiviso", copied: "Copiato", error: "Errore" },
   nav: {
@@ -413,6 +415,7 @@ const UI_EN: ProfileUi = {
   watchHighlights: "Watch highlights",
   contactAgent: "Contact agent",
   seasonAvg: "Season averages",
+  seasonTotals: "Season totals",
   languageSwitch: { label: "Language", toEn: "English", toIt: "Italiano" },
   share: { label: "Share link", shared: "Shared", copied: "Copied", error: "Error" },
   nav: {

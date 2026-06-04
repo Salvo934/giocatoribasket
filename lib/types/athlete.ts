@@ -79,9 +79,17 @@ export interface GameLogRow {
   turnovers?: number;
 }
 
+export interface SeasonTotals {
+  goals: number;
+  assists: number;
+  minutes: number;
+}
+
 export interface SeasonStats {
   label: string;
   games: number;
+  /** Totali stagione in hero (calcio) — se assenti si usano le medie. */
+  seasonTotals?: SeasonTotals;
   minutesPerGame: number;
   pointsPerGame: number;
   reboundsPerGame: number;
