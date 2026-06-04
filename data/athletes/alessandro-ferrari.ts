@@ -9,7 +9,6 @@ export const alessandroFerrari: AthleteProfile = {
     description:
       "Alessandro Ferrari (2007), guardia 191 cm, Pallacanestro Reggiana U19: scorer, penetrazione e tiro dal medio. Statistiche e scheda scouting.",
     publicSiteUrl: "https://alessandroferrari10.katahero.com",
-    ogImage: "/athletes/cardferrari-og.jpg",
   },
   header: {
     heroImage: "/athletes/alessandro-ferrari-avatar.jpg",
