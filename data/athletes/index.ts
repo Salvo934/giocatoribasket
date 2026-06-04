@@ -1,5 +1,6 @@
 import { antonioSorbara } from "./antonio-sorbara";
 import { alessandroFerrari } from "./alessandro-ferrari";
+import { costantinoFavasuli } from "./costantino-favasuli";
 import { francescoSpinelli } from "./francesco-spinelli";
 import { ilarioSimonetti } from "./ilario-simonetti";
 import { thomasAguzzoli } from "./thomas-aguzzoli";
@@ -18,6 +19,7 @@ const athletes: AthleteProfile[] = [
   francescoSpinelli,
   thomasAguzzoli,
   antonioSorbara,
+  costantinoFavasuli,
 ];
 
 function isPublished(athlete: AthleteProfile): boolean {

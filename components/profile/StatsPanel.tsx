@@ -1,6 +1,7 @@
 "use client";
 
 import type { AthleteProfile } from "@/lib/types/athlete";
+import { statsUiForSport } from "@/lib/i18n/football-stats-ui";
 import { SectionShell } from "./SectionShell";
 import { useProfileLocale } from "./ProfileLocaleContext";
 
@@ -29,15 +30,27 @@ function ShotBar({ label, pct }: { label: string; pct: number }) {
 }
 
 export function StatsPanel({ athlete }: Props) {
-  const { ui } = useProfileLocale();
+  const { ui: profileUi } = useProfileLocale();
+  const ui = { ...profileUi, stats: statsUiForSport(profileUi.stats, athlete.header.sport) };
+  const isFootball = athlete.header.sport === "Calcio";
   const s = athlete.stats;
   const maxPtsLast5 = Math.max(...s.lastGames.map((g) => g.points), 1);
-  const astTo = s.turnoversPerGame > 0 ? s.assistsPerGame / s.turnoversPerGame : null;
+  const astTo = isFootball
+    ? s.pointsPerGame > 0
+      ? s.assistsPerGame / s.pointsPerGame
+      : null
+    : s.turnoversPerGame > 0
+      ? s.assistsPerGame / s.turnoversPerGame
+      : null;
 
   const primaryKpis = [
-    { label: ui.stats.points, sub: "PPG", value: fmt(s.pointsPerGame) },
-    { label: ui.stats.assists, sub: "APG", value: fmt(s.assistsPerGame) },
-    { label: ui.stats.rebounds, sub: "RPG", value: fmt(s.reboundsPerGame) },
+    { label: ui.stats.points, sub: isFootball ? "GPG" : "PPG", value: fmt(s.pointsPerGame, 2) },
+    { label: ui.stats.assists, sub: isFootball ? "APG" : "APG", value: fmt(s.assistsPerGame, 2) },
+    {
+      label: isFootball ? ui.stats.minutes : ui.stats.rebounds,
+      sub: isFootball ? "MPG" : "RPG",
+      value: isFootball ? fmt(s.minutesPerGame) : fmt(s.reboundsPerGame),
+    },
   ];
 
   const secondaryKpis = [
