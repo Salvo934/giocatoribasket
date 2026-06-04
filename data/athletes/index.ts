@@ -20,6 +20,10 @@ const athletes: AthleteProfile[] = [
   antonioSorbara,
 ];
 
+function isPublished(athlete: AthleteProfile): boolean {
+  return athlete.published !== false;
+}
+
 const athleteLocaleOverlays: Partial<
   Record<string, Partial<Record<Exclude<ProfileLocale, "it">, AthleteLocaleOverlay>>>
 > = {
@@ -31,17 +35,18 @@ export const athletesBySlug = Object.fromEntries(athletes.map((a) => [a.slug, a]
   AthleteProfile
 >;
 
-export const athleteSlugs = athletes.map((a) => a.slug);
+export const athleteSlugs = athletes.filter(isPublished).map((a) => a.slug);
 
 export function athleteSupportsLocale(slug: string, locale: ProfileLocale): boolean {
-  if (!athletesBySlug[slug]) return false;
+  const athlete = athletesBySlug[slug];
+  if (!athlete || !isPublished(athlete)) return false;
   if (locale === "it") return true;
   return Boolean(athleteLocaleOverlays[slug]?.[locale]);
 }
 
 export function getAthlete(slug: string, locale: ProfileLocale = "it"): AthleteProfile | undefined {
   const base = athletesBySlug[slug];
-  if (!base) return undefined;
+  if (!base || !isPublished(base)) return undefined;
   if (locale === "it") return base;
   const overlay = athleteLocaleOverlays[slug]?.[locale];
   if (!overlay) return undefined;
@@ -67,6 +72,6 @@ export function resolveAthleteSlugForHost(host?: string | null): string {
     if (byHost) return byHost;
   }
   const fromEnv = process.env.NEXT_PUBLIC_ATHLETE_SLUG?.trim();
-  if (fromEnv && athletesBySlug[fromEnv]) return fromEnv;
+  if (fromEnv && athletesBySlug[fromEnv] && isPublished(athletesBySlug[fromEnv])) return fromEnv;
   return athleteSlugs[0];
 }

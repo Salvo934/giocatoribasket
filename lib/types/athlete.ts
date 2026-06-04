@@ -190,6 +190,8 @@ export type ProfileLocaleCode = "it" | "en";
 
 export interface AthleteProfile {
   slug: string;
+  /** Se false, il profilo resta in archivio ma non viene pubblicato. */
+  published?: boolean;
   /** Lingue disponibili oltre all'italiano (default). */
   locales?: ProfileLocaleCode[];
   seo: {

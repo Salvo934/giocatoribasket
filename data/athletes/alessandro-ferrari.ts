@@ -3,6 +3,7 @@ import type { AthleteProfile } from "@/lib/types/athlete";
 /** Profilo breve volutamente minimal — stesso template, contenuti da sostituire. */
 export const alessandroFerrari: AthleteProfile = {
   slug: "alessandro-ferrari",
+  published: false,
   seo: {
     title: "Alessandro Ferrari · Guardia | Player Card",
     description:
