@@ -20,7 +20,8 @@ export const costantinoFavasuli: AthleteProfile = {
   },
   header: {
     heroImage: "/athletes/costantino-favasuli-avatar.jpg",
-    heroImageFocus: "center",
+    heroImageFocus: "top",
+    heroImageObjectPosition: "50% 18%",
     name: "Costantino Favasuli",
     number: "27",
     sport: "Calcio",
@@ -208,8 +209,8 @@ export const costantinoFavasuli: AthleteProfile = {
     items: [
       {
         src: "/athletes/costantino-favasuli-avatar.jpg",
-        alt: "Costantino Favasuli in azione con la maglia dell’US Catanzaro",
-        caption: "US Catanzaro · terzino destro",
+        alt: "Costantino Favasuli — ritratto ufficiale in maglia Italia",
+        caption: "Nazionale · ritratto ufficiale",
       },
     ],
   },
