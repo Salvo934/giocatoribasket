@@ -3,6 +3,7 @@ import type { AthleteProfile } from "@/lib/types/athlete";
 /** Demo dati — valorizzare con numeri ufficiali, video e contatti reali. */
 export const ilarioSimonetti: AthleteProfile = {
   slug: "ilario-simonetti",
+  published: false,
   locales: ["en"],
   seo: {
     title: "Ilario Simonetti · Ala piccola Serie B | Player Card",
