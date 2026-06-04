@@ -3,7 +3,7 @@ import type { AthleteProfile } from "@/lib/types/athlete";
 /** Dati da Lega B / fonti club — verificare referti ufficiali prima di scouting live. */
 export const costantinoFavasuli: AthleteProfile = {
   slug: "costantino-favasuli",
-  published: true,
+  published: false,
   seo: {
     title: "Costantino Favasuli · Terzino / wing-back Serie B | Player Card",
     description:
