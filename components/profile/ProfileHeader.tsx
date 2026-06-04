@@ -85,7 +85,7 @@ export function ProfileHeader({ athlete }: Props) {
         staticHeroBackdrop
       )}
 
-      {jersey && athlete.slug !== "antonio-sorbara" ? (
+      {jersey && athlete.slug !== "antonio-sorbara" && athlete.slug !== "costantino-favasuli" ? (
         <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
           <span
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none text-[min(48vw,22rem)] font-bold leading-[0.82] tracking-tighter text-white/[0.035] lg:left-[58%] lg:text-[min(36vw,26rem)]"
@@ -120,7 +120,7 @@ export function ProfileHeader({ athlete }: Props) {
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(280px,42%)] lg:items-end lg:gap-x-10 xl:gap-x-14">
           {/* Colonna copy: watermark maglia + tipografia da copertina */}
           <div className="relative order-2 flex min-w-0 flex-col lg:order-1 lg:pb-4 lg:pr-4">
-            {jersey ? (
+            {jersey && athlete.slug !== "costantino-favasuli" ? (
               <span
                 className="pointer-events-none absolute -top-6 right-0 select-none text-[clamp(6rem,28vw,14rem)] font-bold leading-none tracking-tighter text-white/5.5 sm:-top-10 sm:right-4 lg:-right-8 lg:top-4 lg:text-[min(16rem,22vw)]"
                 style={{ fontFamily: "var(--font-bebas)" }}

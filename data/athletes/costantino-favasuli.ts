@@ -35,13 +35,13 @@ export const costantinoFavasuli: AthleteProfile = {
     identityNote:
       "Terzino destro dinamico: corre la fascia, spinge in avanti e torna in copertura con intensità. Piede destro, classe 2004 da Reggio Calabria — cresciuto in Fiorentina, maturato in prestiti a Ternana e Bari prima del progetto Catanzaro.",
     dashboardIntro:
-      "Terzino classe 2004, 178 cm, maglia 27 all’US Catanzaro in Serie B: minuti da titolare, contributo in transizione e duelli sulle fasce. Scheda per capire in fretta profilo, numeri e contatti.",
+      "Terzino classe 2004, 178 cm, all’US Catanzaro in Serie B: minuti da titolare, contributo in transizione e duelli sulle fasce. Scheda per capire in fretta profilo, numeri e contatti.",
     agency: {
       name: "RDF Football",
       representative: "Management · contatto su richiesta",
     },
     lastUpdated: "2026-06-04",
-    highlightUrl: "#video",
+    highlightUrl: "https://www.youtube.com/watch?v=Ph3_3BoRjrc",
   },
   scoutView: {
     sectionDescription:
@@ -72,10 +72,15 @@ export const costantinoFavasuli: AthleteProfile = {
   videos: {
     main: {
       title: "Highlights — Costantino Favasuli",
-      url: "mailto:privacy@katahero.com?subject=Richiesta%20highlights%20Costantino%20Favasuli",
+      url: "https://www.youtube.com/watch?v=Ph3_3BoRjrc",
       provider: "youtube",
-      note: "Clip in aggiornamento — richiedi il link al referente.",
     },
+    filmRoomSide: [
+      {
+        title: "Highlights — clip 2",
+        url: "https://www.youtube.com/watch?v=KZqOW6SKmmk",
+      },
+    ],
     categories: [
       {
         id: "transition",
@@ -204,7 +209,7 @@ export const costantinoFavasuli: AthleteProfile = {
       {
         src: "/athletes/costantino-favasuli-avatar.jpg",
         alt: "Costantino Favasuli in azione con la maglia dell’US Catanzaro",
-        caption: "US Catanzaro · terzino destro #27",
+        caption: "US Catanzaro · terzino destro",
       },
     ],
   },
@@ -240,10 +245,46 @@ export const costantinoFavasuli: AthleteProfile = {
       notes: "Avvio del percorso formativo in Calabria.",
     },
   ],
-  honors: [],
+  honors: [
+    {
+      title: "Esordio in Nazionale maggiore",
+      detail: "Titolare nella vittoria per 1-0 contro il Lussemburgo (amichevole, giugno 2026).",
+      year: "2026",
+    },
+    {
+      title: "Prima convocazione — Nazionale italiana",
+      detail: "Chiamata da Silvio Baldini per le amichevoli contro Lussemburgo e Grecia (maggio 2026).",
+      year: "2026",
+    },
+    {
+      title: "Esordio — Italia Under 21",
+      detail: "Qualificazioni Europeo Under 21 2027: vittoria 4-0 contro la Macedonia del Nord (marzo 2026).",
+      year: "2026",
+    },
+    {
+      title: "Prima convocazione — Italia Under 21",
+      detail: "Convocato per le qualificazioni contro Montenegro e Macedonia del Nord (agosto 2025).",
+      year: "2025",
+    },
+    {
+      title: "Italia Under 19",
+      detail: "Due amichevoli contro l’Ungheria (novembre 2022).",
+      year: "2022",
+    },
+    {
+      title: "Coppa Italia Primavera",
+      detail: "Fiorentina — campione nelle edizioni 2020-21 e 2021-22 con la Primavera.",
+      year: "2021-22",
+    },
+    {
+      title: "Supercoppa Primavera",
+      detail: "Fiorentina — vittoria nella Supercoppa Italiana Primavera.",
+      year: "2023",
+    },
+  ],
   verifications: [
     { id: "data", label: "Dati verificati", ok: true },
-    { id: "video", label: "Video in aggiornamento", ok: false },
+    { id: "video", label: "Video verificato", ok: true },
     { id: "contact", label: "Contatto verificato", ok: true },
     { id: "fresh", label: "Profilo aggiornato", ok: true },
     { id: "club", label: "Club confermato", ok: true },
