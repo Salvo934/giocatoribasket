@@ -235,6 +235,16 @@ export interface AthleteProfile {
     heroImageFocus?: "top" | "center" | "bottom";
     /** CSS object-position per avatar hero (es. "50% 18%") */
     heroImageObjectPosition?: string;
+    /** Immagine statica full-bleed dietro hero (mobile + desktop) */
+    heroBackgroundImage?: string;
+    /** Variante desktop opzionale (es. crop 16:9) */
+    heroBackgroundImageDesktop?: string;
+    /** CSS object-position desktop per `heroBackgroundImage` */
+    heroBackgroundImageObjectPosition?: string;
+    /** CSS object-position mobile per `heroBackgroundImage` */
+    heroBackgroundImageObjectPositionMobile?: string;
+    /** Velo leggibilità testi su `heroBackgroundImage` */
+    heroBackgroundImageReadabilityOverlay?: boolean;
     /** Video loop in `public` (mp4), dietro overlay — uso mirato per non coprire copy/avatar */
     heroBackgroundVideo?: string;
     /** Fine loop in secondi (esclude coda indesiderata, es. registrazione schermo) */

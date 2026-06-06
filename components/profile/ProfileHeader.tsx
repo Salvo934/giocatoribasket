@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import type { AthleteProfile } from "@/lib/types/athlete";
+import { HeroBackgroundImage } from "./HeroBackgroundImage";
 import { HeroBackgroundVideo } from "./HeroBackgroundVideo";
 import { ShareProfileButton } from "./ShareActions";
 import { useProfileLocale } from "./ProfileLocaleContext";
@@ -33,6 +34,8 @@ export function ProfileHeader({ athlete }: Props) {
   const heroObjectPosition = h.heroImageObjectPosition?.trim();
   const jersey = h.number?.replace(/\D/g, "") ?? "";
   const hasVideoBg = Boolean(h.heroBackgroundVideo);
+  const hasImageBg = Boolean(h.heroBackgroundImage);
+  const hasMediaBg = hasVideoBg || hasImageBg;
   const avatarDesktopShiftRight =
     athlete.slug === "ilario-simonetti" ? "lg:translate-x-12 xl:translate-x-20 2xl:translate-x-28" : "";
 
@@ -54,12 +57,22 @@ export function ProfileHeader({ athlete }: Props) {
 
   return (
     <header
-      className={`relative overflow-hidden border-b border-white/6 ${hasVideoBg ? "lg:flex lg:min-h-dvh lg:flex-col" : ""}`}
+      className={`relative overflow-hidden border-b border-white/6 ${hasMediaBg ? "min-h-[min(88dvh,50rem)] lg:flex lg:min-h-dvh lg:flex-col" : ""}`}
     >
       {/* Base */}
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-[#030305]" />
 
-      {hasVideoBg && h.heroBackgroundVideo ? (
+      {hasImageBg && h.heroBackgroundImage ? (
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+          <HeroBackgroundImage
+            src={h.heroBackgroundImage}
+            srcDesktop={h.heroBackgroundImageDesktop}
+            objectPosition={h.heroBackgroundImageObjectPosition}
+            objectPositionMobile={h.heroBackgroundImageObjectPositionMobile}
+            readabilityOverlay={h.heroBackgroundImageReadabilityOverlay ?? true}
+          />
+        </div>
+      ) : hasVideoBg && h.heroBackgroundVideo ? (
         <>
           {/* Video solo da md↑ — su mobile risparmiamo banda e CPU */}
           <div className="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden md:block" aria-hidden>
@@ -100,16 +113,18 @@ export function ProfileHeader({ athlete }: Props) {
       <div
         aria-hidden
         className={`pointer-events-none absolute inset-x-0 top-0 z-2 h-24 bg-linear-to-b to-transparent ${
-          hasVideoBg && h.heroBackgroundVideoNoOverlay
-            ? "from-transparent"
-            : h.heroBackgroundVideoReadabilityOverlay
-              ? "from-[#030305]/45"
-              : "from-white/6"
+          hasImageBg || (hasVideoBg && h.heroBackgroundVideoReadabilityOverlay)
+            ? "from-[#030305]/45"
+            : hasVideoBg && h.heroBackgroundVideoNoOverlay
+              ? "from-transparent"
+              : hasVideoBg
+                ? "from-white/6"
+                : "from-white/6"
         }`}
       />
 
       <div
-        className={`relative z-10 mx-auto w-full max-w-6xl px-4 pb-12 pt-8 sm:px-6 sm:pb-14 sm:pt-10 lg:px-8 ${hasVideoBg ? "lg:flex lg:flex-1 lg:flex-col lg:justify-end lg:pb-16 lg:pt-12" : ""}`}
+        className={`relative z-10 mx-auto w-full max-w-6xl px-4 pb-12 pt-8 sm:px-6 sm:pb-14 sm:pt-10 lg:px-8 ${hasMediaBg ? "lg:flex lg:flex-1 lg:flex-col lg:justify-end lg:pb-16 lg:pt-12" : ""}`}
       >
         <a
           href="#contenuto-profilo"
