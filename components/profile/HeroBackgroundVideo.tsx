@@ -15,6 +15,7 @@ type Props = {
   readabilityOverlay?: boolean;
   /** Clip già in 16:9 — cover orizzontale full-bleed */
   landscape?: boolean;
+  fit?: "cover" | "contain";
 };
 
 export function HeroBackgroundVideo({
@@ -26,6 +27,7 @@ export function HeroBackgroundVideo({
   noOverlay = false,
   readabilityOverlay = false,
   landscape = false,
+  fit = "cover",
 }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
 
@@ -44,32 +46,27 @@ export function HeroBackgroundVideo({
     return () => video.removeEventListener("timeupdate", onTimeUpdate);
   }, [loopEnd]);
 
+  const opacityClass = noOverlay
+    ? "opacity-100"
+    : readabilityOverlay
+      ? "opacity-[0.9]"
+      : lightOverlay
+        ? "opacity-[0.94]"
+        : "opacity-[0.82]";
+
+  const videoClass =
+    fit === "contain"
+      ? `absolute inset-0 h-full w-full bg-[#030305] object-contain ${opacityClass}`
+      : landscape
+        ? `absolute inset-0 h-full w-full bg-[#030305] object-cover ${opacityClass}`
+        : `absolute left-1/2 top-0 min-h-[126%] w-full min-w-[104%] -translate-x-1/2 translate-y-[-2.5%] bg-[#030305] object-cover sm:min-h-[132%] ${opacityClass}`;
+
   return (
     <>
       <video
         ref={ref}
-        className={
-          landscape
-            ? `absolute inset-0 h-full w-full bg-[#030305] object-cover ${
-                noOverlay
-                  ? "opacity-100"
-                  : readabilityOverlay
-                    ? "opacity-[0.9]"
-                    : lightOverlay
-                      ? "opacity-[0.94]"
-                      : "opacity-[0.82]"
-              }`
-            : `absolute left-1/2 top-0 min-h-[126%] w-full min-w-[104%] -translate-x-1/2 translate-y-[-2.5%] bg-[#030305] object-cover sm:min-h-[132%] ${
-                noOverlay
-                  ? "opacity-100"
-                  : readabilityOverlay
-                    ? "opacity-[0.9]"
-                    : lightOverlay
-                      ? "opacity-[0.94]"
-                      : "opacity-[0.82]"
-              }`
-        }
-        style={{ objectPosition: landscape ? objectPosition || "center center" : objectPosition }}
+        className={videoClass}
+        style={{ objectPosition: landscape || fit === "contain" ? objectPosition || "center center" : objectPosition }}
         src={src}
         muted
         playsInline

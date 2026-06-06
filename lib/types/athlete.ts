@@ -263,6 +263,8 @@ export interface AthleteProfile {
     heroBackgroundVideoReadabilityOverlay?: boolean;
     /** Clip 16:9 — riempie lo sfondo hero in orizzontale (default: crop verticale tipo reel) */
     heroBackgroundVideoLandscape?: boolean;
+    /** `contain` mostra tutto il clip senza zoom eccessivo (default: `cover`) */
+    heroBackgroundVideoFit?: "cover" | "contain";
     marketStatusLabel: string;
     agency: AgencyRef;
     lastUpdated: string;
