@@ -7,15 +7,20 @@ import { useProfileLocale } from "./ProfileLocaleContext";
 
 type Props = { athlete: AthleteProfile };
 
-const panelFrame =
-  "rounded-[1.75rem] border border-white/10 bg-black/45 p-px shadow-[inset_0_1px_0_0_rgba(255,255,255,0.07)]";
-
-const panelInner = "rounded-[1.65rem] bg-zinc-950/55 px-6 py-8 md:px-10 md:py-10 backdrop-blur-sm";
-
 export function CareerTimeline({ athlete }: Props) {
   const { ui } = useProfileLocale();
   const steps = athlete.career;
   const sectionStyle = athlete.careerSection;
+  const hasBg = Boolean(sectionStyle?.backgroundImage);
+  const panelFrame = hasBg
+    ? "rounded-[1.75rem] border border-white/12 bg-black/25 p-px shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]"
+    : "rounded-[1.75rem] border border-white/10 bg-black/45 p-px shadow-[inset_0_1px_0_0_rgba(255,255,255,0.07)]";
+  const panelInner = hasBg
+    ? "rounded-[1.65rem] bg-zinc-950/35 px-6 py-8 backdrop-blur-[3px] md:px-10 md:py-10"
+    : "rounded-[1.65rem] bg-zinc-950/55 px-6 py-8 backdrop-blur-sm md:px-10 md:py-10";
+  const stepCard = hasBg
+    ? "group rounded-2xl border border-white/10 bg-black/28 p-5 transition hover:border-accent/30 hover:bg-black/40 md:p-6"
+    : "group rounded-2xl border border-white/8 bg-black/40 p-5 transition hover:border-accent/30 hover:bg-black/55 md:p-6";
 
   return (
     <SectionShell
@@ -46,7 +51,7 @@ export function CareerTimeline({ athlete }: Props) {
                     >
                       <span className="absolute size-3 rounded-full bg-accent shadow-[0_0_14px_var(--accent-glow)] ring-4 ring-zinc-950" />
                     </div>
-                    <article className="group rounded-2xl border border-white/8 bg-black/40 p-5 transition hover:border-accent/30 hover:bg-black/55 md:p-6">
+                    <article className={stepCard}>
                       <div className="flex items-start gap-5 md:gap-6">
                         {step.clubLogo ? (
                           <div className="relative size-20 shrink-0 overflow-hidden rounded-2xl bg-white/6 ring-1 ring-white/10 md:size-24 lg:size-28">

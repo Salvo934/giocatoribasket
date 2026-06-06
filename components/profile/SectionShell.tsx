@@ -48,7 +48,7 @@ export function SectionShell({
             alt=""
             fill
             sizes="100vw"
-            className="object-cover opacity-55 md:hidden"
+            className="object-cover opacity-80 md:hidden"
             style={{ objectPosition: backgroundImageObjectPositionMobile }}
           />
           <Image
@@ -56,15 +56,15 @@ export function SectionShell({
             alt=""
             fill
             sizes="100vw"
-            className="hidden object-cover opacity-50 md:block"
+            className="hidden object-cover opacity-[0.82] md:block"
             style={{ objectPosition: backgroundImageObjectPosition }}
           />
           <div
             className="absolute inset-0"
             style={{
               backgroundImage: `
-                linear-gradient(to bottom, rgba(3, 3, 5, 0.92) 0%, rgba(3, 3, 5, 0.68) 32%, rgba(3, 3, 5, 0.74) 68%, rgba(3, 3, 5, 0.9) 100%),
-                linear-gradient(to right, rgba(3, 3, 5, 0.55) 0%, transparent 42%, transparent 58%, rgba(3, 3, 5, 0.45) 100%)
+                linear-gradient(to bottom, rgba(3, 3, 5, 0.72) 0%, rgba(3, 3, 5, 0.38) 36%, rgba(3, 3, 5, 0.48) 72%, rgba(3, 3, 5, 0.76) 100%),
+                linear-gradient(to right, rgba(3, 3, 5, 0.32) 0%, transparent 38%, transparent 62%, rgba(3, 3, 5, 0.28) 100%)
               `,
             }}
           />
