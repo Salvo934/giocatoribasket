@@ -9,7 +9,7 @@ export const alfonsoZampogna: AthleteProfile = {
     description:
       "Alfonso Zampogna (2000), play 186 cm, Moncada Energy Agrigento in Serie B Girone A: 11 PPG e 4,1 APG sui dati LNP. Statistiche, carriera e scheda scouting.",
     publicSiteUrl: "https://alfonsozampogna16.katahero.com",
-    ogImage: "/athletes/cardzampogna-og.jpg",
+    ogImage: "/athletes/cardzampo16-og.png",
   },
   legal: {
     dataController: {
