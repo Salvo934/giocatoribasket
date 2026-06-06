@@ -22,6 +22,9 @@ export const alfonsoZampogna: AthleteProfile = {
     heroImage: "/athletes/alfonso-zampogna-avatar.jpg",
     heroImageFocus: "top",
     heroImageObjectPosition: "50% 12%",
+    heroBackgroundVideo: "/athletes/zampogna-clip-2.mp4",
+    heroBackgroundVideoObjectPosition: "center 38%",
+    heroBackgroundVideoReadabilityOverlay: true,
     name: "Alfonso Zampogna",
     number: "16",
     sport: "Basket",
@@ -30,6 +33,7 @@ export const alfonsoZampogna: AthleteProfile = {
     heightCm: 186,
     nationality: "Italia",
     currentClub: "Moncada Energy Agrigento",
+    currentClubLogo: "/athletes/agrigento-basket-logo.png",
     category: "Serie B",
     league: "LNP · Girone A",
     marketStatusLabel: "In roster · Serie B 25/26",
@@ -81,36 +85,30 @@ export const alfonsoZampogna: AthleteProfile = {
         url: "https://www.youtube.com/watch?v=_X89QPgNBsQ",
       },
     ],
+    poster: "/athletes/alfonso-zampogna-avatar.jpg",
     categories: [
       {
         id: "playmaking",
         label: "Playmaking",
         clips: [
-          {
-            title: "Regia e passaggi in transizione",
-            url: "https://www.youtube.com/watch?v=s1duWe-UEaY",
-          },
+          { title: "Clip 1 — regia e passaggi", url: "/athletes/zampogna-clip-1.mp4" },
+          { title: "Clip 2 — gestione possesso", url: "/athletes/zampogna-clip-2.mp4" },
         ],
       },
       {
         id: "shooting",
         label: "Tiro",
-        clips: [
-          {
-            title: "Tiro da tre e conclusioni",
-            url: "https://www.youtube.com/watch?v=_X89QPgNBsQ",
-          },
-        ],
+        clips: [{ title: "Clip 3 — tiro e conclusioni", url: "/athletes/zampogna-clip-3.mp4" }],
       },
       {
         id: "transition",
         label: "Transizione",
-        clips: [
-          {
-            title: "Decisioni in attacco veloce",
-            url: "https://www.youtube.com/watch?v=s1duWe-UEaY",
-          },
-        ],
+        clips: [{ title: "Clip 4 — attacco veloce", url: "/athletes/zampogna-clip-4.mp4" }],
+      },
+      {
+        id: "pnr",
+        label: "Pick & roll",
+        clips: [{ title: "Clip 5 — lettura sul blocco", url: "/athletes/zampogna-clip-5.mp4" }],
       },
     ],
     fullGame: {
