@@ -260,8 +260,8 @@ export const alfonsoZampogna: AthleteProfile = {
     {
       season: "2021-23",
       club: "Liofilchem Roseto",
-      category: "Serie B · Girone D",
-      notes: "Playoff e Supercoppa B; crescita come regista titolare.",
+      category: "Serie B · Gironi C e D",
+      notes: "1º Girone C 21/22, Coppa Italia LNP 2022, 2º Girone D 22/23; playoff e Supercoppa B.",
     },
     {
       season: "2020-21",
@@ -300,18 +300,28 @@ export const alfonsoZampogna: AthleteProfile = {
       year: "2026",
     },
     {
-      title: "Secondo posto — Girone C Serie B",
-      detail: "Tramarossa Vicenza, stagione 2020-21.",
-      year: "2021",
+      title: "Coppa Italia LNP — Serie B",
+      detail: "Vittoria con Liofilchem Roseto (finale 78-60 vs Lions Bisceglie), stagione 2021-22.",
+      year: "2022",
+    },
+    {
+      title: "Primo posto — Serie B Girone C",
+      detail: "Liofilchem Roseto capolista in regular season (24-6, 48 punti), campionato 2021-22.",
+      year: "2022",
+    },
+    {
+      title: "Secondo posto — Serie B Girone D",
+      detail: "Liofilchem Roseto alle spalle della LUISS Roma in regular season (24-6, 48 punti), campionato 2022-23.",
+      year: "2023",
     },
     {
       title: "Playoff Serie B — Liofilchem Roseto",
-      detail: "Partecipazione ai tabelloni playoff 21/22 e 22/23.",
+      detail: "Finalista promozione 21/22 (persa 1-3 vs Rimini); semifinalista 22/23.",
       year: "2023",
     },
     {
       title: "Supercoppa LNP Serie B",
-      detail: "Impegno in Supercoppa con Roseto e Vicenza.",
+      detail: "Impegno in Supercoppa con Roseto (21/22 e 22/23) e Vicenza (20/21).",
       year: "2022",
     },
   ],
