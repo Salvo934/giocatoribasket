@@ -36,6 +36,7 @@ export function ProfileHeader({ athlete }: Props) {
   const hasVideoBg = Boolean(h.heroBackgroundVideo);
   const hasImageBg = Boolean(h.heroBackgroundImage);
   const hasMediaBg = hasVideoBg || hasImageBg;
+  const hideHeroAvatar = h.heroHideAvatar === true;
   const avatarDesktopShiftRight =
     athlete.slug === "ilario-simonetti" ? "lg:translate-x-12 xl:translate-x-20 2xl:translate-x-28" : "";
 
@@ -99,7 +100,7 @@ export function ProfileHeader({ athlete }: Props) {
         staticHeroBackdrop
       )}
 
-      {jersey && athlete.slug !== "antonio-sorbara" && athlete.slug !== "costantino-favasuli" ? (
+      {jersey && athlete.slug !== "antonio-sorbara" && athlete.slug !== "costantino-favasuli" && athlete.slug !== "alfonso-zampogna" ? (
         <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
           <span
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none text-[min(48vw,22rem)] font-bold leading-[0.82] tracking-tighter text-white/[0.035] lg:left-[58%] lg:text-[min(36vw,26rem)]"
@@ -133,10 +134,18 @@ export function ProfileHeader({ athlete }: Props) {
           {ui.skipIntro}
         </a>
 
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(280px,42%)] lg:items-end lg:gap-x-10 xl:gap-x-14">
+        <div
+          className={`grid gap-10 lg:items-end lg:gap-x-10 xl:gap-x-14 ${
+            hideHeroAvatar ? "" : "lg:grid-cols-[minmax(0,1fr)_minmax(280px,42%)]"
+          }`}
+        >
           {/* Colonna copy: watermark maglia + tipografia da copertina */}
-          <div className="relative order-2 flex min-w-0 flex-col lg:order-1 lg:pb-4 lg:pr-4">
-            {jersey && athlete.slug !== "costantino-favasuli" ? (
+          <div
+            className={`relative flex min-w-0 flex-col lg:pb-4 lg:pr-4 ${
+              hideHeroAvatar ? "" : "order-2 lg:order-1"
+            }`}
+          >
+            {jersey && athlete.slug !== "costantino-favasuli" && athlete.slug !== "alfonso-zampogna" ? (
               <span
                 className="pointer-events-none absolute -top-6 right-0 select-none text-[clamp(6rem,28vw,14rem)] font-bold leading-none tracking-tighter text-white/5.5 sm:-top-10 sm:right-4 lg:-right-8 lg:top-4 lg:text-[min(16rem,22vw)]"
                 style={{ fontFamily: "var(--font-bebas)" }}
@@ -287,6 +296,7 @@ export function ProfileHeader({ athlete }: Props) {
           </div>
 
           {/* Avatar: cornice conica, depth stack, badge maglia */}
+          {hideHeroAvatar ? null : (
           <div
             className={`order-1 mx-auto flex w-full max-w-82 flex-col items-center lg:order-2 lg:mx-0 lg:max-w-88 lg:items-end lg:pb-2 ${avatarDesktopShiftRight}`}
           >
@@ -373,6 +383,7 @@ export function ProfileHeader({ athlete }: Props) {
               ) : null}
             </p>
           </div>
+          )}
         </div>
       </div>
     </header>

@@ -27,6 +27,7 @@ export const alfonsoZampogna: AthleteProfile = {
     heroBackgroundImageObjectPosition: "center center",
     heroBackgroundImageObjectPositionMobile: "center 42%",
     heroBackgroundImageReadabilityOverlay: true,
+    heroHideAvatar: true,
     name: "Alfonso Zampogna",
     number: "16",
     sport: "Basket",

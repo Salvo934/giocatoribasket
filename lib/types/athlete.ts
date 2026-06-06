@@ -235,6 +235,8 @@ export interface AthleteProfile {
     heroImageFocus?: "top" | "center" | "bottom";
     /** CSS object-position per avatar hero (es. "50% 18%") */
     heroImageObjectPosition?: string;
+    /** Nasconde il disco foto in hero (es. quando lo sfondo è già il ritratto) */
+    heroHideAvatar?: boolean;
     /** Immagine statica full-bleed dietro hero (mobile + desktop) */
     heroBackgroundImage?: string;
     /** Variante desktop opzionale (es. crop 16:9) */
