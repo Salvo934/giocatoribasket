@@ -4,6 +4,7 @@ import Image from "next/image";
 import type { AthleteProfile } from "@/lib/types/athlete";
 import { HeroBackgroundImage } from "./HeroBackgroundImage";
 import { HeroBackgroundVideo } from "./HeroBackgroundVideo";
+import { HeroBackgroundVideoStack } from "./HeroBackgroundVideoStack";
 import { ShareProfileButton } from "./ShareActions";
 import { useProfileLocale } from "./ProfileLocaleContext";
 
@@ -33,7 +34,8 @@ export function ProfileHeader({ athlete }: Props) {
   const objectPosition = HERO_FOCUS_CLASS[focus] ?? "object-center";
   const heroObjectPosition = h.heroImageObjectPosition?.trim();
   const jersey = h.number?.replace(/\D/g, "") ?? "";
-  const hasVideoBg = Boolean(h.heroBackgroundVideo);
+  const hasVideoStack = Boolean(h.heroBackgroundVideos?.length);
+  const hasVideoBg = Boolean(h.heroBackgroundVideo) || hasVideoStack;
   const hasImageBg = Boolean(h.heroBackgroundImage);
   const hasMediaBg = hasVideoBg || hasImageBg;
   const hideHeroAvatar = h.heroHideAvatar === true;
@@ -73,24 +75,31 @@ export function ProfileHeader({ athlete }: Props) {
             readabilityOverlay={h.heroBackgroundImageReadabilityOverlay ?? true}
           />
         </div>
-      ) : hasVideoBg && h.heroBackgroundVideo ? (
+      ) : hasVideoBg ? (
         <>
           {/* Video solo da md↑ — su mobile risparmiamo banda e CPU */}
           <div className="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden md:block" aria-hidden>
-            <HeroBackgroundVideo
-              src={h.heroBackgroundVideo}
-              loopEnd={h.heroBackgroundVideoLoopEnd}
-              objectPosition={h.heroBackgroundVideoObjectPosition}
-              scoreboardVeil={h.heroBackgroundVideoScoreboardVeil}
-              lightOverlay={h.heroBackgroundVideoLightOverlay}
-              noOverlay={h.heroBackgroundVideoNoOverlay}
-              readabilityOverlay={h.heroBackgroundVideoReadabilityOverlay}
-              landscape={h.heroBackgroundVideoLandscape}
-              fit={h.heroBackgroundVideoFit}
-            />
+            {hasVideoStack && h.heroBackgroundVideos ? (
+              <HeroBackgroundVideoStack
+                clips={h.heroBackgroundVideos}
+                readabilityOverlay={h.heroBackgroundVideoReadabilityOverlay ?? true}
+              />
+            ) : h.heroBackgroundVideo ? (
+              <HeroBackgroundVideo
+                src={h.heroBackgroundVideo}
+                loopEnd={h.heroBackgroundVideoLoopEnd}
+                objectPosition={h.heroBackgroundVideoObjectPosition}
+                scoreboardVeil={h.heroBackgroundVideoScoreboardVeil}
+                lightOverlay={h.heroBackgroundVideoLightOverlay}
+                noOverlay={h.heroBackgroundVideoNoOverlay}
+                readabilityOverlay={h.heroBackgroundVideoReadabilityOverlay}
+                landscape={h.heroBackgroundVideoLandscape}
+                fit={h.heroBackgroundVideoFit}
+              />
+            ) : null}
           </div>
           <div className="pointer-events-none absolute inset-0 z-0 md:hidden">{staticHeroBackdrop}</div>
-          {!h.heroBackgroundVideoNoOverlay && !h.heroBackgroundVideoReadabilityOverlay ? (
+          {!hasVideoStack && !h.heroBackgroundVideoNoOverlay && !h.heroBackgroundVideoReadabilityOverlay ? (
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 z-1 hidden bg-[radial-gradient(ellipse_90%_80%_at_0%_-15%,rgba(223,255,74,0.09),transparent_50%),radial-gradient(ellipse_70%_55%_at_100%_25%,rgba(100,140,255,0.06),transparent_52%)] opacity-70 md:block"

@@ -22,9 +22,22 @@ export const alfonsoZampogna: AthleteProfile = {
     heroImage: "/athletes/alfonso-zampogna-avatar.jpg",
     heroImageFocus: "top",
     heroImageObjectPosition: "50% 12%",
-    heroBackgroundVideo: "/athletes/zampogna-clip-5.mp4",
-    heroBackgroundVideoObjectPosition: "right center",
-    heroBackgroundVideoFit: "contain",
+    heroBackgroundVideos: [
+      {
+        src: "/athletes/zampogna-clip-1.mp4",
+        anchor: "left",
+        fit: "contain",
+        width: "40%",
+        objectPosition: "center center",
+      },
+      {
+        src: "/athletes/zampogna-clip-3.mp4",
+        anchor: "center",
+        fit: "contain",
+        width: "36%",
+        objectPosition: "center center",
+      },
+    ],
     heroBackgroundVideoReadabilityOverlay: true,
     name: "Alfonso Zampogna",
     number: "16",
@@ -214,18 +227,7 @@ export const alfonsoZampogna: AthleteProfile = {
   },
   socialMediaKit: {
     statusLabel: "Stagione 2025-26 · Moncada Energy Agrigento",
-    items: [
-      {
-        id: "zampogna-season-25-26-post",
-        title: "Player card — stagione 25/26",
-        format: "post",
-        src: "/athletes/cardzampogna-og.jpg",
-        caption:
-          "Playmaker dinamico: visione di gioco, leadership e tiro da tre. In campo porto regia, energia e la voglia di creare per me e per i compagni.\n\n📊 Serie B Girone A 25/26 · Moncada Energy Agrigento\nPPG 11.0 · AST 4.1 · REB 3.3 · MIN 28.5",
-        matchDate: "2026-06-04",
-        downloadName: "alfonso-zampogna-player-card-25-26.jpg",
-      },
-    ],
+    items: [],
   },
   career: [
     {

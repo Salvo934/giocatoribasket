@@ -196,6 +196,15 @@ export interface AthleteLegalConfig {
 
 export type ProfileLocaleCode = "it" | "en";
 
+export interface HeroBackgroundVideoClip {
+  src: string;
+  anchor: "left" | "center" | "right";
+  fit?: "cover" | "contain";
+  objectPosition?: string;
+  /** Larghezza area clip (es. `38%`) */
+  width?: string;
+}
+
 export interface AthleteProfile {
   slug: string;
   /** Se false, il profilo resta in archivio ma non viene pubblicato. */
@@ -247,6 +256,8 @@ export interface AthleteProfile {
     heroBackgroundImageObjectPositionMobile?: string;
     /** Velo leggibilità testi su `heroBackgroundImage` */
     heroBackgroundImageReadabilityOverlay?: boolean;
+    /** Più clip posizionati nello sfondo hero (desktop) — alternativa a `heroBackgroundVideo` singolo */
+    heroBackgroundVideos?: HeroBackgroundVideoClip[];
     /** Video loop in `public` (mp4), dietro overlay — uso mirato per non coprire copy/avatar */
     heroBackgroundVideo?: string;
     /** Fine loop in secondi (esclude coda indesiderata, es. registrazione schermo) */
