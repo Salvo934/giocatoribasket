@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 
 type Props = {
@@ -9,6 +10,9 @@ type Props = {
   children: ReactNode;
   /** Sezione più bassa su viewport (es. gallery densa) */
   density?: "default" | "compact";
+  backgroundImage?: string;
+  backgroundImageObjectPosition?: string;
+  backgroundImageObjectPositionMobile?: string;
 };
 
 export function SectionShell({
@@ -19,9 +23,13 @@ export function SectionShell({
   headerActions,
   children,
   density = "default",
+  backgroundImage,
+  backgroundImageObjectPosition = "center center",
+  backgroundImageObjectPositionMobile = "center 35%",
 }: Props) {
   const headingId = `${id}-heading`;
   const compact = density === "compact";
+  const hasBg = Boolean(backgroundImage);
 
   return (
     <section
@@ -29,11 +37,42 @@ export function SectionShell({
       aria-labelledby={headingId}
       className={
         compact
-          ? "scroll-mt-14 border-b border-white/6 bg-linear-to-b from-[rgba(255,255,255,0.015)] from-0% via-transparent via-12% to-transparent to-100% py-10 md:py-12"
-          : "scroll-mt-14 border-b border-white/6 bg-linear-to-b from-[rgba(255,255,255,0.015)] from-0% via-transparent via-12% to-transparent to-100% py-14 md:py-18"
+          ? `scroll-mt-14 border-b border-white/6 py-10 md:py-12 ${hasBg ? "relative overflow-hidden" : "bg-linear-to-b from-[rgba(255,255,255,0.015)] from-0% via-transparent via-12% to-transparent to-100%"}`
+          : `scroll-mt-14 border-b border-white/6 py-14 md:py-18 ${hasBg ? "relative overflow-hidden" : "bg-linear-to-b from-[rgba(255,255,255,0.015)] from-0% via-transparent via-12% to-transparent to-100%"}`
       }
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      {hasBg && backgroundImage ? (
+        <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
+          <Image
+            src={backgroundImage}
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-55 md:hidden"
+            style={{ objectPosition: backgroundImageObjectPositionMobile }}
+          />
+          <Image
+            src={backgroundImage}
+            alt=""
+            fill
+            sizes="100vw"
+            className="hidden object-cover opacity-50 md:block"
+            style={{ objectPosition: backgroundImageObjectPosition }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `
+                linear-gradient(to bottom, rgba(3, 3, 5, 0.92) 0%, rgba(3, 3, 5, 0.68) 32%, rgba(3, 3, 5, 0.74) 68%, rgba(3, 3, 5, 0.9) 100%),
+                linear-gradient(to right, rgba(3, 3, 5, 0.55) 0%, transparent 42%, transparent 58%, rgba(3, 3, 5, 0.45) 100%)
+              `,
+            }}
+          />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,rgba(223,255,74,0.05),transparent_65%)]" />
+        </div>
+      ) : null}
+
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <header
           className={
             compact

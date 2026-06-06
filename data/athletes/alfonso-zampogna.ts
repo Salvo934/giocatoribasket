@@ -233,6 +233,11 @@ export const alfonsoZampogna: AthleteProfile = {
     statusLabel: "Stagione 2025-26 · Moncada Energy Agrigento",
     items: [],
   },
+  careerSection: {
+    backgroundImage: "/athletes/zampogna-hero-bg.jpg",
+    objectPosition: "center 28%",
+    objectPositionMobile: "center 22%",
+  },
   career: [
     {
       season: "2025-26",

@@ -56,6 +56,7 @@ export function mergeAthleteLocale(base: AthleteProfile, overlay: AthleteLocaleO
         }
       : base.socialMediaKit,
     career: overlay.career ?? base.career,
+    careerSection: overlay.careerSection ? { ...base.careerSection, ...overlay.careerSection } : base.careerSection,
     honors: overlay.honors ?? base.honors,
     verifications: overlay.verifications ?? base.verifications,
     contacts: {

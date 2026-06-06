@@ -114,6 +114,13 @@ export interface CareerStep {
   clubLogo?: string;
 }
 
+export interface CareerSectionStyle {
+  /** Sfondo sezione percorso (`/athletes/...` in `public`) */
+  backgroundImage: string;
+  objectPosition?: string;
+  objectPositionMobile?: string;
+}
+
 export interface HonorItem {
   title: string;
   detail: string;
@@ -326,6 +333,8 @@ export interface AthleteProfile {
   /** Post e storie pronti per Instagram dopo le partite */
   socialMediaKit?: AthleteSocialMediaKit;
   career: CareerStep[];
+  /** Stile opzionale per la sezione percorso */
+  careerSection?: CareerSectionStyle;
   honors: HonorItem[];
   verifications: VerificationBadge[];
   contacts: {

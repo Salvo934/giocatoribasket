@@ -15,6 +15,7 @@ const panelInner = "rounded-[1.65rem] bg-zinc-950/55 px-6 py-8 md:px-10 md:py-10
 export function CareerTimeline({ athlete }: Props) {
   const { ui } = useProfileLocale();
   const steps = athlete.career;
+  const sectionStyle = athlete.careerSection;
 
   return (
     <SectionShell
@@ -22,6 +23,9 @@ export function CareerTimeline({ athlete }: Props) {
       eyebrow={ui.career.eyebrow}
       title={ui.career.title}
       description={ui.career.description}
+      backgroundImage={sectionStyle?.backgroundImage}
+      backgroundImageObjectPosition={sectionStyle?.objectPosition}
+      backgroundImageObjectPositionMobile={sectionStyle?.objectPositionMobile}
     >
       <div className={panelFrame}>
         <div className={panelInner}>
