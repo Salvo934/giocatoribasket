@@ -231,7 +231,18 @@ export const alfonsoZampogna: AthleteProfile = {
   },
   socialMediaKit: {
     statusLabel: "Stagione 2025-26 · Moncada Energy Agrigento",
-    items: [],
+    items: [
+      {
+        id: "zampogna-season-25-26-post",
+        title: "Fine stagione — medie regular season",
+        format: "post",
+        src: "/athletes/social/zampogna-season-25-26-post.png",
+        caption:
+          "Playmaker dinamico: visione di gioco, leadership e tiro da tre. In campo porto regia, energia e la voglia di creare per me e per i compagni.\n\n📊 Serie B Girone A 25/26 · Moncada Energy Agrigento\nPPG 11.0 · REB 3.3 · AST 4.1 · MIN 28.5",
+        matchDate: "2026-06-04",
+        downloadName: "alfonso-zampogna-fine-stagione-25-26.png",
+      },
+    ],
   },
   careerSection: {
     backgroundImage: "/athletes/zampogna-hero-bg.jpg",
