@@ -110,17 +110,6 @@ export function ProfileHeader({ athlete }: Props) {
         staticHeroBackdrop
       )}
 
-      {jersey && athlete.slug !== "antonio-sorbara" && athlete.slug !== "costantino-favasuli" && athlete.slug !== "alfonso-zampogna" ? (
-        <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-          <span
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none text-[min(48vw,22rem)] font-bold leading-[0.82] tracking-tighter text-white/[0.035] lg:left-[58%] lg:text-[min(36vw,26rem)]"
-            style={{ fontFamily: "var(--font-bebas)" }}
-          >
-            {jersey}
-          </span>
-        </div>
-      ) : null}
-
       <div
         aria-hidden
         className={`pointer-events-none absolute inset-x-0 top-0 z-2 h-24 bg-linear-to-b to-transparent ${
@@ -155,7 +144,7 @@ export function ProfileHeader({ athlete }: Props) {
               hideHeroAvatar ? "" : "order-2 lg:order-1"
             }`}
           >
-            {jersey && athlete.slug !== "costantino-favasuli" && athlete.slug !== "alfonso-zampogna" ? (
+            {jersey ? (
               <span
                 className="pointer-events-none absolute -top-6 right-0 select-none text-[clamp(6rem,28vw,14rem)] font-bold leading-none tracking-tighter text-white/5.5 sm:-top-10 sm:right-4 lg:-right-8 lg:top-4 lg:text-[min(16rem,22vw)]"
                 style={{ fontFamily: "var(--font-bebas)" }}
