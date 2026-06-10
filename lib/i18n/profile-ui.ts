@@ -118,6 +118,7 @@ export type CareerUi = {
   title: string;
   description: string;
   empty: string;
+  coachLabel: string;
 };
 
 export type HonorsUi = {
@@ -362,6 +363,7 @@ const UI_IT: ProfileUi = {
     title: "Percorso",
     description: "Linea temporale stagioni e contesti: utile per contesto sportivo rapido senza aprire referti completi.",
     empty: "Nessun passaggio carriera in scheda.",
+    coachLabel: "Allenatore",
   },
   honors: {
     eyebrow: "Palmares",
@@ -555,6 +557,7 @@ const UI_EN: ProfileUi = {
     title: "Career path",
     description: "Season-by-season timeline — quick sporting context without opening full box scores.",
     empty: "No career stops listed on this profile.",
+    coachLabel: "Head coach",
   },
   honors: {
     eyebrow: "Honors",

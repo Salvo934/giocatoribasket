@@ -77,6 +77,15 @@ export function CareerTimeline({ athlete }: Props) {
                           >
                             {step.club}
                           </h3>
+                          {step.coach ? (
+                            <p className="mt-2 text-sm text-zinc-300">
+                              <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-500">
+                                {ui.career.coachLabel}
+                              </span>
+                              <span className="text-zinc-600"> · </span>
+                              {step.coach}
+                            </p>
+                          ) : null}
                           {step.notes ? (
                             <p className="mt-3 border-l-2 border-accent/35 pl-3 text-sm leading-relaxed text-zinc-400">{step.notes}</p>
                           ) : null}

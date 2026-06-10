@@ -110,6 +110,8 @@ export interface CareerStep {
   club: string;
   category: string;
   notes?: string;
+  /** Allenatore di riferimento nel passaggio */
+  coach?: string;
   /** Logo squadra (`/athletes/...` in `public`) */
   clubLogo?: string;
 }

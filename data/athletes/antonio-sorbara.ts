@@ -37,7 +37,8 @@ export const antonioSorbara: AthleteProfile = {
     dashboardIntro:
       "Ala piccola 186 cm, 21 anni, protagonista offensivo della Scuola Basket Viola in DR1 2025-26: 16,4 punti di media su 23 gare (378 punti totali, fonte PlayBasket Calabria), con season high a 38 punti.",
     agency: {
-      name: "Antonio Sorbara",
+      name: "Sergio Zumbo",
+      representative: "Procuratore / avvocato",
     },
     lastUpdated: "2026-06-01",
     highlightUrl: "/athletes/sorbara-highlight-1.mp4",
@@ -257,12 +258,14 @@ export const antonioSorbara: AthleteProfile = {
       season: "2025-26",
       club: "Scuola Basket Viola",
       category: "Divisione Regionale 1 · Calabria",
+      coach: "Pasquale Motta",
       notes: "16,4 PPG in 23 gare · season high 38 pts",
     },
     {
       season: "2024-25",
       club: "Peppino Cocuzza (San Filippo del Mela)",
       category: "Serie C",
+      coach: "Francesco Romeo",
       notes: "6,4 PPG in 19 gare · prima esperienza lontano dalla Calabria",
     },
     {
@@ -275,12 +278,14 @@ export const antonioSorbara: AthleteProfile = {
       season: "2023-24",
       club: "Stingers Reggio Calabria",
       category: "Serie C",
+      coach: "Pasquale Motta · Eugenio Dattola",
       notes: "4,5 PPG in 21 gare",
     },
     {
       season: "2022-23",
       club: "Botteghelle Basket",
       category: "Serie D",
+      coach: "Gianni Tripodi",
       notes: "7,7 PPG in 23 gare · miglior media fino a quel momento",
     },
     {
@@ -316,14 +321,14 @@ export const antonioSorbara: AthleteProfile = {
   ],
   contacts: {
     agency: {
-      name: "",
+      name: "Sergio Zumbo",
     },
     representative: {
-      name: "Antonio Sorbara",
-      role: "Giocatore · contatto diretto",
-      phone: "+39 331 770 1638",
+      name: "Sergio Zumbo",
+      role: "Procuratore / avvocato",
+      phone: "+39 328 426 2935",
     },
-    whatsapp: "https://wa.me/393317701638",
+    whatsapp: "https://wa.me/393284262935",
     social: [
       {
         platform: "Instagram",
