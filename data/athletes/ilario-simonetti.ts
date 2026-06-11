@@ -85,10 +85,10 @@ export const ilarioSimonetti: AthleteProfile = {
     injuryContext: [
       {
         label: "Lesione",
-        value: "Lussazione gomito destro ad alto grado (braccio dominante).",
+        value: "Lussazione gomito sinistro ad alto grado.",
       },
       {
-        label: "Stop competitivo",
+        label: "Stop",
         value: "Circa 6 mesi fuori dal campionato.",
       },
       {
