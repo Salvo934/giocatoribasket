@@ -78,6 +78,26 @@ function PhaseRail({
   );
 }
 
+function InjuryContextBlock({ items }: { items: Array<{ label: string; value: string }> }) {
+  const { ui } = useProfileLocale();
+
+  return (
+    <div className="rounded-2xl border border-white/10 bg-black/40 p-4 sm:p-5">
+      <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-zinc-500">
+        {ui.returnToPlayUi.injuryContext}
+      </p>
+      <dl className="mt-4 divide-y divide-white/8">
+        {items.map((item) => (
+          <div key={item.label} className="grid gap-1 py-3 first:pt-0 last:pb-0 sm:grid-cols-[9.5rem_minmax(0,1fr)] sm:gap-4 sm:py-3.5">
+            <dt className="text-[10px] font-bold uppercase tracking-[0.16em] text-zinc-500">{item.label}</dt>
+            <dd className="text-sm leading-relaxed text-zinc-200">{item.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  );
+}
+
 function StatusPill({ label, value, highlight = false }: { label: string; value: string; highlight?: boolean }) {
   return (
     <div
@@ -261,33 +281,35 @@ export function ReturnToPlayPanel({ athlete }: Props) {
             returnLabel={ui.returnToPlayUi.phaseReturn}
           />
 
-          <div className="grid gap-5 lg:grid-cols-12 lg:gap-6">
-            <div className="space-y-4 lg:col-span-7">
+          {rtp.injuryContext?.length ? <InjuryContextBlock items={rtp.injuryContext} /> : null}
+
+          {!rtp.injuryContext?.length && rtp.focusAreas?.length ? (
+            <aside className="rounded-2xl border border-white/10 bg-black/40 p-4 sm:p-5">
+              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-zinc-500">
+                {ui.returnToPlayUi.injuryContext}
+              </p>
+              <ul className="mt-3 space-y-3">
+                {rtp.focusAreas.map((item) => (
+                  <li key={item.slice(0, 40)} className="flex gap-3 text-sm leading-relaxed text-zinc-300">
+                    <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-sky-400/10 text-sky-300">
+                      <CheckIcon className="size-3" />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          ) : null}
+
+          {!rtp.injuryContext?.length && rtp.intro?.length ? (
+            <div className="space-y-3">
               {rtp.intro.map((paragraph) => (
                 <p key={paragraph.slice(0, 48)} className="text-sm leading-relaxed text-zinc-300 md:text-[0.95rem]">
                   {paragraph}
                 </p>
               ))}
             </div>
-
-            {rtp.focusAreas?.length ? (
-              <aside className="rounded-2xl border border-white/10 bg-black/40 p-4 lg:col-span-5 lg:p-5">
-                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-zinc-500">
-                  {ui.returnToPlayUi.injuryContext}
-                </p>
-                <ul className="mt-3 space-y-3">
-                  {rtp.focusAreas.map((item) => (
-                    <li key={item.slice(0, 40)} className="flex gap-3 text-sm leading-relaxed text-zinc-300">
-                      <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-sky-400/10 text-sky-300">
-                        <CheckIcon className="size-3" />
-                      </span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </aside>
-            ) : null}
-          </div>
+          ) : null}
 
           <div>
             <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-zinc-500">{ui.returnToPlayUi.statusHeading}</p>

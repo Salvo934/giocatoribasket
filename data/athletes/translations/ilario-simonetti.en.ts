@@ -66,21 +66,31 @@ export const ilarioSimonettiEn: AthleteLocaleOverlay = {
     eyebrow: "Return to play",
     title: "Return to Play — Elbow Injury Update",
     subtitle:
-      "Post-injury return sheet (right elbow): operational status, verification clips and access to private documentation for professional evaluations.",
-    intro: [
-      "Ilario sustained a high-grade right elbow dislocation, with roughly six months out of competitive action. Recovery was managed with physiotherapy, strength work and a progressive return to court, monitored by his representative and medical staff.",
-      "This section collects recent training and technical work on video to document his current physical condition — useful for agents, clubs and staff evaluating workouts, tryouts or market availability.",
-    ],
-    focusAreas: [
-      "Injury: high-grade right elbow dislocation — roughly 6 months out.",
-      "Pathway: structured physiotherapy, progressive loading and reintroduction of sport-specific movement.",
-      "Visual verification: shooting, dribbling, passing and controlled physical work filmed in recent sessions.",
-      "Medical / physio documentation available privately to authorized clubs and staff.",
+      "Operational status, verification clips and access to private documentation for professional evaluations.",
+    injuryContext: [
+      {
+        label: "Injury",
+        value: "High-grade right elbow dislocation (dominant arm).",
+      },
+      {
+        label: "Competitive stop",
+        value: "Roughly six months out of league action.",
+      },
+      {
+        label: "Pathway",
+        value: "Structured physiotherapy, strength work and progressive return to court, monitored by representative and medical staff.",
+      },
+      {
+        label: "Verification",
+        value: "Recent clips of shooting, dribbling, passing and controlled physical work — Video proof section.",
+      },
+      {
+        label: "Documentation",
+        value: "Medical / physio report available privately to authorized clubs and staff.",
+      },
     ],
     updatedAt: "2026-06-06",
     status: [
-      { label: "Injury", value: "High-grade right elbow dislocation" },
-      { label: "Time out", value: "Roughly 6 months (competitive stop)" },
       { label: "Current phase", value: "Documented return to court" },
       { label: "Ball work", value: "Resumed in training" },
       { label: "Shooting and technical gestures", value: "Documented on video" },

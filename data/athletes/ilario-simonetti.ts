@@ -81,21 +81,31 @@ export const ilarioSimonetti: AthleteProfile = {
     eyebrow: "Return to play",
     title: "Return to Play — Elbow Injury Update",
     subtitle:
-      "Scheda di rientro post-infortunio (gomito destro): status operativo, clip di verifica e accesso a documentazione riservata per valutazioni professionali.",
-    intro: [
-      "Ilario ha affrontato una lussazione di alto grado al gomito destro, con stop competitivo di circa 6 mesi. Il recupero è stato gestito con fisioterapia, rinforzo muscolare e rientro progressivo sul campo, monitorato dal referente e dallo staff medico.",
-      "Questa sezione raccoglie clip recenti di allenamento e lavoro tecnico per documentare la condizione attuale del giocatore — utile a procuratori, club e staff che devono valutare workout, tryout o disponibilità mercato.",
-    ],
-    focusAreas: [
-      "Lesione: lussazione gomito destro ad alto grado — stop circa 6 mesi.",
-      "Percorso: fisioterapia strutturata, carico progressivo e reintroduzione del gesto sportivo.",
-      "Verifica visiva: tiro, palleggio, passaggi e controllato lavoro fisico filmati in sessioni recenti.",
-      "Documentazione medica/fisioterapica condivisibile in privato con club e staff autorizzati.",
+      "Status operativo, clip di verifica e accesso a documentazione riservata per valutazioni professionali.",
+    injuryContext: [
+      {
+        label: "Lesione",
+        value: "Lussazione gomito destro ad alto grado (braccio dominante).",
+      },
+      {
+        label: "Stop competitivo",
+        value: "Circa 6 mesi fuori dal campionato.",
+      },
+      {
+        label: "Percorso",
+        value: "Fisioterapia strutturata, rinforzo muscolare e rientro progressivo sul campo, monitorato da referente e staff medico.",
+      },
+      {
+        label: "Verifica",
+        value: "Clip recenti di tiro, palleggio, passaggi e lavoro fisico controllato — sezione Video proof.",
+      },
+      {
+        label: "Documentazione",
+        value: "Report medico/fisioterapico condivisibile in privato con club e staff autorizzati.",
+      },
     ],
     updatedAt: "2026-06-06",
     status: [
-      { label: "Infortunio", value: "Lussazione gomito destro — alto grado" },
-      { label: "Stop", value: "Circa 6 mesi (stop competitivo)" },
       { label: "Fase attuale", value: "Rientro in campo documentato" },
       { label: "Lavoro con palla", value: "Ripreso in allenamento" },
       { label: "Tiro e gesti tecnici", value: "Documentati su video" },

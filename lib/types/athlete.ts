@@ -202,9 +202,11 @@ export interface ReturnToPlaySection {
   eyebrow?: string;
   title: string;
   subtitle: string;
-  /** Paragrafi introduttivi */
-  intro: string[];
-  /** Punti tecnici rapidi sotto l’intro */
+  /** @deprecated Preferire `injuryContext` */
+  intro?: string[];
+  /** Contesto infortunio strutturato (label + valore) */
+  injuryContext?: ReturnToPlayStatusItem[];
+  /** @deprecated Preferire `injuryContext` */
   focusAreas?: string[];
   status: ReturnToPlayStatusItem[];
   videoProofTitle?: string;
