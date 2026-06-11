@@ -2,173 +2,18 @@
 
 import { useState } from "react";
 import type { AthleteProfile, AthleteVideo, VideoCategoryId } from "@/lib/types/athlete";
-import { useCookieConsent } from "@/components/legal/CookieConsentProvider";
 import { YouTubeConsentGate } from "@/components/legal/YouTubeConsentGate";
-import { youtubeEmbedUrl, youtubeThumbnailUrl } from "@/lib/youtube";
+import { youtubeEmbedUrl } from "@/lib/youtube";
 import { isLocalVideoUrl } from "@/lib/video-url";
-import type { VideoUi } from "@/lib/i18n/profile-ui";
+import { BroadcastFrame } from "./BroadcastFrame";
+import { FilmRoomThumbnail } from "./FilmRoomThumbnail";
 import { SectionShell } from "./SectionShell";
 import { useProfileLocale } from "./ProfileLocaleContext";
 
 type Props = { athlete: AthleteProfile };
 
-function BroadcastFrame({
-  title,
-  athleteName,
-  number,
-  role,
-  videoUi,
-  children,
-}: {
-  title: string;
-  athleteName: string;
-  number?: string;
-  role: string;
-  videoUi: VideoUi;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="relative overflow-hidden rounded-sm border border-white/15 bg-[#0a0a0a] shadow-[0_24px_80px_-20px_rgba(0,0,0,0.85)]">
-      {/* angoli “broadcast” */}
-      <div className="pointer-events-none absolute left-2 top-2 h-6 w-6 border-l-2 border-t-2 border-white/35" aria-hidden />
-      <div className="pointer-events-none absolute right-2 top-2 h-6 w-6 border-r-2 border-t-2 border-white/35" aria-hidden />
-      <div className="pointer-events-none absolute bottom-2 left-2 h-6 w-6 border-b-2 border-l-2 border-white/35" aria-hidden />
-      <div className="pointer-events-none absolute bottom-2 right-2 h-6 w-6 border-b-2 border-r-2 border-white/35" aria-hidden />
-
-      {/* barra superiore stile arena */}
-      <div className="relative border-b border-white/10 bg-linear-to-r from-black via-zinc-950 to-black">
-        <div className="h-0.5 w-full bg-linear-to-r from-transparent via-[#C9082Acc] to-transparent" />
-        <div className="flex flex-col gap-2 px-3 py-2.5 sm:flex-row sm:items-center sm:justify-between sm:px-4 md:px-5">
-          <div className="flex min-w-0 items-center gap-3">
-            <span className="shrink-0 rounded bg-[#C9082A] px-1.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-white">
-              {videoUi.clip}
-            </span>
-            <div className="min-w-0">
-              <p className="truncate text-[11px] font-bold uppercase tracking-[0.12em] text-zinc-400">{videoUi.featured}</p>
-              <p className="truncate text-sm font-bold text-white md:text-base">
-                {athleteName}
-                {number ? (
-                  <span className="ml-2 font-mono text-zinc-500 tabular-nums">#{number}</span>
-                ) : null}
-              </p>
-            </div>
-          </div>
-          <div className="flex shrink-0 items-center gap-2 sm:text-right">
-            <span className="hidden text-[10px] font-bold uppercase tracking-widest text-zinc-500 sm:inline">
-              {role}
-            </span>
-            <span className="rounded border border-white/10 bg-white/4 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-300">
-              HD
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* area video */}
-      <div className="relative bg-black">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,8,42,0.06)_0%,transparent_55%)]" />
-        {children}
-      </div>
-
-      {/* lower third */}
-      <div className="border-t border-white/10 bg-linear-to-r from-zinc-950 via-black to-zinc-950 px-3 py-2.5 sm:px-4 md:px-5">
-        <div className="flex items-start gap-3">
-          <span className="mt-0.5 h-8 w-1 shrink-0 rounded-full bg-[#C9082A]" aria-hidden />
-          <div className="min-w-0">
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">{videoUi.nowPlaying}</p>
-            <p className="text-sm font-semibold leading-snug text-white md:text-base">{title}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function clipPoster(clip: AthleteVideo, fallback?: string) {
   return clip.poster ?? fallback;
-}
-
-function FilmRoomThumbnail({
-  clip,
-  selected,
-  onSelect,
-  defaultPoster,
-}: {
-  clip: AthleteVideo;
-  selected: boolean;
-  onSelect: () => void;
-  defaultPoster?: string;
-}) {
-  const { externalMediaAllowed, ready } = useCookieConsent();
-  const thumb = externalMediaAllowed && !isLocalVideoUrl(clip.url) ? youtubeThumbnailUrl(clip.url) : null;
-  const localVideo = isLocalVideoUrl(clip.url);
-  const poster = localVideo ? clipPoster(clip, defaultPoster) : null;
-
-  return (
-    <button
-      type="button"
-      aria-pressed={selected}
-      onClick={onSelect}
-      className={`group relative w-full shrink-0 overflow-hidden rounded-lg border bg-black text-left outline-none ring-offset-2 ring-offset-black transition hover:border-[#C9082A]/55 focus-visible:ring-2 focus-visible:ring-[#C9082A] sm:w-[min(42vw,12rem)] lg:w-full lg:flex-1 ${
-        selected
-          ? "border-[#C9082A] shadow-[0_0_26px_-6px_rgba(201,8,42,0.55)]"
-          : "border-white/14 hover:bg-white/3"
-      }`}
-    >
-      <div className="relative aspect-video">
-        {!ready ? (
-          <div className="flex h-full items-center justify-center bg-zinc-900 text-[10px] text-zinc-500">…</div>
-        ) : !externalMediaAllowed ? (
-          <div className="flex h-full flex-col items-center justify-center gap-2 bg-zinc-900 p-3 text-center">
-            <p className="text-[10px] font-bold uppercase text-zinc-400">Anteprima YouTube</p>
-            <p className="line-clamp-2 text-[10px] text-zinc-500">{clip.title}</p>
-          </div>
-        ) : localVideo && poster ? (
-          <img
-            src={poster}
-            alt=""
-            className="h-full w-full object-cover object-top transition duration-300 group-hover:scale-[1.03]"
-            loading="lazy"
-          />
-        ) : localVideo ? (
-          <video
-            src={clip.url}
-            muted
-            playsInline
-            preload="metadata"
-            className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
-          />
-        ) : thumb ? (
-          <img
-            src={thumb}
-            alt=""
-            className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
-            loading="lazy"
-          />
-        ) : (
-          <div className="flex h-full items-center justify-center bg-zinc-900 text-[10px] font-bold uppercase text-zinc-500">
-            Clip
-          </div>
-        )}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-linear-to-t from-black via-black/45 to-transparent"
-        />
-        {selected ? (
-          <span className="pointer-events-none absolute left-1.5 top-1.5 rounded bg-[#C9082A] px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider text-white shadow-lg">
-            In riproduzione
-          </span>
-        ) : (
-          <span className="pointer-events-none absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/55 text-[10px] text-white backdrop-blur-sm transition group-hover:scale-105 group-hover:border-[#C9082A]/60">
-            ▶
-          </span>
-        )}
-        <p className="absolute bottom-1.5 left-2 right-2 line-clamp-2 text-[10px] font-bold uppercase leading-tight tracking-wide text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.9)]">
-          {clip.title}
-        </p>
-      </div>
-    </button>
-  );
 }
 
 function ClipRow({ index, clip }: { index: number; clip: AthleteVideo }) {
@@ -305,6 +150,7 @@ export function VideoHub({ athlete }: Props) {
                       selected={filmRoomFocus === i}
                       onSelect={() => setFilmRoomFocus(i)}
                       defaultPoster={v.poster}
+                      nowPlayingLabel={ui.video.nowPlaying}
                     />
                   ))}
                 </div>

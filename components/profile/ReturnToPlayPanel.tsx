@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 import type { AthleteProfile, ReturnToPlayVideoProof } from "@/lib/types/athlete";
+import { YouTubeConsentGate } from "@/components/legal/YouTubeConsentGate";
 import { isLocalVideoUrl } from "@/lib/video-url";
-import { youtubeEmbedUrl, youtubeThumbnailUrl, youtubeVideoId } from "@/lib/youtube";
+import { youtubeEmbedUrl, youtubeVideoId } from "@/lib/youtube";
+import { BroadcastFrame } from "./BroadcastFrame";
+import { FilmRoomThumbnail } from "./FilmRoomThumbnail";
 import { SectionShell } from "./SectionShell";
 import { useProfileLocale } from "./ProfileLocaleContext";
 
@@ -101,185 +104,102 @@ function StatusPill({ label, value, highlight = false }: { label: string; value:
   );
 }
 
-function VideoPlaceholder({
-  label,
-  compact = false,
-  poster,
-}: {
-  label: string;
-  compact?: boolean;
-  poster?: string;
-}) {
-  return (
-    <div className="relative h-full w-full">
-      {poster ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={poster} alt="" className="h-full w-full object-cover opacity-40" aria-hidden />
-      ) : (
-        <div
-          className="absolute inset-0 opacity-40"
-          style={{
-            background:
-              "repeating-linear-gradient(-45deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 12px), radial-gradient(ellipse at 50% 40%, rgba(56,189,248,0.08), transparent 62%)",
-          }}
-          aria-hidden
-        />
-      )}
-      <div
-        className={`absolute inset-0 flex items-center justify-center bg-linear-to-b from-[#030305]/5 via-[#030305]/35 to-[#030305]/70 ${
-          compact ? "px-1" : "px-2"
-        }`}
-      >
-        <span
-          className={`flex items-center justify-center rounded-full border border-white/15 bg-white/8 text-zinc-200 backdrop-blur-sm ${
-            compact ? "size-8" : "size-10"
-          }`}
-        >
-          <svg className={compact ? "size-3.5" : "size-4"} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-            <path d="M8 5.14v13.72L19 12 8 5.14z" />
-          </svg>
-        </span>
-      </div>
-      {!compact ? (
-        <span className="sr-only">{label}</span>
-      ) : null}
-    </div>
-  );
-}
-
-function VideoProofPlayer({
-  clip,
-  placeholderLabel,
-  nowPlayingLabel,
-}: {
-  clip: ReturnToPlayVideoProof;
-  placeholderLabel: string;
-  nowPlayingLabel: string;
-}) {
-  const url = clip.url?.trim() ?? "";
-
-  return (
-    <div className="relative overflow-hidden bg-[#050508] px-2 py-2 sm:px-3 sm:py-2.5">
-      <div className="relative mx-auto aspect-video w-full max-w-[min(100%,28rem)] overflow-hidden rounded-sm">
-        <div className="pointer-events-none absolute left-1.5 top-1.5 z-20 h-4 w-4 border-l border-t border-sky-300/35" aria-hidden />
-        <div className="pointer-events-none absolute right-1.5 top-1.5 z-20 h-4 w-4 border-r border-t border-sky-300/35" aria-hidden />
-        <div className="pointer-events-none absolute bottom-10 left-1.5 z-20 h-4 w-4 border-b border-l border-sky-300/35" aria-hidden />
-        <div className="pointer-events-none absolute bottom-10 right-1.5 z-20 h-4 w-4 border-b border-r border-sky-300/35" aria-hidden />
-
-        {url && isLocalVideoUrl(url) ? (
-          <video
-            key={url}
-            className="h-full w-full object-cover"
-            src={url}
-            poster={clip.poster}
-            controls
-            playsInline
-            preload="metadata"
-          />
-        ) : url && youtubeVideoId(url) ? (
-          <iframe
-            key={url}
-            className="absolute inset-0 h-full w-full border-0"
-            src={youtubeEmbedUrl(url)}
-            title={clip.title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        ) : (
-          <VideoPlaceholder label={placeholderLabel} poster={clip.poster} />
-        )}
-
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 border-t border-white/10 bg-linear-to-t from-black/95 via-black/85 to-black/20 px-3 py-2 sm:px-3.5">
-          <div className="flex items-center gap-2.5">
-            <span className="h-6 w-0.5 shrink-0 rounded-full bg-sky-400/80" aria-hidden />
-            <div className="min-w-0">
-              <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-sky-300/80">{nowPlayingLabel}</p>
-              <p className="truncate text-xs font-semibold leading-snug text-white sm:text-sm">{clip.title}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function VideoProofThumb({
-  clip,
-  placeholderLabel,
-  index,
-  onSelect,
-}: {
-  clip: ReturnToPlayVideoProof;
-  placeholderLabel: string;
-  index: number;
-  onSelect: () => void;
-}) {
-  const url = clip.url?.trim() ?? "";
-  const preview = clip.poster ?? (url ? youtubeThumbnailUrl(url) : null) ?? undefined;
-
-  return (
-    <button
-      type="button"
-      onClick={onSelect}
-      className={`group overflow-hidden rounded-xl border border-white/10 bg-zinc-950/70 text-left transition hover:border-white/20 ${focusRing}`}
-      aria-label={clip.title}
-    >
-      <div className="relative aspect-4/3 w-full bg-[#07080c]">
-        <VideoPlaceholder label={placeholderLabel} compact poster={preview} />
-        <span className="absolute left-2 top-2 rounded bg-black/55 px-1.5 py-0.5 text-[9px] font-bold tabular-nums text-white/80">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-      </div>
-      <div className="border-t border-white/8 px-2.5 py-2">
-        <p className="line-clamp-2 text-[10px] font-semibold leading-snug text-zinc-400 group-hover:text-zinc-200">
-          {clip.title}
-        </p>
-      </div>
-    </button>
-  );
-}
-
 function VideoProofGallery({
   clips,
+  athlete,
   placeholderLabel,
-  nowPlayingLabel,
 }: {
   clips: ReturnToPlayVideoProof[];
+  athlete: AthleteProfile;
   placeholderLabel: string;
-  nowPlayingLabel: string;
 }) {
+  const { ui } = useProfileLocale();
+  const h = athlete.header;
   const [activeId, setActiveId] = useState(clips[0]?.id ?? "");
   const activeClip = clips.find((clip) => clip.id === activeId) ?? clips[0];
 
   if (!activeClip || clips.length === 0) return null;
 
   const thumbClips = clips.filter((clip) => clip.id !== activeClip.id);
+  const url = activeClip.url?.trim() ?? "";
+  const localMain = url ? isLocalVideoUrl(url) : false;
+  const mainSrc = url ? youtubeEmbedUrl(url) : null;
+  const playingPoster = localMain ? activeClip.poster : undefined;
 
   return (
-    <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_9.5rem] lg:gap-4">
-      <div className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/80 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]">
-        <VideoProofPlayer
-          key={activeClip.id}
-          clip={activeClip}
-          placeholderLabel={placeholderLabel}
-          nowPlayingLabel={nowPlayingLabel}
-        />
-      </div>
+    <BroadcastFrame
+      title={activeClip.title}
+      athleteName={h.name}
+      number={h.number}
+      role={h.role}
+      videoUi={ui.video}
+      featuredLabel={ui.returnToPlayUi.videoProofDefault}
+      clipBadge={ui.video.clip}
+    >
+      <div className="p-4 md:p-5">
+        <div
+          className={`grid gap-3 ${thumbClips.length > 0 ? "lg:grid-cols-[minmax(0,1fr)_minmax(148px,16rem)] lg:gap-4" : ""}`}
+        >
+          <div className="relative aspect-video min-h-0 w-full overflow-hidden bg-zinc-950">
+            {localMain && url ? (
+              <>
+                {playingPoster ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={playingPoster}
+                    alt=""
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 h-full w-full object-cover object-top"
+                  />
+                ) : null}
+                <video
+                  key={url}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster={playingPoster}
+                  className="relative z-1 h-full w-full object-contain"
+                  src={url}
+                />
+              </>
+            ) : mainSrc && youtubeVideoId(url) ? (
+              <YouTubeConsentGate
+                title="Video YouTube"
+                description="Per riprodurre clip e highlights incorporati serve il consenso ai contenuti esterni (Google/YouTube)."
+              >
+                <iframe
+                  key={url}
+                  title={activeClip.title}
+                  src={`${mainSrc}?rel=0`}
+                  className="h-full w-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </YouTubeConsentGate>
+            ) : (
+              <div className="flex h-full flex-col items-center justify-center gap-2 p-6 text-center">
+                <p className="text-sm font-semibold text-zinc-400">{placeholderLabel}</p>
+                <p className="text-xs text-zinc-600">{activeClip.title}</p>
+              </div>
+            )}
+          </div>
 
-      {thumbClips.length > 0 ? (
-        <div className="grid grid-cols-3 gap-2 lg:grid-cols-1 lg:gap-2.5">
-          {thumbClips.map((clip) => (
-            <VideoProofThumb
-              key={clip.id}
-              clip={clip}
-              placeholderLabel={placeholderLabel}
-              index={clips.findIndex((item) => item.id === clip.id)}
-              onSelect={() => setActiveId(clip.id)}
-            />
-          ))}
+          {thumbClips.length > 0 ? (
+            <div className="flex flex-row gap-2 lg:flex-col lg:justify-center lg:gap-3">
+              {thumbClips.map((clip) => (
+                <FilmRoomThumbnail
+                  key={clip.id}
+                  clip={clip}
+                  onSelect={() => setActiveId(clip.id)}
+                  emptyLabel={placeholderLabel}
+                  nowPlayingLabel={ui.returnToPlayUi.nowPlaying}
+                />
+              ))}
+            </div>
+          ) : null}
         </div>
-      ) : null}
-    </div>
+      </div>
+    </BroadcastFrame>
   );
 }
 
@@ -392,8 +312,8 @@ export function ReturnToPlayPanel({ athlete }: Props) {
             </div>
             <VideoProofGallery
               clips={rtp.videoProof}
+              athlete={athlete}
               placeholderLabel={ui.returnToPlayUi.videoPlaceholder}
-              nowPlayingLabel={ui.returnToPlayUi.nowPlaying}
             />
           </div>
 
