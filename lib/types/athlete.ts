@@ -204,13 +204,17 @@ export interface ReturnToPlaySection {
   subtitle: string;
   /** Paragrafi introduttivi */
   intro: string[];
+  /** Punti tecnici rapidi sotto l’intro */
+  focusAreas?: string[];
   status: ReturnToPlayStatusItem[];
   videoProofTitle?: string;
   videoProof: ReturnToPlayVideoProof[];
   ctaLabel?: string;
   /** Default: `#contatti` */
   ctaHref?: string;
-  /** Badge in header sezione (es. data aggiornamento) */
+  /** Data aggiornamento sezione (ISO yyyy-mm-dd) */
+  updatedAt?: string;
+  /** @deprecated Usare `updatedAt` — fallback testuale badge header */
   statusLabel?: string;
 }
 

@@ -60,6 +60,7 @@ export function mergeAthleteLocale(base: AthleteProfile, overlay: AthleteLocaleO
           ...base.returnToPlay,
           ...overlay.returnToPlay,
           intro: overlay.returnToPlay.intro ?? base.returnToPlay?.intro ?? [],
+          focusAreas: overlay.returnToPlay.focusAreas ?? base.returnToPlay?.focusAreas,
           status: overlay.returnToPlay.status ?? base.returnToPlay?.status ?? [],
           videoProof: overlay.returnToPlay.videoProof ?? base.returnToPlay?.videoProof ?? [],
         }

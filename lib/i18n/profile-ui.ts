@@ -173,6 +173,11 @@ export type ReturnToPlayUi = {
   documented: string;
   ctaDefault: string;
   ctaSupport: string;
+  updatedPrefix: string;
+  statusHeading: string;
+  injuryContext: string;
+  activeClipLabel: string;
+  galleryMeta: string;
 };
 
 export type ProfileUi = {
@@ -411,6 +416,11 @@ const UI_IT: ProfileUi = {
     ctaDefault: "Richiedi aggiornamenti fisici",
     ctaSupport:
       "Per club, procuratori e staff tecnici: richiedi documentazione aggiornata tramite i canali ufficiali.",
+    updatedPrefix: "Aggiornamento",
+    statusHeading: "Status rientro",
+    injuryContext: "Contesto infortunio",
+    activeClipLabel: "Clip attiva",
+    galleryMeta: "1 clip principale · 3 anteprime",
   },
   footer: {
     playerCard: "Player Card",
@@ -614,6 +624,11 @@ const UI_EN: ProfileUi = {
     ctaDefault: "Request physical updates",
     ctaSupport:
       "For clubs, agents and technical staff: request updated physical documentation through the official contact channels.",
+    updatedPrefix: "Updated",
+    statusHeading: "Return status",
+    injuryContext: "Injury context",
+    activeClipLabel: "Active clip",
+    galleryMeta: "1 main clip · 3 previews",
   },
   footer: {
     playerCard: "Player Card",
