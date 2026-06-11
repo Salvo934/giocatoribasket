@@ -178,6 +178,11 @@ export type ReturnToPlayUi = {
   injuryContext: string;
   activeClipLabel: string;
   galleryMeta: string;
+  phaseStop: string;
+  phaseRecovery: string;
+  phaseReturn: string;
+  monitoring: string;
+  nowPlaying: string;
 };
 
 export type ProfileUi = {
@@ -421,6 +426,11 @@ const UI_IT: ProfileUi = {
     injuryContext: "Contesto infortunio",
     activeClipLabel: "Clip attiva",
     galleryMeta: "1 clip principale · 3 anteprime",
+    phaseStop: "Stop",
+    phaseRecovery: "Recupero",
+    phaseReturn: "Rientro documentato",
+    monitoring: "Monitoraggio attivo",
+    nowPlaying: "In riproduzione",
   },
   footer: {
     playerCard: "Player Card",
@@ -629,6 +639,11 @@ const UI_EN: ProfileUi = {
     injuryContext: "Injury context",
     activeClipLabel: "Active clip",
     galleryMeta: "1 main clip · 3 previews",
+    phaseStop: "Stop",
+    phaseRecovery: "Recovery",
+    phaseReturn: "Documented return",
+    monitoring: "Active monitoring",
+    nowPlaying: "Now playing",
   },
   footer: {
     playerCard: "Player Card",
