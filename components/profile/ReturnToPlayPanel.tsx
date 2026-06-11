@@ -115,21 +115,34 @@ function VideoPlaceholder({
       {poster ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={poster} alt="" className="h-full w-full object-cover opacity-40" aria-hidden />
-      ) : null}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 bg-linear-to-b from-[#030305]/10 via-[#030305]/45 to-[#030305]/80 px-2 text-center">
+      ) : (
+        <div
+          className="absolute inset-0 opacity-40"
+          style={{
+            background:
+              "repeating-linear-gradient(-45deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 12px), radial-gradient(ellipse at 50% 40%, rgba(56,189,248,0.08), transparent 62%)",
+          }}
+          aria-hidden
+        />
+      )}
+      <div
+        className={`absolute inset-0 flex items-center justify-center bg-linear-to-b from-[#030305]/5 via-[#030305]/35 to-[#030305]/70 ${
+          compact ? "px-1" : "px-2"
+        }`}
+      >
         <span
-          className={`flex items-center justify-center rounded-full border border-white/15 bg-white/6 text-zinc-300 backdrop-blur-sm ${
-            compact ? "size-8" : "size-11"
+          className={`flex items-center justify-center rounded-full border border-white/15 bg-white/8 text-zinc-200 backdrop-blur-sm ${
+            compact ? "size-8" : "size-10"
           }`}
         >
           <svg className={compact ? "size-3.5" : "size-4"} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
             <path d="M8 5.14v13.72L19 12 8 5.14z" />
           </svg>
         </span>
-        {!compact ? (
-          <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-500">{label}</span>
-        ) : null}
       </div>
+      {!compact ? (
+        <span className="sr-only">{label}</span>
+      ) : null}
     </div>
   );
 }
@@ -146,13 +159,13 @@ function VideoProofPlayer({
   const url = clip.url?.trim() ?? "";
 
   return (
-    <div className="relative overflow-hidden bg-[#050508]">
-      <div className="pointer-events-none absolute left-2 top-2 z-10 h-5 w-5 border-l border-t border-sky-300/35" aria-hidden />
-      <div className="pointer-events-none absolute right-2 top-2 z-10 h-5 w-5 border-r border-t border-sky-300/35" aria-hidden />
-      <div className="pointer-events-none absolute bottom-14 left-2 z-10 h-5 w-5 border-b border-l border-sky-300/35 sm:bottom-16" aria-hidden />
-      <div className="pointer-events-none absolute bottom-14 right-2 z-10 h-5 w-5 border-b border-r border-sky-300/35 sm:bottom-16" aria-hidden />
+    <div className="relative overflow-hidden bg-[#050508] px-2 py-2 sm:px-3 sm:py-2.5">
+      <div className="relative mx-auto aspect-video w-full max-w-[min(100%,28rem)] overflow-hidden rounded-sm">
+        <div className="pointer-events-none absolute left-1.5 top-1.5 z-20 h-4 w-4 border-l border-t border-sky-300/35" aria-hidden />
+        <div className="pointer-events-none absolute right-1.5 top-1.5 z-20 h-4 w-4 border-r border-t border-sky-300/35" aria-hidden />
+        <div className="pointer-events-none absolute bottom-10 left-1.5 z-20 h-4 w-4 border-b border-l border-sky-300/35" aria-hidden />
+        <div className="pointer-events-none absolute bottom-10 right-1.5 z-20 h-4 w-4 border-b border-r border-sky-300/35" aria-hidden />
 
-      <div className="relative aspect-video max-h-70 w-full overflow-hidden">
         {url && isLocalVideoUrl(url) ? (
           <video
             key={url}
@@ -175,14 +188,14 @@ function VideoProofPlayer({
         ) : (
           <VideoPlaceholder label={placeholderLabel} poster={clip.poster} />
         )}
-      </div>
 
-      <div className="border-t border-white/8 bg-linear-to-r from-zinc-950 via-[#0a1018] to-zinc-950 px-4 py-3">
-        <div className="flex items-start gap-3">
-          <span className="mt-0.5 h-8 w-1 shrink-0 rounded-full bg-sky-400/70" aria-hidden />
-          <div className="min-w-0">
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-sky-300/75">{nowPlayingLabel}</p>
-            <p className="mt-0.5 text-sm font-semibold leading-snug text-white sm:text-base">{clip.title}</p>
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 border-t border-white/10 bg-linear-to-t from-black/95 via-black/85 to-black/20 px-3 py-2 sm:px-3.5">
+          <div className="flex items-center gap-2.5">
+            <span className="h-6 w-0.5 shrink-0 rounded-full bg-sky-400/80" aria-hidden />
+            <div className="min-w-0">
+              <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-sky-300/80">{nowPlayingLabel}</p>
+              <p className="truncate text-xs font-semibold leading-snug text-white sm:text-sm">{clip.title}</p>
+            </div>
           </div>
         </div>
       </div>
