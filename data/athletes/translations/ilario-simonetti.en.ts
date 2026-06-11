@@ -82,7 +82,7 @@ export const ilarioSimonettiEn: AthleteLocaleOverlay = {
       },
       {
         label: "Verification",
-        value: "Recent clips of shooting, dribbling, passing and controlled physical work — Video proof section.",
+        value: "Recent clips of shooting, dribbling, passing and controlled physical work — Video / offseason section.",
       },
       {
         label: "Documentation",
@@ -100,7 +100,7 @@ export const ilarioSimonettiEn: AthleteLocaleOverlay = {
         value: "On request to authorized clubs and staff",
       },
     ],
-    videoProofTitle: "Video proof",
+    videoProofTitle: "Video / offseason",
     videoProof: [
       { id: "rtp-shooting", title: "Shooting and motion fluidity" },
       { id: "rtp-dribbling", title: "Dribbling and ball control" },

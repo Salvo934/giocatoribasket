@@ -97,7 +97,7 @@ export const ilarioSimonetti: AthleteProfile = {
       },
       {
         label: "Verifica",
-        value: "Clip recenti di tiro, palleggio, passaggi e lavoro fisico controllato — sezione Video proof.",
+        value: "Clip recenti di tiro, palleggio, passaggi e lavoro fisico controllato — sezione Video / offseason.",
       },
       {
         label: "Documentazione",
@@ -115,7 +115,7 @@ export const ilarioSimonetti: AthleteProfile = {
         value: "Su richiesta a club e staff autorizzati",
       },
     ],
-    videoProofTitle: "Video proof",
+    videoProofTitle: "Video / offseason",
     videoProof: [
       { id: "rtp-shooting", title: "Tiro e fluidità del gesto" },
       { id: "rtp-dribbling", title: "Palleggio e controllo palla" },

@@ -415,7 +415,7 @@ const UI_IT: ProfileUi = {
     representative: "Referente",
   },
   returnToPlayUi: {
-    videoProofDefault: "Video proof",
+    videoProofDefault: "Video / offseason",
     videoPlaceholder: "Clip in arrivo",
     documented: "Documentato",
     ctaDefault: "Richiedi aggiornamenti fisici",
@@ -628,7 +628,7 @@ const UI_EN: ProfileUi = {
     representative: "Representative",
   },
   returnToPlayUi: {
-    videoProofDefault: "Video proof",
+    videoProofDefault: "Video / offseason",
     videoPlaceholder: "Clip coming soon",
     documented: "Documented",
     ctaDefault: "Request physical updates",
