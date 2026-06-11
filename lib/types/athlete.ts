@@ -184,6 +184,36 @@ export interface AthleteSocialMediaKit {
   items: SocialKitAsset[];
 }
 
+export interface ReturnToPlayStatusItem {
+  label: string;
+  value: string;
+}
+
+export interface ReturnToPlayVideoProof {
+  id: string;
+  title: string;
+  /** Path in `public`, URL assoluto o YouTube — opzionale finché il clip non è pronto */
+  url?: string;
+  poster?: string;
+}
+
+/** Sezione rientro post-infortunio — opzionale, visibile solo se presente */
+export interface ReturnToPlaySection {
+  eyebrow?: string;
+  title: string;
+  subtitle: string;
+  /** Paragrafi introduttivi */
+  intro: string[];
+  status: ReturnToPlayStatusItem[];
+  videoProofTitle?: string;
+  videoProof: ReturnToPlayVideoProof[];
+  ctaLabel?: string;
+  /** Default: `#contatti` */
+  ctaHref?: string;
+  /** Badge in header sezione (es. data aggiornamento) */
+  statusLabel?: string;
+}
+
 /** Configurazione GDPR / privacy per sito atleta (override opzionali). */
 export interface AthleteLegalConfig {
   /** Titolare del trattamento dei dati pubblicati sul sito */
@@ -334,6 +364,8 @@ export interface AthleteProfile {
   gallery?: AthleteGallery;
   /** Post e storie pronti per Instagram dopo le partite */
   socialMediaKit?: AthleteSocialMediaKit;
+  /** Aggiornamento rientro post-infortunio per club, staff e procuratori */
+  returnToPlay?: ReturnToPlaySection;
   career: CareerStep[];
   /** Stile opzionale per la sezione percorso */
   careerSection?: CareerSectionStyle;

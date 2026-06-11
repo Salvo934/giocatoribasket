@@ -6,14 +6,22 @@ import { useProfileLocale } from "./ProfileLocaleContext";
 
 const MOBILE_MENU_BALL_ICON = "/athletes/icons8-pallacanestro-64.png";
 
-function navLinks(showGallery: boolean, showSocialKit: boolean, nav: ReturnType<typeof useProfileLocale>["ui"]["nav"]) {
+function navLinks(
+  showGallery: boolean,
+  showSocialKit: boolean,
+  showReturnToPlay: boolean,
+  nav: ReturnType<typeof useProfileLocale>["ui"]["nav"],
+) {
   const links: { href: string; label: string }[] = [
     { href: "#scout", label: nav.scout },
     { href: "#mercato", label: nav.market },
+  ];
+  if (showReturnToPlay) links.push({ href: "#return-to-play", label: nav.returnToPlay });
+  links.push(
     { href: "#video", label: nav.video },
     { href: "#stats", label: nav.stats },
     { href: "#fit", label: nav.fit },
-  ];
+  );
   if (showGallery) links.push({ href: "#gallery", label: nav.gallery });
   if (showSocialKit) links.push({ href: "#social-kit", label: nav.socialKit });
   links.push(
@@ -24,11 +32,14 @@ function navLinks(showGallery: boolean, showSocialKit: boolean, nav: ReturnType<
   return links;
 }
 
-type Props = { showGallery?: boolean; showSocialKit?: boolean };
+type Props = { showGallery?: boolean; showSocialKit?: boolean; showReturnToPlay?: boolean };
 
-export function ProfileNav({ showGallery = false, showSocialKit = true }: Props) {
+export function ProfileNav({ showGallery = false, showSocialKit = true, showReturnToPlay = false }: Props) {
   const { ui } = useProfileLocale();
-  const links = useMemo(() => navLinks(showGallery, showSocialKit, ui.nav), [showGallery, showSocialKit, ui.nav]);
+  const links = useMemo(
+    () => navLinks(showGallery, showSocialKit, showReturnToPlay, ui.nav),
+    [showGallery, showSocialKit, showReturnToPlay, ui.nav],
+  );
   const [open, setOpen] = useState(false);
 
   useEffect(() => {

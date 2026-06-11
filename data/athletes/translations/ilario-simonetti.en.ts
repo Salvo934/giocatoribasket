@@ -62,6 +62,37 @@ export const ilarioSimonettiEn: AthleteLocaleOverlay = {
       "Small-forward minutes in a Serie B rotation, staff that knows how to use his frame and floor spacing; possible step up or loans longer term.",
     economicsNote: "Contract / salary details: on direct request to the representative.",
   },
+  returnToPlay: {
+    eyebrow: "Return to play",
+    title: "Return to Play — Elbow Injury Update",
+    subtitle: "Documented physical update for clubs, technical staff and agents.",
+    intro: [
+      "Ilario sustained a high-grade elbow dislocation that kept him sidelined for roughly six months. Recovery was managed with physiotherapy, strength work and a progressive return to court activity.",
+      "This section collects updated training and technical work on video to document his current physical condition and support evaluation by agents, clubs and technical staff.",
+    ],
+    statusLabel: "Update 2026",
+    status: [
+      { label: "Injury", value: "High-grade elbow dislocation" },
+      { label: "Time out", value: "Roughly 6 months" },
+      { label: "Current phase", value: "Documented return to court" },
+      { label: "Ball work", value: "Resumed" },
+      { label: "Shooting and technical gestures", value: "Documented" },
+      { label: "Workouts / technical evaluations", value: "Available" },
+      {
+        label: "Medical / physio report",
+        value: "Available privately on request to authorized clubs and staff",
+      },
+    ],
+    videoProofTitle: "Video proof",
+    videoProof: [
+      { id: "rtp-shooting", title: "Shooting and motion fluidity" },
+      { id: "rtp-dribbling", title: "Dribbling and ball control" },
+      { id: "rtp-passing", title: "Passing, catching and arm use" },
+      { id: "rtp-contact", title: "Contact / progressive physical work" },
+    ],
+    ctaLabel: "Request physical updates",
+    ctaHref: "#contatti",
+  },
   videos: {
     main: {
       title: "Highlights — Ilario Simonetti",

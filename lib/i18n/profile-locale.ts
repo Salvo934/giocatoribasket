@@ -55,6 +55,15 @@ export function mergeAthleteLocale(base: AthleteProfile, overlay: AthleteLocaleO
           items: overlay.socialMediaKit.items ?? base.socialMediaKit?.items ?? [],
         }
       : base.socialMediaKit,
+    returnToPlay: overlay.returnToPlay
+      ? {
+          ...base.returnToPlay,
+          ...overlay.returnToPlay,
+          intro: overlay.returnToPlay.intro ?? base.returnToPlay?.intro ?? [],
+          status: overlay.returnToPlay.status ?? base.returnToPlay?.status ?? [],
+          videoProof: overlay.returnToPlay.videoProof ?? base.returnToPlay?.videoProof ?? [],
+        }
+      : base.returnToPlay,
     career: overlay.career ?? base.career,
     careerSection: overlay.careerSection ? { ...base.careerSection, ...overlay.careerSection } : base.careerSection,
     honors: overlay.honors ?? base.honors,

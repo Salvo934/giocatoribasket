@@ -77,6 +77,37 @@ export const ilarioSimonetti: AthleteProfile = {
       "Ruolo da ala piccola con minuti in rotazione in Serie B, staff che sappia usare fisico e ruolo sul campo; possibile passo futuro verso categorie superiori o prestiti.",
     economicsNote: "Dettaglio economico / ingaggio: solo su richiesta diretta al referente.",
   },
+  returnToPlay: {
+    eyebrow: "Return to play",
+    title: "Return to Play — Elbow Injury Update",
+    subtitle: "Aggiornamento fisico documentato per club, staff tecnici e procuratori.",
+    intro: [
+      "Ilario ha affrontato una lussazione di alto grado al gomito che lo ha tenuto fermo per circa 6 mesi. Il percorso di recupero è stato seguito con fisioterapia, lavoro di rinforzo e rientro progressivo sul campo.",
+      "Questa sezione raccoglie video aggiornati di allenamento e lavoro tecnico per documentare la condizione attuale del giocatore e facilitare la valutazione da parte di procuratori, club e staff tecnici.",
+    ],
+    statusLabel: "Aggiornamento 2026",
+    status: [
+      { label: "Infortunio", value: "Lussazione gomito di alto grado" },
+      { label: "Stop", value: "Circa 6 mesi" },
+      { label: "Fase attuale", value: "Rientro in campo documentato" },
+      { label: "Lavoro con palla", value: "Ripreso" },
+      { label: "Tiro e gesti tecnici", value: "Documentati" },
+      { label: "Workout / valutazioni tecniche", value: "Disponibili" },
+      {
+        label: "Report medico/fisioterapico",
+        value: "Disponibile privatamente su richiesta a club e staff autorizzati",
+      },
+    ],
+    videoProofTitle: "Video proof",
+    videoProof: [
+      { id: "rtp-shooting", title: "Tiro e fluidità del gesto" },
+      { id: "rtp-dribbling", title: "Palleggio e controllo palla" },
+      { id: "rtp-passing", title: "Passaggi, ricezioni e uso del braccio" },
+      { id: "rtp-contact", title: "Contatto / lavoro fisico progressivo" },
+    ],
+    ctaLabel: "Richiedi aggiornamenti fisici",
+    ctaHref: "#contatti",
+  },
   videos: {
     main: {
       title: "Highlights — Ilario Simonetti",

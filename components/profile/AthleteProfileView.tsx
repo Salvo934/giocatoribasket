@@ -9,6 +9,7 @@ import { ContactsPanel } from "./ContactsPanel";
 import { GalleryPanel } from "./GalleryPanel";
 import { HonorsPanel } from "./HonorsPanel";
 import { MarketPanel } from "./MarketPanel";
+import { ReturnToPlayPanel } from "./ReturnToPlayPanel";
 import { ProfileFooter } from "./ProfileFooter";
 import { ProfileHeader } from "./ProfileHeader";
 import { ProfileNav } from "./ProfileNav";
@@ -33,11 +34,13 @@ export function AthleteProfileView({ athlete, locale = "it", dedicatedDomain = f
           <ProfileNav
             showGallery={Boolean(athlete.gallery?.items?.length)}
             showSocialKit={Boolean(athlete.socialMediaKit)}
+            showReturnToPlay={Boolean(athlete.returnToPlay)}
           />
           <div className="min-w-0">
             <main id="contenuto-profilo" className="min-w-0 pb-24 lg:pb-0">
               <ScoutPanel athlete={athlete} />
               <MarketPanel athlete={athlete} />
+              <ReturnToPlayPanel athlete={athlete} />
               <VideoHub athlete={athlete} />
               <StatsPanel athlete={athlete} />
               <TechnicalFitPanel athlete={athlete} />

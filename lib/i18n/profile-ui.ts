@@ -167,6 +167,14 @@ export type VideoUi = {
   nowPlaying: string;
 };
 
+export type ReturnToPlayUi = {
+  videoProofDefault: string;
+  videoPlaceholder: string;
+  documented: string;
+  ctaDefault: string;
+  ctaSupport: string;
+};
+
 export type ProfileUi = {
   htmlLang: string;
   skipIntro: string;
@@ -190,6 +198,7 @@ export type ProfileUi = {
     close: string;
     scout: string;
     market: string;
+    returnToPlay: string;
     video: string;
     stats: string;
     fit: string;
@@ -208,6 +217,7 @@ export type ProfileUi = {
   career: CareerUi;
   honors: HonorsUi;
   contacts: ContactsUi;
+  returnToPlayUi: ReturnToPlayUi;
   footer: FooterUi;
   video: VideoUi;
 };
@@ -235,6 +245,7 @@ const UI_IT: ProfileUi = {
     close: "Chiudi",
     scout: "Scout",
     market: "Mercato",
+    returnToPlay: "Rientro",
     video: "Video",
     stats: "Stats",
     fit: "Fit",
@@ -393,6 +404,14 @@ const UI_IT: ProfileUi = {
     agency: "Agenzia",
     representative: "Referente",
   },
+  returnToPlayUi: {
+    videoProofDefault: "Video proof",
+    videoPlaceholder: "Clip in arrivo",
+    documented: "Documentato",
+    ctaDefault: "Richiedi aggiornamenti fisici",
+    ctaSupport:
+      "Per club, procuratori e staff tecnici: richiedi documentazione aggiornata tramite i canali ufficiali.",
+  },
   footer: {
     playerCard: "Player Card",
     legal: "Informazioni legali",
@@ -429,6 +448,7 @@ const UI_EN: ProfileUi = {
     close: "Close",
     scout: "Scout",
     market: "Market",
+    returnToPlay: "Return",
     video: "Video",
     stats: "Stats",
     fit: "Fit",
@@ -586,6 +606,14 @@ const UI_EN: ProfileUi = {
     verified: "Verified",
     agency: "Agency",
     representative: "Representative",
+  },
+  returnToPlayUi: {
+    videoProofDefault: "Video proof",
+    videoPlaceholder: "Clip coming soon",
+    documented: "Documented",
+    ctaDefault: "Request physical updates",
+    ctaSupport:
+      "For clubs, agents and technical staff: request updated physical documentation through the official contact channels.",
   },
   footer: {
     playerCard: "Player Card",
