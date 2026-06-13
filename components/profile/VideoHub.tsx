@@ -73,20 +73,21 @@ export function VideoHub({ athlete }: Props) {
       id="video"
       eyebrow="Sala video"
       title="Video e clip"
-      description="Primo piano sul giocatore e clip divise per argomento: visione rapida per staff e allenatori."
+      description="Primo piano sul giocatore e clip divise per argomento: visione rapida per staff e allenatori. Condividi solo la tua sala video con il bottone qui sotto."
       headerActions={
-        <div className="overflow-hidden rounded-2xl border border-white/10 bg-linear-to-br from-[#17408B]/14 via-black/50 to-[#C9082A]/10 p-px shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]">
-          <div className="flex flex-col gap-3 rounded-[0.95rem] bg-black/55 px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-5 sm:py-4">
-            <p className="max-w-md text-sm leading-relaxed text-zinc-400">{ui.video.shareHint}</p>
-            <ShareProfileButton
-              path={videoPath}
-              publicSiteUrl={athlete.seo.publicSiteUrl}
-              shareLabels={ui.video.share}
-              shareTitle={shareTitle}
-              showIcon
-              className={`inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full border border-[#C9082A]/35 bg-linear-to-r from-[#C9082A] to-[#a80622] px-6 text-xs font-bold uppercase tracking-[0.14em] text-white shadow-[0_0_28px_-6px_rgba(201,8,42,0.55)] transition hover:border-[#C9082A]/55 hover:brightness-110 ${focusRing}`}
-            />
-          </div>
+        <div className="flex items-center justify-end gap-2 sm:justify-between sm:gap-4 sm:rounded-2xl sm:border sm:border-white/10 sm:bg-linear-to-br sm:from-[#17408B]/14 sm:via-black/50 sm:to-[#C9082A]/10 sm:p-px sm:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]">
+          <p className="hidden min-w-0 flex-1 text-sm leading-relaxed text-zinc-400 sm:block">
+            {ui.video.shareHint}
+          </p>
+          <ShareProfileButton
+            path={videoPath}
+            publicSiteUrl={athlete.seo.publicSiteUrl}
+            shareLabels={ui.video.share}
+            shareTitle={shareTitle}
+            compactLabel={ui.video.share.labelShort}
+            showIcon
+            className={`inline-flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-full border border-[#C9082A]/30 bg-linear-to-r from-[#C9082A]/95 to-[#9a061f] px-3.5 text-[10px] font-bold uppercase tracking-[0.12em] text-white shadow-[0_0_18px_-8px_rgba(201,8,42,0.65)] transition hover:border-[#C9082A]/50 hover:brightness-110 sm:h-10 sm:gap-2 sm:rounded-[0.95rem] sm:border-[#C9082A]/35 sm:px-5 sm:text-[11px] sm:tracking-[0.14em] sm:shadow-[0_0_28px_-6px_rgba(201,8,42,0.55)] md:h-11 md:px-6 md:text-xs ${focusRing}`}
+          />
         </div>
       }
     >

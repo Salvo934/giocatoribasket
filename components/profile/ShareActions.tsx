@@ -13,6 +13,7 @@ type Props = {
   shareLabels?: ShareLabels;
   shareTitle?: string;
   showIcon?: boolean;
+  compactLabel?: string;
 };
 
 function ShareIcon({ className }: { className?: string }) {
@@ -31,6 +32,7 @@ export function ShareProfileButton({
   shareLabels: shareLabelsProp,
   shareTitle,
   showIcon = false,
+  compactLabel,
 }: Props) {
   const { profilePath, ui } = useProfileLocale();
   const path = pathProp ?? profilePath;
@@ -76,8 +78,15 @@ export function ShareProfileButton({
 
   return (
     <button type="button" onClick={() => void onShare()} className={className}>
-      {showIcon ? <ShareIcon className="size-4 shrink-0 opacity-90" /> : null}
-      {label}
+      {showIcon ? <ShareIcon className="size-3.5 shrink-0 opacity-90 sm:size-4" /> : null}
+      {compactLabel && label === share.label ? (
+        <>
+          <span className="sm:hidden">{compactLabel}</span>
+          <span className="hidden sm:inline">{label}</span>
+        </>
+      ) : (
+        label
+      )}
     </button>
   );
 }
