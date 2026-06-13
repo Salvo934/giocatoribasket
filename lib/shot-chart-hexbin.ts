@@ -74,7 +74,7 @@ export function buildHexBins(points: CourtPoint[], radius = DEFAULT_HEX_RADIUS):
   }
 
   const max = Math.max(...[...bins.values()].map((b) => b.count));
-  const minOpacity = 0.27;
+  const minOpacity = 0.48;
 
   return [...bins.values()]
     .filter((b) => b.count > 0)

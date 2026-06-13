@@ -188,17 +188,17 @@ export function ShotChart({ data, season, chartId = 1, labels }: Props) {
           <HexShotCourt id={chartId} data={data} />
         </div>
 
-        <div className="shotchart-meta px-5 py-5 md:px-8 md:py-6">
+        <div className="shotchart-meta">
           <p
-            className="text-center text-lg tabular-nums text-white md:text-xl"
+            className="text-center text-base tabular-nums text-white md:text-lg"
             style={{ fontFamily: "var(--font-bebas)" }}
           >
             {seasonLine}
           </p>
 
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-black px-3 py-1.5 text-xs text-zinc-300">
-              <span className="size-3 rounded-sm bg-accent/30" aria-hidden />
+          <div className="mt-3 flex flex-col items-center justify-center gap-2 sm:flex-row sm:flex-wrap sm:gap-3">
+            <span className="inline-flex items-center gap-2 text-xs text-zinc-400">
+              <span className="size-3 rounded-sm bg-accent/45" aria-hidden />
               {labels.madeLegend(madePct)}
             </span>
             <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-wider text-zinc-500">

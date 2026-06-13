@@ -1,48 +1,53 @@
-/* PerThirtySix-style hex heatmap — nero + giallo */
+/* PerThirtySix-style hex heatmap — nero + giallo, dimensione media */
 
 .profile-shotchart .shotchart-stage {
-  position: relative;
-  width: 100vw;
-  max-width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  padding: 1.5rem 1rem 1.75rem;
+  background: #000;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   .profile-shotchart .shotchart-stage {
-    width: 100%;
-    max-width: none;
-    margin-left: 0;
-    margin-right: 0;
+    padding: 2rem 2rem 2.25rem;
   }
 }
 
 .profile-shotchart .shotchart-container {
   width: 100%;
-  background: #000;
-  border-top: 1px solid rgba(223, 255, 74, 0.12);
-  border-bottom: 1px solid rgba(223, 255, 74, 0.12);
+  max-width: 26rem; /* mobile — misura media */
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .profile-shotchart .shotchart-container {
+    max-width: 28rem; /* ~448px — leggermente più grande del mobile */
+  }
+}
+
+@media (min-width: 1024px) {
+  .profile-shotchart .shotchart-container {
+    max-width: 30rem; /* ~480px */
+  }
 }
 
 .hex-shot-court {
   isolation: isolate;
-  min-height: min(100vw, 70vh);
-  max-height: 72vh;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  filter: drop-shadow(0 28px 56px rgba(0, 0, 0, 0.85));
 }
 
-@media (min-width: 768px) {
-  .hex-shot-court {
-    min-height: 400px;
-    max-height: 520px;
-  }
-}
-
-.hex-shot-court__svg {
+.hex-shot-court__hex {
   position: absolute;
   inset: 0;
+  z-index: 1;
   display: block;
   width: 100%;
   height: 100%;
+  pointer-events: none;
+}
+
+.hex-shot-court__court {
+  z-index: 2;
 }
 
 .hex-shot-court svg[id^="shotchart-"] {
@@ -56,6 +61,7 @@
 .hex-shot-court .shot-chart-court line,
 .hex-shot-court .shot-chart-court path,
 .hex-shot-court .shot-chart-court rect {
+  fill: none !important;
   stroke: rgba(255, 255, 255, 0.33) !important;
   stroke-width: 0.11 !important;
 }
@@ -70,7 +76,22 @@
 }
 
 .profile-shotchart .shotchart-meta {
-  background: linear-gradient(180deg, rgba(223, 255, 74, 0.04) 0%, transparent 100%);
+  max-width: 26rem;
+  margin-inline: auto;
+  margin-top: 1.25rem;
+  padding-top: 0.25rem;
+}
+
+@media (min-width: 768px) {
+  .profile-shotchart .shotchart-meta {
+    max-width: 28rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .profile-shotchart .shotchart-meta {
+    max-width: 30rem;
+  }
 }
 
 .profile-shotchart svg text {

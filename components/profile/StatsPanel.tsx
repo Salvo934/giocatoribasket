@@ -126,7 +126,7 @@ export function StatsPanel({ athlete }: Props) {
       </div>
 
       {shotChart ? (
-        <div className="mt-8">
+        <div className="mt-8 md:hidden">
           <ShotChart
             data={shotChart}
             season={{

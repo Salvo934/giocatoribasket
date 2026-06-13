@@ -5,7 +5,6 @@ import { Halfcourt } from "shotchart.d3.ts";
 import type { ShotChartData } from "@/lib/types/athlete";
 import { generateShotDots } from "@/lib/shot-chart";
 import {
-  COURT_BG,
   COURT_HOOP,
   COURT_LINE,
   DEFAULT_HEX_RADIUS,
@@ -52,7 +51,7 @@ export function HexShotCourt({ id, data }: Props) {
       court.setAttribute("transform", `translate(${offX}, ${offY}) scale(${scale})`);
       court.querySelectorAll<SVGElement>("line, path, rect").forEach((el) => {
         el.style.stroke = COURT_LINE;
-        if (el.tagName === "rect") el.style.fill = "none";
+        el.style.fill = "none";
         el.setAttribute("stroke-width", "0.11");
       });
       const hoop = court.querySelector(".shot-chart-court-hoop");
@@ -86,20 +85,19 @@ export function HexShotCourt({ id, data }: Props) {
 
   return (
     <div ref={wrapRef} className="hex-shot-court relative aspect-square w-full">
-      <svg viewBox={`0 0 ${DISPLAY_SIZE} ${DISPLAY_SIZE}`} className="hex-shot-court__svg" aria-hidden>
-        <rect width={DISPLAY_SIZE} height={DISPLAY_SIZE} rx="4" fill={COURT_BG} />
+      <svg viewBox={`0 0 ${DISPLAY_SIZE} ${DISPLAY_SIZE}`} className="hex-shot-court__hex" aria-hidden>
         <g className="hex-layer">
           {hexBins.map((bin) => (
             <path
               key={`${bin.x}-${bin.y}`}
               d={hexPath(bin.x, bin.y, DEFAULT_HEX_RADIUS)}
               fill={HEX_FILL}
-              opacity={bin.opacity}
+              fillOpacity={bin.opacity}
             />
           ))}
         </g>
       </svg>
-      <div className="pointer-events-none absolute inset-0 [&_svg]:h-full [&_svg]:w-full">
+      <div className="hex-shot-court__court pointer-events-none absolute inset-0 [&_svg]:h-full [&_svg]:w-full">
         <Halfcourt id={id} courtType="NBA" />
       </div>
     </div>
