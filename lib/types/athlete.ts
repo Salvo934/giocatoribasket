@@ -79,6 +79,35 @@ export interface GameLogRow {
   turnovers?: number;
 }
 
+export type ShotChartZoneId =
+  | "restricted"
+  | "paint"
+  | "midRange"
+  | "cornerLeft"
+  | "cornerRight"
+  | "aboveBreak";
+
+export interface ShotChartZone {
+  id: ShotChartZoneId;
+  made: number;
+  attempted: number;
+}
+
+/** Coordinate normalizzate 0–100 (viewBox mezza campo, canestro in alto). */
+export interface ShotChartPoint {
+  x: number;
+  y: number;
+  made: boolean;
+}
+
+export interface ShotChartData {
+  zones: ShotChartZone[];
+  /** Tracking puntuale opzionale; altrimenti i punti si generano dalle zone. */
+  shots?: ShotChartPoint[];
+  /** true se generato da medie 2pt/3pt (non tracking pieno) */
+  synthesized?: boolean;
+}
+
 export interface SeasonTotals {
   goals: number;
   assists: number;
@@ -103,6 +132,8 @@ export interface SeasonStats {
   twoAttPerGame: number;
   threeAttPerGame: number;
   lastGames: GameLogRow[];
+  /** Mappa tiro stile NBA (zone); se assente si stima da medie 2pt/3pt */
+  shotChart?: ShotChartData;
 }
 
 export interface CareerStep {

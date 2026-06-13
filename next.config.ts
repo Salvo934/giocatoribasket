@@ -7,6 +7,7 @@ function nodeModule(pkg: string): string {
 }
 
 const nextConfig: NextConfig = {
+  transpilePackages: ["shotchart.d3.ts"],
   typescript: {
     // Workaround: Next 16.2.6 generated `.next/types/validator.ts` imports `ResolvingMetadata` from
     // `next/types.js`, which does not export those symbols in published types (known skew).

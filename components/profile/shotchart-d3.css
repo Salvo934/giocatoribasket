@@ -1,0 +1,78 @@
+/* PerThirtySix-style hex heatmap — nero + giallo */
+
+.profile-shotchart .shotchart-stage {
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+@media (min-width: 640px) {
+  .profile-shotchart .shotchart-stage {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.profile-shotchart .shotchart-container {
+  width: 100%;
+  background: #000;
+  border-top: 1px solid rgba(223, 255, 74, 0.12);
+  border-bottom: 1px solid rgba(223, 255, 74, 0.12);
+}
+
+.hex-shot-court {
+  isolation: isolate;
+  min-height: min(100vw, 70vh);
+  max-height: 72vh;
+}
+
+@media (min-width: 768px) {
+  .hex-shot-court {
+    min-height: 400px;
+    max-height: 520px;
+  }
+}
+
+.hex-shot-court__svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hex-shot-court svg[id^="shotchart-"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hex-shot-court .shot-chart-court line,
+.hex-shot-court .shot-chart-court path,
+.hex-shot-court .shot-chart-court rect {
+  stroke: rgba(255, 255, 255, 0.33) !important;
+  stroke-width: 0.11 !important;
+}
+
+.hex-shot-court .shot-chart-court-key {
+  fill: none !important;
+}
+
+.hex-shot-court .shot-chart-court-hoop {
+  stroke: #dfff4a !important;
+  stroke-width: 0.14 !important;
+}
+
+.profile-shotchart .shotchart-meta {
+  background: linear-gradient(180deg, rgba(223, 255, 74, 0.04) 0%, transparent 100%);
+}
+
+.profile-shotchart svg text {
+  visibility: hidden !important;
+}

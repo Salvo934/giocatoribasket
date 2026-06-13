@@ -32,7 +32,14 @@ export function mergeAthleteLocale(base: AthleteProfile, overlay: AthleteLocaleO
             : base.videos.fullGame,
         }
       : base.videos,
-    stats: overlay.stats ? { ...base.stats, ...overlay.stats, lastGames: overlay.stats.lastGames ?? base.stats.lastGames } : base.stats,
+    stats: overlay.stats
+      ? {
+          ...base.stats,
+          ...overlay.stats,
+          lastGames: overlay.stats.lastGames ?? base.stats.lastGames,
+          shotChart: overlay.stats.shotChart ?? base.stats.shotChart,
+        }
+      : base.stats,
     technicalFit: { ...base.technicalFit, ...overlay.technicalFit },
     whyHeFits: overlay.whyHeFits
       ? {

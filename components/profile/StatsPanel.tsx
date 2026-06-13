@@ -2,6 +2,8 @@
 
 import type { AthleteProfile } from "@/lib/types/athlete";
 import { statsUiForSport } from "@/lib/i18n/football-stats-ui";
+import { resolveShotChart } from "@/lib/shot-chart";
+import { ShotChart } from "./ShotChart";
 import { SectionShell } from "./SectionShell";
 import { useProfileLocale } from "./ProfileLocaleContext";
 
@@ -64,6 +66,7 @@ export function StatsPanel({ athlete }: Props) {
     { kind: "two" as const, label: ui.stats.twoAttempts, value: fmt(s.twoAttPerGame), hint: ui.stats.perGame },
     { kind: "three" as const, label: ui.stats.threeAttempts, value: fmt(s.threeAttPerGame), hint: ui.stats.perGame },
   ];
+  const shotChart = !isFootball ? resolveShotChart(s) : null;
 
   return (
     <SectionShell
@@ -121,6 +124,37 @@ export function StatsPanel({ athlete }: Props) {
           </dl>
         </div>
       </div>
+
+      {shotChart ? (
+        <div className="mt-8">
+          <ShotChart
+            data={shotChart}
+            season={{
+              fgPct: s.fgPct,
+              threePct: s.threePct,
+              ftPct: s.ftPct,
+              pointsPerGame: s.pointsPerGame,
+              assistsPerGame: s.assistsPerGame,
+              reboundsPerGame: s.reboundsPerGame,
+              minutesPerGame: s.minutesPerGame,
+            }}
+            labels={{
+              title: ui.stats.shotChartTitle,
+              fg: ui.stats.shotChartFg,
+              threePt: ui.stats.shotChartThreePt,
+              ft: ui.stats.shotChartFt,
+              points: ui.stats.points,
+              assists: ui.stats.assists,
+              rebounds: ui.stats.rebounds,
+              minutes: ui.stats.minutes,
+              madeLegend: ui.stats.shotChartMadeLegend,
+              missedLegend: ui.stats.shotChartMissedLegend,
+              eyebrow: ui.stats.shotChartEyebrow,
+              synthesizedNote: ui.stats.shotChartSynthesizedNote,
+            }}
+          />
+        </div>
+      ) : null}
 
       {/* Tiro e volume */}
       <div className="mt-8 grid gap-6 lg:grid-cols-2">

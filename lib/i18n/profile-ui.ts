@@ -79,6 +79,21 @@ export type StatsUi = {
   stl: string;
   to: string;
   pointsMobile: string;
+  shotChartTitle: string;
+  shotChartEyebrow: string;
+  shotChartHint: string;
+  shotChartSeasonTotal: string;
+  shotChartEmpty: string;
+  shotChartSynthesizedNote: string;
+  shotChartMadeLegend: (pct: number) => string;
+  shotChartMissedLegend: (pct: number) => string;
+  shotChartFg: string;
+  shotChartThreePt: string;
+  shotChartFt: string;
+  shotChartZones: Record<
+    "restricted" | "paint" | "midRange" | "cornerLeft" | "cornerRight" | "aboveBreak",
+    string
+  >;
 };
 
 export type TechnicalUi = {
@@ -353,6 +368,26 @@ const UI_IT: ProfileUi = {
     stl: "Rec",
     to: "Pé",
     pointsMobile: "punti",
+    shotChartTitle: "Shot chart",
+    shotChartEyebrow: "Tiro di stagione",
+    shotChartHint: "Distribuzione per zone — colori caldi = percentuali più alte (stile NBA).",
+    shotChartSeasonTotal: "Totale stagione",
+    shotChartEmpty: "Nessun tiro",
+    shotChartSynthesizedNote:
+      "Riparto zone stimato dai totali ufficiali LNP (2pt 36/57 · 3pt 11/35) — fonte legapallacanestro.com.",
+    shotChartMadeLegend: (pct) => `Segnati (${pct}%)`,
+    shotChartMissedLegend: (pct) => `Sbagliati (${pct}%)`,
+    shotChartFg: "FG%",
+    shotChartThreePt: "3PT%",
+    shotChartFt: "FT%",
+    shotChartZones: {
+      restricted: "Area ristretta",
+      paint: "Pitturato",
+      midRange: "Media distanza",
+      cornerLeft: "Angolo sx 3pt",
+      cornerRight: "Angolo dx 3pt",
+      aboveBreak: "Sopra la linea 3pt",
+    },
   },
   technical: {
     eyebrow: "Mappa tattica",
@@ -566,6 +601,26 @@ const UI_EN: ProfileUi = {
     stl: "Stl",
     to: "TO",
     pointsMobile: "pts",
+    shotChartTitle: "Shot chart",
+    shotChartEyebrow: "Season shooting",
+    shotChartHint: "Zone breakdown — warm colors = higher shooting percentages (NBA-style).",
+    shotChartSeasonTotal: "Season total",
+    shotChartEmpty: "No shots",
+    shotChartSynthesizedNote:
+      "Zone split estimated from official LNP totals (2pt 36/57 · 3pt 11/35) — source legapallacanestro.com.",
+    shotChartMadeLegend: (pct) => `Made (${pct}%)`,
+    shotChartMissedLegend: (pct) => `Missed (${pct}%)`,
+    shotChartFg: "FG%",
+    shotChartThreePt: "3PT%",
+    shotChartFt: "FT%",
+    shotChartZones: {
+      restricted: "Restricted area",
+      paint: "In the paint",
+      midRange: "Mid-range",
+      cornerLeft: "Left corner 3",
+      cornerRight: "Right corner 3",
+      aboveBreak: "Above the break 3",
+    },
   },
   technical: {
     eyebrow: "Tactical map",
