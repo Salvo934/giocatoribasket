@@ -165,6 +165,10 @@ export type VideoUi = {
   clip: string;
   featured: string;
   nowPlaying: string;
+  share: { label: string; shared: string; copied: string; error: string };
+  shareHint: string;
+  videoOnlyEyebrow: string;
+  backToFullProfile: string;
 };
 
 export type ReturnToPlayUi = {
@@ -442,7 +446,7 @@ const UI_IT: ProfileUi = {
     backToTop: "Torna su ↑",
     copyright: "Scheda atleta",
   },
-  video: { clip: "Clip", featured: "In evidenza", nowPlaying: "Now playing" },
+  video: { clip: "Clip", featured: "In evidenza", nowPlaying: "Now playing", share: { label: "Condividi video", shared: "Condiviso", copied: "Link copiato", error: "Errore" }, shareHint: "Solo sala video — per agenti, club e società", videoOnlyEyebrow: "Sala video", backToFullProfile: "Scheda completa" },
 };
 
 const UI_EN: ProfileUi = {
@@ -655,7 +659,7 @@ const UI_EN: ProfileUi = {
     backToTop: "Back to top ↑",
     copyright: "Athlete profile",
   },
-  video: { clip: "Clip", featured: "Featured", nowPlaying: "Now playing" },
+  video: { clip: "Clip", featured: "Featured", nowPlaying: "Now playing", share: { label: "Share videos", shared: "Shared", copied: "Link copied", error: "Error" }, shareHint: "Video room only — for agents, clubs and organizations", videoOnlyEyebrow: "Video room", backToFullProfile: "Full profile" },
 };
 
 export function getProfileUi(locale: ProfileLocale): ProfileUi {

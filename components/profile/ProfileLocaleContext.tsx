@@ -5,6 +5,7 @@ import type { AthleteProfile } from "@/lib/types/athlete";
 import {
   formatProfileShortDate,
   profilePublicPath,
+  videoPublicPath,
   localeSwitchHref,
   type ProfileLocale,
 } from "@/lib/i18n/profile-locale";
@@ -16,6 +17,7 @@ type ProfileLocaleContextValue = {
   athlete: AthleteProfile;
   formatDate: (iso: string) => string;
   profilePath: string;
+  videoPath: string;
   switchToItalianHref: string;
   switchToEnglishHref: string;
   showLanguageSwitch: boolean;
@@ -27,13 +29,25 @@ type ProviderProps = {
   locale: ProfileLocale;
   athlete: AthleteProfile;
   dedicatedDomain: boolean;
+  /** `video` = link lingua puntano a /video */
+  mode?: "profile" | "video";
   children: ReactNode;
 };
 
-export function ProfileLocaleProvider({ locale, athlete, dedicatedDomain, children }: ProviderProps) {
+export function ProfileLocaleProvider({
+  locale,
+  athlete,
+  dedicatedDomain,
+  mode = "profile",
+  children,
+}: ProviderProps) {
   const ui = getProfileUi(locale);
   const supportsEn = athlete.locales?.includes("en") ?? false;
   const showLanguageSwitch = supportsEn;
+  const pathFor = (target: ProfileLocale) =>
+    mode === "video"
+      ? videoPublicPath(athlete.slug, target, dedicatedDomain)
+      : localeSwitchHref(athlete.slug, target, dedicatedDomain);
 
   const value: ProfileLocaleContextValue = {
     locale,
@@ -41,8 +55,9 @@ export function ProfileLocaleProvider({ locale, athlete, dedicatedDomain, childr
     athlete,
     formatDate: (iso) => formatProfileShortDate(iso, locale),
     profilePath: profilePublicPath(athlete.slug, locale, dedicatedDomain),
-    switchToItalianHref: localeSwitchHref(athlete.slug, "it", dedicatedDomain),
-    switchToEnglishHref: localeSwitchHref(athlete.slug, "en", dedicatedDomain),
+    videoPath: videoPublicPath(athlete.slug, locale, dedicatedDomain),
+    switchToItalianHref: pathFor("it"),
+    switchToEnglishHref: pathFor("en"),
     showLanguageSwitch,
   };
 

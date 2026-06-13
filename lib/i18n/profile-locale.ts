@@ -103,6 +103,12 @@ export function profilePublicPath(slug: string, locale: ProfileLocale, dedicated
   return dedicatedDomain ? "/" : `/${slug}`;
 }
 
+/** Path pubblico sala video (dominio dedicato = /video o /en/video). */
+export function videoPublicPath(slug: string, locale: ProfileLocale, dedicatedDomain: boolean): string {
+  if (locale === "en") return dedicatedDomain ? "/en/video" : `/en/${slug}/video`;
+  return dedicatedDomain ? "/video" : `/${slug}/video`;
+}
+
 export function localeSwitchHref(
   slug: string,
   target: ProfileLocale,

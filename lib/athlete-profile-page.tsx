@@ -3,9 +3,10 @@ import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { athleteSupportsLocale, getAthlete, getAthleteSlugByHost } from "@/data/athletes";
 import { AthleteProfileView } from "@/components/profile/AthleteProfileView";
+import { AthleteVideoOnlyView } from "@/components/profile/AthleteVideoOnlyView";
 import { absoluteProfileUrlFromOrigin, publicSiteOrigin, stripTrailingSlash } from "@/lib/public-site";
 import type { ProfileLocale } from "@/lib/i18n/profile-locale";
-import { profilePublicPath } from "@/lib/i18n/profile-locale";
+import { profilePublicPath, videoPublicPath } from "@/lib/i18n/profile-locale";
 
 export async function buildAthleteMetadata(slug: string, locale: ProfileLocale): Promise<Metadata> {
   const athlete = getAthlete(slug, locale);
@@ -88,6 +89,60 @@ export async function buildAthleteMetadata(slug: string, locale: ProfileLocale):
   return meta;
 }
 
+export async function buildAthleteVideoMetadata(slug: string, locale: ProfileLocale): Promise<Metadata> {
+  const athlete = getAthlete(slug, locale);
+  if (!athlete) return { title: locale === "en" ? "Videos not found" : "Video non trovati" };
+
+  const origin = publicSiteOrigin(athlete.seo.publicSiteUrl);
+  const dedicatedDomain = Boolean(origin);
+  const videoPath = videoPublicPath(slug, locale, dedicatedDomain);
+  const title =
+    locale === "en"
+      ? `${athlete.header.name} — Video & clips`
+      : `${athlete.header.name} — Video e clip`;
+  const description =
+    locale === "en"
+      ? `Highlights and skill clips for ${athlete.header.name} — direct video room for clubs, agents and staff.`
+      : `Highlights e clip per reparto di ${athlete.header.name} — sala video diretta per club, agenti e staff.`;
+
+  const meta: Metadata = {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+    },
+  };
+
+  if (origin) {
+    meta.metadataBase = new URL(origin.endsWith("/") ? origin : `${origin}/`);
+    meta.alternates = {
+      canonical: videoPath,
+      languages: athlete.locales?.includes("en")
+        ? {
+            it: videoPublicPath(slug, "it", true),
+            en: videoPublicPath(slug, "en", true),
+          }
+        : undefined,
+    };
+    meta.openGraph = {
+      ...meta.openGraph,
+      url: `${origin.replace(/\/$/, "")}${videoPath}`,
+    };
+  } else if (athlete.locales?.includes("en")) {
+    meta.alternates = {
+      canonical: videoPath,
+      languages: {
+        it: videoPublicPath(slug, "it", false),
+        en: videoPublicPath(slug, "en", false),
+      },
+    };
+  }
+
+  return meta;
+}
+
 export async function AthleteProfilePage({ slug, locale }: { slug: string; locale: ProfileLocale }) {
   if (!athleteSupportsLocale(slug, locale)) notFound();
   const athlete = getAthlete(slug, locale);
@@ -97,6 +152,17 @@ export async function AthleteProfilePage({ slug, locale }: { slug: string; local
   const dedicatedDomain = Boolean(host && getAthleteSlugByHost(host) === slug);
 
   return <AthleteProfileView athlete={athlete} locale={locale} dedicatedDomain={dedicatedDomain} />;
+}
+
+export async function AthleteVideoPage({ slug, locale }: { slug: string; locale: ProfileLocale }) {
+  if (!athleteSupportsLocale(slug, locale)) notFound();
+  const athlete = getAthlete(slug, locale);
+  if (!athlete) notFound();
+
+  const host = (await headers()).get("host");
+  const dedicatedDomain = Boolean(host && getAthleteSlugByHost(host) === slug);
+
+  return <AthleteVideoOnlyView athlete={athlete} locale={locale} dedicatedDomain={dedicatedDomain} />;
 }
 
 /** @deprecated use buildAthleteMetadata — kept for imports that need origin helper */

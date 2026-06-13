@@ -17,6 +17,17 @@ export function middleware(request: NextRequest) {
     return NextResponse.rewrite(new URL(`/${dedicatedSlug}/cookie-policy`, request.url));
   }
 
+  if (pathname === "/video" || pathname === "/video/") {
+    return NextResponse.rewrite(new URL(`/${dedicatedSlug}/video`, request.url));
+  }
+
+  if (pathname === "/en/video" || pathname === "/en/video/") {
+    if (athleteSupportsLocale(dedicatedSlug, "en")) {
+      return NextResponse.rewrite(new URL(`/en/${dedicatedSlug}/video`, request.url));
+    }
+    return NextResponse.redirect(new URL("/video", request.url), 308);
+  }
+
   if (pathname === "/en" || pathname === "/en/") {
     if (athleteSupportsLocale(dedicatedSlug, "en")) {
       return NextResponse.rewrite(new URL(`/en/${dedicatedSlug}`, request.url));
@@ -43,6 +54,14 @@ export function middleware(request: NextRequest) {
 
   if (first === dedicatedSlug && segments.length === 1) {
     return NextResponse.redirect(new URL("/", request.url), 308);
+  }
+
+  if (first === dedicatedSlug && segments[1] === "video" && segments.length === 2) {
+    return NextResponse.redirect(new URL("/video", request.url), 308);
+  }
+
+  if (first === "en" && segments[1] === dedicatedSlug && segments[2] === "video" && segments.length === 3) {
+    return NextResponse.redirect(new URL("/en/video", request.url), 308);
   }
 
   if (first === dedicatedSlug && segments.length > 1) {

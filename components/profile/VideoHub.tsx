@@ -7,6 +7,7 @@ import { youtubeEmbedUrl } from "@/lib/youtube";
 import { isLocalVideoUrl } from "@/lib/video-url";
 import { BroadcastFrame } from "./BroadcastFrame";
 import { FilmRoomThumbnail } from "./FilmRoomThumbnail";
+import { ShareProfileButton } from "./ShareActions";
 import { SectionShell } from "./SectionShell";
 import { useProfileLocale } from "./ProfileLocaleContext";
 
@@ -46,7 +47,7 @@ function ClipRow({ index, clip }: { index: number; clip: AthleteVideo }) {
 }
 
 export function VideoHub({ athlete }: Props) {
-  const { ui } = useProfileLocale();
+  const { ui, videoPath, locale } = useProfileLocale();
   const v = athlete.videos;
   const h = athlete.header;
 
@@ -62,6 +63,10 @@ export function VideoHub({ athlete }: Props) {
   const [activeId, setActiveId] = useState<VideoCategoryId>(firstId);
 
   const activeCat = v.categories.find((c) => c.id === activeId) ?? v.categories[0];
+  const shareTitle =
+    locale === "en" ? `${h.name} — Video & clips` : `${h.name} — Video e clip`;
+  const focusRing =
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9082A]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-black";
 
   return (
     <SectionShell
@@ -71,6 +76,13 @@ export function VideoHub({ athlete }: Props) {
       description="Primo piano sul giocatore e clip divise per argomento: visione rapida per staff e allenatori."
       headerActions={
         <>
+          <ShareProfileButton
+            path={videoPath}
+            publicSiteUrl={athlete.seo.publicSiteUrl}
+            shareLabels={ui.video.share}
+            shareTitle={shareTitle}
+            className={`inline-flex h-9 items-center justify-center rounded-full border border-[#17408B]/45 bg-[#17408B]/15 px-4 text-[11px] font-bold uppercase tracking-wider text-[#9ec5ff] transition hover:border-[#17408B]/65 hover:bg-[#17408B]/25 hover:text-white ${focusRing}`}
+          />
           <span className="inline-flex items-center gap-1.5 rounded-full border border-[#17408B]/40 bg-[#17408B]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#7eb3ff]">
             Per reparto
           </span>
@@ -179,6 +191,7 @@ export function VideoHub({ athlete }: Props) {
               <p className="mt-1 text-sm text-zinc-400">
                 Scegli il reparto · ogni voce apre il video su YouTube (o link esterno).
               </p>
+              <p className="mt-2 text-xs text-zinc-600">{ui.video.shareHint}</p>
             </div>
           </div>
 

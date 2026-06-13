@@ -11,9 +11,16 @@ type Props = {
   publicSiteUrl?: string;
   className?: string;
   shareLabels?: ShareLabels;
+  shareTitle?: string;
 };
 
-export function ShareProfileButton({ path: pathProp, publicSiteUrl, className, shareLabels: shareLabelsProp }: Props) {
+export function ShareProfileButton({
+  path: pathProp,
+  publicSiteUrl,
+  className,
+  shareLabels: shareLabelsProp,
+  shareTitle,
+}: Props) {
   const { profilePath, ui } = useProfileLocale();
   const path = pathProp ?? profilePath;
   const share = shareLabelsProp ?? ui.share;
@@ -37,7 +44,7 @@ export function ShareProfileButton({ path: pathProp, publicSiteUrl, className, s
 
     try {
       if (typeof navigator.share === "function") {
-        await navigator.share({ title: document.title, url });
+        await navigator.share({ title: shareTitle ?? document.title, url });
         setLabel(share.shared);
         setTimeout(() => setLabel(share.label), 2000);
         return;
@@ -54,7 +61,7 @@ export function ShareProfileButton({ path: pathProp, publicSiteUrl, className, s
       setLabel(share.error);
       setTimeout(() => setLabel(share.label), 2200);
     }
-  }, [absoluteUrl, path, share]);
+  }, [absoluteUrl, path, share, shareTitle]);
 
   return (
     <button type="button" onClick={() => void onShare()} className={className}>
