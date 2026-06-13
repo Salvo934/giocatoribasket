@@ -75,21 +75,19 @@ export function VideoHub({ athlete }: Props) {
       title="Video e clip"
       description="Primo piano sul giocatore e clip divise per argomento: visione rapida per staff e allenatori."
       headerActions={
-        <>
-          <ShareProfileButton
-            path={videoPath}
-            publicSiteUrl={athlete.seo.publicSiteUrl}
-            shareLabels={ui.video.share}
-            shareTitle={shareTitle}
-            className={`inline-flex h-9 items-center justify-center rounded-full border border-[#17408B]/45 bg-[#17408B]/15 px-4 text-[11px] font-bold uppercase tracking-wider text-[#9ec5ff] transition hover:border-[#17408B]/65 hover:bg-[#17408B]/25 hover:text-white ${focusRing}`}
-          />
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-[#17408B]/40 bg-[#17408B]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#7eb3ff]">
-            Per reparto
-          </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/4 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
-            {v.categories.length} categorie
-          </span>
-        </>
+        <div className="overflow-hidden rounded-2xl border border-white/10 bg-linear-to-br from-[#17408B]/14 via-black/50 to-[#C9082A]/10 p-px shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]">
+          <div className="flex flex-col gap-3 rounded-[0.95rem] bg-black/55 px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-5 sm:py-4">
+            <p className="max-w-md text-sm leading-relaxed text-zinc-400">{ui.video.shareHint}</p>
+            <ShareProfileButton
+              path={videoPath}
+              publicSiteUrl={athlete.seo.publicSiteUrl}
+              shareLabels={ui.video.share}
+              shareTitle={shareTitle}
+              showIcon
+              className={`inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full border border-[#C9082A]/35 bg-linear-to-r from-[#C9082A] to-[#a80622] px-6 text-xs font-bold uppercase tracking-[0.14em] text-white shadow-[0_0_28px_-6px_rgba(201,8,42,0.55)] transition hover:border-[#C9082A]/55 hover:brightness-110 ${focusRing}`}
+            />
+          </div>
+        </div>
       }
     >
       <div
@@ -185,14 +183,11 @@ export function VideoHub({ athlete }: Props) {
 
         {/* Skill tabs + playlist */}
         <div>
-          <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <h3 className="text-xs font-black uppercase tracking-[0.2em] text-zinc-500">Playbook clips</h3>
-              <p className="mt-1 text-sm text-zinc-400">
-                Scegli il reparto · ogni voce apre il video su YouTube (o link esterno).
-              </p>
-              <p className="mt-2 text-xs text-zinc-600">{ui.video.shareHint}</p>
-            </div>
+          <div className="mb-4">
+            <h3 className="text-xs font-black uppercase tracking-[0.2em] text-zinc-500">Playbook clips</h3>
+            <p className="mt-1 text-sm text-zinc-400">
+              Scegli il reparto · ogni voce apre il video su YouTube (o link esterno).
+            </p>
           </div>
 
           <div className="relative">

@@ -7,11 +7,14 @@ import { AthleteVideoOnlyView } from "@/components/profile/AthleteVideoOnlyView"
 import { absoluteProfileUrlFromOrigin, publicSiteOrigin, stripTrailingSlash } from "@/lib/public-site";
 import type { ProfileLocale } from "@/lib/i18n/profile-locale";
 import { profilePublicPath, videoPublicPath } from "@/lib/i18n/profile-locale";
+import type { AthleteProfile } from "@/lib/types/athlete";
 
-export async function buildAthleteMetadata(slug: string, locale: ProfileLocale): Promise<Metadata> {
-  const athlete = getAthlete(slug, locale);
-  if (!athlete) return { title: locale === "en" ? "Player not found" : "Giocatore non trovato" };
+type OgPreview = {
+  url: string;
+  alt: string;
+};
 
+function resolveAthleteOgPreview(athlete: AthleteProfile, imageAlt: string): OgPreview | undefined {
   const origin = publicSiteOrigin(athlete.seo.publicSiteUrl);
   const previewSrc = (athlete.seo.ogImage ?? athlete.header.heroImage).trim();
   const previewIsAbsolute = /^https?:\/\//i.test(previewSrc);
@@ -28,38 +31,62 @@ export async function buildAthleteMetadata(slug: string, locale: ProfileLocale):
     }
   }
 
+  if (previewImageUrl === undefined) return undefined;
+
+  return { url: previewImageUrl, alt: imageAlt };
+}
+
+function withOgPreview(
+  meta: Metadata,
+  preview: OgPreview | undefined,
+  title: string,
+  description: string,
+): Metadata {
+  if (!preview) return meta;
+
+  const images = [{ url: preview.url, width: 1200, height: 675, alt: preview.alt }];
+
+  return {
+    ...meta,
+    openGraph: {
+      ...meta.openGraph,
+      title,
+      description,
+      images,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [preview.url],
+    },
+  };
+}
+
+export async function buildAthleteMetadata(slug: string, locale: ProfileLocale): Promise<Metadata> {
+  const athlete = getAthlete(slug, locale);
+  if (!athlete) return { title: locale === "en" ? "Player not found" : "Giocatore non trovato" };
+
+  const origin = publicSiteOrigin(athlete.seo.publicSiteUrl);
   const previewAlt = athlete.seo.ogImage
     ? `${athlete.header.name} — player card`
     : `${athlete.header.name} — ${locale === "en" ? "profile photo" : "foto profilo"}`;
-
-  const previewImages =
-    previewImageUrl !== undefined
-      ? [{ url: previewImageUrl, width: 1200, height: 675, alt: previewAlt }]
-      : undefined;
+  const preview = resolveAthleteOgPreview(athlete, previewAlt);
 
   const dedicatedDomain = Boolean(origin);
   const profilePath = profilePublicPath(slug, locale, dedicatedDomain);
 
-  const meta: Metadata = {
+  let meta: Metadata = {
     title: athlete.seo.title,
     description: athlete.seo.description,
     openGraph: {
       title: athlete.seo.title,
       description: athlete.seo.description,
       type: "profile",
-      ...(previewImages ? { images: previewImages } : {}),
     },
-    ...(previewImages
-      ? {
-          twitter: {
-            card: "summary_large_image",
-            title: athlete.seo.title,
-            description: athlete.seo.description,
-            images: [previewImages[0].url],
-          },
-        }
-      : {}),
   };
+
+  meta = withOgPreview(meta, preview, athlete.seo.title, athlete.seo.description);
 
   if (origin) {
     meta.metadataBase = new URL(origin.endsWith("/") ? origin : `${origin}/`);
@@ -102,10 +129,15 @@ export async function buildAthleteVideoMetadata(slug: string, locale: ProfileLoc
       : `${athlete.header.name} — Video e clip`;
   const description =
     locale === "en"
-      ? `Highlights and skill clips for ${athlete.header.name} — direct video room for clubs, agents and staff.`
-      : `Highlights e clip per reparto di ${athlete.header.name} — sala video diretta per club, agenti e staff.`;
+      ? `Highlights and skill clips for ${athlete.header.name} — direct video link for clubs, agents and staff.`
+      : `Highlights e clip per reparto di ${athlete.header.name} — link video diretto per club, agenti e staff.`;
+  const previewAlt =
+    locale === "en"
+      ? `${athlete.header.name} — video & clips`
+      : `${athlete.header.name} — video e clip`;
+  const preview = resolveAthleteOgPreview(athlete, previewAlt);
 
-  const meta: Metadata = {
+  let meta: Metadata = {
     title,
     description,
     openGraph: {
@@ -114,6 +146,8 @@ export async function buildAthleteVideoMetadata(slug: string, locale: ProfileLoc
       type: "website",
     },
   };
+
+  meta = withOgPreview(meta, preview, title, description);
 
   if (origin) {
     meta.metadataBase = new URL(origin.endsWith("/") ? origin : `${origin}/`);

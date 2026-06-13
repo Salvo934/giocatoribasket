@@ -12,7 +12,17 @@ type Props = {
   className?: string;
   shareLabels?: ShareLabels;
   shareTitle?: string;
+  showIcon?: boolean;
 };
+
+function ShareIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>
+      <path d="M12.5 11.5l4-2-4-2v1.5H8a3 3 0 00-3 3v1" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M7.5 8.5l-4 2 4 2v-1.5H12a3 3 0 013 3v1" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
 
 export function ShareProfileButton({
   path: pathProp,
@@ -20,6 +30,7 @@ export function ShareProfileButton({
   className,
   shareLabels: shareLabelsProp,
   shareTitle,
+  showIcon = false,
 }: Props) {
   const { profilePath, ui } = useProfileLocale();
   const path = pathProp ?? profilePath;
@@ -65,6 +76,7 @@ export function ShareProfileButton({
 
   return (
     <button type="button" onClick={() => void onShare()} className={className}>
+      {showIcon ? <ShareIcon className="size-4 shrink-0 opacity-90" /> : null}
       {label}
     </button>
   );
