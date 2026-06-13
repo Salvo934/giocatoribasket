@@ -135,8 +135,8 @@ export const costantinoFavasuli: AthleteProfile = {
       },
     ],
     fullGame: {
-      title: "Film completo — disponibile su richiesta (link privato)",
-      url: "mailto:privacy@katahero.com?subject=Richiesta%20film%20completo%20Costantino%20Favasuli",
+      title: "Partita completa — disponibile su richiesta (link privato)",
+      url: "#contatti",
     },
   },
   stats: {

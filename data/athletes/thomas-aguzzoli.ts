@@ -118,8 +118,8 @@ export const thomasAguzzoli: AthleteProfile = {
       },
     ],
     fullGame: {
-      title: "Film completo — disponibile su richiesta (link privato)",
-      url: "mailto:salvo.bonaita9808@gmail.com?subject=Richiesta%20film%20completo%20Thomas%20Aguzzoli",
+      title: "Partita completa — disponibile su richiesta (link privato)",
+      url: "#contatti",
     },
   },
   stats: {

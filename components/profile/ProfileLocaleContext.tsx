@@ -62,7 +62,9 @@ export function ProfileLocaleProvider({
   };
 
   useEffect(() => {
-    document.documentElement.lang = ui.htmlLang;
+    if (ui.htmlLang && document.documentElement.lang !== ui.htmlLang) {
+      document.documentElement.lang = ui.htmlLang;
+    }
   }, [ui.htmlLang]);
 
   return <ProfileLocaleContext.Provider value={value}>{children}</ProfileLocaleContext.Provider>;

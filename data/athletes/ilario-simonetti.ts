@@ -24,8 +24,8 @@ export const ilarioSimonetti: AthleteProfile = {
     policyUpdated: "2026-05-23",
   },
   header: {
-    heroImage: "/athletes/ilario-simonetti-avatar.png",
-    heroImageFocus: "top",
+    heroImage: "/athletes/ilario-simonetti-avatar-v4.jpg",
+    heroImageFocus: "center",
     heroBackgroundVideo: "/athletes/sfondoheroila.mp4",
     name: "Ilario Simonetti",
     number: "7",
@@ -187,8 +187,8 @@ export const ilarioSimonetti: AthleteProfile = {
       },
     ],
     fullGame: {
-      title: "Film completo — disponibile su richiesta (link privato)",
-      url: "mailto:salvo.bonaita9808@gmail.com?subject=Richiesta%20film%20completo%20Ilario%20Simonetti",
+      title: "Partita completa — disponibile su richiesta (link privato)",
+      url: "#contatti",
     },
   },
   stats: {

@@ -47,7 +47,7 @@ function ClipRow({ index, clip }: { index: number; clip: AthleteVideo }) {
 }
 
 export function VideoHub({ athlete }: Props) {
-  const { ui, videoPath, locale } = useProfileLocale();
+  const { ui, videoPath, locale, profilePath } = useProfileLocale();
   const v = athlete.videos;
   const h = athlete.header;
 
@@ -63,6 +63,7 @@ export function VideoHub({ athlete }: Props) {
   const [activeId, setActiveId] = useState<VideoCategoryId>(firstId);
 
   const activeCat = v.categories.find((c) => c.id === activeId) ?? v.categories[0];
+  const contactsHref = `${profilePath}#contatti`;
   const shareTitle =
     locale === "en" ? `${h.name} — Video & clips` : `${h.name} — Video e clip`;
   const focusRing =
@@ -244,7 +245,7 @@ export function VideoHub({ athlete }: Props) {
           </div>
         </div>
 
-        {/* Full game — stile “locked broadcast” */}
+        {/* Partita completa — accesso su richiesta */}
         {v.fullGame ? (
           <div className="relative overflow-hidden rounded-xl border border-dashed border-white/20 bg-linear-to-br from-[#17408B]/20 via-black/80 to-black p-5 md:p-6">
             <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-[#C9082A]/10 blur-3xl" />
@@ -254,26 +255,28 @@ export function VideoHub({ athlete }: Props) {
                   ◆
                 </div>
                 <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-500">Full game film</p>
+                  <p className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-500">
+                    {ui.video.fullGameEyebrow}
+                  </p>
                   <p className="mt-1 max-w-xl text-base font-semibold text-white">{v.fullGame.title}</p>
-                  <p className="mt-2 text-xs text-zinc-500">Accesso controllato — tipico flusso tra club e rappresentanza.</p>
+                  <p className="mt-2 text-xs text-zinc-500">{ui.video.fullGameNote}</p>
                 </div>
               </div>
-              {v.fullGame.url.startsWith("mailto:") ? (
-                <a
-                  href={v.fullGame.url}
-                  className="inline-flex h-11 shrink-0 items-center justify-center rounded-md border-2 border-white bg-white px-6 text-sm font-bold uppercase tracking-wide text-black hover:bg-zinc-200"
-                >
-                  Richiedi film
-                </a>
-              ) : (
+              {/^https?:\/\//i.test(v.fullGame.url) ? (
                 <a
                   href={v.fullGame.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex h-11 shrink-0 items-center justify-center rounded-md border border-[#C9082A] bg-[#C9082A]/90 px-6 text-sm font-bold uppercase tracking-wide text-white hover:bg-[#C9082A]"
                 >
-                  Apri partita
+                  {ui.video.fullGameOpenCta}
+                </a>
+              ) : (
+                <a
+                  href={contactsHref}
+                  className="inline-flex h-11 shrink-0 items-center justify-center rounded-md border-2 border-white bg-white px-6 text-sm font-bold uppercase tracking-wide text-black hover:bg-zinc-200"
+                >
+                  {ui.video.fullGameRequestCta}
                 </a>
               )}
             </div>

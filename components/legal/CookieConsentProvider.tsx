@@ -21,6 +21,7 @@ import { CookieBanner } from "./CookieBanner";
 type CookieConsentContextValue = {
   consent: ConsentPreferences | null;
   ready: boolean;
+  mounted: boolean;
   externalMediaAllowed: boolean;
   analyticsAllowed: boolean;
   acceptAll: () => void;
@@ -42,9 +43,11 @@ export function useCookieConsent() {
 export function CookieConsentProvider({ children }: { children: ReactNode }) {
   const [consent, setConsent] = useState<ConsentPreferences | null>(null);
   const [ready, setReady] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const stored = parseConsent(localStorage.getItem(CONSENT_STORAGE_KEY));
     setConsent(stored);
     setReady(true);
@@ -92,6 +95,7 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
     () => ({
       consent,
       ready,
+      mounted,
       externalMediaAllowed: consent?.externalMedia ?? false,
       analyticsAllowed: consent?.analytics ?? false,
       acceptAll,
@@ -99,7 +103,7 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
       savePreferences,
       openSettings,
     }),
-    [acceptAll, acceptNecessary, consent, openSettings, ready, savePreferences],
+    [acceptAll, acceptNecessary, consent, mounted, openSettings, ready, savePreferences],
   );
 
   const showBanner = ready && !consent && !settingsOpen;

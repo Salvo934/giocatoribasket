@@ -9,8 +9,8 @@ export const ilarioSimonettiEn: AthleteLocaleOverlay = {
     ogImage: "/athletes/cardilario7-og.jpg",
   },
   header: {
-    heroImage: "/athletes/ilario-simonetti-avatar.png",
-    heroImageFocus: "top",
+    heroImage: "/athletes/ilario-simonetti-avatar-v4.jpg",
+    heroImageFocus: "center",
     heroBackgroundVideo: "/athletes/sfondoheroila.mp4",
     name: "Ilario Simonetti",
     number: "7",
@@ -166,8 +166,8 @@ export const ilarioSimonettiEn: AthleteLocaleOverlay = {
       },
     ],
     fullGame: {
-      title: "Full game film — available on request (private link)",
-      url: "mailto:salvo.bonaita9808@gmail.com?subject=Full%20game%20film%20request%20-%20Ilario%20Simonetti",
+      title: "Full game — available on request (private link)",
+      url: "#contatti",
     },
   },
   stats: {

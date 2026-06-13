@@ -28,9 +28,10 @@ export function FilmRoomThumbnail({
   emptyLabel = "Clip",
   nowPlayingLabel = "In riproduzione",
 }: Props) {
-  const { externalMediaAllowed, ready } = useCookieConsent();
+  const { externalMediaAllowed, ready, mounted } = useCookieConsent();
   const url = clip.url?.trim() ?? "";
-  const thumb = externalMediaAllowed && url && !isLocalVideoUrl(url) ? youtubeThumbnailUrl(url) : null;
+  const canRenderMedia = mounted && ready;
+  const thumb = canRenderMedia && externalMediaAllowed && url && !isLocalVideoUrl(url) ? youtubeThumbnailUrl(url) : null;
   const localVideo = url ? isLocalVideoUrl(url) : false;
   const poster = clip.poster ?? (localVideo ? defaultPoster : undefined);
 
@@ -46,8 +47,10 @@ export function FilmRoomThumbnail({
       }`}
     >
       <div className="relative aspect-video">
-        {!ready ? (
-          <div className="flex h-full items-center justify-center bg-zinc-900 text-[10px] text-zinc-500">…</div>
+        {!canRenderMedia ? (
+          <div className="flex h-full items-center justify-center bg-zinc-900 px-3 text-center text-[10px] font-bold uppercase text-zinc-500">
+            {emptyLabel}
+          </div>
         ) : poster ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img

@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="it" className={[dmSans.variable, bebasNeue.variable].join(" ")}>
+    <html lang="it" suppressHydrationWarning className={[dmSans.variable, bebasNeue.variable].join(" ")}>
       <body className="antialiased">
         <CookieConsentProvider>{children}</CookieConsentProvider>
       </body>

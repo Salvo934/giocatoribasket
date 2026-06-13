@@ -322,7 +322,7 @@ export function ProfileHeader({ athlete }: Props) {
                   className="pointer-events-none absolute -inset-1 rounded-full bg-[conic-gradient(from_200deg,var(--accent)_0%,rgba(223,255,74,0.12)_22%,rgba(255,255,255,0.35)_42%,rgba(147,197,253,0.28)_62%,rgba(223,255,74,0.15)_82%,var(--accent)_100%)] p-[3px] shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_24px_50px_-20px_rgba(0,0,0,0.85),0_0_52px_-18px_var(--accent-glow)] sm:-inset-1.5 sm:p-[3.5px]"
                 >
                   <div className="size-full rounded-full bg-zinc-950 p-[3px] sm:p-1">
-                    <div className="relative size-full overflow-hidden rounded-full shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08),inset_0_8px_24px_rgba(0,0,0,0.55)]">
+                    <div className="relative size-full overflow-hidden rounded-full shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]">
                       <Image
                         src={h.heroImage}
                         alt={`${h.name} — ${ui.profilePhotoAlt}`}
@@ -330,12 +330,12 @@ export function ProfileHeader({ athlete }: Props) {
                         priority
                         quality={95}
                         sizes="(max-width: 1024px) 88vw, 22rem"
-                        className={`object-cover ${heroObjectPosition ? "" : objectPosition} scale-[1.02]`}
+                        className={`object-cover ${heroObjectPosition ? "" : objectPosition}`}
                         style={heroObjectPosition ? { objectPosition: heroObjectPosition } : undefined}
                       />
                       <div
                         aria-hidden
-                        className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(ellipse_80%_70%_at_50%_38%,transparent_42%,rgba(0,0,0,0.55)_88%,rgba(0,0,0,0.82)_100%)]"
+                        className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(ellipse_95%_92%_at_50%_50%,transparent_72%,rgba(0,0,0,0.12)_100%)]"
                       />
                       <div
                         aria-hidden

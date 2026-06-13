@@ -130,8 +130,8 @@ export const alfonsoZampogna: AthleteProfile = {
       },
     ],
     fullGame: {
-      title: "Film completo — disponibile su richiesta (link privato)",
-      url: "mailto:privacy@katahero.com?subject=Richiesta%20film%20completo%20Alfonso%20Zampogna",
+      title: "Partita completa — disponibile su richiesta (link privato)",
+      url: "#contatti",
     },
   },
   stats: {

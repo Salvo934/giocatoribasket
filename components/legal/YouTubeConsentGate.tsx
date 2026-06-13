@@ -12,9 +12,10 @@ type Props = {
 
 /** Blocco mostrato al posto di embed/thumbnail YouTube finché non c'è consenso. */
 export function YouTubeConsentGate({ title, description, onAccept, children }: Props) {
-  const { externalMediaAllowed, acceptAll, openSettings, ready } = useCookieConsent();
+  const { externalMediaAllowed, acceptAll, openSettings, ready, mounted } = useCookieConsent();
+  const canRenderMedia = mounted && ready;
 
-  if (!ready) {
+  if (!canRenderMedia) {
     return (
       <div className="flex h-full min-h-40 items-center justify-center bg-zinc-950 p-6">
         <p className="text-sm text-zinc-500">Caricamento preferenze…</p>
