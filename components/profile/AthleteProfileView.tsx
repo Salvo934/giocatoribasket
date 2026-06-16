@@ -18,7 +18,6 @@ import { SocialMediaKitPanel } from "./SocialMediaKitPanel";
 import { StatsPanel } from "./StatsPanel";
 import { TechnicalFitPanel } from "./TechnicalFitPanel";
 import { VideoHub } from "./VideoHub";
-import { WhyHeFitsPanel } from "./WhyHeFitsPanel";
 
 type Props = { athlete: AthleteProfile; locale?: ProfileLocale; dedicatedDomain?: boolean };
 
@@ -44,7 +43,6 @@ export function AthleteProfileView({ athlete, locale = "it", dedicatedDomain = f
               <VideoHub athlete={athlete} />
               <StatsPanel athlete={athlete} />
               <TechnicalFitPanel athlete={athlete} />
-              <WhyHeFitsPanel athlete={athlete} />
               <GalleryPanel athlete={athlete} />
               <SocialMediaKitPanel athlete={athlete} />
               <CareerTimeline athlete={athlete} />
