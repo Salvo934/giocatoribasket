@@ -1,0 +1,508 @@
+import type { AthleteProfile } from "@/lib/types/athlete";
+
+/** Profilo storico — dati carriera NBA da Basketball-Reference / NBA.com. */
+export const michaelJordan: AthleteProfile = {
+  slug: "michael-jordan",
+  published: true,
+  showContactsSection: false,
+  showScoutSection: false,
+  showMarketSection: false,
+  showTechnicalFitSection: false,
+  seo: {
+    title: "Michael Jeffrey Jordan · Guardia tiratrice | Player Card",
+    description:
+      "Michael Jeffrey Jordan (1963), guardia 198 cm, 6× campione NBA con i Chicago Bulls: 30,1 PPG in carriera, 5 MVP, Hall of Fame. Statistiche, carriera e scheda scouting.",
+    ogImage: "/athletes/michael-jordan-og.webp",
+    publicSiteUrl: "https://michaeljordan23.katahero.com",
+  },
+  header: {
+    heroImage: "/athletes/michael-jordan-avatar.webp",
+    heroImageObjectPosition: "50% 22%",
+    heroBackgroundVideoTheme: "legend",
+    heroBackgroundVideos: [
+      {
+        src: "/athletes/michael-jordan-hero-1.mp4",
+        anchor: "left",
+        fit: "cover",
+        width: "30%",
+        objectPosition: "center center",
+      },
+      {
+        src: "/athletes/michael-jordan-hero-2.mp4",
+        anchor: "center",
+        fit: "cover",
+        width: "38%",
+        objectPosition: "center center",
+      },
+      {
+        src: "/athletes/michael-jordan-hero-3.mp4",
+        anchor: "right",
+        fit: "cover",
+        width: "30%",
+        objectPosition: "center center",
+      },
+    ],
+    heroBackgroundVideoReadabilityOverlay: true,
+    name: "Michael Jeffrey Jordan",
+    number: "23",
+    sport: "Basket",
+    role: "Guardia tiratrice / SG",
+    birthYear: 1963,
+    heightCm: 198,
+    nationality: "Stati Uniti",
+    currentClub: "Chicago Bulls · Hall of Fame",
+    currentClubLogo: "/athletes/chicago-bulls-logo.svg",
+    category: "NBA",
+    league: "Naismith Memorial Basketball Hall of Fame",
+    marketStatusLabel: "Ritirato · leggenda NBA · 6 titoli",
+    identityNote:
+      "Il più grande di sempre per molti: guardia 198 cm con combinazione unica di atletismo, competizione, difesa e clutch. Mano dominante destra; fadeaway, penetrazione al ferro e chiusura difensiva ai massimi livelli.",
+    dashboardIntro:
+      "Michael Jeffrey Jordan, classe 1963, 198 cm: 15 stagioni NBA, 30,1 punti di media in carriera, 6 finali vinte su 6, 5 MVP e 10 scoring title. Player Card storica per club, media e fan — numeri, video e percorso.",
+    agency: {
+      name: "KataHero · Profilo storico",
+      representative: "Scheda dimostrativa Player Card",
+      website: "https://katahero.com",
+    },
+    lastUpdated: "2026-06-19",
+    highlightUrl: "https://www.youtube.com/watch?v=jbW4f60dCNA",
+  },
+  story: {
+    eyebrow: "Leggenda",
+    title: "His Airness",
+    lead: "Da Wilmington al mito globale: sei capitoli per ripercorrere la vita di Michael Jordan — competizione, cadute, ritorni e immortalità.",
+    pullQuote: "Ho fallito più e più volte nella mia vita. Ed è per questo che ho successo.",
+    pullQuoteAttribution: "Michael Jordan",
+    theme: "legend",
+    chapters: [
+      {
+        era: "1963–1981",
+        title: "La fame nasce dal no",
+        body: "Cresciuto a Wilmington, North Carolina. Tagliato dalla squadra del liceo da coach — non abbastanza alto, non abbastanza bravo. Quella delusione diventa ossessione: palestra prima dell'alba, migliaia di tiri, una mentalità che non accetta secondi posti.",
+        quote: "La delusione mi ha dato la motivazione per lavorare più duramente di chiunque altro.",
+        video: "https://www.youtube.com/watch?v=Ztb3KhRsBQc",
+      },
+      {
+        era: "1982",
+        title: "The Shot",
+        body: "Da freshman a North Carolina, tiro da 16 piedi vs Georgetown in finale NCAA. Il primo momento iconico: il pallone che entra, Dean Smith che abbraccia il ragazzo che diventerà il volto del basket mondiale.",
+        stat: { label: "Finale NCAA", value: "63–62" },
+        video: "https://www.youtube.com/watch?v=XDiiVg48zAI",
+      },
+      {
+        era: "1984",
+        title: "Bulls & Air Jordan",
+        body: "Scelto al terzo pick dagli Chicago Bulls. Nike scommette su di lui: nasce la Air Jordan 1, scandalo NBA per i colori, rivoluzione sneaker culture. Rookie of the Year, ma Detroit resta un muro.",
+        stat: { label: "Draft NBA", value: "Pick #3" },
+        video: "https://www.youtube.com/watch?v=rzQAC8kPJxo",
+      },
+      {
+        era: "1991–93",
+        title: "Primo three-peat",
+        body: "Dopo anni di playoff falliti vs Pistons, Jordan e i Bulls rompono il tabù. Phil Jackson, triangle offense, Pippen e Grant: tre titoli consecutivi, tre Finals MVP. Il cattivo ragazzo diventa campione.",
+        stat: { label: "Finals MVP", value: "3×" },
+        video: "https://www.youtube.com/shorts/irSAYVevaQU",
+      },
+      {
+        era: "1995–98",
+        title: "Il ritorno e i 72–10",
+        body: "Intermezzo baseball, numero 45, poi di nuovo 23. Secondo three-peat con Rodman: stagione 72–10, cinque titoli in sette anni. Il Last Shot a Utah chiude l'era Bulls — 6–0 nelle Finals, mai una Game 7.",
+        stat: { label: "Titoli NBA", value: "6×" },
+        video: "https://www.youtube.com/shorts/cuR_e_AVLl0",
+      },
+      {
+        era: "Oltre",
+        title: "Jordan Brand & GOAT",
+        body: "Ritiro definitivo, Hall of Fame, proprietà dei Charlotte Hornets, Jordan Brand da miliardi. Non solo un giocatore: un'icona culturale che ha trasformato sport, moda e marketing per sempre.",
+        stat: { label: "PPG carriera", value: "30.1" },
+        video: "https://www.youtube.com/shorts/HUa0cNO_XRc",
+      },
+    ],
+  },
+  scoutView: {
+    sectionDescription:
+      "Il profilo di riferimento del basket moderno: cosa ha portato Jordan al vertice assoluto e perché resta il metro di paragone per ogni guardia scorer.",
+    shortProfile:
+      "Guardia 198 cm, due-way star e closer definitivo: 30,1 PPG in carriera NBA, 49,7% FG, 6× campione con Chicago (1991–93, 1996–98), Finals MVP in tutte e 6 le serie. Dominio su mid-range, transizione e difesa perimetrale — 9 All-Defensive First Team, 3 steal title. Il modello del wing che vince partite e franchise.",
+    whyWatch:
+      "Il benchmark assoluto per guardie che devono segnare, difendere e chiudere: footwork, ritmo, intensità difensiva e mentalità da Finals in ogni possesso.",
+    toVerify:
+      "Profilo storico — nessuna valutazione attuale; utile come riferimento tattico e comparativo per scouting e storytelling.",
+    idealFit:
+      "Sistemi con spacing, transizione e possessi decisi negli ultimi 8″: isolamento controllato, weak-side cut e difesa aggressiva sul perimetro. Il plus è creare e chiudere — non la regia pura da playmaker.",
+  },
+  market: {
+    availableFrom: "Ritirato dal 2003 · attività imprenditoriale (Jordan Brand)",
+    availability: [
+      { id: "tryout", label: "Tryout / workout", active: false },
+      { id: "loan", label: "Prestito", active: false },
+      { id: "transfer", label: "Trasferimento", active: false },
+      { id: "showcase", label: "Showcase / eventi", active: true },
+      { id: "abroad", label: "Estero", active: false },
+    ],
+    regionsEvaluated: ["NBA", "Team USA · Dream Team", "Brand globale"],
+    opportunitySought:
+      "Profilo archivio / legacy — non disponibilità mercato attuale. Riferimento per contenuti, academy e comparazioni scouting.",
+    economicsNote: "Non applicabile — profilo storico dimostrativo.",
+  },
+  videos: {
+    poster: "/athletes/michael-jordan-gallery-2.jpg",
+    main: {
+      title: "Michael Jordan — Highlights",
+      url: "https://www.youtube.com/watch?v=jbW4f60dCNA",
+      provider: "youtube",
+    },
+    filmRoomSide: [
+      {
+        title: "Jordan Highlights — clip 1",
+        url: "https://www.youtube.com/watch?v=cuLprHh_BRg",
+      },
+      {
+        title: "Jordan Highlights — clip 2",
+        url: "https://www.youtube.com/watch?v=SUo8skGvl-Q",
+      },
+      {
+        title: "Jordan Highlights — clip 3",
+        url: "https://www.youtube.com/watch?v=ytyncBOjAAE",
+      },
+    ],
+    categories: [
+      {
+        id: "shooting",
+        label: "Tiro",
+        clips: [{ title: "Tiro e conclusioni", url: "https://www.youtube.com/watch?v=cuLprHh_BRg" }],
+      },
+      {
+        id: "defense",
+        label: "Difesa",
+        clips: [{ title: "Steal e chiusure", url: "https://www.youtube.com/watch?v=SUo8skGvl-Q" }],
+      },
+      {
+        id: "transition",
+        label: "Transizione",
+        clips: [{ title: "Fast break", url: "https://www.youtube.com/watch?v=ytyncBOjAAE" }],
+      },
+      {
+        id: "playmaking",
+        label: "Passaggi",
+        clips: [{ title: "Playmaking", url: "https://www.youtube.com/watch?v=cuLprHh_BRg" }],
+      },
+      {
+        id: "pnr",
+        label: "Gioco sul blocco",
+        clips: [{ title: "Pick & roll", url: "https://www.youtube.com/watch?v=SUo8skGvl-Q" }],
+      },
+      {
+        id: "iso",
+        label: "Uno contro uno",
+        clips: [{ title: "Isolamento", url: "https://www.youtube.com/watch?v=ytyncBOjAAE" }],
+      },
+      {
+        id: "rebounding",
+        label: "Rimbalzo",
+        clips: [{ title: "Rimbalzo", url: "https://www.youtube.com/watch?v=cuLprHh_BRg" }],
+      },
+      {
+        id: "athleticism",
+        label: "Atletismo",
+        clips: [{ title: "Dunk e elevazione", url: "https://www.youtube.com/watch?v=SUo8skGvl-Q" }],
+      },
+    ],
+    fullGame: {
+      title: "Jordan Highlights — clip 3",
+      url: "https://www.youtube.com/watch?v=ytyncBOjAAE",
+    },
+  },
+  stats: {
+    label: "Carriera NBA · 1984–2003 · fonte Basketball-Reference",
+    games: 1072,
+    minutesPerGame: 38.3,
+    pointsPerGame: 30.1,
+    reboundsPerGame: 6.2,
+    assistsPerGame: 5.3,
+    stealsPerGame: 2.3,
+    turnoversPerGame: 2.9,
+    fgPct: 49.7,
+    twoPct: 51.0,
+    threePct: 32.7,
+    ftPct: 83.5,
+    twoAttPerGame: 20.6,
+    threeAttPerGame: 1.4,
+    shotChart: {
+      synthesized: true,
+      zones: [
+        { id: "restricted", made: 4120, attempted: 6200 },
+        { id: "paint", made: 2180, attempted: 4100 },
+        { id: "midRange", made: 4890, attempted: 9200 },
+        { id: "cornerLeft", made: 210, attempted: 580 },
+        { id: "cornerRight", made: 195, attempted: 560 },
+        { id: "aboveBreak", made: 890, attempted: 2540 },
+      ],
+    },
+    lastGames: [
+      {
+        date: "1998-06-14",
+        opponent: "Utah Jazz (Finals G6)",
+        minutes: 43,
+        points: 45,
+        rebounds: 1,
+        assists: 1,
+        steals: 1,
+      },
+      {
+        date: "1998-06-11",
+        opponent: "Utah Jazz (Finals G5)",
+        minutes: 40,
+        points: 27,
+        rebounds: 4,
+        assists: 4,
+        steals: 2,
+      },
+      {
+        date: "1997-06-13",
+        opponent: "Utah Jazz (Finals G6)",
+        minutes: 42,
+        points: 39,
+        rebounds: 11,
+        assists: 4,
+        steals: 2,
+      },
+      {
+        date: "1986-04-20",
+        opponent: "Boston Celtics (Playoff G2)",
+        minutes: 53,
+        points: 63,
+        rebounds: 6,
+        assists: 3,
+        steals: 3,
+      },
+      {
+        date: "1992-06-14",
+        opponent: "Portland Trail Blazers (Finals G6)",
+        minutes: 42,
+        points: 33,
+        rebounds: 4,
+        assists: 4,
+        steals: 1,
+      },
+    ],
+  },
+  technicalFit: {
+    playerType:
+      "Michael Jeffrey Jordan: guardia 198 cm, due-way superstar e closer — 30,1 PPG in carriera, 6 titoli NBA, 5 MVP e 6 Finals MVP. Il riferimento per ogni wing scorer che deve vincere partite decisive.",
+    strengths: [
+      "Scoring title record (10) e media 30,1 PPG — efficienza e volume insieme",
+      "Difesa perimetrale d’élite: 9× All-Defensive First Team, 3× steal leader",
+      "Clutch e Finals: 6–0 nelle serie finali, 6 Finals MVP",
+      "Mid-range, footwork e isolamento — arma primaria pre-analytics",
+      "Leadership competitiva e standard di lavoro che hanno elevato l’intera franchise",
+    ],
+    improvements: [
+      "Profilo storico — non valutazione attuale",
+      "Percentuale da tre sotto la media moderna (32,7% career) — contesto epoca",
+      "Ruolo da playmaker puro non era il core del valore",
+    ],
+    idealSystem:
+      "Triangle offense, spacing sul weak side, transizione e possessi decisi negli ultimi minuti. Massimo valore con big che schermano, tagliano e difendono il ferro — es. Pippen, Rodman, Grant.",
+    idealRole:
+      "Guardia tiratrice / small forward offensivo con palla nelle mani negli ultimi 8″, 36′+ e responsabilità difensiva sul miglior avversario perimetrale.",
+  },
+  gallery: {
+    description: "Momenti iconici — Chicago Bulls, Air Jordan e immagini da leggenda NBA.",
+    items: [
+      {
+        src: "/athletes/michael-jordan-gallery-1.jpg",
+        alt: "Michael Jordan giovane in maglia Bulls con pallone e Air Jordan 1 appoggiate sulla spalla, campo outdoor",
+        caption: "Chicago Bulls · il mito nasce qui",
+      },
+      {
+        src: "/athletes/michael-jordan-gallery-2.jpg",
+        alt: "Michael Jordan in volo verso il canestro per uno schiacciata con la maglia rossa dei Bulls numero 23",
+        caption: "Schiacciata · hang time",
+      },
+      {
+        src: "/athletes/michael-jordan-gallery-3.jpg",
+        alt: "Michael Jordan visto di spalle con JORDAN 23 sulla maglia rossa, mani sui fianchi",
+        caption: "JORDAN 23 · il numero della leggenda",
+      },
+      {
+        src: "/athletes/michael-jordan-gallery-4.jpg",
+        alt: "Michael Jordan in palleggio con lingua fuori, maglia bianca Bulls contro i Detroit Pistons",
+        caption: "Palleggio · intensità vs Detroit",
+      },
+      {
+        src: "/athletes/michael-jordan-gallery-5.webp",
+        alt: "Michael Jordan in azione in palleggio con maglia rossa Bulls numero 23",
+        caption: "In campo · Chicago Bulls",
+      },
+    ],
+  },
+  career: [
+    {
+      season: "2001-03",
+      club: "Washington Wizards",
+      category: "NBA",
+      notes: "Rientro dopo ritiro · 21,2 PPG in 142 gare",
+      clubLogo: "/athletes/chicago-bulls-logo.svg",
+    },
+    {
+      season: "1995-98",
+      club: "Chicago Bulls",
+      category: "NBA · secondo three-peat",
+      notes: "3 titoli · 72–10 (1995-96) · 6 Finals MVP totali",
+      clubLogo: "/athletes/chicago-bulls-logo.svg",
+    },
+    {
+      season: "1994-95",
+      club: "Chicago Bulls",
+      category: "NBA · rientro maglia 45",
+      notes: "Playoff semifinali vs Orlando",
+      clubLogo: "/athletes/chicago-bulls-logo.svg",
+    },
+    {
+      season: "1991-93",
+      club: "Chicago Bulls",
+      category: "NBA · first three-peat",
+      notes: "3 titoli consecutivi · prima dinastia Bulls",
+      clubLogo: "/athletes/chicago-bulls-logo.svg",
+    },
+    {
+      season: "1984-93",
+      club: "Chicago Bulls",
+      category: "NBA",
+      notes: "Rookie of the Year 1985 · prime Finals e prime MVP",
+      clubLogo: "/athletes/chicago-bulls-logo.svg",
+    },
+    {
+      season: "1981-84",
+      club: "North Carolina Tar Heels",
+      category: "NCAA Division I",
+      notes: "Campione NCAA 1982 · tiro decisivo vs Georgetown",
+    },
+    {
+      season: "1984",
+      club: "Team USA",
+      category: "Olimpiadi Los Angeles",
+      notes: "Oro olimpico",
+    },
+    {
+      season: "1992",
+      club: "Dream Team USA",
+      category: "Olimpiadi Barcelona",
+      notes: "Oro · squadra storica del basket mondiale",
+    },
+  ],
+  honors: [
+    {
+      title: "6× Campione NBA",
+      detail: "Chicago Bulls — 1991, 1992, 1993, 1996, 1997, 1998.",
+      year: "1998",
+    },
+    {
+      title: "5× MVP stagione regolare",
+      detail: "MVP NBA — massimo riconoscimento individuale.",
+      year: "1998",
+    },
+    {
+      title: "6× Finals MVP",
+      detail: "MVP in tutte e 6 le serie finali vinte.",
+      year: "1998",
+    },
+    {
+      title: "10× NBA scoring champion",
+      detail: "Capocannoniere assoluto per dieci stagioni.",
+      year: "1998",
+    },
+    {
+      title: "Naismith Hall of Fame",
+      detail: "Inserito nel Naismith Memorial Basketball Hall of Fame (2009).",
+      year: "2009",
+    },
+    {
+      title: "Presidential Medal of Freedom",
+      detail: "Medaglia presidenziale della libertà (2016).",
+      year: "2016",
+    },
+  ],
+  verifications: [
+    { id: "data", label: "Dati verificati", ok: true },
+    { id: "video", label: "Video verificato", ok: true },
+    { id: "contact", label: "Contatto verificato", ok: false },
+    { id: "fresh", label: "Profilo aggiornato", ok: true },
+    { id: "club", label: "Club confermato", ok: true },
+  ],
+  contacts: {
+    agency: {
+      name: "KataHero · Profilo storico",
+      website: "https://katahero.com",
+    },
+    representative: {
+      name: "Player Card demo",
+      role: "Scheda dimostrativa — non contatto ufficiale Jordan Brand",
+      emailPublicLabel: "Profilo storico · non gestito",
+      phonePublicLabel: "Non applicabile",
+    },
+    whatsappPublicLabel: "Profilo storico — nessun contatto diretto",
+    social: [
+      {
+        platform: "Instagram",
+        handle: "@jumpman23",
+        url: "https://www.instagram.com/jumpman23/",
+      },
+    ],
+  },
+  agencyRoster: [],
+  shop: {
+    storeUrl: "https://www.nike.com/it/jordan",
+    storeLabel: "Shop Jordan su Nike",
+    products: [
+      {
+        title: 'Air Jordan 1 Retro High OG "Black Toe"',
+        subtitle: "Colorway Bianco / Varsity Red / Nero · stile DZ5485-106.",
+        category: "shoes",
+        image: "/athletes/shop/jordan-shop-aj1-black-toe.png",
+        url: "https://www.nike.com/it/t/scarpa-air-jordan-1-retro-high-og-black-toe-oSRhapAE/DZ5485-106",
+        badge: "Iconic",
+      },
+      {
+        title: 'Air Jordan 11 Retro Low "University Blue"',
+        subtitle: "Pelle verniciata e suola trasparente · stile FV5104-100.",
+        category: "shoes",
+        image: "/athletes/shop/jordan-shop-aj11-university-blue.png",
+        url: "https://www.nike.com/it/t/scarpa-air-jordan-11-retro-low-university-blue-cxm35J/FV5104-100",
+        badge: "Retro",
+      },
+      {
+        title: "Maglia Chicago Bulls Icon Edition Swingman",
+        subtitle: "Nike Dri-FIT NBA ufficiale · stile DN2009-657.",
+        category: "jersey",
+        image: "/athletes/shop/jordan-shop-bulls-swingman-jersey.png",
+        url: "https://www.nike.com/it/t/maglia-chicago-bulls-icon-edition-swingman-dri-fit-nba-pc4rG6/DN2009-657",
+        badge: "Bulls",
+      },
+      {
+        title: "Felpa Chicago Bulls Jordan Basketball Flight",
+        subtitle: "Fleece con cappuccio · logo Bulls e Jumpman.",
+        category: "apparel",
+        image: "/athletes/shop/jordan-shop-bulls-flight-hoodie.png",
+        url: "https://www.nike.com/it/t/felpa-pullover-in-fleece-con-cappuccio-chicago-bulls-jordan-basketball-flight-EV5ny3t0/HV9794-060",
+      },
+      {
+        title: 'Air Jordan 4 Retro "Flight Club"',
+        subtitle: "Mesh, Wings e Max Air · edizione uomo IM4002-100.",
+        category: "shoes",
+        image: "/athletes/shop/jordan-shop-aj4-flight-club.png",
+        url: "https://www.nike.com/it/t/scarpa-air-jordan-4-retro-flight-club-x4MSM19W/IM4002-100",
+        badge: "Classic",
+      },
+      {
+        title: "Cappello regolabile Jordan Jumpman Pro",
+        subtitle: "Visiera piatta · stile FV5296-011 · Nero/Antracite.",
+        category: "accessory",
+        image: "/athletes/shop/jordan-shop-jumpman-cap.png",
+        url: "https://www.nike.com/it/t/cappello-regolabile-jordan-jumpman-pro-qW2XSv/FV5296-011",
+        badge: "Jumpman",
+      },
+    ],
+  },
+};

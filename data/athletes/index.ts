@@ -1,3 +1,4 @@
+import { michaelJordan } from "./michael-jordan";
 import { alfonsoZampogna } from "./alfonso-zampogna";
 import { antonioSorbara } from "./antonio-sorbara";
 import { alessandroFerrari } from "./alessandro-ferrari";
@@ -16,6 +17,7 @@ import { hostFromPublicSiteUrl, normalizeHost } from "@/lib/public-site";
 
 const athletes: AthleteProfile[] = [
   ilarioSimonetti,
+  michaelJordan,
   alessandroFerrari,
   francescoSpinelli,
   thomasAguzzoli,

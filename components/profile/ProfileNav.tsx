@@ -10,35 +10,71 @@ function navLinks(
   showGallery: boolean,
   showSocialKit: boolean,
   showReturnToPlay: boolean,
+  showContacts: boolean,
+  showScout: boolean,
+  showMarket: boolean,
+  showTechnicalFit: boolean,
+  showShop: boolean,
+  showStory: boolean,
   nav: ReturnType<typeof useProfileLocale>["ui"]["nav"],
 ) {
-  const links: { href: string; label: string }[] = [
-    { href: "#scout", label: nav.scout },
-    { href: "#mercato", label: nav.market },
-  ];
+  const links: { href: string; label: string }[] = [];
+  if (showScout) links.push({ href: "#scout", label: nav.scout });
+  if (showMarket) links.push({ href: "#mercato", label: nav.market });
   if (showReturnToPlay) links.push({ href: "#return-to-play", label: nav.returnToPlay });
+  if (showStory) links.push({ href: "#storia", label: nav.story });
   links.push(
     { href: "#video", label: nav.video },
     { href: "#stats", label: nav.stats },
-    { href: "#fit", label: nav.fit },
   );
+  if (showTechnicalFit) links.push({ href: "#fit", label: nav.fit });
   if (showGallery) links.push({ href: "#gallery", label: nav.gallery });
+  if (showShop) links.push({ href: "#shop", label: nav.shop });
   if (showSocialKit) links.push({ href: "#social-kit", label: nav.socialKit });
-  links.push(
-    { href: "#carriera", label: nav.career },
-    { href: "#honors", label: nav.honors },
-    { href: "#contatti", label: nav.contacts },
-  );
+  links.push({ href: "#carriera", label: nav.career }, { href: "#honors", label: nav.honors });
+  if (showContacts) links.push({ href: "#contatti", label: nav.contacts });
   return links;
 }
 
-type Props = { showGallery?: boolean; showSocialKit?: boolean; showReturnToPlay?: boolean };
+type Props = {
+  showGallery?: boolean;
+  showSocialKit?: boolean;
+  showReturnToPlay?: boolean;
+  showContacts?: boolean;
+  showScout?: boolean;
+  showMarket?: boolean;
+  showTechnicalFit?: boolean;
+  showShop?: boolean;
+  showStory?: boolean;
+};
 
-export function ProfileNav({ showGallery = false, showSocialKit = true, showReturnToPlay = false }: Props) {
+export function ProfileNav({
+  showGallery = false,
+  showSocialKit = true,
+  showReturnToPlay = false,
+  showContacts = true,
+  showScout = true,
+  showMarket = true,
+  showTechnicalFit = true,
+  showShop = false,
+  showStory = false,
+}: Props) {
   const { ui } = useProfileLocale();
   const links = useMemo(
-    () => navLinks(showGallery, showSocialKit, showReturnToPlay, ui.nav),
-    [showGallery, showSocialKit, showReturnToPlay, ui.nav],
+    () =>
+      navLinks(
+        showGallery,
+        showSocialKit,
+        showReturnToPlay,
+        showContacts,
+        showScout,
+        showMarket,
+        showTechnicalFit,
+        showShop,
+        showStory,
+        ui.nav,
+      ),
+    [showGallery, showSocialKit, showReturnToPlay, showContacts, showScout, showMarket, showTechnicalFit, showShop, showStory, ui.nav],
   );
   const [open, setOpen] = useState(false);
 

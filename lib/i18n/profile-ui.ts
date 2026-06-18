@@ -208,6 +208,30 @@ export type ReturnToPlayUi = {
   nowPlaying: string;
 };
 
+export type ShopUi = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  storeCta: string;
+  buyCta: string;
+  externalHint: string;
+  categories: {
+    shoes: string;
+    jersey: string;
+    apparel: string;
+    accessory: string;
+  };
+};
+
+export type StoryUi = {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  swipeHint: string;
+  documentaryLabel: string;
+  chaptersLabel: string;
+};
+
 export type ProfileUi = {
   htmlLang: string;
   skipIntro: string;
@@ -240,6 +264,8 @@ export type ProfileUi = {
     career: string;
     honors: string;
     contacts: string;
+    shop: string;
+    story: string;
   };
   scout: ScoutUi;
   market: MarketUi;
@@ -251,6 +277,8 @@ export type ProfileUi = {
   honors: HonorsUi;
   contacts: ContactsUi;
   returnToPlayUi: ReturnToPlayUi;
+  shop: ShopUi;
+  story: StoryUi;
   footer: FooterUi;
   video: VideoUi;
 };
@@ -287,6 +315,8 @@ const UI_IT: ProfileUi = {
     career: "Carriera",
     honors: "Palmares",
     contacts: "Contatti",
+    shop: "Shop",
+    story: "Storia",
   },
   scout: {
     eyebrow: "30 secondi",
@@ -475,6 +505,29 @@ const UI_IT: ProfileUi = {
     monitoring: "Monitoraggio attivo",
     nowPlaying: "In riproduzione",
   },
+  shop: {
+    eyebrow: "Jordan Brand",
+    title: "Shop",
+    description:
+      "Scarpe, canotte e apparel ufficiali — ogni prodotto apre lo shop Nike / Jordan in una nuova scheda.",
+    storeCta: "Shop Jordan su Nike",
+    buyCta: "Su Nike",
+    externalHint: "Link esterno · Nike.com / Jordan.com",
+    categories: {
+      shoes: "Scarpe",
+      jersey: "Canotta",
+      apparel: "Apparel",
+      accessory: "Accessori",
+    },
+  },
+  story: {
+    eyebrow: "Leggenda",
+    title: "La storia",
+    lead: "Dal taglio dalla squadra del liceo al Last Shot: i capitoli che hanno costruito il mito.",
+    swipeHint: "Scorri per esplorare i capitoli →",
+    documentaryLabel: "Documentary",
+    chaptersLabel: "capitoli",
+  },
   footer: {
     playerCard: "Player Card",
     legal: "Informazioni legali",
@@ -520,6 +573,8 @@ const UI_EN: ProfileUi = {
     career: "Career",
     honors: "Honors",
     contacts: "Contact",
+    shop: "Shop",
+    story: "Story",
   },
   scout: {
     eyebrow: "30 seconds",
@@ -707,6 +762,29 @@ const UI_EN: ProfileUi = {
     phaseReturn: "Documented return",
     monitoring: "Active monitoring",
     nowPlaying: "Now playing",
+  },
+  shop: {
+    eyebrow: "Jordan Brand",
+    title: "Shop",
+    description:
+      "Official shoes, jerseys and apparel — each product opens the Nike / Jordan store in a new tab.",
+    storeCta: "Jordan shop on Nike",
+    buyCta: "On Nike",
+    externalHint: "External link · Nike.com / Jordan.com",
+    categories: {
+      shoes: "Shoes",
+      jersey: "Jersey",
+      apparel: "Apparel",
+      accessory: "Accessories",
+    },
+  },
+  story: {
+    eyebrow: "Legacy",
+    title: "The story",
+    lead: "From getting cut in high school to The Last Shot: the chapters that built the myth.",
+    swipeHint: "Swipe to explore the chapters →",
+    documentaryLabel: "Documentary",
+    chaptersLabel: "chapters",
   },
   footer: {
     playerCard: "Player Card",

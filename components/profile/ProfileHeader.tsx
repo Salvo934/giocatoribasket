@@ -83,6 +83,7 @@ export function ProfileHeader({ athlete }: Props) {
               <HeroBackgroundVideoStack
                 clips={h.heroBackgroundVideos}
                 readabilityOverlay={h.heroBackgroundVideoReadabilityOverlay ?? true}
+                theme={h.heroBackgroundVideoTheme ?? "default"}
               />
             ) : h.heroBackgroundVideo ? (
               <HeroBackgroundVideo
@@ -239,7 +240,7 @@ export function ProfileHeader({ athlete }: Props) {
               >
                 {ui.watchHighlights}
               </a>
-              {athlete.slug !== "antonio-sorbara" ? (
+              {athlete.showContactsSection !== false && athlete.slug !== "antonio-sorbara" ? (
                 <a
                   href="#contatti"
                   className={`inline-flex h-11 items-center justify-center rounded-full border border-white/18 bg-white/3 px-6 text-sm font-semibold text-zinc-200 transition hover:border-white/30 hover:bg-white/7 hover:text-white ${focusRing}`}

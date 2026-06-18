@@ -29,6 +29,15 @@ export function youtubeVideoId(rawUrl: string): string | null {
   }
 }
 
+export function youtubeIsShort(rawUrl: string): boolean {
+  try {
+    const u = new URL(rawUrl.trim());
+    return u.pathname.startsWith("/shorts/");
+  } catch {
+    return false;
+  }
+}
+
 export function youtubeThumbnailUrl(rawUrl: string): string | null {
   const id = youtubeVideoId(rawUrl);
   return id ? `https://i.ytimg.com/vi/${id}/mqdefault.jpg` : null;
@@ -37,4 +46,27 @@ export function youtubeThumbnailUrl(rawUrl: string): string | null {
 export function youtubeEmbedUrl(rawUrl: string): string {
   const id = youtubeVideoId(rawUrl);
   return id ? `https://www.youtube-nocookie.com/embed/${id}` : "";
+}
+
+/** Embed muto in loop per sfondo hero (Shorts / clip verticali). */
+export function youtubeBackgroundEmbedUrl(rawUrl: string): string {
+  const id = youtubeVideoId(rawUrl);
+  if (!id) return "";
+
+  const params = new URLSearchParams({
+    autoplay: "1",
+    mute: "1",
+    loop: "1",
+    playlist: id,
+    controls: "0",
+    modestbranding: "1",
+    rel: "0",
+    playsinline: "1",
+    disablekb: "1",
+    fs: "0",
+    iv_load_policy: "3",
+    enablejsapi: "0",
+  });
+
+  return `https://www.youtube-nocookie.com/embed/${id}?${params.toString()}`;
 }

@@ -251,6 +251,55 @@ export interface ReturnToPlaySection {
   statusLabel?: string;
 }
 
+export type ShopProductCategory = "shoes" | "jersey" | "apparel" | "accessory";
+
+export interface ShopProduct {
+  title: string;
+  subtitle?: string;
+  category: ShopProductCategory;
+  /** Copertina prodotto (path in `public`) */
+  image?: string;
+  /** URL shop ufficiale (Nike, Jordan, ecc.) */
+  url: string;
+  badge?: string;
+}
+
+/** Shop ufficiale atleta — link esterni, sezione opzionale */
+export interface AthleteShop {
+  /** Paragrafo sotto il titolo sezione (override UI default) */
+  description?: string;
+  /** Link principale allo shop brand */
+  storeUrl?: string;
+  storeLabel?: string;
+  products: ShopProduct[];
+}
+
+export type AthleteStoryTheme = "default" | "legend";
+
+export interface AthleteStoryChapter {
+  /** Periodo o anno — es. "1991–93" */
+  era: string;
+  title: string;
+  body: string;
+  quote?: string;
+  stat?: { label: string; value: string };
+  /** Immagine di sfondo (path in `public`) */
+  image?: string;
+  /** Clip YouTube del capitolo (watch o Shorts) */
+  video?: string;
+}
+
+/** Sezione narrativa sotto l'hero — opzionale */
+export interface AthleteStory {
+  eyebrow?: string;
+  title?: string;
+  lead?: string;
+  pullQuote?: string;
+  pullQuoteAttribution?: string;
+  theme?: AthleteStoryTheme;
+  chapters: AthleteStoryChapter[];
+}
+
 /** Configurazione GDPR / privacy per sito atleta (override opzionali). */
 export interface AthleteLegalConfig {
   /** Titolare del trattamento dei dati pubblicati sul sito */
@@ -271,6 +320,8 @@ export interface AthleteLegalConfig {
 }
 
 export type ProfileLocaleCode = "it" | "en";
+
+export type HeroBackgroundVideoTheme = "default" | "legend";
 
 export interface HeroBackgroundVideoClip {
   src: string;
@@ -334,6 +385,8 @@ export interface AthleteProfile {
     heroBackgroundImageReadabilityOverlay?: boolean;
     /** Più clip posizionati nello sfondo hero (desktop) — alternativa a `heroBackgroundVideo` singolo */
     heroBackgroundVideos?: HeroBackgroundVideoClip[];
+    /** Stile grafico stack clip — es. `legend` per profili iconici */
+    heroBackgroundVideoTheme?: HeroBackgroundVideoTheme;
     /** Video loop in `public` (mp4), dietro overlay — uso mirato per non coprire copy/avatar */
     heroBackgroundVideo?: string;
     /** Fine loop in secondi (esclude coda indesiderata, es. registrazione schermo) */
@@ -403,6 +456,18 @@ export interface AthleteProfile {
   socialMediaKit?: AthleteSocialMediaKit;
   /** Aggiornamento rientro post-infortunio per club, staff e procuratori */
   returnToPlay?: ReturnToPlaySection;
+  /** Se false, nasconde sezione contatti e link correlati in nav/hero. */
+  showContactsSection?: boolean;
+  /** Se false, nasconde la sezione scout (30 secondi). */
+  showScoutSection?: boolean;
+  /** Se false, nasconde la sezione status mercato. */
+  showMarketSection?: boolean;
+  /** Se false, nasconde la sezione fit tecnico. */
+  showTechnicalFitSection?: boolean;
+  /** Shop prodotti ufficiali (link esterni) — se assente la sezione non viene mostrata. */
+  shop?: AthleteShop;
+  /** Narrativa biografica sotto l'hero — opzionale */
+  story?: AthleteStory;
   career: CareerStep[];
   /** Stile opzionale per la sezione percorso */
   careerSection?: CareerSectionStyle;

@@ -1,0 +1,652 @@
+/* Legend story — sezione biografica cinematografica */
+
+.legend-story {
+  position: relative;
+  overflow: hidden;
+  background: #030305;
+}
+
+.legend-story--legend {
+  border-bottom-color: rgba(206, 17, 65, 0.18);
+}
+
+.legend-story__grain {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.legend-story__floor {
+  pointer-events: none;
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 0;
+  height: 12rem;
+  background: radial-gradient(ellipse 80% 100% at 50% 100%, rgba(206, 17, 65, 0.2), transparent 70%);
+  filter: blur(24px);
+}
+
+.legend-story__watermark {
+  pointer-events: none;
+  position: absolute;
+  right: -2%;
+  top: 8%;
+  z-index: 0;
+  font-family: var(--font-bebas);
+  font-size: clamp(10rem, 32vw, 22rem);
+  line-height: 0.85;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.025);
+  user-select: none;
+}
+
+.legend-story__club-logo {
+  pointer-events: none;
+  position: absolute;
+  left: -5%;
+  bottom: 0;
+  z-index: 0;
+  width: clamp(9rem, 30vw, 20rem);
+  opacity: 0.045;
+  user-select: none;
+  filter: saturate(0.9);
+}
+
+.legend-story__club-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 1024px) {
+  .legend-story__club-logo {
+    left: -2%;
+    bottom: 4%;
+    width: clamp(11rem, 16vw, 18rem);
+  }
+}
+
+.legend-story__beam {
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  z-index: 0;
+  height: 100%;
+  width: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(206, 17, 65, 0.28) 15%,
+    rgba(223, 255, 74, 0.18) 50%,
+    rgba(206, 17, 65, 0.28) 85%,
+    transparent
+  );
+}
+
+.legend-story-hud {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.45);
+  padding: 0.45rem 0.85rem;
+  backdrop-filter: blur(8px);
+}
+
+.legend-story-hud__left {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.legend-story-hud__rec {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: #ff2d2d;
+  box-shadow: 0 0 10px rgba(255, 45, 45, 0.85);
+  animation: legend-story-rec 1.4s ease-in-out infinite;
+}
+
+.legend-story-hud__tag {
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.legend-story-hud__tag--accent {
+  color: #dfff4a;
+}
+
+.legend-story-hud__meta {
+  font-family: var(--font-bebas);
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  color: rgba(223, 255, 74, 0.85);
+}
+
+.legend-story-intro {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .legend-story-intro {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: end;
+    gap: 2.5rem;
+  }
+}
+
+.legend-story-intro__title-block {
+  position: relative;
+}
+
+.legend-story-intro__title-block::before {
+  content: "";
+  position: absolute;
+  left: -1rem;
+  top: 0.35rem;
+  bottom: 0.35rem;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(to bottom, #dfff4a, #ce1141, transparent);
+}
+
+.legend-story-quote {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.35rem;
+  padding: 2px;
+  background: linear-gradient(
+    145deg,
+    rgba(223, 255, 74, 0.45),
+    rgba(206, 17, 65, 0.75) 40%,
+    rgba(255, 255, 255, 0.12) 55%,
+    rgba(206, 17, 65, 0.65)
+  );
+  background-size: 200% 200%;
+  animation: legend-story-border-shimmer 5s ease-in-out infinite;
+  box-shadow: 0 24px 70px -32px rgba(206, 17, 65, 0.55);
+}
+
+.legend-story-quote__inner {
+  position: relative;
+  overflow: hidden;
+  border-radius: calc(1.35rem - 2px);
+  background: linear-gradient(145deg, rgba(8, 8, 12, 0.98), rgba(3, 3, 5, 0.96));
+  padding: 1.35rem 1.5rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .legend-story-quote__inner {
+    padding: 1.75rem 2rem 2rem;
+  }
+}
+
+.legend-story-quote__bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 7%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.88), transparent);
+}
+
+.legend-story-quote__bar--bottom {
+  top: auto;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.88), transparent);
+}
+
+.legend-story-quote__mark {
+  font-family: var(--font-bebas);
+  font-size: 4rem;
+  line-height: 0.8;
+  color: rgba(223, 255, 74, 0.16);
+}
+
+.legend-story-timeline {
+  position: relative;
+  margin-top: 3rem;
+}
+
+.legend-story-timeline__spine {
+  pointer-events: none;
+  position: absolute;
+  left: 1.15rem;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    rgba(223, 255, 74, 0.45),
+    rgba(206, 17, 65, 0.55) 50%,
+    rgba(255, 255, 255, 0.08)
+  );
+}
+
+@media (min-width: 1024px) {
+  .legend-story-timeline__spine {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.legend-story-chapter-row__node {
+  position: absolute;
+  left: 0.95rem;
+  top: 0.45rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .legend-story-chapter-row__node {
+    position: relative;
+    left: auto;
+    top: auto;
+    justify-self: center;
+  }
+}
+
+.legend-story-chapter-row {
+  position: relative;
+  padding-left: 3rem;
+  padding-bottom: 2.5rem;
+  animation: legend-story-enter 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (min-width: 1024px) {
+  .legend-story-chapter-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 3.5rem minmax(0, 1fr);
+    align-items: center;
+    gap: 1.5rem;
+    padding-left: 0;
+    padding-bottom: 3.5rem;
+  }
+
+  .legend-story-chapter-row.is-right .legend-story-chapter-row__content-col {
+    text-align: right;
+  }
+
+  .legend-story-chapter-row.is-right .legend-story-chapter-row__content-col .legend-story-chapter-row__body {
+    margin-left: auto;
+  }
+
+  .legend-story-chapter-row.is-right .legend-story-chapter-row__content-col .legend-story-chapter-row__quote {
+    border-left: none;
+    border-right: 2px solid rgba(206, 17, 65, 0.5);
+    padding-left: 0;
+    padding-right: 0.85rem;
+  }
+
+  .legend-story-chapter-row.is-right .legend-story-chapter-row__content-col .legend-story-chapter-row__stat {
+    margin-left: auto;
+  }
+}
+
+.legend-story-chapter-row__node-core {
+  position: relative;
+  z-index: 1;
+  width: 0.65rem;
+  height: 0.65rem;
+  rotate: 45deg;
+  border: 1px solid rgba(223, 255, 74, 0.75);
+  background: rgba(5, 5, 8, 0.95);
+  box-shadow: 0 0 14px rgba(206, 17, 65, 0.55);
+}
+
+.legend-story-chapter-row__node-ring {
+  position: absolute;
+  inset: -0.35rem;
+  border-radius: 999px;
+  border: 1px solid rgba(206, 17, 65, 0.35);
+  animation: legend-story-node-pulse 2.8s ease-in-out infinite;
+}
+
+.legend-story-chapter-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  padding: 2px;
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(206, 17, 65, 0.55) 42%,
+    rgba(223, 255, 74, 0.28)
+  );
+  background-size: 180% 180%;
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s ease;
+}
+
+.legend-story-chapter-row:hover .legend-story-chapter-frame {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 28px 70px -28px rgba(206, 17, 65, 0.55);
+  animation: legend-story-border-shimmer 3.5s ease-in-out infinite;
+}
+
+.legend-story-chapter-frame__shell {
+  position: relative;
+  overflow: hidden;
+  border-radius: calc(1.25rem - 2px);
+  background: #07070c;
+  aspect-ratio: 4 / 5;
+}
+
+.legend-story-chapter-frame__shell--video {
+  aspect-ratio: 16 / 9;
+}
+
+.legend-story-chapter-frame__shell--short {
+  aspect-ratio: 9 / 16;
+  max-width: 17.5rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 1024px) {
+  .legend-story-chapter-frame__shell {
+    aspect-ratio: 16 / 11;
+    min-height: 16.5rem;
+  }
+
+  .legend-story-chapter-frame__shell--video {
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+  }
+
+  .legend-story-chapter-frame__shell--short {
+    aspect-ratio: 9 / 16;
+    min-height: 0;
+    max-height: 22rem;
+    max-width: 12.5rem;
+  }
+}
+
+.legend-story-chapter-frame__media {
+  position: absolute;
+  inset: 0;
+}
+
+.legend-story-chapter-frame__media--video {
+  z-index: 0;
+  background: #000;
+}
+
+.legend-story-chapter-frame__media--video > div {
+  height: 100%;
+  min-height: 100%;
+}
+
+.legend-story-chapter-frame__iframe {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  border: 0;
+}
+
+.legend-story-chapter-frame__media img {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.legend-story-chapter-row:hover .legend-story-chapter-frame__media img {
+  transform: scale(1.06);
+}
+
+.legend-story-chapter-frame__veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(3, 3, 5, 0.92) 0%, rgba(3, 3, 5, 0.2) 42%, rgba(3, 3, 5, 0.45) 100%),
+    linear-gradient(to right, rgba(206, 17, 65, 0.18), transparent 60%);
+}
+
+.legend-story-chapter-frame__hud {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.8rem;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.82), transparent);
+  pointer-events: none;
+}
+
+.legend-story-chapter-frame__index {
+  font-family: var(--font-bebas);
+  font-size: 1.35rem;
+  letter-spacing: 0.12em;
+  color: rgba(223, 255, 74, 0.9);
+}
+
+.legend-story-chapter-frame__era {
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.legend-story-chapter-frame__corners span {
+  position: absolute;
+  z-index: 3;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-color: rgba(223, 255, 74, 0.65);
+  pointer-events: none;
+}
+
+.legend-story-chapter-frame__corners span:nth-child(1) {
+  left: 0.55rem;
+  top: 2.15rem;
+  border-left: 2px solid;
+  border-top: 2px solid;
+}
+
+.legend-story-chapter-frame__corners span:nth-child(2) {
+  right: 0.55rem;
+  top: 2.15rem;
+  border-right: 2px solid;
+  border-top: 2px solid;
+}
+
+.legend-story-chapter-frame__corners span:nth-child(3) {
+  left: 0.55rem;
+  bottom: 0.55rem;
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+  border-color: rgba(206, 17, 65, 0.8);
+}
+
+.legend-story-chapter-frame__corners span:nth-child(4) {
+  right: 0.55rem;
+  bottom: 0.55rem;
+  border-right: 2px solid;
+  border-bottom: 2px solid;
+  border-color: rgba(206, 17, 65, 0.8);
+}
+
+.legend-story-chapter-row__content-col {
+  position: relative;
+  padding-top: 0.35rem;
+}
+
+@media (min-width: 1024px) {
+  .legend-story-chapter-row__content-col {
+    padding-top: 0;
+  }
+}
+
+.legend-story-chapter-row__content-panel {
+  border-radius: 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: linear-gradient(145deg, rgba(12, 12, 16, 0.92), rgba(3, 3, 5, 0.88));
+  padding: 1.15rem 1.25rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition:
+    border-color 0.35s ease,
+    background 0.35s ease;
+}
+
+.legend-story-chapter-row:hover .legend-story-chapter-row__content-panel {
+  border-color: rgba(206, 17, 65, 0.35);
+  background: linear-gradient(145deg, rgba(16, 10, 12, 0.95), rgba(3, 3, 5, 0.9));
+}
+
+.legend-story-chapter-row__quote {
+  margin-top: 0.85rem;
+  border-left: 2px solid rgba(206, 17, 65, 0.5);
+  padding-left: 0.85rem;
+}
+
+.legend-story-chapter-row__stat {
+  display: inline-flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(223, 255, 74, 0.18);
+  background: rgba(206, 17, 65, 0.1);
+  padding: 0.55rem 0.85rem;
+}
+
+.legend-story-timeline__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.legend-story-timeline__label {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.legend-story-timeline__count {
+  font-family: var(--font-bebas);
+  font-size: 1.15rem;
+  letter-spacing: 0.16em;
+  color: rgba(223, 255, 74, 0.75);
+}
+
+.legend-story-mobile-rail {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 0.15rem 0.35rem 0.35rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(206, 17, 65, 0.45) transparent;
+}
+
+@media (min-width: 1024px) {
+  .legend-story-mobile-rail,
+  .legend-story-mobile-hint {
+    display: none !important;
+  }
+}
+
+.legend-story-mobile-card {
+  width: min(84vw, 19rem);
+  scroll-snap-align: center;
+  border-radius: 1.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: linear-gradient(160deg, rgba(10, 10, 14, 0.95), rgba(3, 3, 5, 0.92));
+  padding: 0.65rem;
+  box-shadow: 0 24px 60px -36px rgba(0, 0, 0, 0.85);
+  transition:
+    border-color 0.35s ease,
+    transform 0.35s ease;
+}
+
+.legend-story-mobile-card:focus-within {
+  border-color: rgba(206, 17, 65, 0.35);
+}
+
+.legend-story-mobile-card .legend-story-chapter-row__content-panel {
+  border: none;
+  background: transparent;
+  padding: 0.85rem 0.35rem 0.35rem;
+  box-shadow: none;
+}
+
+.legend-story-mobile-rail::-webkit-scrollbar {
+  height: 5px;
+}
+
+.legend-story-mobile-rail::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(206, 17, 65, 0.55);
+}
+
+.legend-story-mobile-rail .legend-story-chapter-frame {
+  min-width: 100%;
+}
+
+@keyframes legend-story-enter {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes legend-story-border-shimmer {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes legend-story-rec {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes legend-story-node-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.12);
+  }
+}

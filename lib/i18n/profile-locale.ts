@@ -73,6 +73,20 @@ export function mergeAthleteLocale(base: AthleteProfile, overlay: AthleteLocaleO
           videoProof: overlay.returnToPlay.videoProof ?? base.returnToPlay?.videoProof ?? [],
         }
       : base.returnToPlay,
+    shop: overlay.shop
+      ? {
+          ...base.shop,
+          ...overlay.shop,
+          products: overlay.shop.products ?? base.shop?.products ?? [],
+        }
+      : base.shop,
+    story: overlay.story
+      ? {
+          ...base.story,
+          ...overlay.story,
+          chapters: overlay.story.chapters ?? base.story?.chapters ?? [],
+        }
+      : base.story,
     career: overlay.career ?? base.career,
     careerSection: overlay.careerSection ? { ...base.careerSection, ...overlay.careerSection } : base.careerSection,
     honors: overlay.honors ?? base.honors,
