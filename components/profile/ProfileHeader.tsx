@@ -251,6 +251,7 @@ export function ProfileHeader({ athlete }: Props) {
             </div>
 
             {/* Stat fascia unica — non box ripetuti come i panel */}
+            {athlete.showStatsSection !== false ? (
             <div className="mt-10 border-y border-white/10 py-4 sm:mt-12">
               <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-600">
                 {h.sport === "Calcio" && s.seasonTotals ? ui.seasonTotals : ui.seasonAvg}
@@ -293,6 +294,7 @@ export function ProfileHeader({ athlete }: Props) {
                 ))}
               </div>
             </div>
+            ) : null}
           </div>
 
           {/* Avatar: cornice conica, depth stack, badge maglia */}

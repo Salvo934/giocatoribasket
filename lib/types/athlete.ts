@@ -464,6 +464,8 @@ export interface AthleteProfile {
   showMarketSection?: boolean;
   /** Se false, nasconde la sezione fit tecnico. */
   showTechnicalFitSection?: boolean;
+  /** Se false, nasconde la sezione statistiche e la fascia numeri in hero. */
+  showStatsSection?: boolean;
   /** Shop prodotti ufficiali (link esterni) — se assente la sezione non viene mostrata. */
   shop?: AthleteShop;
   /** Narrativa biografica sotto l'hero — opzionale */

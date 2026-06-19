@@ -41,6 +41,7 @@ export function AthleteProfileView({ athlete, locale = "it", dedicatedDomain = f
             showScout={athlete.showScoutSection !== false}
             showMarket={athlete.showMarketSection !== false}
             showTechnicalFit={athlete.showTechnicalFitSection !== false}
+            showStats={athlete.showStatsSection !== false}
             showShop={Boolean(athlete.shop?.products?.length)}
             showStory={Boolean(athlete.story?.chapters?.length)}
           />
@@ -50,7 +51,7 @@ export function AthleteProfileView({ athlete, locale = "it", dedicatedDomain = f
               {athlete.showMarketSection !== false ? <MarketPanel athlete={athlete} /> : null}
               <ReturnToPlayPanel athlete={athlete} />
               <VideoHub athlete={athlete} />
-              <StatsPanel athlete={athlete} />
+              {athlete.showStatsSection !== false ? <StatsPanel athlete={athlete} /> : null}
               {athlete.showTechnicalFitSection !== false ? <TechnicalFitPanel athlete={athlete} /> : null}
               <GalleryPanel athlete={athlete} />
               <ShopPanel athlete={athlete} />

@@ -14,6 +14,7 @@ function navLinks(
   showScout: boolean,
   showMarket: boolean,
   showTechnicalFit: boolean,
+  showStats: boolean,
   showShop: boolean,
   showStory: boolean,
   nav: ReturnType<typeof useProfileLocale>["ui"]["nav"],
@@ -23,10 +24,8 @@ function navLinks(
   if (showMarket) links.push({ href: "#mercato", label: nav.market });
   if (showReturnToPlay) links.push({ href: "#return-to-play", label: nav.returnToPlay });
   if (showStory) links.push({ href: "#storia", label: nav.story });
-  links.push(
-    { href: "#video", label: nav.video },
-    { href: "#stats", label: nav.stats },
-  );
+  links.push({ href: "#video", label: nav.video });
+  if (showStats) links.push({ href: "#stats", label: nav.stats });
   if (showTechnicalFit) links.push({ href: "#fit", label: nav.fit });
   if (showGallery) links.push({ href: "#gallery", label: nav.gallery });
   if (showShop) links.push({ href: "#shop", label: nav.shop });
@@ -44,6 +43,7 @@ type Props = {
   showScout?: boolean;
   showMarket?: boolean;
   showTechnicalFit?: boolean;
+  showStats?: boolean;
   showShop?: boolean;
   showStory?: boolean;
 };
@@ -56,6 +56,7 @@ export function ProfileNav({
   showScout = true,
   showMarket = true,
   showTechnicalFit = true,
+  showStats = true,
   showShop = false,
   showStory = false,
 }: Props) {
@@ -70,11 +71,12 @@ export function ProfileNav({
         showScout,
         showMarket,
         showTechnicalFit,
+        showStats,
         showShop,
         showStory,
         ui.nav,
       ),
-    [showGallery, showSocialKit, showReturnToPlay, showContacts, showScout, showMarket, showTechnicalFit, showShop, showStory, ui.nav],
+    [showGallery, showSocialKit, showReturnToPlay, showContacts, showScout, showMarket, showTechnicalFit, showStats, showShop, showStory, ui.nav],
   );
   const [open, setOpen] = useState(false);
 

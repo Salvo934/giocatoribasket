@@ -8,6 +8,7 @@ export const michaelJordan: AthleteProfile = {
   showScoutSection: false,
   showMarketSection: false,
   showTechnicalFitSection: false,
+  showStatsSection: false,
   seo: {
     title: "Michael Jeffrey Jordan · Guardia tiratrice | Player Card",
     description:
