@@ -9,7 +9,7 @@ export const antonioCioppa: AthleteProfile = {
     title: "Antonio Cioppa · Playmaker Serie B Interregionale | Player Card",
     description:
       "Antonio Cioppa (1999), playmaker 184 cm, Felice Scandone Avellino in Serie B Interregionale: cabina di regia, visione di gioco e percentuali al tiro. Statistiche, carriera e scheda scouting.",
-    ogImage: "/athletes/cardcioppa7-og.png",
+    ogImage: "/athletes/cardcioppa7-og.jpg",
     publicSiteUrl: "https://antoniocioppa7.katahero.com",
   },
   legal: {
