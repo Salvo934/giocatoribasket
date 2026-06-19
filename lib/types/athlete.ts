@@ -361,6 +361,8 @@ export interface AthleteProfile {
     publicSiteUrl?: string;
     /** Anteprima link (OG / Twitter); default: `header.heroImage` */
     ogImage?: string;
+    /** Cache-bust per crawler social (Instagram/Facebook) — es. "20260619" */
+    ogImageVersion?: string;
   };
   /** GDPR: titolare, note legali e override policy (default da agenzia + piattaforma) */
   legal?: AthleteLegalConfig;

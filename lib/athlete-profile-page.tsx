@@ -14,6 +14,13 @@ type OgPreview = {
   alt: string;
 };
 
+function withOgImageVersion(url: string, version?: string): string {
+  const v = version?.trim();
+  if (!v) return url;
+  const sep = url.includes("?") ? "&" : "?";
+  return `${url}${sep}v=${encodeURIComponent(v)}`;
+}
+
 function resolveAthleteOgPreview(athlete: AthleteProfile, imageAlt: string): OgPreview | undefined {
   const origin = publicSiteOrigin(athlete.seo.publicSiteUrl);
   const previewSrc = (athlete.seo.ogImage ?? athlete.header.heroImage).trim();
@@ -32,6 +39,8 @@ function resolveAthleteOgPreview(athlete: AthleteProfile, imageAlt: string): OgP
   }
 
   if (previewImageUrl === undefined) return undefined;
+
+  previewImageUrl = withOgImageVersion(previewImageUrl, athlete.seo.ogImageVersion);
 
   return { url: previewImageUrl, alt: imageAlt };
 }
