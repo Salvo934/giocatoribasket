@@ -251,6 +251,7 @@ export type SocialKitUi = {
     string
   >;
   requestSubmit: string;
+  requestMediaNotice: string;
   requestMissingWhatsApp: string;
   requestMessageIntro: string;
   requestMessagePlayer: string;
@@ -260,6 +261,7 @@ export type SocialKitUi = {
   requestMessageMonth: string;
   requestMessageEvent: string;
   requestMessageNotes: string;
+  requestMessageMedia: string;
   requestMessageLink: string;
 };
 
@@ -641,6 +643,8 @@ const UI_IT: ProfileUi = {
       "fine-stagione": "Es. medie finali, playoff, ringraziamenti…",
     },
     requestSubmit: "Invia su WhatsApp",
+    requestMediaNotice:
+      "Foto e video da inserire nella grafica devono essere inviati separatamente su WhatsApp, in un secondo messaggio dopo quello del modulo.",
     requestMissingWhatsApp: "Numero WhatsApp non configurato per le richieste grafica.",
     requestMessageIntro: "Richiesta grafica · Social media kit",
     requestMessagePlayer: "Giocatore",
@@ -650,6 +654,8 @@ const UI_IT: ProfileUi = {
     requestMessageMonth: "Mese",
     requestMessageEvent: "Evento",
     requestMessageNotes: "Note",
+    requestMessageMedia:
+      "Materiali: inviare foto/video da inserire nella grafica in un secondo messaggio WhatsApp",
     requestMessageLink: "Scheda",
   },
   shop: {
@@ -971,6 +977,8 @@ const UI_EN: ProfileUi = {
       "fine-stagione": "E.g. final averages, playoffs, thank-you note…",
     },
     requestSubmit: "Send on WhatsApp",
+    requestMediaNotice:
+      "Photos and videos to include in the graphic must be sent separately on WhatsApp, in a follow-up message after the form.",
     requestMissingWhatsApp: "WhatsApp number not configured for graphic requests.",
     requestMessageIntro: "Graphic request · Social media kit",
     requestMessagePlayer: "Player",
@@ -980,6 +988,8 @@ const UI_EN: ProfileUi = {
     requestMessageMonth: "Month",
     requestMessageEvent: "Event",
     requestMessageNotes: "Notes",
+    requestMessageMedia:
+      "Assets: send photos/videos for the graphic in a separate WhatsApp message",
     requestMessageLink: "Profile",
   },
   shop: {

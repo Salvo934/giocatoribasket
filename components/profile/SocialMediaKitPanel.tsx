@@ -390,6 +390,18 @@ function FormatPreview({ format, active }: { format: SocialKitFormat; active: bo
   );
 }
 
+function IconAttachment({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} aria-hidden>
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"
+      />
+    </svg>
+  );
+}
+
 function SocialKitRequestForm({
   athlete,
   whatsappTarget,
@@ -445,6 +457,7 @@ function SocialKitRequestForm({
     if (profileUrl) {
       lines.push(`${sk.requestMessageLink}: ${profileUrl}`);
     }
+    lines.push("", sk.requestMessageMedia);
 
     const url = buildWhatsAppRequestUrl(whatsappTarget, lines.join("\n"));
     if (!url) return;
@@ -452,7 +465,8 @@ function SocialKitRequestForm({
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
-  const fieldClass = `w-full rounded-2xl border border-white/10 bg-black/55 px-4 py-3.5 text-base text-white placeholder:text-zinc-600 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)] ${focusRing}`;
+  const fieldClass = `box-border block w-full min-w-0 max-w-full rounded-2xl border border-white/10 bg-black/55 px-4 py-3.5 text-base text-white placeholder:text-zinc-600 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)] ${focusRing}`;
+  const dateFieldClass = `${fieldClass} appearance-none [color-scheme:dark] [&::-webkit-date-and-time-value]:min-w-0 [&::-webkit-date-and-time-value]:text-left [&::-webkit-calendar-picker-indicator]:opacity-80`;
   const sectionLabelClass = "text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-500";
 
   return (
@@ -484,7 +498,7 @@ function SocialKitRequestForm({
       </div>
 
       {open ? (
-        <form className="space-y-6 px-4 py-5 sm:px-5 sm:py-6" onSubmit={handleSubmit}>
+        <form className="min-w-0 space-y-6 px-4 py-5 sm:px-5 sm:py-6" onSubmit={handleSubmit}>
           {!whatsappTarget ? (
             <p className="rounded-2xl border border-amber-400/25 bg-amber-400/8 px-4 py-3 text-sm text-amber-100/90">
               {sk.requestMissingWhatsApp}
@@ -557,20 +571,20 @@ function SocialKitRequestForm({
             </div>
           </div>
 
-          <div className="space-y-4 rounded-2xl border border-white/8 bg-black/25 p-4">
+          <div className="min-w-0 space-y-4 overflow-hidden rounded-2xl border border-white/8 bg-black/25 p-3 sm:p-4">
             {showMatchFields ? (
-              <label className="block">
+              <label className="block min-w-0">
                 <span className={`${sectionLabelClass} mb-2 block`}>{sk.requestEventDate}</span>
                 <input
                   type="date"
                   value={eventDate}
                   onChange={(event) => setEventDate(event.target.value)}
-                  className={fieldClass}
+                  className={dateFieldClass}
                 />
               </label>
             ) : null}
 
-            <label className="block">
+            <label className="block min-w-0">
               <span className={`${sectionLabelClass} mb-2 block`}>{sk.requestEventTitle}</span>
               <input
                 type="text"
@@ -581,7 +595,7 @@ function SocialKitRequestForm({
               />
             </label>
 
-            <label className="block">
+            <label className="block min-w-0">
               <span className={`${sectionLabelClass} mb-2 block`}>{sk.requestNotes}</span>
               <textarea
                 value={notes}
@@ -592,6 +606,16 @@ function SocialKitRequestForm({
               />
             </label>
           </div>
+
+          <p
+            role="note"
+            className="flex gap-3 rounded-2xl border border-amber-400/25 bg-amber-400/8 px-4 py-3.5 text-sm leading-relaxed text-amber-50/90"
+          >
+            <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-xl border border-amber-300/20 bg-amber-300/10 text-amber-100">
+              <IconAttachment className="size-4" />
+            </span>
+            <span>{sk.requestMediaNotice}</span>
+          </p>
 
           <button
             type="submit"
