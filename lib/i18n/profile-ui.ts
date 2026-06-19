@@ -219,16 +219,42 @@ export type SocialKitUi = {
   requestDescription: string;
   requestOpen: string;
   requestClose: string;
+  requestTypeLabel: string;
+  requestTypeHint: string;
+  requestTypes: Record<
+    | "match-day"
+    | "post-partita"
+    | "statistiche"
+    | "prestazione"
+    | "player-card"
+    | "rinnovo"
+    | "trasferimento"
+    | "fine-stagione",
+    { label: string; desc: string }
+  >;
   requestFormat: string;
+  requestFormatHint: string;
   requestEventDate: string;
   requestEventTitle: string;
   requestEventTitlePlaceholder: string;
   requestNotes: string;
   requestNotesPlaceholder: string;
+  requestNotesPlaceholders: Record<
+    | "match-day"
+    | "post-partita"
+    | "statistiche"
+    | "prestazione"
+    | "player-card"
+    | "rinnovo"
+    | "trasferimento"
+    | "fine-stagione",
+    string
+  >;
   requestSubmit: string;
   requestMissingWhatsApp: string;
   requestMessageIntro: string;
   requestMessagePlayer: string;
+  requestMessageType: string;
   requestMessageFormat: string;
   requestMessageDate: string;
   requestMessageMonth: string;
@@ -585,16 +611,40 @@ const UI_IT: ProfileUi = {
       "Compila il modulo e invia la richiesta su WhatsApp: riceverai post, storie o reel personalizzati.",
     requestOpen: "Richiedi grafica",
     requestClose: "Chiudi modulo",
+    requestTypeLabel: "Tipo di grafica",
+    requestTypeHint: "Scegli il template — poi indica formato e dettagli.",
+    requestTypes: {
+      "match-day": { label: "Match day", desc: "Anticipo gara · avversario e data" },
+      "post-partita": { label: "Post partita", desc: "Risultato e recap dopo la gara" },
+      statistiche: { label: "Statistiche", desc: "Medie, numeri di stagione o gara" },
+      prestazione: { label: "Prestazione", desc: "Performance singola · season high" },
+      "player-card": { label: "Player card", desc: "Scheda giocatore · branding stagione" },
+      rinnovo: { label: "Rinnovo", desc: "Comunicato rinnovo o resta in club" },
+      trasferimento: { label: "Trasferimento", desc: "Nuovo club · annuncio mercato" },
+      "fine-stagione": { label: "Fine stagione", desc: "Chiusura campionato · medie finali" },
+    },
     requestFormat: "Formato",
+    requestFormatHint: "Post 4:5 · Storia o reel 9:16",
     requestEventDate: "Data gara / evento",
     requestEventTitle: "Avversario o titolo",
-    requestEventTitlePlaceholder: "Es. Ristopro Fabriano · Player card post-gara",
+    requestEventTitlePlaceholder: "Es. Ristopro Fabriano · gara in casa",
     requestNotes: "Dettagli richiesta",
     requestNotesPlaceholder: "Es. statistiche da evidenziare, foto da usare, testo caption…",
+    requestNotesPlaceholders: {
+      "match-day": "Es. gara in casa, orario 20:30, hashtag da usare…",
+      "post-partita": "Es. risultato 78-72, PPG 18, MVP gara, foto da campo…",
+      statistiche: "Es. medie ultimi 5 match, FG% da evidenziare, confronto stagione…",
+      prestazione: "Es. 28 punti vs Catanzaro, clip da includere, quote testuale…",
+      "player-card": "Es. numeri stagione, club, sponsor da inserire…",
+      rinnovo: "Es. club, durata contratto, messaggio personale…",
+      trasferimento: "Es. nuovo club, categoria, data presentazione…",
+      "fine-stagione": "Es. medie finali, playoff, ringraziamenti…",
+    },
     requestSubmit: "Invia su WhatsApp",
     requestMissingWhatsApp: "Numero WhatsApp non configurato per le richieste grafica.",
     requestMessageIntro: "Richiesta grafica · Social media kit",
     requestMessagePlayer: "Giocatore",
+    requestMessageType: "Tipo",
     requestMessageFormat: "Formato",
     requestMessageDate: "Data",
     requestMessageMonth: "Mese",
@@ -891,16 +941,40 @@ const UI_EN: ProfileUi = {
       "Fill in the form and send the request on WhatsApp: you'll receive custom posts, stories or reels.",
     requestOpen: "Request graphic",
     requestClose: "Close form",
+    requestTypeLabel: "Graphic type",
+    requestTypeHint: "Pick a template — then choose format and details.",
+    requestTypes: {
+      "match-day": { label: "Match day", desc: "Pre-game · opponent and date" },
+      "post-partita": { label: "Post-game", desc: "Result and recap after the game" },
+      statistiche: { label: "Statistics", desc: "Season or game numbers" },
+      prestazione: { label: "Performance", desc: "Single-game highlight · season high" },
+      "player-card": { label: "Player card", desc: "Player profile · season branding" },
+      rinnovo: { label: "Contract renewal", desc: "Staying with the club announcement" },
+      trasferimento: { label: "Transfer", desc: "New club · market announcement" },
+      "fine-stagione": { label: "End of season", desc: "Season wrap · final averages" },
+    },
     requestFormat: "Format",
+    requestFormatHint: "Post 4:5 · Story or reel 9:16",
     requestEventDate: "Game / event date",
     requestEventTitle: "Opponent or title",
-    requestEventTitlePlaceholder: "E.g. Ristopro Fabriano · Post-game player card",
+    requestEventTitlePlaceholder: "E.g. Ristopro Fabriano · home game",
     requestNotes: "Request details",
     requestNotesPlaceholder: "E.g. stats to highlight, photo to use, caption text…",
+    requestNotesPlaceholders: {
+      "match-day": "E.g. home game, 8:30 PM tip-off, hashtags to use…",
+      "post-partita": "E.g. 78-72 result, 18 PPG, game MVP, court photo…",
+      statistiche: "E.g. last 5 games averages, FG% to highlight…",
+      prestazione: "E.g. 28 pts vs Catanzaro, clip to include, quote…",
+      "player-card": "E.g. season stats, club, sponsors to include…",
+      rinnovo: "E.g. club, contract length, personal message…",
+      trasferimento: "E.g. new club, league, presentation date…",
+      "fine-stagione": "E.g. final averages, playoffs, thank-you note…",
+    },
     requestSubmit: "Send on WhatsApp",
     requestMissingWhatsApp: "WhatsApp number not configured for graphic requests.",
     requestMessageIntro: "Graphic request · Social media kit",
     requestMessagePlayer: "Player",
+    requestMessageType: "Type",
     requestMessageFormat: "Format",
     requestMessageDate: "Date",
     requestMessageMonth: "Month",
