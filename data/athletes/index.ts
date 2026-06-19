@@ -1,8 +1,6 @@
-import { michaelJordan } from "./michael-jordan";
+import { antonioCioppa } from "./antonio-cioppa";
 import { alfonsoZampogna } from "./alfonso-zampogna";
 import { antonioSorbara } from "./antonio-sorbara";
-import { alessandroFerrari } from "./alessandro-ferrari";
-import { costantinoFavasuli } from "./costantino-favasuli";
 import { francescoSpinelli } from "./francesco-spinelli";
 import { ilarioSimonetti } from "./ilario-simonetti";
 import { thomasAguzzoli } from "./thomas-aguzzoli";
@@ -17,12 +15,10 @@ import { hostFromPublicSiteUrl, normalizeHost } from "@/lib/public-site";
 
 const athletes: AthleteProfile[] = [
   ilarioSimonetti,
-  michaelJordan,
-  alessandroFerrari,
   francescoSpinelli,
   thomasAguzzoli,
+  antonioCioppa,
   antonioSorbara,
-  costantinoFavasuli,
   alfonsoZampogna,
 ];
 
