@@ -1,4 +1,3 @@
-import { antonioCioppa } from "./antonio-cioppa";
 import { alfonsoZampogna } from "./alfonso-zampogna";
 import { antonioSorbara } from "./antonio-sorbara";
 import { francescoSpinelli } from "./francesco-spinelli";
@@ -17,7 +16,6 @@ const athletes: AthleteProfile[] = [
   ilarioSimonetti,
   francescoSpinelli,
   thomasAguzzoli,
-  antonioCioppa,
   antonioSorbara,
   alfonsoZampogna,
 ];
