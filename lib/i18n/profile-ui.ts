@@ -190,6 +190,53 @@ export type VideoUi = {
   fullGameOpenCta: string;
 };
 
+export type SocialKitUi = {
+  formatPost: string;
+  formatStory: string;
+  formatReel: string;
+  shareStory: string;
+  sharePost: string;
+  shareReel: string;
+  download: string;
+  copyCaption: string;
+  copied: string;
+  copyError: string;
+  mobileHint: string;
+  instagramReady: string;
+  assetsLabel: string;
+  monthPickerLabel: string;
+  monthContents: string;
+  comingSoonEyebrow: string;
+  comingSoonTitle: string;
+  comingSoonBody: string;
+  goToInstagram: string;
+  gateTitle: string;
+  gateDescription: string;
+  gateSubmit: string;
+  gateError: string;
+  gateHint: string;
+  requestTitle: string;
+  requestDescription: string;
+  requestOpen: string;
+  requestClose: string;
+  requestFormat: string;
+  requestEventDate: string;
+  requestEventTitle: string;
+  requestEventTitlePlaceholder: string;
+  requestNotes: string;
+  requestNotesPlaceholder: string;
+  requestSubmit: string;
+  requestMissingWhatsApp: string;
+  requestMessageIntro: string;
+  requestMessagePlayer: string;
+  requestMessageFormat: string;
+  requestMessageDate: string;
+  requestMessageMonth: string;
+  requestMessageEvent: string;
+  requestMessageNotes: string;
+  requestMessageLink: string;
+};
+
 export type ReturnToPlayUi = {
   videoProofDefault: string;
   videoPlaceholder: string;
@@ -277,6 +324,7 @@ export type ProfileUi = {
   honors: HonorsUi;
   contacts: ContactsUi;
   returnToPlayUi: ReturnToPlayUi;
+  socialKit: SocialKitUi;
   shop: ShopUi;
   story: StoryUi;
   footer: FooterUi;
@@ -504,6 +552,55 @@ const UI_IT: ProfileUi = {
     phaseReturn: "Rientro documentato",
     monitoring: "Monitoraggio attivo",
     nowPlaying: "In riproduzione",
+  },
+  socialKit: {
+    formatPost: "Post",
+    formatStory: "Storia",
+    formatReel: "Reel",
+    shareStory: "Condividi storia",
+    sharePost: "Condividi post",
+    shareReel: "Condividi reel",
+    download: "Scarica",
+    copyCaption: "Copia caption",
+    copied: "Copiata",
+    copyError: "Errore",
+    mobileHint: "Tocca il pulsante e scegli Instagram: la grafica si apre pronta per il post.",
+    instagramReady: "Instagram ready",
+    assetsLabel: "asset",
+    monthPickerLabel: "Seleziona mese",
+    monthContents: "contenuti",
+    comingSoonEyebrow: "Kit in arrivo",
+    comingSoonTitle: "Dopo ogni gara troverai qui grafiche pronte per post, storie e reel.",
+    comingSoonBody:
+      "Il team prepara contenuti con statistiche, risultato e branding del club — tu li condividi con un tap su Instagram.",
+    goToInstagram: "Vai su",
+    gateTitle: "Area riservata",
+    gateDescription:
+      "Inserisci il codice a 4 cifre per accedere a post, storie e reel scaricabili del social media kit.",
+    gateSubmit: "Sblocca kit",
+    gateError: "Codice non valido. Riprova.",
+    gateHint: "Riservato al giocatore e al team autorizzato.",
+    requestTitle: "Richiedi nuova grafica",
+    requestDescription:
+      "Compila il modulo e invia la richiesta su WhatsApp: riceverai post, storie o reel personalizzati.",
+    requestOpen: "Richiedi grafica",
+    requestClose: "Chiudi modulo",
+    requestFormat: "Formato",
+    requestEventDate: "Data gara / evento",
+    requestEventTitle: "Avversario o titolo",
+    requestEventTitlePlaceholder: "Es. Ristopro Fabriano · Player card post-gara",
+    requestNotes: "Dettagli richiesta",
+    requestNotesPlaceholder: "Es. statistiche da evidenziare, foto da usare, testo caption…",
+    requestSubmit: "Invia su WhatsApp",
+    requestMissingWhatsApp: "Numero WhatsApp non configurato per le richieste grafica.",
+    requestMessageIntro: "Richiesta grafica · Social media kit",
+    requestMessagePlayer: "Giocatore",
+    requestMessageFormat: "Formato",
+    requestMessageDate: "Data",
+    requestMessageMonth: "Mese",
+    requestMessageEvent: "Evento",
+    requestMessageNotes: "Note",
+    requestMessageLink: "Scheda",
   },
   shop: {
     eyebrow: "Jordan Brand",
@@ -762,6 +859,54 @@ const UI_EN: ProfileUi = {
     phaseReturn: "Documented return",
     monitoring: "Active monitoring",
     nowPlaying: "Now playing",
+  },
+  socialKit: {
+    formatPost: "Post",
+    formatStory: "Story",
+    formatReel: "Reel",
+    shareStory: "Share story",
+    sharePost: "Share post",
+    shareReel: "Share reel",
+    download: "Download",
+    copyCaption: "Copy caption",
+    copied: "Copied",
+    copyError: "Error",
+    mobileHint: "Tap the button and choose Instagram: the graphic opens ready to post.",
+    instagramReady: "Instagram ready",
+    assetsLabel: "asset",
+    monthPickerLabel: "Select month",
+    monthContents: "items",
+    comingSoonEyebrow: "Kit coming soon",
+    comingSoonTitle: "After each game you'll find ready-to-share posts, stories and reels here.",
+    comingSoonBody:
+      "The team prepares content with stats, results and club branding — you share it with one tap on Instagram.",
+    goToInstagram: "Go to",
+    gateTitle: "Restricted area",
+    gateDescription: "Enter the 4-digit code to access downloadable social media kit posts, stories and reels.",
+    gateSubmit: "Unlock kit",
+    gateError: "Invalid code. Try again.",
+    gateHint: "For the player and authorized team only.",
+    requestTitle: "Request new graphic",
+    requestDescription:
+      "Fill in the form and send the request on WhatsApp: you'll receive custom posts, stories or reels.",
+    requestOpen: "Request graphic",
+    requestClose: "Close form",
+    requestFormat: "Format",
+    requestEventDate: "Game / event date",
+    requestEventTitle: "Opponent or title",
+    requestEventTitlePlaceholder: "E.g. Ristopro Fabriano · Post-game player card",
+    requestNotes: "Request details",
+    requestNotesPlaceholder: "E.g. stats to highlight, photo to use, caption text…",
+    requestSubmit: "Send on WhatsApp",
+    requestMissingWhatsApp: "WhatsApp number not configured for graphic requests.",
+    requestMessageIntro: "Graphic request · Social media kit",
+    requestMessagePlayer: "Player",
+    requestMessageFormat: "Format",
+    requestMessageDate: "Date",
+    requestMessageMonth: "Month",
+    requestMessageEvent: "Event",
+    requestMessageNotes: "Notes",
+    requestMessageLink: "Profile",
   },
   shop: {
     eyebrow: "Jordan Brand",

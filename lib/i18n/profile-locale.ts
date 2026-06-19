@@ -59,6 +59,7 @@ export function mergeAthleteLocale(base: AthleteProfile, overlay: AthleteLocaleO
       ? {
           ...base.socialMediaKit,
           ...overlay.socialMediaKit,
+          months: overlay.socialMediaKit.months ?? base.socialMediaKit?.months ?? [],
           items: overlay.socialMediaKit.items ?? base.socialMediaKit?.items ?? [],
         }
       : base.socialMediaKit,

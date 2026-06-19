@@ -189,9 +189,9 @@ export interface AthleteGallery {
   items: GalleryImage[];
 }
 
-export type SocialKitFormat = "post" | "story";
+export type SocialKitFormat = "post" | "story" | "reel";
 
-/** Asset scaricabile per Instagram (post 1:1 o storia 9:16) */
+/** Asset scaricabile per Instagram (post 1:1, storia o reel 9:16) */
 export interface SocialKitAsset {
   id: string;
   title: string;
@@ -206,13 +206,29 @@ export interface SocialKitAsset {
   downloadName?: string;
 }
 
+/** Contenuti social raggruppati per mese di stagione */
+export interface SocialKitMonth {
+  /** ISO yyyy-mm — es. "2025-10" */
+  month: string;
+  /** Etichetta opzionale — es. "Ottobre 2025" */
+  label?: string;
+  items: SocialKitAsset[];
+}
+
 export interface AthleteSocialMediaKit {
   /** Default: "Contenuti pronti per i social" */
   title?: string;
   description?: string;
   /** Es. "Aggiornato dopo ogni gara" */
   statusLabel?: string;
-  items: SocialKitAsset[];
+  /** Codice a 4 cifre per sbloccare download e anteprime */
+  accessCode?: string;
+  /** WhatsApp per richieste grafica — numero (393...) o URL wa.me */
+  requestWhatsApp?: string;
+  /** Raggruppamento mensile — consigliato per stagioni lunghe */
+  months?: SocialKitMonth[];
+  /** Lista piatta legacy — auto-raggruppata per mese da matchDate */
+  items?: SocialKitAsset[];
 }
 
 export interface ReturnToPlayStatusItem {
