@@ -7,7 +7,7 @@ export const ugoSimon: AthleteProfile = {
   seo: {
     title: "Ugo Simon · Ala piccola Serie B | Player Card",
     description:
-      "Ugo Simon (2002), ala piccola 195 cm, Infodrive Capo d'Orlando in Serie B Girone A: fisicità, rimbalzo e versatilità difensiva. Statistiche LNP, carriera Virtus Ragusa e scheda scouting.",
+      "Ugo Simon (2002), ala piccola 199 cm, Infodrive Capo d'Orlando in Serie B Girone A: fisicità, rimbalzo e versatilità difensiva. Statistiche LNP, carriera Virtus Ragusa e scheda scouting.",
     ogImage: "/athletes/cardsimon8-og.jpg",
     ogImageVersion: "20260622-1",
     publicSiteUrl: "https://ugosimon8.katahero.com",
@@ -27,19 +27,18 @@ export const ugoSimon: AthleteProfile = {
     sport: "Basket",
     role: "Ala piccola / SF",
     birthYear: 2002,
-    heightCm: 195,
+    heightCm: 199,
     nationality: "Nigeria",
     currentClub: "Infodrive Capo d'Orlando",
     category: "Serie B",
     league: "LNP · Girone A",
     marketStatusLabel: "In roster · play-in Serie B 25/26",
     identityNote:
-      "Ugochukwu Andrew Simon, detto Ugo: ala 195 cm classe 2002, formazione tra Virtus Ragusa e Fortitudo Bologna. Cinque stagioni da protagonista a Ragusa prima del trasferimento a Capo d'Orlando; convocato con la Nazionale nigeriana (AfroBasket 2025).",
+      "Ugochukwu Andrew Simon, detto Ugo: ala 199 cm classe 2002, formazione tra Virtus Ragusa e Fortitudo Bologna. Cinque stagioni da protagonista a Ragusa prima del trasferimento a Capo d'Orlando; convocato con la Nazionale nigeriana (AfroBasket 2025).",
     dashboardIntro:
-      "Ala 195 cm, 24 anni, Infodrive Capo d'Orlando: 6,0 punti e 4,3 rimbalzi di media su 36 gare in Serie B Girone A 2025-26 (fonte LNP), season high a 20 punti vs Paffoni Omegna e 13 rimbalzi vs Montecatini. In play-in Tabellone 2.",
+      "Ala 199 cm, 24 anni, Infodrive Capo d'Orlando: 6,0 punti e 4,3 rimbalzi di media su 36 gare in Serie B Girone A 2025-26 (fonte LNP), season high a 20 punti vs Paffoni Omegna e 13 rimbalzi vs Montecatini. In play-in Tabellone 2.",
     agency: {
-      name: "Infodrive Capo d'Orlando",
-      representative: "Staff societario",
+      name: "",
     },
     lastUpdated: "2026-06-04",
     highlightUrl: "https://www.youtube.com/watch?v=FxH6Y8guaxA",
@@ -48,7 +47,7 @@ export const ugoSimon: AthleteProfile = {
     sectionDescription:
       "Profilo da ala versatile in Serie B nazionale: cosa porta oggi in rotazione, perché può interessare a club che cercano fisicità, rimbalzo e difesa su più ruoli.",
     shortProfile:
-      "Ala 195 cm, classe 2002, ingaggiato dall'Orlandina per la stagione 2025/26 dopo cinque annate consecutive a Virtus Ragusa (8,9 PPG in B nazionale 24/25). Medie LNP attuali: 6,0 PPG, 4,3 RPG e 0,7 APG con 61% FG; picco realizzativo a 20 vs Omegna (gennaio 2026).",
+      "Ala 199 cm, classe 2002, ingaggiato dall'Orlandina per la stagione 2025/26 dopo cinque annate consecutive a Virtus Ragusa (8,9 PPG in B nazionale 24/25). Medie LNP attuali: 6,0 PPG, 4,3 RPG e 0,7 APG con 61% FG; picco realizzativo a 20 vs Omegna (gennaio 2026).",
     whyWatch:
       "Interessante se cerchi un'ala con leve lunghe, energia difensiva e impatto emotivo sul parquet — da incrociare con video e partite play-in.",
     toVerify:
@@ -170,7 +169,7 @@ export const ugoSimon: AthleteProfile = {
   },
   technicalFit: {
     playerType:
-      "Ugo Simon: ala piccola 195 cm (2002), Infodrive Capo d'Orlando in Serie B Girone A — fisicità, rimbalzo e versatilità difensiva. Ex protagonista Virtus Ragusa (8,9 PPG in 24/25); career high 20 punti e 13 rimbalzi in campionato 25/26.",
+      "Ugo Simon: ala piccola 199 cm (2002), Infodrive Capo d'Orlando in Serie B Girone A — fisicità, rimbalzo e versatilità difensiva. Ex protagonista Virtus Ragusa (8,9 PPG in 24/25); career high 20 punti e 13 rimbalzi in campionato 25/26.",
     strengths: [
       "Fisicità e atletismo — profilo ideale per switching e difesa su più ruoli",
       "Rimbalzo e secondi possessi: 4,3 RPG sui dati LNP attuali",
@@ -308,11 +307,11 @@ export const ugoSimon: AthleteProfile = {
   ],
   contacts: {
     agency: {
-      name: "Infodrive Capo d'Orlando",
+      name: "",
     },
     representative: {
       name: "Referente societario",
-      role: "Infodrive Capo d'Orlando · Orlandina Basket",
+      role: "Su richiesta (club / scouting)",
       emailPublicLabel: "Su richiesta (club / scouting)",
       phonePublicLabel: "Su richiesta",
     },
