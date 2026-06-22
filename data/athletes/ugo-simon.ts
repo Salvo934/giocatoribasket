@@ -10,7 +10,7 @@ export const ugoSimon: AthleteProfile = {
       "Ugo Simon (2002), ala piccola 195 cm, Infodrive Capo d'Orlando in Serie B Girone A: fisicità, rimbalzo e versatilità difensiva. Statistiche LNP, carriera Virtus Ragusa e scheda scouting.",
     ogImage: "/athletes/cardsimon8-og.jpg",
     ogImageVersion: "20260622-1",
-    publicSiteUrl: "https://ugosimon80.katahero.com",
+    publicSiteUrl: "https://ugosimon8.katahero.com",
   },
   legal: {
     dataController: {
@@ -23,7 +23,7 @@ export const ugoSimon: AthleteProfile = {
     heroImage: "/athletes/ugo-simon-avatar.png",
     heroImageObjectPosition: "50% 15%",
     name: "Ugo Simon",
-    number: "80",
+    number: "8",
     sport: "Basket",
     role: "Ala piccola / SF",
     birthYear: 2002,
@@ -211,7 +211,7 @@ export const ugoSimon: AthleteProfile = {
     ],
   },
   gallery: {
-    description: "Ritratto e immagini da Infodrive Capo d'Orlando — ala numero 80.",
+    description: "Ritratto e immagini da Infodrive Capo d'Orlando — ala numero 8.",
     items: [
       {
         src: "/athletes/ugo-simon-avatar.png",
