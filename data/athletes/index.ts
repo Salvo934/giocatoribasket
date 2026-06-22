@@ -4,6 +4,7 @@ import { antonioSorbara } from "./antonio-sorbara";
 import { francescoSpinelli } from "./francesco-spinelli";
 import { ilarioSimonetti } from "./ilario-simonetti";
 import { thomasAguzzoli } from "./thomas-aguzzoli";
+import { ugoSimon } from "./ugo-simon";
 import { ilarioSimonettiEn } from "./translations/ilario-simonetti.en";
 import type { AthleteProfile } from "@/lib/types/athlete";
 import {
@@ -20,6 +21,7 @@ const athletes: AthleteProfile[] = [
   antonioCioppa,
   antonioSorbara,
   alfonsoZampogna,
+  ugoSimon,
 ];
 
 function isPublished(athlete: AthleteProfile): boolean {
