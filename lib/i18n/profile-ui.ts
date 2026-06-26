@@ -326,6 +326,9 @@ export type ProfileUi = {
   contactAgent: string;
   seasonAvg: string;
   seasonTotals: string;
+  heroStatGames: string;
+  heroStatMinutes: string;
+  heroStatPoints: string;
   languageSwitch: { label: string; toEn: string; toIt: string };
   share: { label: string; shared: string; copied: string; error: string };
   nav: {
@@ -379,6 +382,9 @@ const UI_IT: ProfileUi = {
   contactAgent: "Contatta procuratore",
   seasonAvg: "Media stagione",
   seasonTotals: "Totali stagione",
+  heroStatGames: "Partite",
+  heroStatMinutes: "Minuti",
+  heroStatPoints: "Punti",
   languageSwitch: { label: "Lingua", toEn: "English", toIt: "Italiano" },
   share: { label: "Condividi link", shared: "Condiviso", copied: "Copiato", error: "Errore" },
   nav: {
@@ -721,6 +727,9 @@ const UI_EN: ProfileUi = {
   contactAgent: "Contact agent",
   seasonAvg: "Season averages",
   seasonTotals: "Season totals",
+  heroStatGames: "Games",
+  heroStatMinutes: "Minutes",
+  heroStatPoints: "Points",
   languageSwitch: { label: "Language", toEn: "English", toIt: "Italiano" },
   share: { label: "Share link", shared: "Shared", copied: "Copied", error: "Error" },
   nav: {
