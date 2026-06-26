@@ -38,6 +38,7 @@ export function mergeAthleteLocale(base: AthleteProfile, overlay: AthleteLocaleO
           ...overlay.stats,
           lastGames: overlay.stats.lastGames ?? base.stats.lastGames,
           shotChart: overlay.stats.shotChart ?? base.stats.shotChart,
+          basketballTotals: overlay.stats.basketballTotals ?? base.stats.basketballTotals,
         }
       : base.stats,
     technicalFit: { ...base.technicalFit, ...overlay.technicalFit },

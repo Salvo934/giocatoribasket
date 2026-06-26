@@ -79,6 +79,11 @@ export type StatsUi = {
   stl: string;
   to: string;
   pointsMobile: string;
+  totalPoints: string;
+  totalMinutes: string;
+  freeThrowsLine: string;
+  twoPointMade: string;
+  threePointMade: string;
   shotChartTitle: string;
   shotChartEyebrow: string;
   shotChartHint: string;
@@ -477,6 +482,11 @@ const UI_IT: ProfileUi = {
     stl: "Rec",
     to: "Pé",
     pointsMobile: "punti",
+    totalPoints: "Punti totali",
+    totalMinutes: "Minuti totali",
+    freeThrowsLine: "Tiri liberi",
+    twoPointMade: "Da due segnati",
+    threePointMade: "Da tre segnati",
     shotChartTitle: "Shot chart",
     shotChartEyebrow: "Tiro di stagione",
     shotChartHint: "Distribuzione per zone — colori caldi = percentuali più alte (stile NBA).",
@@ -814,6 +824,11 @@ const UI_EN: ProfileUi = {
     stl: "Stl",
     to: "TO",
     pointsMobile: "pts",
+    totalPoints: "Total points",
+    totalMinutes: "Total minutes",
+    freeThrowsLine: "Free throws",
+    twoPointMade: "2PT made",
+    threePointMade: "3PT made",
     shotChartTitle: "Shot chart",
     shotChartEyebrow: "Season shooting",
     shotChartHint: "Zone breakdown — warm colors = higher shooting percentages (NBA-style).",

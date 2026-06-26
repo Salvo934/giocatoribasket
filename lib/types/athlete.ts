@@ -114,11 +114,23 @@ export interface SeasonTotals {
   minutes: number;
 }
 
+/** Totali stagione basket quando non si hanno medie/percents completi */
+export interface BasketballSeasonTotals {
+  points: number;
+  minutes: number;
+  freeThrowsMade: number;
+  freeThrowsAttempted: number;
+  twoPointMade: number;
+  threePointMade: number;
+}
+
 export interface SeasonStats {
   label: string;
   games: number;
   /** Totali stagione in hero (calcio) — se assenti si usano le medie. */
   seasonTotals?: SeasonTotals;
+  /** Totali stagione basket (punti, minuti, breakdown tiro) */
+  basketballTotals?: BasketballSeasonTotals;
   minutesPerGame: number;
   pointsPerGame: number;
   reboundsPerGame: number;
@@ -134,6 +146,8 @@ export interface SeasonStats {
   lastGames: GameLogRow[];
   /** Mappa tiro stile NBA (zone); se assente si stima da medie 2pt/3pt */
   shotChart?: ShotChartData;
+  hideShotChart?: boolean;
+  hideShootingBreakdown?: boolean;
 }
 
 export interface CareerStep {

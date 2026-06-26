@@ -128,11 +128,10 @@ export const kevinBasile: AthleteProfile = {
     ],
   },
   stats: {
-    label:
-      "Under 19 Eccellenza 2025-26 · Basket Academy Catanzaro · punti e presenze PlayBasket Calabria",
-    games: 18,
-    minutesPerGame: 0,
-    pointsPerGame: 8.4,
+    label: "Stagione 2025-26 · Basket Academy Catanzaro · 32 partite",
+    games: 32,
+    minutesPerGame: 15.7,
+    pointsPerGame: 5.3,
     reboundsPerGame: 0,
     assistsPerGame: 0,
     stealsPerGame: 0,
@@ -140,9 +139,19 @@ export const kevinBasile: AthleteProfile = {
     fgPct: 0,
     twoPct: 0,
     threePct: 0,
-    ftPct: 0,
+    ftPct: 73.2,
     twoAttPerGame: 0,
     threeAttPerGame: 0,
+    hideShotChart: true,
+    hideShootingBreakdown: true,
+    basketballTotals: {
+      points: 170,
+      minutes: 503,
+      freeThrowsMade: 41,
+      freeThrowsAttempted: 56,
+      twoPointMade: 39,
+      threePointMade: 17,
+    },
     lastGames: [
       {
         date: "2025-10-06",

@@ -55,18 +55,33 @@ export function StatsPanel({ athlete }: Props) {
     },
   ];
 
-  const secondaryKpis = [
+  const volumeKpis = [
+    { kind: "two" as const, label: ui.stats.twoAttempts, value: fmt(s.twoAttPerGame), hint: ui.stats.perGame },
+    { kind: "three" as const, label: ui.stats.threeAttempts, value: fmt(s.threeAttPerGame), hint: ui.stats.perGame },
+  ];
+  const totals = s.basketballTotals;
+  const seasonTotalKpis = totals
+    ? [
+        { label: ui.stats.games, value: String(s.games) },
+        { label: ui.stats.totalMinutes, value: String(totals.minutes) },
+        { label: ui.stats.totalPoints, value: String(totals.points) },
+        {
+          label: ui.stats.freeThrowsLine,
+          value: `${totals.freeThrowsMade}/${totals.freeThrowsAttempted}`,
+        },
+        { label: ui.stats.twoPointMade, value: String(totals.twoPointMade) },
+        { label: ui.stats.threePointMade, value: String(totals.threePointMade) },
+      ]
+    : null;
+  const secondaryKpis = seasonTotalKpis ?? [
     { label: ui.stats.games, value: String(s.games) },
     { label: ui.stats.minutes, value: `${fmt(s.minutesPerGame)} mpg` },
     { label: ui.stats.steals, value: fmt(s.stealsPerGame) },
     { label: ui.stats.turnovers, value: fmt(s.turnoversPerGame) },
   ];
-
-  const volumeKpis = [
-    { kind: "two" as const, label: ui.stats.twoAttempts, value: fmt(s.twoAttPerGame), hint: ui.stats.perGame },
-    { kind: "three" as const, label: ui.stats.threeAttempts, value: fmt(s.threeAttPerGame), hint: ui.stats.perGame },
-  ];
-  const shotChart = !isFootball ? resolveShotChart(s) : null;
+  const showShotChart = !isFootball && !s.hideShotChart;
+  const shotChart = showShotChart ? resolveShotChart(s) : null;
+  const showShootingBreakdown = !s.hideShootingBreakdown;
 
   return (
     <SectionShell
@@ -97,7 +112,7 @@ export function StatsPanel({ athlete }: Props) {
 
       {/* Contesto stagione + rapporti */}
       <div className="mt-6 grid gap-4 lg:grid-cols-[1fr_320px]">
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-3">
           {secondaryKpis.map((k) => (
             <div
               key={k.label}
@@ -108,6 +123,7 @@ export function StatsPanel({ athlete }: Props) {
             </div>
           ))}
         </div>
+        {showShootingBreakdown ? (
         <div className="flex flex-col justify-center rounded-2xl border border-dashed border-white/15 bg-white/2 px-4 py-4 md:px-5">
           <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">{ui.stats.quickIndicators}</p>
           <dl className="mt-2 space-y-2 text-sm">
@@ -123,6 +139,7 @@ export function StatsPanel({ athlete }: Props) {
             </div>
           </dl>
         </div>
+        ) : null}
       </div>
 
       {shotChart ? (
@@ -157,6 +174,7 @@ export function StatsPanel({ athlete }: Props) {
       ) : null}
 
       {/* Tiro e volume */}
+      {showShootingBreakdown ? (
       <div className="mt-8 grid gap-6 lg:grid-cols-2">
         <div className="rounded-2xl border border-white/8 bg-elevated p-5 md:p-6">
           <h3 className="text-sm font-semibold text-white">{ui.stats.shootingEfficiency}</h3>
@@ -206,6 +224,7 @@ export function StatsPanel({ athlete }: Props) {
           </div>
         </div>
       </div>
+      ) : null}
 
       {/* Ultime partite */}
       <div className="mt-10">
