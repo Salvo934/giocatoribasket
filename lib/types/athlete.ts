@@ -426,6 +426,8 @@ export interface AthleteProfile {
     marketStatusLabel: string;
     agency: AgencyRef;
     lastUpdated: string;
+    /** Default: aggiornamento scheda; `created` per nuove schede */
+    lastUpdatedKind?: "created" | "updated";
     highlightUrl: string;
     whatsapp?: string;
   };

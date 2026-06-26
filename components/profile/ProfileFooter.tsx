@@ -13,6 +13,8 @@ export function ProfileFooter({ athlete }: Props) {
   const h = athlete.header;
   const legal = resolveLegalContext(athlete);
   const updated = formatDate(h.lastUpdated);
+  const footerDateLabel =
+    h.lastUpdatedKind === "created" ? ui.footer.created : ui.footer.updated;
   const jersey = h.number?.replace(/\D/g, "") ?? "";
   const siteHost = athlete.seo.publicSiteUrl?.replace(/^https?:\/\//, "");
 
@@ -110,7 +112,7 @@ export function ProfileFooter({ athlete }: Props) {
             <span className="mx-2 text-zinc-800" aria-hidden>
               ·
             </span>
-            {ui.footer.updated}{" "}
+            {footerDateLabel}{" "}
             <time dateTime={h.lastUpdated} className="tabular-nums text-zinc-500">
               {updated}
             </time>

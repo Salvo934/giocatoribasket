@@ -172,6 +172,7 @@ export type FooterUi = {
   platform: string;
   platformBody: string;
   updated: string;
+  created: string;
   backToTop: string;
   copyright: string;
 };
@@ -313,6 +314,7 @@ export type ProfileUi = {
   player: string;
   birthYear: string;
   profileUpdated: string;
+  profileCreated: string;
   team: string;
   profilePhotoAlt: string;
   watchHighlights: string;
@@ -365,6 +367,7 @@ const UI_IT: ProfileUi = {
   player: "Giocatore",
   birthYear: "classe",
   profileUpdated: "Scheda aggiornata",
+  profileCreated: "Scheda creata",
   team: "Squadra",
   profilePhotoAlt: "foto profilo",
   watchHighlights: "Guarda gli highlights",
@@ -688,6 +691,7 @@ const UI_IT: ProfileUi = {
     platform: "Piattaforma",
     platformBody: "Player Card per scouting, club e agenzie. Template condiviso, dominio dedicato per ogni atleta.",
     updated: "Aggiornato",
+    created: "Creata",
     backToTop: "Torna su ↑",
     copyright: "Scheda atleta",
   },
@@ -700,6 +704,7 @@ const UI_EN: ProfileUi = {
   player: "Player",
   birthYear: "class",
   profileUpdated: "Profile updated",
+  profileCreated: "Profile created",
   team: "Team",
   profilePhotoAlt: "profile photo",
   watchHighlights: "Watch highlights",
@@ -1022,6 +1027,7 @@ const UI_EN: ProfileUi = {
     platform: "Platform",
     platformBody: "Player Card for scouting, clubs and agencies. Shared template, dedicated domain per athlete.",
     updated: "Updated",
+    created: "Created",
     backToTop: "Back to top ↑",
     copyright: "Athlete profile",
   },

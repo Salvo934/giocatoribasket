@@ -30,6 +30,8 @@ export function ProfileHeader({ athlete }: Props) {
   const h = athlete.header;
   const s = athlete.stats;
   const updated = formatDate(h.lastUpdated);
+  const profileDateLabel =
+    h.lastUpdatedKind === "created" ? ui.profileCreated : ui.profileUpdated;
   const focus = h.heroImageFocus ?? "center";
   const objectPosition = HERO_FOCUS_CLASS[focus] ?? "object-center";
   const heroObjectPosition = h.heroImageObjectPosition?.trim();
@@ -200,7 +202,7 @@ export function ProfileHeader({ athlete }: Props) {
             <p className="mt-2 text-xs font-medium uppercase tracking-wider text-zinc-500">{h.marketStatusLabel}</p>
             <p className="mt-1.5 text-xs text-zinc-500">
               <time dateTime={h.lastUpdated}>
-                {ui.profileUpdated} <span className="text-zinc-600">·</span>{" "}
+                {profileDateLabel} <span className="text-zinc-600">·</span>{" "}
                 <span className="tabular-nums text-zinc-400">{updated}</span>
               </time>
             </p>
