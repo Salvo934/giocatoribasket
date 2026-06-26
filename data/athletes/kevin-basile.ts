@@ -62,8 +62,8 @@ export const kevinBasile: AthleteProfile = {
     availableFrom: "Da definire con il club / referente",
     availability: [
       { id: "tryout", label: "Tryout / workout", active: true },
-      { id: "loan", label: "Prestito", active: false },
-      { id: "transfer", label: "Trasferimento", active: false },
+      { id: "loan", label: "Prestito", active: true },
+      { id: "transfer", label: "Trasferimento", active: true },
       { id: "showcase", label: "Showcase / eventi", active: true },
       { id: "abroad", label: "Estero", active: false },
     ],
