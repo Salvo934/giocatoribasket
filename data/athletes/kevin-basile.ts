@@ -320,7 +320,13 @@ export const kevinBasile: AthleteProfile = {
       emailPublicLabel: "Su richiesta",
       phonePublicLabel: "Su richiesta",
     },
-    social: [],
+    social: [
+      {
+        platform: "Instagram",
+        handle: "@_keke35._",
+        url: "https://www.instagram.com/_keke35._/",
+      },
+    ],
   },
   agencyRoster: [],
 };
