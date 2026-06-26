@@ -3,7 +3,7 @@ import type { AthleteProfile } from "@/lib/types/athlete";
 /** Dati da PlayBasket Calabria e comunicati Basket Academy — https://www.playbasket.it/calabria/ · https://www.catanzaroinforma.it/sport/2025/07/30/basket-academy-blinda-i-suoi-gioielli-giglio-e-basile/381777/ */
 export const kevinBasile: AthleteProfile = {
   slug: "kevin-basile",
-  published: false,
+  published: true,
   seo: {
     title: "Kevin Basile · Ala piccola Serie B Interregionale | Player Card",
     description:
@@ -39,11 +39,12 @@ export const kevinBasile: AthleteProfile = {
     dashboardIntro:
       "Ala 191 cm, 19 anni, Basket Academy Catanzaro: 8,4 punti di media su 18 gare in U19 Eccellenza 2025-26 (fonte PlayBasket Calabria), season high a 21 vs Fortitudo Francavilla. In roster Serie B Interregionale Girone F e doppio impegno U19.",
     agency: {
-      name: "",
+      name: "Players Group",
+      representative: "Francesco Carlotti · procuratore",
     },
     lastUpdated: "2026-06-26",
     lastUpdatedKind: "created",
-    highlightUrl: "https://kevinbasile35.katahero.com/#video",
+    highlightUrl: "/athletes/basile-trailer.mp4",
   },
   scoutView: {
     sectionDescription:
@@ -74,20 +75,56 @@ export const kevinBasile: AthleteProfile = {
   videos: {
     poster: "/athletes/kevin-basile-avatar.png",
     main: {
-      title: "Highlights — in arrivo",
-      url: "https://kevinbasile35.katahero.com/#video",
-      provider: "youtube",
+      title: "Trailer — Kevin Basile",
+      url: "/athletes/basile-trailer.mp4",
     },
-    filmRoomSide: [],
+    filmRoomSide: [
+      {
+        title: "Highlights — clip 2",
+        url: "/athletes/basile-highlight-2.mp4",
+      },
+    ],
     categories: [
-      { id: "shooting", label: "Tiro", clips: [] },
-      { id: "defense", label: "Difesa", clips: [] },
-      { id: "rebounding", label: "Rimbalzo", clips: [] },
-      { id: "athleticism", label: "Atletismo", clips: [] },
-      { id: "transition", label: "Transizione", clips: [] },
-      { id: "iso", label: "Uno contro uno", clips: [] },
-      { id: "pnr", label: "Pick & roll", clips: [] },
-      { id: "playmaking", label: "Passaggi", clips: [] },
+      {
+        id: "shooting",
+        label: "Tiro",
+        clips: [{ title: "Trailer — tiro e realizzazione", url: "/athletes/basile-trailer.mp4" }],
+      },
+      {
+        id: "defense",
+        label: "Difesa",
+        clips: [{ title: "Highlights — difesa", url: "/athletes/basile-highlight-2.mp4" }],
+      },
+      {
+        id: "rebounding",
+        label: "Rimbalzo",
+        clips: [{ title: "Trailer — rimbalzo", url: "/athletes/basile-trailer.mp4" }],
+      },
+      {
+        id: "athleticism",
+        label: "Atletismo",
+        clips: [{ title: "Highlights — atletismo", url: "/athletes/basile-highlight-2.mp4" }],
+      },
+      {
+        id: "transition",
+        label: "Transizione",
+        clips: [{ title: "Trailer — transizione", url: "/athletes/basile-trailer.mp4" }],
+      },
+      {
+        id: "iso",
+        label: "Uno contro uno",
+        clips: [{ title: "Highlights — 1v1", url: "/athletes/basile-highlight-2.mp4" }],
+      },
+      {
+        id: "pnr",
+        label: "Pick & roll",
+        clips: [{ title: "Trailer — pick & roll", url: "/athletes/basile-trailer.mp4" }],
+      },
+      {
+        id: "playmaking",
+        label: "Passaggi",
+        clips: [{ title: "Highlights — palleggio", url: "/athletes/basile-highlight-2.mp4" }],
+      },
     ],
   },
   stats: {
@@ -192,8 +229,23 @@ export const kevinBasile: AthleteProfile = {
     ],
   },
   gallery: {
-    description: "Ritratto e immagini da Basket Academy Catanzaro — ala numero 35.",
+    description: "Scatti da gara con Basket Academy Catanzaro — attacco al ferro, palleggio e intensità.",
     items: [
+      {
+        src: "/athletes/kevin-basile-gallery-1.jpg",
+        alt: "Kevin Basile in elevazione per il layup con la maglia rossa numero 35",
+        caption: "Basket Academy Catanzaro · attacco al ferro",
+      },
+      {
+        src: "/athletes/kevin-basile-gallery-2.jpg",
+        alt: "Kevin Basile in campo con la maglia bianca, tatuaggio Never Give Up sul braccio",
+        caption: "Gara · impronte basket",
+      },
+      {
+        src: "/athletes/kevin-basile-gallery-3.jpg",
+        alt: "Kevin Basile in palleggio con la maglia verde PGC Summer League",
+        caption: "PGC Summer League · cambio di ritmo",
+      },
       {
         src: "/athletes/kevin-basile-avatar.png",
         alt: "Kevin Basile ala Basket Academy Catanzaro",
@@ -259,12 +311,13 @@ export const kevinBasile: AthleteProfile = {
   ],
   contacts: {
     agency: {
-      name: "",
+      name: "Players Group",
+      representative: "Francesco Carlotti · procuratore",
     },
     representative: {
-      name: "Referente societario",
-      role: "Su richiesta (club / scouting)",
-      emailPublicLabel: "Su richiesta (club / scouting)",
+      name: "Francesco Carlotti",
+      role: "Procuratore · Players Group",
+      emailPublicLabel: "Su richiesta",
       phonePublicLabel: "Su richiesta",
     },
     social: [],
