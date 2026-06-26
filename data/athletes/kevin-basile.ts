@@ -3,7 +3,7 @@ import type { AthleteProfile } from "@/lib/types/athlete";
 /** Dati da PlayBasket Calabria e comunicati Basket Academy — https://www.playbasket.it/calabria/ · https://www.catanzaroinforma.it/sport/2025/07/30/basket-academy-blinda-i-suoi-gioielli-giglio-e-basile/381777/ */
 export const kevinBasile: AthleteProfile = {
   slug: "kevin-basile",
-  published: true,
+  published: false,
   seo: {
     title: "Kevin Basile · Ala piccola Serie B Interregionale | Player Card",
     description:
