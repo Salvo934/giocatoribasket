@@ -3,7 +3,7 @@ import type { AthleteProfile } from "@/lib/types/athlete";
 /** Dati da LNP — https://www.legapallacanestro.com/simon-ugo · https://www.legapallacanestro.com/ugochukwu-andrew-simon */
 export const ugoSimon: AthleteProfile = {
   slug: "ugo-simon",
-  published: true,
+  published: false,
   seo: {
     title: "Ugo Simon · Ala piccola Serie B | Player Card",
     description:

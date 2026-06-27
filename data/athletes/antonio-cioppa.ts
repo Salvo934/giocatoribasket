@@ -3,7 +3,7 @@ import type { AthleteProfile } from "@/lib/types/athlete";
 /** Dati da PlayBasket Campania e sito ufficiale Scandone — https://www.playbasket.it/campania/ · https://felicescandone.it/player/antonio-cioppa/ */
 export const antonioCioppa: AthleteProfile = {
   slug: "antonio-cioppa",
-  published: true,
+  published: false,
   seo: {
     title: "Antonio Cioppa · Playmaker Serie B Interregionale | Player Card",
     description:

@@ -296,6 +296,12 @@ export const kevinBasile: AthleteProfile = {
   ],
   honors: [
     {
+      title: "Selezionato CSH / PGC Summer League Under20 — Cantù",
+      detail:
+        "Partecipazione su invito alla Summer League Under20 organizzata da Progetto Giovani Cantù e Pallacanestro Cantù, evento nazionale dedicato ai migliori prospetti italiani delle annate 2006-2008.",
+      year: "2026",
+    },
+    {
       title: "Season high 21 punti U19",
       detail: "Prestazione vs Fortitudo Francavilla in U19 Eccellenza 2025-26 (fonte PlayBasket).",
       year: "2025",
