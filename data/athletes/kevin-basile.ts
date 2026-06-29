@@ -44,7 +44,7 @@ export const kevinBasile: AthleteProfile = {
     },
     lastUpdated: "2026-06-26",
     lastUpdatedKind: "created",
-    highlightUrl: "/athletes/basile-trailer.mp4",
+    highlightUrl: "/athletes/basile-highlight-2.mp4",
   },
   scoutView: {
     sectionDescription:
@@ -75,20 +75,20 @@ export const kevinBasile: AthleteProfile = {
   videos: {
     poster: "/athletes/kevin-basile-avatar.png",
     main: {
-      title: "Trailer — Kevin Basile",
-      url: "/athletes/basile-trailer.mp4",
+      title: "Highlights — Kevin Basile",
+      url: "/athletes/basile-highlight-2.mp4",
     },
     filmRoomSide: [
       {
-        title: "Highlights — clip 2",
-        url: "/athletes/basile-highlight-2.mp4",
+        title: "Trailer — Kevin Basile",
+        url: "/athletes/basile-trailer-3.mp4",
       },
     ],
     categories: [
       {
         id: "shooting",
         label: "Tiro",
-        clips: [{ title: "Trailer — tiro e realizzazione", url: "/athletes/basile-trailer.mp4" }],
+        clips: [{ title: "Trailer — tiro e realizzazione", url: "/athletes/basile-trailer-3.mp4" }],
       },
       {
         id: "defense",
@@ -98,7 +98,7 @@ export const kevinBasile: AthleteProfile = {
       {
         id: "rebounding",
         label: "Rimbalzo",
-        clips: [{ title: "Trailer — rimbalzo", url: "/athletes/basile-trailer.mp4" }],
+        clips: [{ title: "Trailer — rimbalzo", url: "/athletes/basile-trailer-3.mp4" }],
       },
       {
         id: "athleticism",
@@ -108,7 +108,7 @@ export const kevinBasile: AthleteProfile = {
       {
         id: "transition",
         label: "Transizione",
-        clips: [{ title: "Trailer — transizione", url: "/athletes/basile-trailer.mp4" }],
+        clips: [{ title: "Trailer — transizione", url: "/athletes/basile-trailer-3.mp4" }],
       },
       {
         id: "iso",
@@ -118,7 +118,7 @@ export const kevinBasile: AthleteProfile = {
       {
         id: "pnr",
         label: "Pick & roll",
-        clips: [{ title: "Trailer — pick & roll", url: "/athletes/basile-trailer.mp4" }],
+        clips: [{ title: "Trailer — pick & roll", url: "/athletes/basile-trailer-3.mp4" }],
       },
       {
         id: "playmaking",
