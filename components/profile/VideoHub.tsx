@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import type { AthleteProfile, AthleteVideo, VideoCategoryId } from "@/lib/types/athlete";
 import { YouTubeConsentGate } from "@/components/legal/YouTubeConsentGate";
 import { youtubeEmbedUrl } from "@/lib/youtube";
 import { isLocalVideoUrl } from "@/lib/video-url";
+import { resolveMonthlyHighlights, type ResolvedMonthlyHighlight } from "@/lib/video-months";
+import type { VideoUi } from "@/lib/i18n/profile-ui";
 import { BroadcastFrame } from "./BroadcastFrame";
 import { FilmRoomThumbnail } from "./FilmRoomThumbnail";
 import { ShareProfileButton } from "./ShareActions";
@@ -12,6 +14,8 @@ import { SectionShell } from "./SectionShell";
 import { useProfileLocale } from "./ProfileLocaleContext";
 
 type Props = { athlete: AthleteProfile };
+
+const SWIPE_MIN_PX = 40;
 
 function clipPoster(clip: AthleteVideo, fallback?: string) {
   return clip.poster ?? fallback;
@@ -46,35 +50,273 @@ function ClipRow({ index, clip }: { index: number; clip: AthleteVideo }) {
   );
 }
 
+function VideoPlayer({
+  clip,
+  defaultPoster,
+  compact = false,
+}: {
+  clip: AthleteVideo;
+  defaultPoster?: string;
+  compact?: boolean;
+}) {
+  const playingPoster = isLocalVideoUrl(clip.url) ? clipPoster(clip, defaultPoster) : undefined;
+  const embedSrc = youtubeEmbedUrl(clip.url);
+  const localVideo = isLocalVideoUrl(clip.url);
+
+  return (
+    <div
+      className={`relative w-full overflow-hidden bg-zinc-950 ${
+        compact ? "aspect-video max-h-48 sm:max-h-56" : "aspect-video min-h-0"
+      }`}
+    >
+      {localVideo ? (
+        <>
+          {playingPoster ? (
+            <img
+              src={playingPoster}
+              alt=""
+              aria-hidden
+              className="pointer-events-none absolute inset-0 h-full w-full object-cover object-top"
+            />
+          ) : null}
+          <video
+            key={clip.url}
+            controls
+            playsInline
+            preload="metadata"
+            poster={playingPoster}
+            className="relative z-1 h-full w-full object-contain"
+            src={clip.url}
+          />
+        </>
+      ) : embedSrc ? (
+        <YouTubeConsentGate
+          title="Video YouTube"
+          description="Per riprodurre clip e highlights incorporati serve il consenso ai contenuti esterni (Google/YouTube)."
+        >
+          <iframe
+            key={clip.url}
+            title={clip.title}
+            src={`${embedSrc}?rel=0`}
+            className="h-full w-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </YouTubeConsentGate>
+      ) : (
+        <div className="flex h-full flex-col items-center justify-center gap-2 p-6 text-center">
+          <p className="text-sm font-semibold text-zinc-400">Nessun embed valido</p>
+          <p className="text-xs text-zinc-600">Serve un URL YouTube per questo clip.</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function MonthlyHighlightsCarousel({
+  months,
+  defaultPoster,
+  videoUi,
+}: {
+  months: ResolvedMonthlyHighlight[];
+  defaultPoster?: string;
+  videoUi: VideoUi;
+}) {
+  const sortedMonths = useMemo(
+    () => [...months].sort((a, b) => a.key.localeCompare(b.key)),
+    [months],
+  );
+  const total = sortedMonths.length;
+  const [index, setIndex] = useState(0);
+  const swipeStartX = useRef<number | null>(null);
+
+  const go = useCallback(
+    (dir: -1 | 1) => {
+      setIndex((current) => (current + dir + total) % total);
+    },
+    [total],
+  );
+
+  const onSwipePointerDown = useCallback(
+    (e: React.PointerEvent) => {
+      if (total <= 1) return;
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      swipeStartX.current = e.clientX;
+    },
+    [total],
+  );
+
+  const onSwipePointerUp = useCallback(
+    (e: React.PointerEvent) => {
+      if (swipeStartX.current === null || total <= 1) return;
+      const dx = e.clientX - swipeStartX.current;
+      swipeStartX.current = null;
+      if (Math.abs(dx) < SWIPE_MIN_PX) return;
+      go(dx > 0 ? -1 : 1);
+    },
+    [go, total],
+  );
+
+  const onSwipePointerCancel = useCallback(() => {
+    swipeStartX.current = null;
+  }, []);
+
+  const active = sortedMonths[index];
+  if (!active) return null;
+
+  return (
+    <div className="mx-auto max-w-2xl">
+      <div
+        role="region"
+        aria-roledescription="carosello"
+        aria-label={videoUi.monthlyCarouselAria}
+        className="overflow-hidden rounded-xl border border-white/8 bg-black/45 p-3 sm:p-4"
+        style={{ boxShadow: "inset 0 0 0 1px rgba(23, 64, 139, 0.15)" }}
+        onPointerDown={onSwipePointerDown}
+        onPointerUp={onSwipePointerUp}
+        onPointerCancel={onSwipePointerCancel}
+        onPointerLeave={(e) => {
+          if (e.buttons === 0) swipeStartX.current = null;
+        }}
+      >
+        <div className="mb-3 text-center" aria-live="polite">
+          <p
+            className="text-base font-bold uppercase tracking-[0.16em] text-white sm:text-lg"
+            style={{ fontFamily: "var(--font-bebas)" }}
+          >
+            {active.label}
+          </p>
+          <p className="mt-1 text-xs text-zinc-500">{active.clip.title}</p>
+        </div>
+
+        <div className="relative touch-pan-y">
+          <div className="overflow-hidden rounded-lg border border-white/10">
+            <VideoPlayer key={active.key} clip={active.clip} defaultPoster={defaultPoster} compact />
+          </div>
+
+          {total > 1 ? (
+            <>
+              <button
+                type="button"
+                aria-label={videoUi.monthlyCarouselPrev}
+                onClick={() => go(-1)}
+                className="absolute left-1 top-1/2 z-10 -translate-y-1/2 rounded-md border border-white/12 bg-black/70 px-2 py-1.5 text-sm font-bold text-white backdrop-blur-sm transition hover:border-[#C9082A]/45 hover:text-accent sm:left-2"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                aria-label={videoUi.monthlyCarouselNext}
+                onClick={() => go(1)}
+                className="absolute right-1 top-1/2 z-10 -translate-y-1/2 rounded-md border border-white/12 bg-black/70 px-2 py-1.5 text-sm font-bold text-white backdrop-blur-sm transition hover:border-[#C9082A]/45 hover:text-accent sm:right-2"
+              >
+                ›
+              </button>
+            </>
+          ) : null}
+        </div>
+
+        {total > 1 ? (
+          <div className="mt-3 flex items-center justify-center gap-1.5" role="tablist" aria-label={videoUi.monthlyCarouselAria}>
+            {sortedMonths.map((month, i) => (
+              <button
+                key={month.key}
+                type="button"
+                role="tab"
+                aria-selected={i === index}
+                aria-label={month.label}
+                onClick={() => setIndex(i)}
+                className={`h-1.5 rounded-full transition-all ${
+                  i === index ? "w-6 bg-[#C9082A]" : "w-1.5 bg-white/20 hover:bg-white/35"
+                }`}
+              />
+            ))}
+          </div>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+function MonthlyHighlightsEmpty({ videoUi, locale }: { videoUi: VideoUi; locale: "it" | "en" }) {
+  const previewMonths = useMemo(() => {
+    const labels: string[] = [];
+    for (let i = 0; i < 6; i += 1) {
+      const date = new Date(2025, 8 + i, 1);
+      labels.push(
+        new Intl.DateTimeFormat(locale === "en" ? "en-GB" : "it-IT", {
+          month: "long",
+        }).format(date),
+      );
+    }
+    return labels;
+  }, [locale]);
+
+  return (
+    <div className="mx-auto max-w-2xl overflow-hidden rounded-xl border border-dashed border-white/15 bg-zinc-950/40 p-4 sm:p-5">
+      <div className="mb-4 flex flex-wrap justify-center gap-1.5" aria-hidden>
+        {previewMonths.map((label) => (
+          <span
+            key={label}
+            className="rounded-md border border-white/8 bg-white/3 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-600"
+          >
+            {label}
+          </span>
+        ))}
+        <span className="rounded-md border border-white/8 bg-white/3 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-700">
+          …
+        </span>
+      </div>
+      <div className="rounded-lg border border-white/8 bg-black/35 px-4 py-8 text-center sm:px-6">
+        <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-zinc-500">
+          {videoUi.monthlyEmptyTitle}
+        </p>
+        <p className="mx-auto mt-3 max-w-md text-sm font-semibold text-zinc-300">{videoUi.monthlyComingSoon}</p>
+        <p className="mx-auto mt-2 max-w-lg text-xs leading-relaxed text-zinc-500">{videoUi.monthlyEmptyBody}</p>
+      </div>
+    </div>
+  );
+}
+
 export function VideoHub({ athlete }: Props) {
   const { ui, videoPath, locale, profilePath } = useProfileLocale();
   const v = athlete.videos;
   const h = athlete.header;
 
+  const monthlyHighlights = v.monthlyHighlights?.length
+    ? resolveMonthlyHighlights(v.monthlyHighlights, locale)
+    : [];
+  const showMonthlySection = v.monthlyHighlights !== undefined;
+
   const sideClips = v.filmRoomSide ?? [];
   const [filmRoomFocus, setFilmRoomFocus] = useState<"main" | number>("main");
   const playing =
     filmRoomFocus === "main" ? v.main : (sideClips[filmRoomFocus] ?? v.main);
-  const playingPoster = isLocalVideoUrl(playing.url) ? clipPoster(playing, v.poster) : undefined;
-  const mainSrc = youtubeEmbedUrl(playing.url);
-  const localMain = isLocalVideoUrl(playing.url);
 
   const firstId = v.categories[0]?.id ?? "shooting";
   const [activeId, setActiveId] = useState<VideoCategoryId>(firstId);
 
   const activeCat = v.categories.find((c) => c.id === activeId) ?? v.categories[0];
+  const showPlaybook = v.categories.some((cat) => cat.clips.length > 0);
   const contactsHref = `${profilePath}#contatti`;
   const shareTitle =
     locale === "en" ? `${h.name} — Video & clips` : `${h.name} — Video e clip`;
   const focusRing =
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9082A]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-black";
+  const sectionDescription = showMonthlySection
+    ? locale === "en"
+      ? "Main showcase plus one highlight reel per season month — updated throughout the year."
+      : "Video principale e un recap per ogni mese di stagione — aggiornato mese per mese."
+    : locale === "en"
+      ? "Featured player footage and clips by topic — quick view for staff and coaches. Share your video room with the button below."
+      : "Primo piano sul giocatore e clip divise per argomento: visione rapida per staff e allenatori. Condividi solo la tua sala video con il bottone qui sotto.";
 
   return (
     <SectionShell
       id="video"
       eyebrow="Sala video"
       title="Video e clip"
-      description="Primo piano sul giocatore e clip divise per argomento: visione rapida per staff e allenatori. Condividi solo la tua sala video con il bottone qui sotto."
+      description={sectionDescription}
       headerActions={
         <div className="flex items-center justify-end gap-2 sm:justify-between sm:gap-4 sm:rounded-2xl sm:border sm:border-white/10 sm:bg-linear-to-br sm:from-[#17408B]/14 sm:via-black/50 sm:to-[#C9082A]/10 sm:p-px sm:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]">
           <p className="hidden min-w-0 flex-1 text-sm leading-relaxed text-zinc-400 sm:block">
@@ -98,7 +340,7 @@ export function VideoHub({ athlete }: Props) {
           background: `linear-gradient(180deg, rgba(23,64,139,0.12) 0%, transparent 38%), linear-gradient(165deg, #14100e 0%, #050505 45%, #0a0b10 100%)`,
         }}
       >
-        {/* Highlight principale */}
+        {/* Video principale */}
         <BroadcastFrame
           title={playing.title}
           athleteName={h.name}
@@ -110,48 +352,7 @@ export function VideoHub({ athlete }: Props) {
             <div
               className={`grid gap-3 ${sideClips.length > 0 ? "lg:grid-cols-[minmax(0,1fr)_minmax(148px,16rem)] lg:gap-4" : ""}`}
             >
-              <div className="relative aspect-video min-h-0 w-full overflow-hidden bg-zinc-950">
-                {localMain ? (
-                  <>
-                    {playingPoster ? (
-                      <img
-                        src={playingPoster}
-                        alt=""
-                        aria-hidden
-                        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-top"
-                      />
-                    ) : null}
-                    <video
-                      key={playing.url}
-                      controls
-                      playsInline
-                      preload="metadata"
-                      poster={playingPoster}
-                      className="relative z-1 h-full w-full object-contain"
-                      src={playing.url}
-                    />
-                  </>
-                ) : mainSrc ? (
-                  <YouTubeConsentGate
-                    title="Video YouTube"
-                    description="Per riprodurre clip e highlights incorporati serve il consenso ai contenuti esterni (Google/YouTube)."
-                  >
-                    <iframe
-                      key={playing.url}
-                      title={playing.title}
-                      src={`${mainSrc}?rel=0`}
-                      className="h-full w-full"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  </YouTubeConsentGate>
-                ) : (
-                  <div className="flex h-full flex-col items-center justify-center gap-2 p-6 text-center">
-                    <p className="text-sm font-semibold text-zinc-400">Nessun embed valido</p>
-                    <p className="text-xs text-zinc-600">Serve un URL YouTube per questo clip.</p>
-                  </div>
-                )}
-              </div>
+              <VideoPlayer clip={playing} defaultPoster={v.poster} />
 
               {sideClips.length > 0 ? (
                 <div className="flex flex-row gap-2 lg:flex-col lg:justify-center lg:gap-3">
@@ -176,74 +377,98 @@ export function VideoHub({ athlete }: Props) {
                   onClick={() => setFilmRoomFocus("main")}
                   className="rounded-md border border-white/14 bg-white/5 px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-zinc-200 transition hover:border-[#17408B]/45 hover:bg-[#17408B]/15 hover:text-white"
                 >
-                  ← Highlights principali
+                  ← {ui.video.mainVideoEyebrow}
                 </button>
               </div>
             ) : null}
           </div>
         </BroadcastFrame>
 
-        {/* Skill tabs + playlist */}
-        <div>
-          <div className="mb-4">
-            <h3 className="text-xs font-black uppercase tracking-[0.2em] text-zinc-500">Playbook clips</h3>
-            <p className="mt-1 text-sm text-zinc-400">
-              Scegli il reparto · ogni voce apre il video su YouTube (o link esterno).
-            </p>
-          </div>
-
-          <div className="relative">
-            <div
-              className="mb-4 flex gap-1.5 overflow-x-auto pb-1 scrollbar-thin"
-              style={{ scrollbarColor: "#C9082A transparent" }}
-              role="tablist"
-              aria-label="Categorie video"
-            >
-              {v.categories.map((cat) => {
-                const sel = cat.id === activeId;
-                return (
-                  <button
-                    key={cat.id}
-                    type="button"
-                    role="tab"
-                    aria-selected={sel}
-                    onClick={() => setActiveId(cat.id)}
-                    className={`shrink-0 rounded-md border px-3 py-2 text-left text-xs font-bold uppercase tracking-wider transition sm:px-4 ${
-                      sel
-                        ? "border-[#C9082A] bg-[#C9082A] text-white shadow-[0_0_24px_-4px_rgba(201,8,42,0.5)]"
-                        : "border-white/10 bg-black/40 text-zinc-400 hover:border-white/25 hover:text-zinc-200"
-                    }`}
-                  >
-                    {cat.label}
-                    <span className="ml-1.5 font-mono text-[10px] font-normal opacity-70 tabular-nums">
-                      ({cat.clips.length})
-                    </span>
-                  </button>
-                );
-              })}
+        {/* Highlights mensili */}
+        {showMonthlySection ? (
+          <div>
+            <div className="mb-4">
+              <h3 className="text-xs font-black uppercase tracking-[0.2em] text-zinc-500">
+                {ui.video.monthlyHighlightsTitle}
+              </h3>
+              <p className="mt-1 text-sm text-zinc-400">{ui.video.monthlyHighlightsHint}</p>
             </div>
 
-            {activeCat ? (
-              <div
-                role="tabpanel"
-                className="rounded-xl border border-white/8 bg-black/50 p-3 md:p-4"
-                style={{ boxShadow: `inset 0 0 0 1px rgba(23, 64, 139, 0.15)` }}
-              >
-                <div className="mb-3 flex items-center justify-between gap-3 border-b border-white/10 pb-3">
-                  <p className="text-sm font-bold uppercase tracking-widest text-white">{activeCat.label}</p>
-                  <span className="rounded border border-[#17408B]/35 bg-[#17408B]/20 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-widest text-[#9ec5ff]">
-                    {activeCat.clips.length} {activeCat.clips.length === 1 ? "voce" : "voci"}
-                  </span>
-                </div>
-                <ul className="space-y-2">
-                  {activeCat.clips.map((clip, i) => (
-                    <ClipRow key={`${clip.title}-${i}`} index={i + 1} clip={clip} />
-                  ))}
-                </ul>
-              </div>
-            ) : null}
+            {monthlyHighlights.length > 0 ? (
+              <MonthlyHighlightsCarousel
+                months={monthlyHighlights}
+                defaultPoster={v.poster}
+                videoUi={ui.video}
+              />
+            ) : (
+              <MonthlyHighlightsEmpty videoUi={ui.video} locale={locale} />
+            )}
           </div>
-        </div>
+        ) : null}
+
+        {/* Playbook clips */}
+        {showPlaybook ? (
+          <div>
+            <div className="mb-4">
+              <h3 className="text-xs font-black uppercase tracking-[0.2em] text-zinc-500">Playbook clips</h3>
+              <p className="mt-1 text-sm text-zinc-400">
+                Scegli il reparto · ogni voce apre il video su YouTube (o link esterno).
+              </p>
+            </div>
+
+            <div className="relative">
+              <div
+                className="mb-4 flex gap-1.5 overflow-x-auto pb-1 scrollbar-thin"
+                style={{ scrollbarColor: "#C9082A transparent" }}
+                role="tablist"
+                aria-label="Categorie video"
+              >
+                {v.categories.map((cat) => {
+                  const sel = cat.id === activeId;
+                  return (
+                    <button
+                      key={cat.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={sel}
+                      onClick={() => setActiveId(cat.id)}
+                      className={`shrink-0 rounded-md border px-3 py-2 text-left text-xs font-bold uppercase tracking-wider transition sm:px-4 ${
+                        sel
+                          ? "border-[#C9082A] bg-[#C9082A] text-white shadow-[0_0_24px_-4px_rgba(201,8,42,0.5)]"
+                          : "border-white/10 bg-black/40 text-zinc-400 hover:border-white/25 hover:text-zinc-200"
+                      }`}
+                    >
+                      {cat.label}
+                      <span className="ml-1.5 font-mono text-[10px] font-normal opacity-70 tabular-nums">
+                        ({cat.clips.length})
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {activeCat ? (
+                <div
+                  role="tabpanel"
+                  className="rounded-xl border border-white/8 bg-black/50 p-3 md:p-4"
+                  style={{ boxShadow: `inset 0 0 0 1px rgba(23, 64, 139, 0.15)` }}
+                >
+                  <div className="mb-3 flex items-center justify-between gap-3 border-b border-white/10 pb-3">
+                    <p className="text-sm font-bold uppercase tracking-widest text-white">{activeCat.label}</p>
+                    <span className="rounded border border-[#17408B]/35 bg-[#17408B]/20 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-widest text-[#9ec5ff]">
+                      {activeCat.clips.length} {activeCat.clips.length === 1 ? "voce" : "voci"}
+                    </span>
+                  </div>
+                  <ul className="space-y-2">
+                    {activeCat.clips.map((clip, i) => (
+                      <ClipRow key={`${clip.title}-${i}`} index={i + 1} clip={clip} />
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        ) : null}
 
         {/* Partita completa — accesso su richiesta */}
         {v.fullGame ? (

@@ -104,6 +104,7 @@ export const alfonsoZampogna: AthleteProfile = {
       },
     ],
     poster: "/athletes/alfonso-zampogna-avatar.jpg",
+    monthlyHighlights: [],
     categories: [
       {
         id: "playmaking",

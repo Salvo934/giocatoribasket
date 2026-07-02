@@ -141,6 +141,7 @@ export const ilarioSimonetti: AthleteProfile = {
         url: "https://www.youtube.com/watch?v=Zvu_SEi4XdU",
       },
     ],
+    monthlyHighlights: [],
     categories: [
       {
         id: "shooting",

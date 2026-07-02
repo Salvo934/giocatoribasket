@@ -27,6 +27,7 @@ export function mergeAthleteLocale(base: AthleteProfile, overlay: AthleteLocaleO
           main: { ...base.videos.main, ...overlay.videos.main },
           categories: overlay.videos.categories ?? base.videos.categories,
           filmRoomSide: overlay.videos.filmRoomSide ?? base.videos.filmRoomSide,
+          monthlyHighlights: overlay.videos.monthlyHighlights ?? base.videos.monthlyHighlights,
           fullGame: overlay.videos.fullGame
             ? { ...base.videos.fullGame, ...overlay.videos.fullGame }
             : base.videos.fullGame,

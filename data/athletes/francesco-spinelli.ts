@@ -82,6 +82,7 @@ export const francescoSpinelli: AthleteProfile = {
         url: "/athletes/spinelli-highlight-3.mp4",
       },
     ],
+    monthlyHighlights: [],
     categories: [
       {
         id: "shooting",

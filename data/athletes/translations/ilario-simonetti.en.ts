@@ -120,6 +120,7 @@ export const ilarioSimonettiEn: AthleteLocaleOverlay = {
       { title: "Film room — clip 1", url: "https://www.youtube.com/watch?v=JYJfGWHTEho" },
       { title: "Film room — clip 2", url: "https://www.youtube.com/watch?v=Zvu_SEi4XdU" },
     ],
+    monthlyHighlights: [],
     categories: [
       {
         id: "shooting",

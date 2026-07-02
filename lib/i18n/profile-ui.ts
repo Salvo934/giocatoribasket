@@ -186,6 +186,15 @@ export type VideoUi = {
   clip: string;
   featured: string;
   nowPlaying: string;
+  mainVideoEyebrow: string;
+  monthlyHighlightsTitle: string;
+  monthlyHighlightsHint: string;
+  monthlyComingSoon: string;
+  monthlyEmptyTitle: string;
+  monthlyEmptyBody: string;
+  monthlyCarouselPrev: string;
+  monthlyCarouselNext: string;
+  monthlyCarouselAria: string;
   share: { label: string; labelShort?: string; shared: string; copied: string; error: string };
   shareHint: string;
   videoOnlyEyebrow: string;
@@ -711,7 +720,7 @@ const UI_IT: ProfileUi = {
     backToTop: "Torna su ↑",
     copyright: "Scheda atleta",
   },
-  video: { clip: "Clip", featured: "In evidenza", nowPlaying: "Now playing", share: { label: "Condividi link clip", labelShort: "Condividi clip", shared: "Condiviso", copied: "Link copiato", error: "Errore" }, shareHint: "Un link facile da mandare ad agenti, club e società — solo video, senza tutta la scheda.", videoOnlyEyebrow: "Sala video", backToFullProfile: "Scheda completa", fullGameEyebrow: "Partita completa", fullGameNote: "Accesso controllato — tipico flusso tra club e rappresentanza.", fullGameRequestCta: "Richiedi partita", fullGameOpenCta: "Apri partita" },
+  video: { clip: "Clip", featured: "In evidenza", nowPlaying: "In riproduzione", mainVideoEyebrow: "Video principale", monthlyHighlightsTitle: "Highlights del mese", monthlyHighlightsHint: "Un recap per ogni mese di stagione — settembre, ottobre, novembre e via dicendo.", monthlyComingSoon: "Highlights in arrivo", monthlyEmptyTitle: "Recap mensili in arrivo", monthlyEmptyBody: "Qui comparirà un highlight per ogni mese di stagione — settembre, ottobre, novembre e via dicendo.", monthlyCarouselPrev: "Mese precedente", monthlyCarouselNext: "Mese successivo", monthlyCarouselAria: "Highlights mensili", share: { label: "Condividi link clip", labelShort: "Condividi clip", shared: "Condiviso", copied: "Link copiato", error: "Errore" }, shareHint: "Un link facile da mandare ad agenti, club e società — solo video, senza tutta la scheda.", videoOnlyEyebrow: "Sala video", backToFullProfile: "Scheda completa", fullGameEyebrow: "Partita completa", fullGameNote: "Accesso controllato — tipico flusso tra club e rappresentanza.", fullGameRequestCta: "Richiedi partita", fullGameOpenCta: "Apri partita" },
 };
 
 const UI_EN: ProfileUi = {
@@ -1055,7 +1064,7 @@ const UI_EN: ProfileUi = {
     backToTop: "Back to top ↑",
     copyright: "Athlete profile",
   },
-  video: { clip: "Clip", featured: "Featured", nowPlaying: "Now playing", share: { label: "Share clip link", labelShort: "Share clips", shared: "Shared", copied: "Link copied", error: "Error" }, shareHint: "An easy link for agents, clubs and organizations — videos only, not the full profile.", videoOnlyEyebrow: "Video room", backToFullProfile: "Full profile", fullGameEyebrow: "Full game", fullGameNote: "Controlled access — typical flow between club and representation.", fullGameRequestCta: "Request game tape", fullGameOpenCta: "Open game" },
+  video: { clip: "Clip", featured: "Featured", nowPlaying: "Now playing", mainVideoEyebrow: "Main video", monthlyHighlightsTitle: "Monthly highlights", monthlyHighlightsHint: "One recap per season month — September, October, November and so on.", monthlyComingSoon: "Highlights coming soon", monthlyEmptyTitle: "Monthly recaps coming soon", monthlyEmptyBody: "One highlight reel per season month will appear here — September, October, November and so on.", monthlyCarouselPrev: "Previous month", monthlyCarouselNext: "Next month", monthlyCarouselAria: "Monthly highlights", share: { label: "Share clip link", labelShort: "Share clips", shared: "Shared", copied: "Link copied", error: "Error" }, shareHint: "An easy link for agents, clubs and organizations — videos only, not the full profile.", videoOnlyEyebrow: "Video room", backToFullProfile: "Full profile", fullGameEyebrow: "Full game", fullGameNote: "Controlled access — typical flow between club and representation.", fullGameRequestCta: "Request game tape", fullGameOpenCta: "Open game" },
 };
 
 export function getProfileUi(locale: ProfileLocale): ProfileUi {

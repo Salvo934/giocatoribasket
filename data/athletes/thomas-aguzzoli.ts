@@ -75,6 +75,7 @@ export const thomasAguzzoli: AthleteProfile = {
       url: "https://www.youtube.com/watch?v=F_Rm-K6hYlc",
       provider: "youtube",
     },
+    monthlyHighlights: [],
     categories: [
       {
         id: "shooting",

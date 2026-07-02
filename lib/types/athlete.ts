@@ -48,12 +48,23 @@ export interface AthleteVideo {
   poster?: string;
 }
 
+/** Highlights mensili in sala video — un clip per mese di stagione (es. `2025-09`) */
+export interface MonthlyHighlight {
+  /** Mese ISO `yyyy-mm` */
+  month: string;
+  /** Override etichetta tab (es. "Settembre 2025") */
+  label?: string;
+  clip: AthleteVideo;
+}
+
 export interface AthleteVideos {
   /** Copertina default per clip mp4 in sala video */
   poster?: string;
   main: AthleteVideo & { provider?: VideoProvider };
   /** Max 2 consigliati: miniature accanto al player principale in Film room */
   filmRoomSide?: AthleteVideo[];
+  /** Un highlight per mese di stagione — sostituisce playbook/filmRoomSide quando valorizzato */
+  monthlyHighlights?: MonthlyHighlight[];
   categories: Array<{
     id: VideoCategoryId;
     label: string;

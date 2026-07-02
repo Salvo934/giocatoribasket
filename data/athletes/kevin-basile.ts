@@ -44,7 +44,7 @@ export const kevinBasile: AthleteProfile = {
     },
     lastUpdated: "2026-06-26",
     lastUpdatedKind: "created",
-    highlightUrl: "/athletes/basile-highlight-2.mp4",
+    highlightUrl: "/athletes/basile-trailer-3.mp4",
   },
   scoutView: {
     sectionDescription:
@@ -75,57 +75,17 @@ export const kevinBasile: AthleteProfile = {
   videos: {
     poster: "/athletes/kevin-basile-avatar.png",
     main: {
-      title: "Highlights — Kevin Basile",
-      url: "/athletes/basile-highlight-2.mp4",
+      title: "Trailer — Kevin Basile",
+      url: "/athletes/basile-trailer-3.mp4",
     },
     filmRoomSide: [
       {
-        title: "Trailer — Kevin Basile",
-        url: "/athletes/basile-trailer-3.mp4",
+        title: "Highlights — clip breve",
+        url: "/athletes/basile-highlight-2.mp4",
       },
     ],
-    categories: [
-      {
-        id: "shooting",
-        label: "Tiro",
-        clips: [{ title: "Trailer — tiro e realizzazione", url: "/athletes/basile-trailer-3.mp4" }],
-      },
-      {
-        id: "defense",
-        label: "Difesa",
-        clips: [{ title: "Highlights — difesa", url: "/athletes/basile-highlight-2.mp4" }],
-      },
-      {
-        id: "rebounding",
-        label: "Rimbalzo",
-        clips: [{ title: "Trailer — rimbalzo", url: "/athletes/basile-trailer-3.mp4" }],
-      },
-      {
-        id: "athleticism",
-        label: "Atletismo",
-        clips: [{ title: "Highlights — atletismo", url: "/athletes/basile-highlight-2.mp4" }],
-      },
-      {
-        id: "transition",
-        label: "Transizione",
-        clips: [{ title: "Trailer — transizione", url: "/athletes/basile-trailer-3.mp4" }],
-      },
-      {
-        id: "iso",
-        label: "Uno contro uno",
-        clips: [{ title: "Highlights — 1v1", url: "/athletes/basile-highlight-2.mp4" }],
-      },
-      {
-        id: "pnr",
-        label: "Pick & roll",
-        clips: [{ title: "Trailer — pick & roll", url: "/athletes/basile-trailer-3.mp4" }],
-      },
-      {
-        id: "playmaking",
-        label: "Passaggi",
-        clips: [{ title: "Highlights — palleggio", url: "/athletes/basile-highlight-2.mp4" }],
-      },
-    ],
+    monthlyHighlights: [],
+    categories: [],
   },
   stats: {
     label: "Stagione 2025-26 · Basket Academy Catanzaro · 32 partite",

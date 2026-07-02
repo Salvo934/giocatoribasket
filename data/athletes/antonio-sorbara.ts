@@ -85,6 +85,7 @@ export const antonioSorbara: AthleteProfile = {
         url: "/athletes/sorbara-highlight-3.mp4",
       },
     ],
+    monthlyHighlights: [],
     categories: [
       {
         id: "shooting",
