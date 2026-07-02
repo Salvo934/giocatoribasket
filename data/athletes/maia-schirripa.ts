@@ -10,7 +10,7 @@ export const maiaSchirripa: AthleteProfile = {
       "Maia Schirripa (2009), guardia, A.Dil. Basket Pegli in Serie B Femminile Piemonte e U19: percorso da Eutimo Locri alla Liguria, convocata SSN Next Gen U19F. Carriera e scheda scouting.",
     ogImage: "/athletes/cardmaia16-og.jpg",
     ogImageVersion: "20260702-1",
-    publicSiteUrl: "https://maiaschirripa16.katahero.com",
+    publicSiteUrl: "https://maiaschirripa.katahero.com",
   },
   legal: {
     dataController: {
