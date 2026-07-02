@@ -27,7 +27,7 @@ export const maiaSchirripa: AthleteProfile = {
     sport: "Basket",
     role: "Guardia / SG",
     birthYear: 2009,
-    heightCm: 172,
+    heightCm: 170,
     nationality: "Italia",
     currentClub: "A.Dil. Basket Pegli",
     category: "Serie B Femminile Piemonte · U19",
@@ -52,7 +52,7 @@ export const maiaSchirripa: AthleteProfile = {
     whyWatch:
       "Interessante se cerchi una guardia giovane con esperienza precoce in Serie B Femminile e percorso nazionale Next Gen — da incrociare con video e partite U19 quando disponibili.",
     toVerify:
-      "Altezza ufficiale; numeri U19 su PlayBasket; continuità realizzativa in Serie B Femminile a minuti strutturati; ruolo definitivo tra guardia e ala piccola.",
+      "Numeri U19 su PlayBasket; continuità realizzativa in Serie B Femminile a minuti strutturati; ruolo definitivo tra guardia e ala piccola.",
     idealFit:
       "Progetti giovanili ambiziosi con ritmo alto e spacing; utile in rotazioni U19 con prospettiva di crescita in campionati regionali senior.",
   },
@@ -182,7 +182,7 @@ export const maiaSchirripa: AthleteProfile = {
     { id: "contact", label: "Contatto verificato", ok: false },
     { id: "fresh", label: "Profilo aggiornato", ok: true },
     { id: "club", label: "Club confermato", ok: true },
-    { id: "height", label: "Altezza da confermare", ok: false },
+    { id: "height", label: "Altezza confermata", ok: true },
   ],
   contacts: {
     agency: {
