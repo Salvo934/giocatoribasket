@@ -31,6 +31,13 @@ export function AthleteProfileView({ athlete, locale = "it", dedicatedDomain = f
       <div className="pointer-events-none fixed inset-x-0 top-0 z-0 h-px bg-linear-to-r from-transparent via-white/15 to-transparent" aria-hidden />
       <ProfileHeader athlete={athlete} />
       {athlete.story?.chapters?.length ? <LegendStoryPanel athlete={athlete} /> : null}
+      {athlete.heroOnly ? (
+        <div className="relative z-10 w-full min-w-0">
+          <div className="mx-auto min-w-0 w-full max-w-lg px-5 sm:px-6">
+            <ProfileFooter athlete={athlete} />
+          </div>
+        </div>
+      ) : (
       <div className="relative z-10 w-full min-w-0">
         <div className="mx-auto min-w-0 w-full max-w-360">
           <ProfileNav
@@ -64,6 +71,7 @@ export function AthleteProfileView({ athlete, locale = "it", dedicatedDomain = f
           </div>
         </div>
       </div>
+      )}
     </div>
     </ProfileLocaleProvider>
   );

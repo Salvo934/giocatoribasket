@@ -2,6 +2,7 @@ import { alfonsoZampogna } from "./alfonso-zampogna";
 import { antonioCioppa } from "./antonio-cioppa";
 import { antonioSorbara } from "./antonio-sorbara";
 import { francescoSpinelli } from "./francesco-spinelli";
+import { jasonTaylor } from "./jason-taylor";
 import { kevinBasile } from "./kevin-basile";
 import { maiaSchirripa } from "./maia-schirripa";
 import { ilarioSimonetti } from "./ilario-simonetti";
@@ -26,6 +27,7 @@ const athletes: AthleteProfile[] = [
   ugoSimon,
   kevinBasile,
   maiaSchirripa,
+  jasonTaylor,
 ];
 
 function isPublished(athlete: AthleteProfile): boolean {

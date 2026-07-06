@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import type { AthleteProfile } from "@/lib/types/athlete";
+import { HeroOnlyHeader } from "./HeroOnlyHeader";
 import { HeroBackgroundImage } from "./HeroBackgroundImage";
 import { HeroBackgroundVideo } from "./HeroBackgroundVideo";
 import { HeroBackgroundVideoStack } from "./HeroBackgroundVideoStack";
@@ -43,6 +44,10 @@ export function ProfileHeader({ athlete }: Props) {
   const hideHeroAvatar = h.heroHideAvatar === true;
   const avatarDesktopShiftRight =
     athlete.slug === "ilario-simonetti" ? "lg:translate-x-12 xl:translate-x-20 2xl:translate-x-28" : "";
+
+  if (athlete.heroOnly) {
+    return <HeroOnlyHeader athlete={athlete} />;
+  }
 
   const staticHeroBackdrop = (
     <>
@@ -236,6 +241,8 @@ export function ProfileHeader({ athlete }: Props) {
                 publicSiteUrl={athlete.seo.publicSiteUrl}
                 className={`inline-flex h-11 items-center justify-center rounded-full border border-accent/50 bg-accent/12 px-6 text-sm font-semibold text-accent shadow-[0_0_28px_-8px_var(--accent-glow)] transition hover:border-accent/65 hover:bg-accent/18 ${focusRing}`}
               />
+              {!athlete.heroOnly ? (
+                <>
               <a
                 href="#video"
                 className={`inline-flex h-11 items-center justify-center rounded-full bg-accent px-6 text-sm font-bold text-black shadow-[0_0_28px_-6px_rgba(223,255,74,0.55)] transition hover:bg-[#e8ff6a] hover:shadow-[0_0_36px_-4px_rgba(223,255,74,0.65)] ${focusRing}`}
@@ -249,6 +256,8 @@ export function ProfileHeader({ athlete }: Props) {
                 >
                   {ui.contactAgent}
                 </a>
+              ) : null}
+                </>
               ) : null}
             </div>
 

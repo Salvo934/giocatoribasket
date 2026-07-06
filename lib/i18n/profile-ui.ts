@@ -395,7 +395,7 @@ const UI_IT: ProfileUi = {
   heroStatMinutes: "Minuti",
   heroStatPoints: "Punti",
   languageSwitch: { label: "Lingua", toEn: "English", toIt: "Italiano" },
-  share: { label: "Condividi link", shared: "Condiviso", copied: "Copiato", error: "Errore" },
+  share: { label: "Condividi la tua Player Card", shared: "Condiviso", copied: "Copiato", error: "Errore" },
   nav: {
     openMenu: "Apri menu sezioni",
     closeMenu: "Chiudi menu",
@@ -740,7 +740,7 @@ const UI_EN: ProfileUi = {
   heroStatMinutes: "Minutes",
   heroStatPoints: "Points",
   languageSwitch: { label: "Language", toEn: "English", toIt: "Italiano" },
-  share: { label: "Share link", shared: "Shared", copied: "Copied", error: "Error" },
+  share: { label: "Share your Player Card", shared: "Shared", copied: "Copied", error: "Error" },
   nav: {
     openMenu: "Open section menu",
     closeMenu: "Close menu",
