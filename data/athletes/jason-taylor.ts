@@ -8,7 +8,8 @@ export const jasonTaylor: AthleteProfile = {
     title: "Jason Taylor · Playmaker / Guardia | Player Card",
     description:
       "Jason Taylor, playmaker / guardia HK (2006, 189 cm): Campionato nazionale. 12,0 punti, 2,8 assist e 1,8 rimbalzi di media stagione 2025-26.",
-    ogImage: "/athletes/jason-taylor-avatar.png",
+    ogImage: "/athletes/cardjasontaylor-og.png",
+    ogImageVersion: "20260706-1",
     publicSiteUrl: "https://jasontaylor.katahero.com",
   },
   legal: {
