@@ -47,12 +47,6 @@ export function HeroOnlyHeader({ athlete }: Props) {
   const { first, last } = splitName(h.name);
   const heroImage = h.heroImage?.trim() ?? "";
   const showAvatar = h.heroHideAvatar !== true && heroImage.length > 0;
-  const initials = h.name
-    .split(/\s+/)
-    .map((w) => w[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
 
   return (
     <header className="relative min-h-dvh overflow-hidden border-b border-white/6">
@@ -195,14 +189,6 @@ export function HeroOnlyHeader({ athlete }: Props) {
 
         {/* Name block */}
         <div className={`relative text-center ${showAvatar ? "mt-6 sm:mt-7" : "mt-7 sm:mt-9"}`}>
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none text-[clamp(5rem,28vw,9rem)] font-bold leading-none tracking-tighter text-white/5"
-            style={{ fontFamily: "var(--font-bebas)" }}
-          >
-            {initials}
-          </span>
-
           <div
             className="relative inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.22em] text-zinc-400 backdrop-blur-md"
             style={{ boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.08)" }}
